@@ -32,8 +32,8 @@
     DOM二重化なし（§7-1）
   ========================================= -->
   <header class="sp-header">
-    <a href="./sp-index.html" class="header-logo-plain">
-        <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    <a href="./sp-index.html" class="header-logo">
+      <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
     </a>
 
     <!-- ヘッダー右アクションエリア -->
@@ -70,6 +70,7 @@
 
       <!-- ハンバーガーボタン（§2-2 / 付録A-1）-->
       <button
+        id="sp-menu-toggle"
         class="hamburger sp-header__action-btn sp-header__action-btn--menu"
         type="button"
         aria-expanded="false"
@@ -529,7 +530,9 @@
   <footer>
     <div class="footer-top">
       <div>
-        <img src="../assets/MoreFriends_RGB_white_cropped.png" alt="More Friends" class="footer-logo-img">
+        <a href="./sp-index.html" class="footer-logo">
+          <img src="../assets/MoreFriends_RGB_white_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--footer">
+        </a>
         <div class="footer-tagline">
           そっと心に触れる、<br>友達のような存在でありたい。<br><br>
           東京都・千葉県のペットシッティングサービス
@@ -580,25 +583,46 @@
   </footer>
 
   <script>
-  document.querySelector('.hamburger')?.addEventListener('click', function() {
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.getElementById('sp-menu-toggle');
     const nav = document.getElementById('sp-nav');
-    const isOpen = nav.classList.toggle('open');
-    this.setAttribute('aria-expanded', isOpen);
-    nav.setAttribute('aria-hidden', !isOpen);
-  });
 
-  // Escape キーでナビを閉じる（§2-2）
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const nav = document.getElementById('sp-nav');
-      const toggle = document.querySelector('.hamburger');
-      if (nav && nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        nav.setAttribute('aria-hidden', 'true');
-        toggle?.setAttribute('aria-expanded', 'false');
-        toggle?.focus();
+    if (!toggle || !nav) return;
+
+    function closeMenu() {
+      nav.classList.remove('open');
+      nav.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMenu() {
+      nav.classList.add('open');
+      nav.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function toggleMenu() {
+      if (nav.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
       }
     }
+
+    toggle.addEventListener('click', toggleMenu);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    closeMenu();
   });
   </script>
 
