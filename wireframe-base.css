@@ -148,20 +148,19 @@ header {
 .header-logo {
   display: flex;
   align-items: center;
-  background: var(--bg-dark);
-  padding: 7px 18px;
-  border-radius: 6px;
+  justify-content: flex-start;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
   text-decoration: none;
-  color: #fff;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  min-width: 120px;        /* ロゴ差し替えまでのプレースホルダー幅 */
-  min-height: 40px;
-  justify-content: center;
+  color: inherit;
+  min-width: 0;
+  min-height: 0;
+  line-height: 0;
 }
 
 .header-logo img {
-  height: 40px;
+  height: auto;
 }
 
 nav {
@@ -958,15 +957,51 @@ footer {
 
 /* ロゴプレースホルダー */
 .ph-logo {
-  background: var(--bg-dark);
-  color: rgba(255, 255, 255, 0.5);
-  padding: 7px 18px;
-  border-radius: 6px;
+    background: var(--bg-dark);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 7px 18px;
+    border-radius: 6px;
   font-size: 12px;
   letter-spacing: 0.1em;
   display: inline-block;
-  min-width: 120px;
-  text-align: center;
+    min-width: 120px;
+    text-align: center;
+  }
+
+.site-logo-img {
+  display: block;
+  height: auto;
+}
+
+.header-logo .site-logo-img--header {
+  width: 220px;
+}
+
+.footer-logo {
+  display: inline-block;
+  line-height: 0;
+  margin-bottom: 14px;
+}
+
+.footer-logo .site-logo-img--footer {
+  width: 220px;
+}
+
+@media (max-width: 1024px) {
+  .header-logo .site-logo-img--header,
+  .footer-logo .site-logo-img--footer {
+    width: 190px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-logo .site-logo-img--header {
+    width: 156px;
+  }
+
+  .footer-logo .site-logo-img--footer {
+    width: 170px;
+  }
 }
 
 /* テキストプレースホルダー (仮テキスト領域) */
