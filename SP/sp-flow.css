@@ -393,9 +393,23 @@
 
   /* faq__question: タップターゲット 44px 以上（§2-1） */
   .faq__question {
-    padding: 16px 0;
-    min-height: 44px;
-    gap: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px 0;
+    cursor: pointer;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .faq__question:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
   }
 
   .faq__question-mark {
