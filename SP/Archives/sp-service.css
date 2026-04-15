@@ -1,0 +1,416 @@
+/* ============================================================
+  sp-service.css
+  More Friends — サービス内容ページ SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css
+    2. sp-wireframe-base.css
+      ← .mf-flow-list / .mf-flow-item 定義済み
+    3. sp-service.css ← このファイル
+
+  主な変換:
+    - サービスカード: PC 2カラム → SP 1カラム縦積み（§3-2）
+    - 対象ペット: PC 複数カラム → SP 1カラム
+      アイコン＋テキストの横並びは維持可（§04）
+    - シッティングの進め方: PC 2カラム → SP 1カラム縦積み（§3-2）
+    - philosophy-section: dark bg コントラスト要確認（§04 ⚠️）
+    - 最終CTA: 4択（他ページと異なる §04固有仕様）
+
+  ⚠️ 本番CSSではない。wireframe確認用。
+============================================================ */
+
+@media (max-width: 768px) {
+
+/* ============================================================
+  1. ページヘッダー
+============================================================ */
+
+  .mf-page-header {
+    padding: 40px 16px 48px;
+    background: var(--bg-mid, #f7f5f0);
+  }
+
+  .mf-page-header__heading {
+    font-size: clamp(26px, 6.5vw, 32px);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .mf-page-header__body {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .mf-page-header__cta .mf-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+
+/* ============================================================
+  2. サービスカード一覧（.mf-service-list）
+  PC: 2カラムグリッド → SP: 1カラム縦積み（§3-2）
+============================================================ */
+
+  .mf-service-list {
+    padding: 48px 16px;
+  }
+
+  /* PC 2カラム grid を解除 → 1カラム縦積み */
+  .mf-service-list__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    grid-template-columns: unset;
+  }
+
+  /* サービスカード */
+  .mf-service-card {
+    background: var(--bg, #fff);
+    border: 1px solid var(--border, #e0e0e0);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+
+  /* カードヘッド: アイコン＋タイトル横並び */
+  .mf-service-card__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .mf-service-card__icon {
+    flex-shrink: 0;
+    width:  48px;
+    height: 48px;
+  }
+
+  .mf-service-card__title-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mf-service-card__tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary, #4a7c59);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .mf-service-card__heading {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  /* 説明文: 固定height禁止（§7-2） */
+  .mf-service-card__body {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text, #1a1a1a);
+  }
+
+  /* 特徴リスト */
+  .mf-service-card__features {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 14px;
+    background: var(--bg-mid, #f7f5f0);
+    border-radius: 6px;
+  }
+
+  .mf-service-card__features li {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-sub, #555);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .mf-service-card__features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary, #4a7c59);
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  /* 料金表示 */
+  .mf-service-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    padding-top: 4px;
+    border-top: 1px solid var(--border, #e0e0e0);
+    margin-top: 4px;
+  }
+
+  .mf-service-card__price-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary, #4a7c59);
+    line-height: 1;
+  }
+
+  .mf-service-card__price-unit {
+    font-size: 13px;
+    color: var(--text-sub, #555);
+  }
+
+  /* 内部CTAボタン */
+  .mf-service-list .mf-btn--outline {
+    width: 100%;
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+
+/* ============================================================
+  3. 対象ペット（.mf-pets）
+  PC: 複数カラム → SP: 1カラム
+  アイコン＋テキストの横並びは維持（§04）
+============================================================ */
+
+  .mf-pets {
+    padding: 48px 16px;
+  }
+
+  /* 1カラム縦積み */
+  .mf-pets__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border, #e0e0e0);
+  }
+
+  /* 各ペット行: アイコン＋テキスト横並び維持（§04） */
+  .mf-pets__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border, #e0e0e0);
+    /* タップ領域: min-height 44px（§2-1） */
+    min-height: 44px;
+  }
+
+  /* 要相談行: 視覚的に区別 */
+  .mf-pets__item--consult {
+    background: rgba(74,124,89,.04);
+    border-radius: 6px;
+    padding: 14px 12px;
+    border: 1px dashed rgba(74,124,89,.3);
+    margin-top: 8px;
+  }
+
+  /* アイコン */
+  .mf-pets__icon {
+    flex-shrink: 0;
+    font-size: 24px;
+    line-height: 1;
+    width: 32px;
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  /* テキストブロック */
+  .mf-pets__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .mf-pets__name {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .mf-pets__note {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+
+/* ============================================================
+  4. シッティングの進め方（.mf-service-flow）
+  PC: .flow-grid 2カラム → SP: 1カラム縦積み（§3-2）
+  sp-wireframe-base.css の .mf-flow-list / .mf-flow-item を使用
+  STEP バッジのデザインを上書き
+============================================================ */
+
+  .mf-service-flow {
+    padding: 48px 16px;
+  }
+
+  /* コネクター線位置を STEPバッジ幅に合わせる */
+  .mf-service-flow .mf-flow-list::before {
+    left: 24px;
+  }
+
+  /* STEPバッジ上書き */
+  .mf-service-flow .mf-flow-item__num {
+    flex-shrink: 0;
+    width:  48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary, #4a7c59);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .mf-service-flow__step-label {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    opacity: .85;
+    line-height: 1;
+  }
+
+  .mf-service-flow__step-value {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* 内部CTAボタン */
+  .mf-service-flow .mf-btn--outline {
+    width: 100%;
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+
+/* ============================================================
+  5. +30分をおすすめする理由（.mf-service-philosophy）
+  dark background での表示
+  ⚠️ TODO: コントラスト確認（§04 ⚠️）
+============================================================ */
+
+  .mf-service-philosophy {
+    padding: 48px 16px;
+    /* background: var(--bg-dark) は .mf-section--bg-dark で設定済み */
+  }
+
+  /* ⚠️ TODO: dark background でのコントラスト確認
+     背景色: var(--bg-dark, #2b2b2b)
+     WCAG AA 基準: 通常テキスト 4.5:1 以上 / 大テキスト 3:1 以上
+     特に .mf-service-philosophy__body の p と
+     .mf-text-sub の薄いテキストは要注意
+     本番実装前に実際の背景色と文字色で比率を測定すること */
+
+  /* セクションラベル（dark bg用） */
+  .mf-section-label--light {
+    color: rgba(255,255,255,.6);
+  }
+
+  /* 見出し */
+  .mf-service-philosophy__heading {
+    font-size: clamp(24px, 5.5vw, 28px);
+    line-height: 1.3;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  /* リード文 */
+  .mf-service-philosophy__lead {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    /* ⚠️ TODO: コントラスト比を確認 */
+    color: rgba(255,255,255,.95);
+    margin-bottom: 16px;
+  }
+
+  /* 本文 */
+  .mf-service-philosophy__body p {
+    font-size: 16px;
+    line-height: 1.8;
+    /* ⚠️ TODO: コントラスト比を確認（rgba(255,255,255,.85) 程度が目安） */
+    color: rgba(255,255,255,.85);
+  }
+
+  /* ビジュアル */
+  .mf-service-philosophy__visual {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+
+/* ============================================================
+  6. 最終CTA（このページのみ 4択）
+  §04固有仕様: 他ページは3択
+  「利用の流れを見る」は btn-outline 扱い
+  sp-wireframe-base.css の .mf-cta-section を使用
+============================================================ */
+
+  /* 4択対応: btn-outline も幅100% / 44px以上 */
+  .mf-cta-section .mf-btn--outline {
+    width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+    font-weight: 700;
+    /* outline ボタン: primary カラーのボーダー */
+    color: var(--primary, #4a7c59);
+    border: 2px solid var(--primary, #4a7c59);
+    background: transparent;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ============================================================
+  PC幅での打ち消し
+============================================================ */
+
+@media (min-width: 769px) {
+
+  /* サービスグリッドを PC 2カラムに戻す */
+  .mf-service-list__grid {
+    display: grid;
+  }
+
+  /* ペットリストを PC 定義に戻す */
+  .mf-pets__list {
+    display: grid;
+  }
+
+  /* フローリストを PC 2カラムに戻す */
+  .mf-service-flow .mf-flow-list {
+    display: grid;
+  }
+
+  /* CTAボタン幅を auto に戻す */
+  .mf-cta-section .mf-btn--outline {
+    width: auto;
+  }
+
+}
+
+/* ============================================================
+  END OF sp-service.css
+============================================================ */

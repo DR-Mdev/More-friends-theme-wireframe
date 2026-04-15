@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お客様の声 — More Friends</title>
+  <meta name="description" content="More Friendsのお客様の声。実際にご利用いただいた飼い主さまのリアルな感想をご紹介しています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500&display=swap" rel="stylesheet">
+  <!--
+    読み込み順:
+      1. wireframe-base.css             共通トークン・共通コンポーネント
+      2. [inline <style>]               reviews.html PCレイアウト（wireframe確認用）
+      3. sp-reviews.css                 SP上書き（768px以下）← 追加
+  -->
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+    /* ── reviews.html ページ固有スタイル（PCレイアウト） ──
+       SP では sp-reviews.css の @media (max-width: 768px) で上書きされる */
+
+    /* ページヘッダー */
+    .page-hero { background: var(--bg-mid); padding: 120px 80px 80px; border-bottom: 1px solid var(--border); }
+    .page-hero-inner { max-width: 640px; }
+    .page-hero-title { font-size: 48px; font-weight: 400; color: var(--text); line-height: 1.2; margin-bottom: 20px; }
+    .page-hero-lead { font-size: 15px; color: var(--text-sub); line-height: 2; }
+
+    /* 実績サマリー */
+    .stats-section { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 72px 80px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .stat-item { background: var(--bg2); padding: 40px 32px; text-align: center; }
+    .stat-num-lg { font-size: 52px; font-weight: 400; color: var(--primary); line-height: 1; margin-bottom: 8px; }
+    .stat-num-lg small { font-size: 22px; color: var(--text-sub); }
+    .stat-label-lg { font-size: 13px; color: var(--text-sub); letter-spacing: 0.06em; }
+
+    /* 口コミ */
+    .reviews-section { background: var(--bg); padding: 96px 80px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .review-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 32px 28px; display: flex; flex-direction: column; gap: 20px; }
+    .review-card-header { display: flex; align-items: center; gap: 14px; }
+    .review-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--primary-l); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .review-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+    .review-pet { font-size: 11px; color: var(--text-sub); letter-spacing: 0.04em; }
+    .review-stars { display: flex; gap: 3px; color: #E8A040; font-size: 14px; }
+    .review-body { font-size: 13px; color: var(--text-sub); line-height: 1.9; flex: 1; }
+    .review-body::before { content: '"'; font-size: 28px; color: var(--primary-l); line-height: 1; display: block; margin-bottom: 6px; font-weight: 400; }
+    .review-tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); font-size: 10px; padding: 4px 12px; border-radius: 100px; letter-spacing: 0.04em; }
+    .reviews-note { text-align: center; font-size: 12px; color: var(--text-sub); margin-top: 40px; opacity: 0.7; }
+
+    /* section-header 中央寄せ（stats-section用） → inline style 除去 → クラス管理 */
+    .section-header--center { text-align: center; margin-bottom: 48px; }
+    .section-header--center .label { text-align: center; }
+
+    /* PC版のみの既存レスポンシブ（1024px以下） */
+    @media (max-width: 1024px) {
+      .page-hero { padding: 100px 40px 64px; }
+      .stats-section { padding: 56px 40px; }
+      .reviews-section { padding: 72px 40px; }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    /* ⚠️ PC版の @media(max-width:640px) は sp-reviews.css で上書き済みのため削除 */
+  </style>
+  <link rel="stylesheet" href="sp-reviews.css">
+</head>
+
+<body>
+
+  <!-- ========================================
+    header
+    parts/header.php
+    編集区分: 固定
+    SP変換:
+      - グローバルナビ非表示 → ハンバーガー収納
+      - PC版の nav a:not(.btn-line){ display:none } は sp-reviews.css でドロワー方式に置き換え
+  ========================================= -->
+  <header class="sp-header">
+    <a href="./sp-index.html" class="header-logo-plain">
+      <img src="MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    </a>
+
+    <div class="sp-header__actions">
+
+      <a
+        href="#"
+        class="sp-header__action-btn sp-header__action-btn--ig"
+        aria-label="Instagramで相談・予約する"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </span>
+        <span class="sp-header__action-label">相談予約</span>
+      </a>
+
+      <a
+        href="https://line.me/"
+        class="sp-header__action-btn sp-header__action-btn--line"
+        aria-label="LINEで相談する"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        </span>
+        <span class="sp-header__action-label">LINE相談</span>
+      </a>
+
+      <button
+        class="hamburger sp-header__action-btn sp-header__action-btn--menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="sp-nav"
+        aria-label="メニューを開く"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <span class="hamburger-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </span>
+        <span class="sp-header__action-label">MENU</span>
+      </button>
+    </div>
+
+    <nav id="sp-nav" aria-hidden="true">
+      <a href="./sp-about.html">More Friendsとは</a>
+      <a href="./sp-service.html">サービス内容</a>
+      <a href="./sp-price.html">料金プラン</a>
+      <a href="./sp-flow.html">利用の流れ</a>
+      <a href="./sp-sitter.html">シッター紹介</a>
+      <a href="./sp-area.html">対応エリア</a>
+      <a href="./sp-reviews.html" class="is-current">お客様の声</a>
+      <a href="./sp-blog.html">ブログ</a>
+      <a href="./sp-contact.html">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========================================
+      ① ページヘッダー
+      parts/page-header.php
+      編集区分: 固定
+      SP変換: padding縮小 / h1 クランプ
+      ⚠️ TODO: page-hero-lead の <br> を本番で削除すること
+               sp-reviews.css の .page-hero-lead br { display:none } で制御済み
+    ========================================= -->
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <span class="label">Customer Reviews</span>
+        <h1 class="page-hero-title">お客様の声</h1>
+        <p class="page-hero-lead">
+          実際にMore Friendsをご利用いただいた飼い主さまから寄せられた声をご紹介します。<br>
+          ペットさんと飼い主さま、双方の笑顔がいちばんの励みになっています。
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================
+      ② 実績サマリー（stats）
+      parts/stats.php
+      編集区分: 固定（数字は管理画面から更新）
+      SP変換:
+        - stats-grid（3項目）: 横並び維持（§3-2 数字が短い実績カードの例外条件）
+        - stat-num-lg: SP幅に合わせて clamp() で縮小（sp-reviews.css）
+        - section-header の inline style → .section-header--center クラスに移行済み
+      ⚠️ TODO: PC の inline style="text-align:center; margin-bottom:48px;" を削除
+               → .section-header--center クラスに移行済み
+      ⚠️ TODO: PC の label の inline style="text-align:center;" を削除
+               → .section-header--center .label で管理済み
+    ========================================= -->
+    <section class="stats-section">
+      <!-- inline style 除去 → .section-header--center クラスに移行 -->
+      <div class="section-header section-header--center">
+        <span class="label">Track Record</span>
+        <h2 class="section-title">これまでの実績</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-num-lg">98<small>%</small></div>
+          <div class="stat-label-lg">顧客満足度</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num-lg">★<small> 4.9</small></div>
+          <div class="stat-label-lg">平均評価</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num-lg">80<small>%+</small></div>
+          <div class="stat-label-lg">リピート率</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+      ③ 口コミカード一覧
+      parts/review-list.php
+      編集区分: CMSループ（カスタム投稿タイプ "review" のループ）
+      ループ単位: .review-card
+      SP変換: 3カラム → 1カラム縦積み（§3-2）
+    ========================================= -->
+    <section class="reviews-section">
+      <div class="section-header">
+        <span class="label">Voices</span>
+        <h2 class="section-title">みなさまのコメント</h2>
+        <p class="section-sub">ペットさんの種類・状況はさまざまですが、どの子にも誠実に向き合っています。</p>
+      </div>
+
+      <div class="reviews-grid">
+
+        <!-- ループ単位: .review-card（カスタム投稿タイプ "review" のループ内で繰り返す） -->
+
+        <div class="review-card">
+          <div class="review-card-header">
+            <div class="review-avatar">🐶</div>
+            <div class="review-meta">
+              <div class="review-name">M.T. さま</div>
+              <div class="review-pet">ミニチュアダックスフンド（6歳）</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">初めてペットシッターを頼むことにとても不安がありましたが、カウンセリングで丁寧に話を聞いてもらえて安心しました。シッティング後の報告もとても細かく、出張中も気持ちが楽でした。</p>
+          <span class="review-tag">お留守番サポート</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-header">
+            <div class="review-avatar">🐱</div>
+            <div class="review-meta">
+              <div class="review-name">Y.K. さま</div>
+              <div class="review-pet">スコティッシュフォールド（3歳）</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">うちの子は超がつく繊細さんで、知らない人には近づかない子なのですが、2回目から自分から近づいていくようになりました。信頼関係を丁寧に作ってくださるのが伝わります。</p>
+          <span class="review-tag">繊細な子への対応</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-header">
+            <div class="review-avatar">🐕</div>
+            <div class="review-meta">
+              <div class="review-name">A.N. さま</div>
+              <div class="review-pet">柴犬（4歳）</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">急な残業が続いたときにお願いしました。「いつでも気軽に連絡してください」という言葉が本当にありがたかったです。帰宅したときに元気でいてくれることが何よりも安心でした。</p>
+          <span class="review-tag">急な予定変更</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-header">
+            <div class="review-avatar">🐱</div>
+            <div class="review-meta">
+              <div class="review-name">R.S. さま</div>
+              <div class="review-pet">アメリカンショートヘア（5歳）/ 2頭</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">2頭いるのでペットホテルが難しく、ずっと悩んでいました。自宅でいつもと変わらない生活をさせてもらえるのが一番。写真付きの報告もとても嬉しかったです。リピート確定です。</p>
+          <span class="review-tag">多頭飼い</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-header">
+            <div class="review-avatar">🐩</div>
+            <div class="review-meta">
+              <div class="review-name">K.O. さま</div>
+              <div class="review-pet">トイプードル（2歳）</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">「お世話をタスクとしてこなすのではなく、ペットさんの気持ちを最優先に」という姿勢がこちらにも伝わってきます。初回のカウンセリングから椎名さんのことが大好きになりました。</p>
+          <span class="review-tag">お散歩代行</span>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card-header">
+            <div class="review-avatar">🐶</div>
+            <div class="review-meta">
+              <div class="review-name">T.M. さま</div>
+              <div class="review-pet">ゴールデンレトリーバー（7歳）</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-body">GWの帰省に合わせて長期でお願いしました。毎日の報告が楽しみで、旅行先でも安心して過ごせました。うちの子の性格を細かく把握してくださっていて、本当に「友達に預けた」という感覚でした。</p>
+          <span class="review-tag">長期シッティング</span>
+        </div>
+
+      </div><!-- /reviews-grid -->
+
+      <p class="reviews-note">※ お客様の声は許可を得た上で掲載しています。イニシャルで表記しています。</p>
+    </section>
+
+    <!-- ========================================
+      ④ CTAセクション
+      parts/cta.php
+      編集区分: 固定
+      SP変換: ボタン3択 → 縦積み100%幅（§4-5）
+    ========================================= -->
+    <section class="cta-section">
+      <span class="label">Start Here</span>
+      <h2 class="section-title">まずは無料カウンセリングから</h2>
+      <p>
+        ペットさんのこと、どんな些細なことでもお聞きします。<br>
+        お気軽にご相談ください。
+      </p>
+      <div class="cta-buttons">
+        <a href="./sp-contact.html" class="btn-cta-white">カウンセリングを申し込む</a>
+        <a href="https://line.me/" class="btn-line-lg">💬 LINEで相談する</a>
+        <a href="#" class="btn-ig-lg">Instagramで相談</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+    フッター
+    parts/footer.php
+    編集区分: 固定
+    SP変換: grid 2カラム → 1カラム縦積み
+  ========================================= -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <img src="MoreFriends_RGB_white_cropped.png" alt="More Friends" class="footer-logo-img">
+        <div class="footer-tagline">
+          そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+          東京都・千葉県のペットシッティングサービス
+        </div>
+        <div class="footer-sns">
+          <a href="#" class="footer-sns-btn" aria-label="LINE">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </a>
+          <a href="#" class="footer-sns-btn" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Service</p>
+          <ul>
+            <li><a href="./sp-about.html">More Friendsとは</a></li>
+            <li><a href="./sp-service.html">サービス内容</a></li>
+            <li><a href="./sp-price.html">料金プラン</a></li>
+            <li><a href="./sp-cancel.html">キャンセルポリシー</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">About</p>
+          <ul>
+            <li><a href="./sp-sitter.html">シッター紹介</a></li>
+            <li><a href="./sp-flow.html">利用の流れ</a></li>
+            <li><a href="./sp-area.html">対応エリア</a></li>
+            <li><a href="./sp-reviews.html">お客様の声</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Info</p>
+          <ul>
+            <li><a href="./sp-blog.html">ブログ</a></li>
+            <li><a href="./sp-contact.html">お問い合わせ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">利用規約</a></li>
+            <li><a href="#">動物取扱業</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 More Friends. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+  // ハンバーガーメニュー開閉（§2-2）
+  document.querySelector('.hamburger')?.addEventListener('click', function() {
+    const nav = document.getElementById('sp-nav');
+    const isOpen = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+    nav.setAttribute('aria-hidden', !isOpen);
+  });
+
+  // Escape キーでナビを閉じる（§2-2）
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const nav = document.getElementById('sp-nav');
+      const toggle = document.querySelector('.hamburger');
+      if (nav && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        nav.setAttribute('aria-hidden', 'true');
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.focus();
+      }
+    }
+  });
+  </script>
+
+</body>
+
+</html>

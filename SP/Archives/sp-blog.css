@@ -1,0 +1,262 @@
+
+/* ============================================================
+  sp-blog.css
+  More Friends — ブログ一覧ページ SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css
+    2. sp-wireframe-base.css  ← .mf-filter-bar / .mf-pagination 定義済み
+    3. sp-blog.css            ← このファイル（ページ固有上書き）
+
+  ⚠️ 本番CSSではない。wireframe確認用。
+============================================================ */
+
+@media (max-width: 768px) {
+
+/* ============================================================
+  1. ページヘッダー（フィルターバー付き）
+============================================================ */
+
+  .mf-blog-header {
+    padding-bottom: 0; /* フィルターバーがヘッダー直下に続くため下余白なし */
+  }
+
+  .mf-blog-header .mf-container {
+    padding-bottom: 24px;
+  }
+
+  .mf-page-header__heading {
+    font-size: clamp(26px, 6.5vw, 32px);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+
+  .mf-page-header__body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-sub, #555);
+  }
+
+  /* フィルターバー:
+     sp-wireframe-base.css の .mf-filter-bar を使用
+     コンテナをまたいでフル幅スクロール */
+  .mf-filter-bar {
+    /* padding-left でコンテナ余白に揃える */
+    padding-left: 16px;
+    padding-bottom: 0;
+    background: var(--bg-mid, #f7f5f0);
+    border-top: 1px solid var(--border, #e0e0e0);
+    border-bottom: 1px solid var(--border, #e0e0e0);
+  }
+
+  .mf-filter-bar__inner {
+    padding: 12px 0 12px;
+    /* 右端フェードアウトは sp-wireframe-base.css の mask-image で設定済み */
+    /* 最後のボタンが隠れないよう右側に余白 */
+    padding-right: 32px;
+  }
+
+  /* フィルターボタン: 44px以上タップターゲット確保（§2-1） */
+  .mf-filter-btn {
+    min-height: 44px;
+    padding: 0 16px;
+    font-size: 14px;
+    white-space: nowrap;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  /* ボタン間の隣接ターゲット余白: 8px以上（§2-1） */
+  .mf-filter-bar__inner {
+    gap: 8px;
+  }
+
+
+/* ============================================================
+  2. 記事一覧グリッド
+  PC 3カラム → SP 1カラム縦積み（§3-2）
+  ループ単位: .blog-card（§3-5）
+============================================================ */
+
+  .mf-blog-list {
+    padding: 32px 16px 48px;
+  }
+
+  /* PC 3カラム grid を解除 → 1カラム縦積み */
+  .mf-blog-list__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    /* PC の grid-template-columns を解除 */
+    grid-template-columns: unset;
+  }
+
+  /* ブログカード: リンク全体をタップ領域に */
+  .blog-card {
+    border-bottom: 1px solid var(--border, #e0e0e0);
+  }
+
+  .blog-card:first-child {
+    border-top: 1px solid var(--border, #e0e0e0);
+  }
+
+  .mf-blog-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    text-decoration: none;
+    color: inherit;
+    /* タップ領域を確保 */
+    min-height: 44px;
+  }
+
+  /* サムネイル: 固定幅 + aspect-ratio（§2-3） */
+  .mf-blog-card__thumb {
+    flex-shrink: 0;
+    width: 96px;
+    /* aspect-ratio は .mf-media--16x9 で定義済み */
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  /* カード本文 */
+  .mf-blog-card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 2px;
+  }
+
+  /* メタ情報（カテゴリー + 日付）: 横並び */
+  .mf-blog-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .mf-blog-card__category {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary, #4a7c59);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    background: rgba(74,124,89,.08);
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+
+  .mf-blog-card__date {
+    font-size: 12px;
+    color: var(--text-sub, #555);
+  }
+
+  /* タイトル: 固定height禁止（§7-2）→ 自然な高さ */
+  .mf-blog-card__title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+    /* overflow: hidden / -webkit-line-clamp は任意
+       ワイヤー段階では自然な折り返しにしておく */
+  }
+
+  /* 0件メッセージ */
+  .mf-blog-list__empty {
+    padding: 48px 0;
+    text-align: center;
+    font-size: 15px;
+    color: var(--text-sub, #555);
+  }
+
+
+/* ============================================================
+  3. ページネーション
+  §09: PCワイヤーの div.page-btn → button タグへ変更済み
+  タップターゲット 44px以上（§2-1）
+  sp-wireframe-base.css の .mf-pagination を使用・上書き
+============================================================ */
+
+  .mf-pagination {
+    padding: 32px 16px 48px;
+    gap: 6px;
+  }
+
+  /* ページ番号ボタン */
+  .mf-pagination__btn {
+    min-width:  44px;
+    min-height: 44px;
+    font-size: 15px;
+    border-radius: 8px;
+    background: var(--bg, #fff);
+    border: 1px solid var(--border, #e0e0e0);
+    color: var(--text, #1a1a1a);
+  }
+
+  .mf-pagination__btn.is-active,
+  .mf-pagination__btn[aria-current="page"] {
+    background: var(--primary, #4a7c59);
+    color: #fff;
+    border-color: var(--primary, #4a7c59);
+    font-weight: 700;
+  }
+
+  /* 前へ / 次へ: やや広め */
+  .mf-pagination__btn--prev,
+  .mf-pagination__btn--next {
+    min-width: 48px;
+    font-size: 18px;
+    color: var(--primary, #4a7c59);
+  }
+
+  /* disabled */
+  .mf-pagination__btn[disabled] {
+    opacity: .35;
+    cursor: not-allowed;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ============================================================
+  PC幅での打ち消し
+============================================================ */
+
+@media (min-width: 769px) {
+
+  /* グリッドを PC の定義に戻す */
+  .mf-blog-list__grid {
+    display: grid;
+  }
+
+  /* フィルターバーの横スクロールをPC幅で解除 */
+  .mf-filter-bar {
+    overflow-x: visible;
+    -webkit-mask-image: none;
+            mask-image: none;
+    padding-left: 0;
+  }
+
+  .mf-filter-bar__inner {
+    flex-wrap: wrap;
+    white-space: normal;
+    padding-right: 0;
+  }
+
+  /* カードレイアウトをPC定義に戻す */
+  .mf-blog-card {
+    flex-direction: column;
+  }
+
+  .mf-blog-card__thumb {
+    width: 100%;
+  }
+
+}
+
+/* ============================================================
+  END OF sp-blog.css
+============================================================ */

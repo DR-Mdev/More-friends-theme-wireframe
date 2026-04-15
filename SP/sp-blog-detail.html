@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記事詳細 — More Friends</title>
+  <meta name="description" content="初めてペットシッターを使う前に知っておきたいこと。信頼できるシッターの見つけ方と準備のポイントを解説します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500&family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!--
+    読み込み順:
+      1. wireframe-base.css           共通トークン・共通コンポーネント
+      2. [inline <style>]             blog-detail.html PCレイアウト（wireframe確認用）
+      3. sp-blog-detail.css           SP上書き（768px以下）← 追加
+  -->
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+    /* ── blog-detail.html ページ固有スタイル（PCレイアウト） ──
+       SP では sp-blog-detail.css の @media (max-width: 768px) で上書きされる */
+
+    body { background: var(--bg); font-weight: 400; color: var(--text); font-size: 15px; line-height: 1.85; margin: 0; padding: 0; }
+
+    /* パンくず */
+    .breadcrumb { padding: 88px 80px 0; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-sub); }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--primary); }
+    .breadcrumb span { color: var(--border); }
+    .breadcrumb-current { color: var(--text); }
+
+    /* 2カラムレイアウト */
+    .article-layout { display: grid; grid-template-columns: 1fr 300px; gap: 56px; padding: 48px 80px 96px; max-width: 1160px; margin: 0 auto; }
+
+    /* 記事ヘッダー */
+    .article-header { margin-bottom: 36px; }
+    .article-cat { display: inline-block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); background: var(--tag-bg); padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+    .article-title { font-size: 28px; font-weight: 400; line-height: 1.5; color: var(--text); margin: 0 0 16px; }
+    .article-meta { display: flex; align-items: center; gap: 20px; font-size: 12px; color: var(--text-sub); }
+    .article-meta-item { display: flex; align-items: center; gap: 5px; }
+
+    /* アイキャッチ */
+    .article-eyecatch { width: 100%; aspect-ratio: 16 / 7; background: linear-gradient(135deg, var(--bg-mid), var(--primary-l)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-sub); letter-spacing: 0.1em; margin-bottom: 48px; }
+
+    /* 本文 */
+    .article-body { font-size: 15px; font-weight: 400; line-height: 2; color: var(--text); }
+    .article-body h2 { font-size: 20px; font-weight: 400; color: var(--text); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 2px solid var(--primary-l); }
+    .article-body h3 { font-size: 16px; font-weight: 500; color: var(--text); margin: 32px 0 10px; }
+    .article-body p { margin: 0 0 20px; }
+    .article-body blockquote { margin: 32px 0; padding: 20px 28px; background: var(--bg2); border-left: 3px solid var(--primary); border-radius: 0 6px 6px 0; font-size: 14px; color: var(--text-sub); line-height: 1.9; }
+    .article-body .article-img-ph { width: 100%; aspect-ratio: 16 / 8; background: var(--ph-bg); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--ph-text); letter-spacing: 0.1em; margin: 32px 0; }
+    /* ul: inline style 除去 → .article-checklist クラスで管理 */
+    .article-checklist { margin: 0 0 20px; padding-left: 1.4em; line-height: 2.2; font-size: 14px; color: var(--text-sub); }
+
+    /* タグ */
+    .article-tags { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-size: 11px; background: var(--tag-bg); color: var(--tag-text); padding: 5px 14px; border-radius: 100px; letter-spacing: 0.06em; }
+
+    /* 著者プロフィール */
+    .author-card { margin-top: 56px; padding: 28px 32px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; display: flex; gap: 24px; align-items: flex-start; }
+    .author-photo { width: 72px; height: 72px; border-radius: 50%; background: var(--ph-bg); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+    .author-eyebrow { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); margin-bottom: 4px; }
+    .author-name { font-size: 16px; font-weight: 400; color: var(--text); margin: 0 0 4px; }
+    .author-title { font-size: 11px; color: var(--text-sub); margin-bottom: 10px; }
+    .author-bio { font-size: 13px; color: var(--text-sub); line-height: 1.8; margin: 0; }
+
+    /* サイドバー */
+    .sidebar { padding-top: 0; }
+    .sidebar-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 28px; }
+    .sidebar-heading { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); margin-bottom: 16px; display: block; }
+    .sidebar-cta { background: var(--primary); border-radius: 8px; padding: 28px 24px; text-align: center; margin-bottom: 28px; }
+    .sidebar-cta .label { color: rgba(255,255,255,0.6); }
+    .sidebar-cta p { font-size: 13px; color: rgba(255,255,255,0.85); margin: 0 0 16px; line-height: 1.7; }
+    .btn-cta-white-sm { background: #fff; color: var(--primary); font-size: 12px; font-weight: 500; padding: 11px 24px; border-radius: 4px; text-decoration: none; display: block; text-align: center; margin-bottom: 10px; }
+    .btn-line-sm { background: #06C755; color: #fff; font-size: 12px; font-weight: 500; padding: 11px 24px; border-radius: 4px; text-decoration: none; display: block; text-align: center; }
+    .sidebar-cta .btn-ig { display: block; text-align: center; margin-top: 10px; padding: 11px 24px; }
+    .toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .toc-list li a { font-size: 12px; color: var(--text-sub); text-decoration: none; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+    .toc-list li a::before { content: '—'; color: var(--primary-l); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+    .toc-list li a:hover { color: var(--primary); }
+    .cat-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .cat-list li a { font-size: 12px; color: var(--text-sub); text-decoration: none; display: flex; justify-content: space-between; align-items: center; }
+    .cat-list li a:hover { color: var(--primary); }
+    .cat-count { font-size: 11px; background: var(--tag-bg); color: var(--tag-text); padding: 2px 8px; border-radius: 100px; }
+    /* 新着記事: inline style 除去 → クラスで管理 */
+    .recent-posts-list { display: flex; flex-direction: column; gap: 16px; }
+    .recent-post-item { display: grid; grid-template-columns: 64px 1fr; gap: 10px; text-decoration: none; color: inherit; }
+    .recent-post-thumb { width: 64px; height: 44px; background: var(--ph-bg); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--ph-text); flex-shrink: 0; }
+    .recent-post-body { display: flex; flex-direction: column; gap: 4px; }
+    .recent-post-title { font-size: 12px; color: var(--text); line-height: 1.5; margin: 0; }
+    .recent-post-date { font-size: 10px; color: var(--text-sub); }
+
+    /* 関連記事 */
+    .related-section { background: var(--bg-mid); padding: 72px 80px; border-top: 1px solid var(--border); }
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .blog-card { background: var(--bg2); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .blog-thumb { aspect-ratio: 16 / 9; background: linear-gradient(135deg, var(--bg-mid), var(--primary-l)); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--text-sub); letter-spacing: 0.1em; }
+    .blog-body { padding: 20px 24px; }
+    .blog-cat { font-size: 10px; color: var(--primary); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+    .blog-title { font-size: 14px; color: var(--text); line-height: 1.6; font-weight: 400; }
+    .blog-date { font-size: 11px; color: var(--text-sub); margin-top: 10px; }
+
+    /* マーカー */
+    .marker { background-image: linear-gradient(#FEE55F, #FEE55F); background-repeat: no-repeat; background-size: 0% 0.35em; background-position: 0 90%; transition: background-size 0.55s cubic-bezier(0.4, 0, 0.2, 1); padding-bottom: 1px; }
+    .marker.is-active { background-size: 100% 0.35em; }
+  </style>
+  <link rel="stylesheet" href="sp-blog-detail.css">
+</head>
+
+<body>
+
+  <!-- ========================================
+    header
+    parts/header.php
+    編集区分: 固定
+    SP変換: グローバルナビ → ハンバーガー収納
+  ========================================= -->
+  <header class="sp-header">
+    <a href="./sp-index.html" class="header-logo-plain">
+      <img src="MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    </a>
+
+    <div class="sp-header__actions">
+
+      <a
+        href="#"
+        class="sp-header__action-btn sp-header__action-btn--ig"
+        aria-label="Instagramで相談・予約する"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </span>
+        <span class="sp-header__action-label">相談予約</span>
+      </a>
+
+      <a
+        href="https://line.me/"
+        class="sp-header__action-btn sp-header__action-btn--line"
+        aria-label="LINEで相談する"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        </span>
+        <span class="sp-header__action-label">LINE相談</span>
+      </a>
+
+      <button
+        class="hamburger sp-header__action-btn sp-header__action-btn--menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="sp-nav"
+        aria-label="メニューを開く"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <span class="hamburger-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </span>
+        <span class="sp-header__action-label">MENU</span>
+      </button>
+    </div>
+
+    <nav id="sp-nav" aria-hidden="true">
+      <a href="./sp-about.html">More Friendsとは</a>
+      <a href="./sp-service.html">サービス内容</a>
+      <a href="./sp-price.html">料金プラン</a>
+      <a href="./sp-flow.html">利用の流れ</a>
+      <a href="./sp-sitter.html">シッター紹介</a>
+      <a href="./sp-area.html">対応エリア</a>
+      <a href="./sp-reviews.html">お客様の声</a>
+      <a href="./sp-blog.html" class="is-current">ブログ</a>
+      <a href="./sp-contact.html">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <!-- ========================================
+    パンくず
+    parts/breadcrumb.php
+    編集区分: 固定
+    SP変換: padding縮小 / flex-wrap で折り返し対応
+    ⚠️ TODO: 末尾 span の inline style="color:var(--text)" → .breadcrumb-current クラスに移行済み
+  ========================================= -->
+  <div class="breadcrumb">
+    <a href="./sp-index.html">ホーム</a>
+    <span>/</span>
+    <a href="./sp-blog.html">ブログ</a>
+    <span>/</span>
+    <a href="./sp-blog.html">ペットケア</a>
+    <span>/</span>
+    <span class="breadcrumb-current">初めてペットシッターを使う前に知っておきたいこと</span>
+  </div>
+
+  <!-- ========================================
+    記事レイアウト（本文 + サイドバー）
+    SP変換:
+      - PC: grid 2カラム（本文 1fr / サイドバー 300px）
+      - SP: flex-direction: column（main → aside の DOM順を維持し CSS で order: 1 / 2）
+      - サイドバーは著者プロフィールの直後に移動（§SP変換リファレンス §10）
+  ========================================= -->
+  <div class="article-layout">
+
+    <!-- ===== MAIN COLUMN ===== -->
+    <main>
+
+      <!-- ========================================
+        parts/article-header.php
+        編集区分: 固定（CMS: タイトル・カテゴリ・メタは動的）
+        ⚠️ TODO: article-title の <br> を本番で削除すること
+                 sp-blog-detail.css の .article-title br { display:none } で制御済み
+      ========================================= -->
+      <div class="article-header">
+        <span class="article-cat">ペットケア</span>
+        <h1 class="article-title">初めてペットシッターを使う前に知っておきたいこと。<br>信頼できるシッターの見つけ方と準備のポイント</h1>
+        <div class="article-meta">
+          <div class="article-meta-item">📅 <span>2026.03.20</span></div>
+          <div class="article-meta-item">🕐 <span>読了時間 約5分</span></div>
+          <div class="article-meta-item">✏️ <span>椎名 春香</span></div>
+        </div>
+      </div>
+
+      <!-- ========================================
+        アイキャッチ画像
+        ワイヤー専用: .article-eyecatch 本番では img タグ（aspect-ratio: 16/9）に差し替え
+        SP変換: aspect-ratio を 16/7 → 16/9 に変更（sp-blog-detail.css）
+      ========================================= -->
+      <div class="article-eyecatch">
+        [ アイキャッチ画像プレースホルダー ]
+      </div>
+
+      <!-- ========================================
+        parts/article-body.php
+        編集区分: CMSリッチテキスト（WordPress ビジュアルエディタ）
+        ⚠️ TODO: ul の inline style 除去 → .article-checklist クラスに移行済み
+      ========================================= -->
+      <div class="article-body">
+
+        <p>ペットシッターを初めて利用しようとしたとき、<span class="marker">「本当に大丈夫かな?」「ペットがストレスを感じないだろうか」と不安を感じる方は多いと思います。</span>この記事では、信頼できるシッターを選ぶためのポイントと、当日までに準備しておくべきことをお伝えします。</p>
+
+        <h2 id="blog-section-difference">ペットシッターとペットホテルの違い</h2>
+
+        <p>ペットホテルは施設に預ける形ですが、ペットシッターは自宅に来て世話をするスタイルです。自分のテリトリーである自宅でケアを受けられるため、環境の変化によるストレスを最小限に抑えられます。特に繊細な性格のペット・高齢のペットには自宅シッターが向いています。</p>
+
+        <blockquote>
+          「お世話の本質とは、タスクの可/不可ではなく、可能な限りストレスLessで気持ちよく、心身ともに安定して過ごしてもらえるかどうか。」
+        </blockquote>
+
+        <!-- ワイヤー専用: .article-img-ph 本番前に削除 -->
+        <div class="article-img-ph">[ 本文挿入画像 — ペットと信頼関係のイメージ ]</div>
+
+        <h2 id="blog-section-counseling">カウンセリングが必ず必要な理由</h2>
+
+        <p>はじめてシッターと会う日、ペットの反応は本当にさまざまです。すぐ打ち解けてくれる子もいれば、警戒して部屋の隅に隠れてしまう子もいます。どちらも正常な反応です。</p>
+
+        <p>だからこそ More Friends では、本番シッティングの前にカウンセリング (面会) を必ず設けています。シッターがペットの個性・ストレスサイン・普段の生活リズムを把握してから本番を迎えることで、当日の不安を大幅に軽減できます。</p>
+
+        <h3>カウンセリングで確認すること</h3>
+
+        <p>初対面時の反応を観察しながら、食事・排泄のルーティン、よく遊ぶおもちゃ、苦手な音や状況などを丁寧にヒアリングします。飼い主さまの普段の生活をできる限り再現することが、シッティングの品質につながります。</p>
+
+        <h2 id="blog-section-plus30">シッティング時間は「+30分」をおすすめする理由</h2>
+
+        <p>シッティング時間に余裕を持たせるのには2つの理由があります。<span class="marker">1つは信頼関係の構築のため。</span>もう1つは「お世話 = 作業タスク」ではないというスタンスからです。飼い主さまが在宅しているときのような、自然な時間の流れを再現することを大切にしています。</p>
+
+        <p>時間に追われた状態でのシッティングは、ペットさんのサインを見落としがちになります。余裕のある時間設定が、質の高いケアへの近道です。</p>
+
+        <h2 id="blog-section-preparation">当日までに準備しておくこと</h2>
+
+        <p>カウンセリング時にシッターへ伝えておくべき情報をリストアップしておきましょう。</p>
+
+        <!-- inline style 除去 → .article-checklist クラスに移行 -->
+        <ul class="article-checklist">
+          <li>かかりつけ動物病院の名前と連絡先</li>
+          <li>フードの種類・量・タイミング</li>
+          <li>ペット保険の加入有無</li>
+          <li>普段の排泄の場所・頻度</li>
+          <li>苦手なこと・触れてほしくない部位</li>
+          <li>緊急時に連絡がつく電話番号</li>
+        </ul>
+
+        <p>事前に情報を整理しておくことで、カウンセリングがスムーズになり、シッターも適切なケアの設計が立てやすくなります。</p>
+
+      </div><!-- /article-body -->
+
+      <!-- タグ -->
+      <div class="article-tags">
+        <span class="tag">ペットシッター</span>
+        <span class="tag">初めての方へ</span>
+        <span class="tag">カウンセリング</span>
+        <span class="tag">信頼関係</span>
+        <span class="tag">お留守番</span>
+      </div>
+
+      <!-- ========================================
+        parts/author-bio.php
+        編集区分: 固定
+      ========================================= -->
+      <div class="author-card">
+        <div class="author-photo">👤</div>
+        <div>
+          <div class="author-eyebrow">Author</div>
+          <p class="author-name">椎名 春香</p>
+          <p class="author-title">動物取扱責任者 / ペットシッター</p>
+          <p class="author-bio">
+            大手ペットシッター会社での豊富な経験を経て More Friends を設立。数多くのペットさんとの関わりの中で「お世話はタスクではなく信頼関係のプロセス」という哲学を育む。東京都・千葉県エリアで活動中。
+          </p>
+        </div>
+      </div>
+
+    </main><!-- /main -->
+
+    <!-- ===== SIDEBAR =====
+      SP変換:
+        - PC: 右カラム（grid 2番目）→ SP: flex order:2 で本文後に移動
+        - サイドバーCTA（ピンク背景）→ SP でも最上部に配置してCTA機会を確保
+        - 新着記事の inline style 群 → .recent-post-* クラスに移行済み
+    ===== -->
+    <aside class="sidebar">
+
+      <!-- CTA ブロック -->
+      <div class="sidebar-cta">
+        <span class="label">Free Counseling</span>
+        <p>初回カウンセリングは実質無料。<br>まずはお気軽にご相談ください。</p>
+        <a href="./sp-contact.html" class="btn-cta-white-sm">お問い合わせフォーム</a>
+        <a href="https://line.me/" class="btn-line-sm">💬 LINEで相談</a>
+        <a href="#" class="btn-ig">Instagramで相談</a>
+      </div>
+
+      <!-- 目次 -->
+      <div class="sidebar-block">
+        <span class="sidebar-heading">目次</span>
+        <ul class="toc-list">
+          <li><a href="#blog-section-difference">ペットシッターとペットホテルの違い</a></li>
+          <li><a href="#blog-section-counseling">カウンセリングが必ず必要な理由</a></li>
+          <li><a href="#blog-section-plus30">シッティング時間は「+30分」をおすすめする理由</a></li>
+          <li><a href="#blog-section-preparation">当日までに準備しておくこと</a></li>
+        </ul>
+      </div>
+
+      <!-- カテゴリ -->
+      <div class="sidebar-block">
+        <span class="sidebar-heading">カテゴリ</span>
+        <ul class="cat-list">
+          <li><a href="./sp-blog.html">ペットケア <span class="cat-count">12</span></a></li>
+          <li><a href="./sp-blog.html">お役立ち情報 <span class="cat-count">8</span></a></li>
+          <li><a href="./sp-blog.html">シッターの日常 <span class="cat-count">5</span></a></li>
+          <li><a href="./sp-blog.html">お知らせ <span class="cat-count">3</span></a></li>
+        </ul>
+      </div>
+
+      <!-- 新着記事（inline style 除去 → クラスで管理） -->
+      <div class="sidebar-block">
+        <span class="sidebar-heading">新着記事</span>
+        <!-- ワイヤー専用: .recent-posts-list 本番は WP_Query で動的生成 -->
+        <div class="recent-posts-list">
+          <a href="./sp-blog-detail.html" class="recent-post-item">
+            <div class="recent-post-thumb">🐾</div>
+            <div class="recent-post-body">
+              <p class="recent-post-title">信頼関係を築くための最初の5分間</p>
+              <span class="recent-post-date">2026.03.15</span>
+            </div>
+          </a>
+          <a href="./sp-blog-detail.html" class="recent-post-item">
+            <div class="recent-post-thumb">🐱</div>
+            <div class="recent-post-body">
+              <p class="recent-post-title">繊細な子ほど自宅シッターが向く理由</p>
+              <span class="recent-post-date">2026.03.08</span>
+            </div>
+          </a>
+          <a href="./sp-blog-detail.html" class="recent-post-item">
+            <div class="recent-post-thumb">🐶</div>
+            <div class="recent-post-body">
+              <p class="recent-post-title">ペットのストレスサインに気づく方法</p>
+              <span class="recent-post-date">2026.02.22</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </aside>
+  </div><!-- /article-layout -->
+
+  <!-- ========================================
+    (5) 関連記事
+    parts/related-posts.php
+    編集区分: CMSループ（関連記事クエリで最大3件）
+    ループ単位: .blog-card
+    SP変換: 3カラム → 1カラム縦積み（§3-2）
+    ⚠️ TODO: section-title の inline style="font-size:28px;margin-bottom:40px;" 除去
+             sp-blog-detail.css の .related-section h2 で上書き済み
+  ========================================= -->
+  <section class="related-section">
+    <div>
+      <span class="label">Related Articles</span>
+      <h2 class="section-title">関連記事</h2>
+    </div>
+    <div class="blog-grid">
+      <!-- ループ単位: .blog-card -->
+      <div class="blog-card">
+        <div class="blog-thumb">サムネイル画像</div>
+        <div class="blog-body">
+          <div class="blog-cat">ペットケア</div>
+          <div class="blog-title">信頼関係を築くための最初の5分間。初対面でやること・やらないこと</div>
+          <div class="blog-date">2026.03.15</div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-thumb">サムネイル画像</div>
+        <div class="blog-body">
+          <div class="blog-cat">お役立ち情報</div>
+          <div class="blog-title">ペットホテルが苦手な子のためのシッターの使い方。繊細な子ほど自宅シッターが向く理由</div>
+          <div class="blog-date">2026.03.08</div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-thumb">サムネイル画像</div>
+        <div class="blog-body">
+          <div class="blog-cat">シッターの日常</div>
+          <div class="blog-title">初めてシッタ―依頼をした日。飼い主さんの緊張とペットさんの反応</div>
+          <div class="blog-date">2026.02.28</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+    (6) CTAセクション
+    parts/cta.php（blog-detail 専用: 2択）
+    編集区分: 固定
+    ※ blog-detail は Instagram ボタンなし 2択（§SP変換リファレンス §10）
+    SP変換: ボタン2択 → 縦積み100%幅（§4-5）
+  ========================================= -->
+  <section class="cta-section">
+    <span class="label">Contact</span>
+    <h2 class="section-title">まずはお気軽に<br>ご相談ください</h2>
+    <p>初回カウンセリングは実質無料。<br>ペットさんのこと、どんな些細なことでもお聞きします。</p>
+    <div class="cta-buttons">
+      <a href="./sp-contact.html" class="btn-cta-white">お問い合わせフォーム</a>
+      <a href="https://line.me/" class="btn-line-lg">💬 LINEで相談する</a>
+      <!-- ※ Instagram ボタンなし（blog-detail 固有） -->
+    </div>
+  </section>
+
+  <!-- ========================================
+    フッター
+    parts/footer.php
+    編集区分: 固定
+    SP変換: grid 2カラム → 1カラム縦積み
+  ========================================= -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <img src="MoreFriends_RGB_white_cropped.png" alt="More Friends" class="footer-logo-img">
+        <div class="footer-tagline">
+          そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+          東京都・千葉県のペットシッティングサービス
+        </div>
+        <div class="footer-sns">
+          <a href="#" class="footer-sns-btn" aria-label="LINE">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </a>
+          <a href="#" class="footer-sns-btn" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Service</p>
+          <ul>
+            <li><a href="./sp-about.html">More Friendsとは</a></li>
+            <li><a href="./sp-service.html">サービス内容</a></li>
+            <li><a href="./sp-price.html">料金プラン</a></li>
+            <li><a href="./sp-cancel.html">キャンセルポリシー</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">About</p>
+          <ul>
+            <li><a href="./sp-sitter.html">シッター紹介</a></li>
+            <li><a href="./sp-flow.html">利用の流れ</a></li>
+            <li><a href="./sp-area.html">対応エリア</a></li>
+            <li><a href="./sp-reviews.html">お客様の声</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Info</p>
+          <ul>
+            <li><a href="./sp-blog.html">ブログ</a></li>
+            <li><a href="./sp-contact.html">お問い合わせ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">利用規約</a></li>
+            <li><a href="#">動物取扱業</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 More Friends. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+  // ハンバーガーメニュー開閉（§2-2）
+  document.querySelector('.hamburger')?.addEventListener('click', function() {
+    const nav = document.getElementById('sp-nav');
+    const isOpen = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+    nav.setAttribute('aria-hidden', !isOpen);
+  });
+
+  // Escape キーでナビを閉じる（§2-2）
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const nav = document.getElementById('sp-nav');
+      const toggle = document.querySelector('.hamburger');
+      if (nav && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        nav.setAttribute('aria-hidden', 'true');
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.focus();
+      }
+    }
+  });
+
+  // マーカーアンダーライン（IntersectionObserver）
+  const markers = document.querySelectorAll('.marker');
+  if (markers.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-active');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    markers.forEach(el => io.observe(el));
+  }
+  </script>
+
+</body>
+
+</html>

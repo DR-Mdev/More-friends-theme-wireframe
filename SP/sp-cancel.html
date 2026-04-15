@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>キャンセルポリシー — More Friends</title>
+  <meta name="description" content="More Friendsのキャンセルポリシー。シッティング・カウンセリングのキャンセル期限と料金についてご確認ください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!--
+    読み込み順:
+      1. wireframe-base.css          共通トークン・共通コンポーネント
+      2. [inline <style>]            cancel.html PCレイアウト（wireframe確認用）
+      3. sp-cancel.css               SP上書き（768px以下）← 追加
+  -->
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+    /* ── cancel.html ページ固有スタイル（PCレイアウト） ──
+       SP では sp-cancel.css の @media (max-width: 768px) で上書きされる */
+
+    /* ページヘッダー */
+    .page-header { background: var(--bg-mid); padding: 128px 80px 80px; border-bottom: 1px solid var(--border); }
+    .page-header .label { margin-bottom: 14px; }
+    .page-header-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 40px; font-weight: 400; color: var(--text); line-height: 1.3; margin-bottom: 16px; }
+    .page-header-sub { font-size: 14px; color: var(--text); line-height: 1.9; max-width: 480px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-sub); margin-bottom: 32px; }
+    .breadcrumb a { text-decoration: none; color: var(--text-sub); }
+    .breadcrumb a:hover { color: var(--primary); }
+    .breadcrumb-sep { color: var(--primary-l); }
+    .breadcrumb-current { color: var(--text); }
+
+    /* メインコンテンツ */
+    .policy-wrap { background: var(--bg); padding: 80px 80px 96px; }
+    .policy-inner { max-width: 720px; }
+    .policy-block { margin-bottom: 64px; }
+    .policy-block-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 20px; font-weight: 500; color: var(--text); margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .policy-block-title .block-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--primary-l); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+
+    /* テーブル */
+    .policy-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .policy-table thead tr { background: var(--bg-mid); }
+    .policy-table th { padding: 14px 20px; text-align: left; font-weight: 500; font-size: 12px; letter-spacing: 0.08em; color: var(--text-sub); border-bottom: 1px solid var(--border); }
+    .policy-table td { padding: 20px; border-bottom: 1px solid var(--border); color: var(--text); line-height: 1.7; vertical-align: middle; }
+    .policy-table tr:last-child td { border-bottom: none; }
+    .policy-table .rate-cell { font-family: 'Zen Maru Gothic', sans-serif; font-size: 20px; font-weight: 500; }
+    .rate-charged { color: var(--primary); }
+    .rate-free { color: #3A7A5A; }
+    .rate-badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
+    .rate-badge.charged { background: var(--primary-l); color: var(--primary-d); }
+    .rate-badge.free { background: #D6EDE0; color: #2D7A52; }
+    /* inline style 除去 → クラスで管理 */
+    .td-note { font-size: 12px; }
+    .td-note--sub { font-size: 12px; color: var(--text-sub); }
+
+    /* カウンセリングカード */
+    .counseling-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 32px 36px; display: flex; align-items: flex-start; gap: 32px; }
+    .counseling-fee-box { flex-shrink: 0; text-align: center; background: var(--bg-mid); border-radius: 8px; padding: 20px 28px; min-width: 140px; }
+    .counseling-fee-label { font-size: 11px; letter-spacing: 0.1em; color: var(--text); margin-bottom: 8px; }
+    .counseling-fee-amount { font-family: 'Zen Maru Gothic', sans-serif; font-size: 28px; font-weight: 500; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+    .counseling-fee-unit { font-size: 11px; color: var(--text); }
+    .counseling-desc { font-size: 14px; color: var(--text); line-height: 1.9; }
+    .counseling-desc strong { color: var(--text); font-weight: 500; }
+    .counseling-desc p + p { margin-top: 10px; }
+
+    /* 注意事項 */
+    .notice-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .notice-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text); line-height: 1.8; }
+    .notice-list li::before { content: '!'; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--primary-l); color: var(--primary-d); font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .notice-list li strong { color: var(--text); font-weight: 500; }
+
+    /* 戻るバナー */
+    .back-banner { margin-top: 64px; padding: 28px 36px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .back-banner-text { font-size: 14px; color: var(--text); line-height: 1.7; }
+    .back-banner-text strong { display: block; font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+
+    /* SP専用カード型（PCでは非表示） */
+    .cancel-cards { display: none; }
+  </style>
+  <link rel="stylesheet" href="sp-cancel.css">
+</head>
+
+<body>
+
+  <!-- ========================================
+    header
+    parts/header.php
+    編集区分: 固定
+    SP変換: グローバルナビ → ハンバーガー収納
+  ========================================= -->
+  <header class="sp-header">
+    <a href="./sp-index.html" class="header-logo-plain">
+      <img src="MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    </a>
+
+    <div class="sp-header__actions">
+
+      <a
+        href="#"
+        class="sp-header__action-btn sp-header__action-btn--ig"
+        aria-label="Instagramで相談・予約する"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </span>
+        <span class="sp-header__action-label">相談予約</span>
+      </a>
+
+      <a
+        href="https://line.me/"
+        class="sp-header__action-btn sp-header__action-btn--line"
+        aria-label="LINEで相談する"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        </span>
+        <span class="sp-header__action-label">LINE相談</span>
+      </a>
+
+      <button
+        class="hamburger sp-header__action-btn sp-header__action-btn--menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="sp-nav"
+        aria-label="メニューを開く"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <span class="hamburger-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </span>
+        <span class="sp-header__action-label">MENU</span>
+      </button>
+    </div>
+
+    <nav id="sp-nav" aria-hidden="true">
+      <a href="./sp-about.html">More Friendsとは</a>
+      <a href="./sp-service.html">サービス内容</a>
+      <a href="./sp-price.html">料金プラン</a>
+      <a href="./sp-cancel.html" class="is-current">キャンセルポリシー</a>
+      <a href="./sp-flow.html">利用の流れ</a>
+      <a href="./sp-sitter.html">シッター紹介</a>
+      <a href="./sp-area.html">対応エリア</a>
+      <a href="./sp-reviews.html">お客様の声</a>
+      <a href="./sp-blog.html">ブログ</a>
+      <a href="./sp-contact.html">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========================================
+      ページヘッダー
+      parts/page-header.php
+      編集区分: 固定
+      SP変換: padding縮小 / h1 クランプ
+      ⚠️ TODO: breadcrumb 末尾 span の inline style="color:var(--text)" → .breadcrumb-current クラスに移行済み
+    ========================================= -->
+    <section class="page-header">
+      <div class="breadcrumb">
+        <a href="./sp-index.html">ホーム</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="./sp-price.html">料金プラン</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">キャンセルポリシー</span>
+      </div>
+      <div class="label">Cancel Policy</div>
+      <h1 class="page-header-title">キャンセルポリシー</h1>
+      <p class="page-header-sub">シッティング・カウンセリングのキャンセルに関するルールをご確認ください。ご不明な点はお気軽にご相談ください。</p>
+    </section>
+
+    <!-- ========================================
+      メインコンテンツ
+      parts/cancel-policy.php
+      編集区分: 固定
+    ========================================= -->
+    <div class="policy-wrap">
+      <div class="policy-inner">
+
+        <!-- ① キャンセル料 -->
+        <div class="policy-block">
+          <h2 class="policy-block-title">
+            <span class="block-icon">📋</span>
+            シッティングのキャンセル料
+          </h2>
+
+          <!-- PC: 通常テーブル（sp-cancel.css で SP時に display:none） -->
+          <!-- ⚠️ TODO: td の inline style を .td-note / .td-note--sub クラスに移行済み -->
+          <table class="policy-table">
+            <thead>
+              <tr>
+                <th>キャンセルのタイミング</th>
+                <th>キャンセル料</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>前日・当日</strong><br>
+                  <span class="td-note">シッティング前日または当日にキャンセルした場合</span>
+                </td>
+                <td class="rate-cell rate-charged">
+                  100%
+                  <span class="rate-badge charged">全額</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>前々日以前</strong><br>
+                  <span class="td-note td-note--sub">シッティング2日前までのキャンセル</span>
+                </td>
+                <td class="rate-cell rate-free">
+                  無料
+                  <span class="rate-badge free">0円</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- SP: カード型（PCでは display:none、sp-cancel.css で display:flex） -->
+          <div class="cancel-cards">
+            <div class="cancel-card">
+              <div class="cancel-card__timing">
+                前日・当日
+                <span class="cancel-card__timing-note">— 前日または当日のキャンセル</span>
+              </div>
+              <div class="cancel-card__rate">
+                <span class="cancel-card__rate-num cancel-card__rate-num--charged">100%</span>
+                <span class="rate-badge charged">全額</span>
+              </div>
+            </div>
+            <div class="cancel-card">
+              <div class="cancel-card__timing">
+                前々日以前
+                <span class="cancel-card__timing-note">— 2日前までのキャンセル</span>
+              </div>
+              <div class="cancel-card__rate">
+                <span class="cancel-card__rate-num cancel-card__rate-num--free">無料</span>
+                <span class="rate-badge free">0円</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② カウンセリングキャンセル -->
+        <div class="policy-block">
+          <h2 class="policy-block-title">
+            <span class="block-icon">💬</span>
+            カウンセリング後のキャンセル
+          </h2>
+          <!-- SP変換: flex横並び → sp-cancel.css で flex-direction:column に変換 -->
+          <div class="counseling-card">
+            <div class="counseling-fee-box">
+              <div class="counseling-fee-label">キャンセル料</div>
+              <div class="counseling-fee-amount">3,300</div>
+              <div class="counseling-fee-unit">円（税込）</div>
+            </div>
+            <div class="counseling-desc">
+              <p><strong>カウンセリング（面会）実施後</strong>に、シッティングのご依頼をキャンセルされた場合に発生します。</p>
+              <p>カウンセリング自体のご予約のキャンセル・変更は無料です。</p>
+              <p>なお、シッティングのご予約が確定した場合、カウンセリング費用は初回シッティング料金に含まれるため、別途請求はございません。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ 注意事項 -->
+        <div class="policy-block">
+          <h2 class="policy-block-title">
+            <span class="block-icon">⚠️</span>
+            注意事項
+          </h2>
+          <ul class="notice-list">
+            <li>キャンセル料は<strong>シッティング料金（税込）の全額</strong>を基準として算出します。</li>
+            <li>お支払いはシッティング<strong>3日前まで</strong>にお済みください。未払いの場合は原則として対応できかねます。</li>
+            <li>ハイシーズン（GW・お盆・シルバーウィーク・年末年始）のキャンセルも同一ポリシーが適用されます。</li>
+            <li>天災・交通機関の大規模遅延など、やむを得ない事情によるキャンセルについては個別にご相談ください。</li>
+            <li>ご不明な点はお気軽にLINEまたはお問い合わせフォームよりご連絡ください。</li>
+          </ul>
+        </div>
+
+        <!-- 料金ページへ戻るバナー
+             SP変換: flex横並び → sp-cancel.css で flex-direction:column / ボタン100%幅 -->
+        <div class="back-banner">
+          <div class="back-banner-text">
+            <strong>料金プランの詳細はこちら</strong>
+            基本料金・割増料金・その他オプションは料金プランページでご確認いただけます。
+          </div>
+          <a href="./sp-price.html" class="btn-outline">料金プランを見る</a>
+        </div>
+
+      </div><!-- /policy-inner -->
+    </div><!-- /policy-wrap -->
+
+    <!-- ========================================
+      CTAセクション
+      parts/cta.php
+      編集区分: 固定
+      SP変換: ボタン3択 → 縦積み100%幅（§4-5）
+    ========================================= -->
+    <section class="cta-section">
+      <span class="label">Contact</span>
+      <h2 class="section-title">まずは気軽にご相談ください</h2>
+      <p>初回カウンセリングは、シッティングご予約確定時に無料です。<br>ポリシーや料金など、気になることはなんでもお聞きください。</p>
+      <div class="cta-buttons">
+        <a href="./sp-contact.html" class="btn-cta-white">無料カウンセリングを申し込む</a>
+        <a href="https://line.me/" class="btn-line-lg">💬 LINEで相談する</a>
+        <a href="#" class="btn-ig-lg">Instagramで相談</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+    フッター
+    parts/footer.php
+    編集区分: 固定
+    SP変換: grid 2カラム → 1カラム縦積み
+  ========================================= -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <img src="MoreFriends_RGB_white_cropped.png" alt="More Friends" class="footer-logo-img">
+        <div class="footer-tagline">
+          そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+          東京都・千葉県のペットシッティングサービス
+        </div>
+        <div class="footer-sns">
+          <a href="#" class="footer-sns-btn" aria-label="LINE">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </a>
+          <a href="#" class="footer-sns-btn" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Service</p>
+          <ul>
+            <li><a href="./sp-about.html">More Friendsとは</a></li>
+            <li><a href="./sp-service.html">サービス内容</a></li>
+            <li><a href="./sp-price.html">料金プラン</a></li>
+            <li><a href="./sp-cancel.html">キャンセルポリシー</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">About</p>
+          <ul>
+            <li><a href="./sp-sitter.html">シッター紹介</a></li>
+            <li><a href="./sp-flow.html">利用の流れ</a></li>
+            <li><a href="./sp-area.html">対応エリア</a></li>
+            <li><a href="./sp-reviews.html">お客様の声</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Info</p>
+          <ul>
+            <li><a href="./sp-blog.html">ブログ</a></li>
+            <li><a href="./sp-contact.html">お問い合わせ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">利用規約</a></li>
+            <li><a href="#">動物取扱業</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 More Friends. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+  // ハンバーガーメニュー開閉（§2-2）
+  document.querySelector('.hamburger')?.addEventListener('click', function() {
+    const nav = document.getElementById('sp-nav');
+    const isOpen = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+    nav.setAttribute('aria-hidden', !isOpen);
+  });
+
+  // Escape キーでナビを閉じる（§2-2）
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const nav = document.getElementById('sp-nav');
+      const toggle = document.querySelector('.hamburger');
+      if (nav && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        nav.setAttribute('aria-hidden', 'true');
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.focus();
+      }
+    }
+  });
+  </script>
+
+</body>
+
+</html>

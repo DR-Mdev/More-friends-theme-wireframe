@@ -1,0 +1,422 @@
+/*
+  sp-review-detail.css
+  More Friends — 口コミ詳細（review-detail）SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css                 共通トークン・リセット
+    2. [sp-review-detail.html inline]     PCレイアウト（wireframe確認用）
+    3. sp-review-detail.css               ← このファイル（768px以下を上書き）
+
+  ブレークポイント: max-width: 768px
+*/
+
+@media (max-width: 768px) {
+
+  /* ==============================================
+     SP ヘッダー（共通パターン）
+  =============================================== */
+  header nav:not(.open) { display: none; }
+  header nav a { display: flex; }
+
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-left-color: transparent;
+  }
+
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff;
+    border-left-color: transparent;
+  }
+
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 0;
+    border-left-color: transparent;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .sp-header__action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    height: 16px;
+  }
+
+  .hamburger-lines span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  /* ドロワーナビ */
+  header nav.open {
+    position: fixed;
+    top: 60px;
+    left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
+    z-index: 99;
+    border-top: 1px solid var(--border);
+  }
+
+  header nav.open a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+    min-height: 52px;
+    color: var(--text);
+    text-decoration: none;
+    background: none;
+    border-radius: 0;
+    letter-spacing: 0.08em;
+  }
+
+  header nav.open a::after {
+    content: '›';
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 18px;
+  }
+
+  header nav.open a.is-current {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+  /* ==============================================
+     共通: パディング・タイポ
+  =============================================== */
+  section {
+    padding: 48px 16px;
+  }
+
+  .section-title {
+    font-size: clamp(22px, 6vw, 28px);
+    line-height: 1.35;
+  }
+
+  .section-header {
+    margin-bottom: 28px;
+  }
+
+  /* ==============================================
+     パンくず
+  =============================================== */
+  .breadcrumb {
+    padding: 20px 16px 0;
+    font-size: 11px;
+    flex-wrap: wrap;
+  }
+
+  /* ==============================================
+     ① ページヘッダー
+  =============================================== */
+  .page-header {
+    padding: 24px 16px 32px;
+  }
+
+  .review-headline {
+    font-size: clamp(20px, 5.5vw, 26px);
+    margin-bottom: 16px;
+  }
+
+  .review-header-meta {
+    gap: 10px;
+  }
+
+  .review-stars-lg {
+    font-size: 18px;
+  }
+
+  /* ==============================================
+     ② 本文エリア
+  =============================================== */
+  .review-detail-body {
+    padding: 32px 16px 80px;
+    max-width: 100%;
+  }
+
+  /* 投稿者カード: 横並び → 縦積み */
+  .reviewer-card {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    margin-bottom: 36px;
+  }
+
+  .reviewer-avatar {
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
+  }
+
+  .reviewer-name {
+    font-size: 15px;
+  }
+
+  .reviewer-detail-list {
+    gap: 6px 16px;
+  }
+
+  .reviewer-detail-item {
+    font-size: 11px;
+  }
+
+  /* 口コミ本文 */
+  .review-text-block {
+    margin-bottom: 40px;
+  }
+
+  .review-text-block p {
+    font-size: 14px;
+    line-height: 2;
+    margin-bottom: 16px;
+  }
+
+  /* 写真ギャラリー: 3カラム → 2カラム */
+  .review-section-heading {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .review-photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  /* シッターコメント */
+  .sitter-comment {
+    padding: 20px;
+    margin-bottom: 40px;
+  }
+
+  .sitter-comment p {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+
+  /* 前後ナビ: 横並び → 縦積み */
+  .review-nav {
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 36px;
+    margin-bottom: 36px;
+  }
+
+  .review-nav-btn {
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding: 14px 16px;
+  }
+
+  .review-nav-title {
+    font-size: 13px;
+  }
+
+  /* 一覧に戻る */
+  .back-to-list .btn-outline {
+    width: 100%;
+    text-align: center;
+    padding: 14px;
+    font-size: 14px;
+    min-height: 44px;
+  }
+
+  /* ==============================================
+     ③ 関連口コミ: 3カラム → 1カラム
+  =============================================== */
+  .related-reviews {
+    padding: 48px 16px;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .review-card {
+    padding: 20px;
+  }
+
+  .review-card-header {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .review-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .review-body {
+    font-size: 13px;
+    line-height: 1.85;
+    margin-bottom: 10px;
+  }
+
+  /* ==============================================
+     CTAセクション（共通パターン）
+  =============================================== */
+  .cta-section {
+    padding: 48px 16px;
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(22px, 6vw, 28px);
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-cta-white,
+  .btn-line-lg,
+  .btn-ig-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  /* ==============================================
+     フッター（共通パターン）
+  =============================================== */
+  footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-sns-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ==============================================
+   ロゴ / フッター: SP非依存
+=============================================== */
+.header-logo-plain {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  min-width: auto;
+  min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}

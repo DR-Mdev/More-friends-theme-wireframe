@@ -1,0 +1,527 @@
+/* ============================================================
+  sp-sitter.css
+  More Friends — シッター紹介ページ SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css
+    2. sp-wireframe-base.css
+      ← .mf-flow-list / .mf-flow-item 定義済み
+    3. sp-sitter.css ← このファイル
+
+  主な変換:
+    - v06-profile: 横並び → 写真上・テキスト下（§3-2）
+    - v06-overview: 3カラム → 1カラム縦積み（§3-2）
+    - v06-career / v06-cert: リスト量多い → 折りたたみ（§05 ⚠️判断済み）
+      タップターゲット: summary 44px以上（§2-1）
+    - 背景色の交互塗り分け: bg / bg-mid で維持
+    - セクション数11（最多）: 見出し・余白でメリハリ（§05）
+
+  ⚠️ 本番CSSではない。wireframe確認用。
+============================================================ */
+
+@media (max-width: 768px) {
+
+/* ============================================================
+  1. ページヘッダー
+============================================================ */
+
+  .mf-page-header {
+    padding: 40px 16px 48px;
+    background: var(--bg-mid, #f7f5f0);
+  }
+
+  .mf-page-header__heading {
+    font-size: clamp(26px, 6.5vw, 32px);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .mf-page-header__body {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+
+/* ============================================================
+  2. プロフィール（.mf-sitter-profile）
+  PC: 横並び（写真左・テキスト右）→ SP: 写真上・テキスト下
+  §3-2 / §sitter
+============================================================ */
+
+  .mf-sitter-profile {
+    padding: 48px 16px;
+  }
+
+  /* アバター: 上に配置・中央寄せ */
+  .mf-sitter-profile__avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  /* 写真: 円形・適度なサイズ */
+  .mf-sitter-profile__avatar-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--primary, #4a7c59);
+    /* aspect-ratio: 1/1 は .mf-media--1x1 で定義済み */
+  }
+
+  /* テキストブロック: 下に縦積み */
+  .mf-sitter-profile__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mf-sitter-profile__name-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mf-sitter-profile__role {
+    font-size: 13px;
+  }
+
+  .mf-sitter-profile__name {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .mf-sitter-profile__name-kana {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-sub, #555);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* タグライン */
+  .mf-sitter-profile__tagline {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--primary, #4a7c59);
+    padding: 14px 16px;
+    border-left: 3px solid var(--primary, #4a7c59);
+    background: rgba(74,124,89,.05);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* 資格バッジ群 */
+  .mf-sitter-profile__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mf-sitter-profile__badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary, #4a7c59);
+    background: rgba(74,124,89,.08);
+    border: 1px solid rgba(74,124,89,.2);
+    border-radius: 4px;
+    padding: 4px 10px;
+  }
+
+
+/* ============================================================
+  3. 3テーマ概要（.mf-sitter-overview）
+  PC: 3カラム → SP: 1カラム縦積み（§3-2）
+============================================================ */
+
+  .mf-sitter-overview {
+    padding: 48px 16px;
+  }
+
+  .mf-sitter-overview__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mf-sitter-overview__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg, #fff);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+
+  /* 番号バッジ */
+  .mf-sitter-overview__item-num {
+    flex-shrink: 0;
+    width:  40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary, #4a7c59);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mf-sitter-overview__item-body {
+    flex: 1;
+  }
+
+  .mf-sitter-overview__item-heading {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+
+/* ============================================================
+  4. 個性・信頼・フィロソフィー・馴れるプロセス・名前の由来
+  SP変換: すべて縦積みそのまま
+  セクション数最多（11）のため余白でメリハリ（§05）
+============================================================ */
+
+  .mf-sitter-individuality,
+  .mf-sitter-trust,
+  .mf-sitter-philosophy,
+  .mf-sitter-acclimation,
+  .mf-sitter-origin {
+    padding: 48px 16px;
+  }
+
+  /* 見出し: セクション間のメリハリを強調 */
+  .mf-sitter-individuality .mf-heading-section,
+  .mf-sitter-trust .mf-heading-section,
+  .mf-sitter-philosophy .mf-heading-section,
+  .mf-sitter-acclimation .mf-heading-section,
+  .mf-sitter-origin .mf-heading-section {
+    font-size: clamp(22px, 5.5vw, 26px);
+  }
+
+  /* ビジュアル */
+  .mf-sitter-individuality__visual,
+  .mf-sitter-origin__visual {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* 信頼ステップ（絵文字3点横並び） */
+  .mf-sitter-trust__steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    background: var(--bg, #fff);
+    border-radius: 8px;
+  }
+
+  .mf-sitter-trust__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .mf-sitter-trust__step-icon {
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .mf-sitter-trust__step-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-sub, #555);
+    text-align: center;
+  }
+
+  .mf-sitter-trust__step-arrow {
+    font-size: 20px;
+    color: var(--primary, #4a7c59);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+
+/* ============================================================
+  5. 経歴・実績（.mf-sitter-career）
+  折りたたみ: <details>/<summary>（判断済み）
+  タップターゲット: summary 44px以上（§2-1）
+  <details>/<summary>: JS不要のネイティブ動作
+============================================================ */
+
+  .mf-sitter-career {
+    padding: 48px 16px;
+  }
+
+  /* <details> リセット */
+  .mf-sitter-career__details {
+    background: none;
+  }
+
+  /* <summary>: タップターゲット44px以上（§2-1） */
+  .mf-sitter-career__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    padding: 12px 16px;
+    background: var(--bg-mid, #f7f5f0);
+    border: 1px solid var(--border, #e0e0e0);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    color: var(--text, #1a1a1a);
+    -webkit-appearance: none;
+    transition: background .15s;
+  }
+
+  .mf-sitter-career__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mf-sitter-career__summary:hover,
+  .mf-sitter-career__summary:focus-visible {
+    background: rgba(74,124,89,.08);
+  }
+
+  .mf-sitter-career__summary-text {
+    flex: 1;
+  }
+
+  /* 矢印アイコン */
+  .mf-sitter-career__summary-icon {
+    flex-shrink: 0;
+    width:  24px;
+    height: 24px;
+    color: var(--primary, #4a7c59);
+    transition: transform .2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  details[open] .mf-sitter-career__summary-icon {
+    transform: rotate(180deg);
+  }
+
+  details[open] .mf-sitter-career__summary {
+    border-radius: 8px 8px 0 0;
+    border-bottom-color: transparent;
+  }
+
+  /* 展開コンテンツ */
+  .mf-sitter-career__content {
+    border: 1px solid var(--border, #e0e0e0);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 16px;
+    background: var(--bg, #fff);
+  }
+
+  /* 経歴リスト */
+  .mf-sitter-career__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mf-sitter-career__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border, #e0e0e0);
+  }
+
+  .mf-sitter-career__item:last-child {
+    border-bottom: none;
+  }
+
+  .mf-sitter-career__year {
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary, #4a7c59);
+    min-width: 60px;
+    padding-top: 1px;
+  }
+
+  .mf-sitter-career__desc {
+    font-size: 15px;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+
+/* ============================================================
+  6. 資格・認定（.mf-sitter-cert）
+  折りたたみ: <details>/<summary>（判断済み）
+  タップターゲット: summary 44px以上（§2-1）
+============================================================ */
+
+  .mf-sitter-cert {
+    padding: 48px 16px;
+  }
+
+  .mf-sitter-cert__details {
+    background: none;
+  }
+
+  /* <summary>: タップターゲット44px以上 */
+  .mf-sitter-cert__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    padding: 12px 16px;
+    background: var(--bg, #fff);
+    border: 1px solid var(--border, #e0e0e0);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    color: var(--text, #1a1a1a);
+    -webkit-appearance: none;
+    transition: background .15s;
+  }
+
+  .mf-sitter-cert__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mf-sitter-cert__summary:hover,
+  .mf-sitter-cert__summary:focus-visible {
+    background: rgba(74,124,89,.06);
+  }
+
+  .mf-sitter-cert__summary-text {
+    flex: 1;
+  }
+
+  .mf-sitter-cert__summary-icon {
+    flex-shrink: 0;
+    width:  24px;
+    height: 24px;
+    color: var(--primary, #4a7c59);
+    transition: transform .2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  details[open] .mf-sitter-cert__summary-icon {
+    transform: rotate(180deg);
+  }
+
+  details[open] .mf-sitter-cert__summary {
+    border-radius: 8px 8px 0 0;
+    border-bottom-color: transparent;
+  }
+
+  .mf-sitter-cert__content {
+    border: 1px solid var(--border, #e0e0e0);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 16px;
+    background: var(--bg, #fff);
+  }
+
+  /* 資格リスト */
+  .mf-sitter-cert__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mf-sitter-cert__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border, #e0e0e0);
+  }
+
+  .mf-sitter-cert__item:last-child {
+    border-bottom: none;
+  }
+
+  /* チェックバッジ */
+  .mf-sitter-cert__badge {
+    flex-shrink: 0;
+    width:  24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary, #4a7c59);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .mf-sitter-cert__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .mf-sitter-cert__name {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .mf-sitter-cert__org {
+    font-size: 13px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ============================================================
+  PC幅での打ち消し
+============================================================ */
+
+@media (min-width: 769px) {
+
+  /* プロフィールを PC 横並びに戻す */
+  .mf-sitter-profile .mf-sitter-profile__avatar {
+    justify-content: flex-start;
+  }
+
+  /* overviewリストを PC 3カラムに戻す */
+  .mf-sitter-overview__list {
+    display: grid;
+  }
+
+  /* 折りたたみを PC では展開した状態として表示
+     （PC では折りたたまない） */
+  .mf-sitter-career__details,
+  .mf-sitter-cert__details {
+    /* PC 定義は wireframe-base.css / sitter.css に従う */
+  }
+
+}
+
+/* ============================================================
+  END OF sp-sitter.css
+============================================================ */

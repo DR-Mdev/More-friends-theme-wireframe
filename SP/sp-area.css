@@ -1,0 +1,560 @@
+/*
+  sp-area.css
+  More Friends — 対応エリア（area）SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css      共通トークン・リセット・ハンバーガー基本制御
+    2. [area.html inline <style>]  PCレイアウト（PC確認用 inline）
+    3. sp-area.css             ← このファイル（768px以下を正式ブレークポイントで上書き）
+
+  方針:
+    - クラス名は area.html の既存クラスをそのまま使う
+    - SP固有のレイアウト変更のみをここに記述する
+    - 本番CSSではない。wireframe確認用（§7-3）
+    - theme.json + 本番CSS に置き換えること
+
+  参照: SP変換リファレンス.md §07 / 03_SPワイヤー専用ルール.md
+  ブレークポイント: max-width: 768px（--bp-sp に相当）
+*/
+
+
+@media (max-width: 768px) {
+
+  /* ==============================================
+     SP ヘッダー
+     sp-index.css / sp-about.css と同一パターン
+     44×44px タップターゲット確保（§2-1）
+  =============================================== */
+
+  header nav:not(.open) {
+    display: none;
+  }
+
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* PC の body { padding-top: 64px } を sticky 化に合わせて解除 */
+  body {
+    padding-top: 0;
+  }
+
+  .sp-header .header-logo,
+  header .header-logo {
+    font-size: 13px;
+    min-width: auto;
+    min-height: 36px;
+    padding: 6px 14px;
+  }
+
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn:first-child {
+    border-left: none;
+  }
+
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 0;
+    border-left-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .sp-header__action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    height: 16px;
+    background: transparent;
+  }
+
+  .hamburger-lines span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-icon {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-label {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: transparent;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines span {
+    background: #fff;
+    width: 18px;
+    height: 1.5px;
+  }
+
+  /* ドロワーナビ */
+  header nav.open {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
+    z-index: 99;
+    border-top: 1px solid var(--border);
+  }
+
+  header nav.open a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+    min-height: 52px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  header nav.open a::after {
+    content: '›';
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 18px;
+  }
+
+  header nav.open a.is-current {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+
+  /* ==============================================
+     共通: セクションパディング
+  =============================================== */
+  section {
+    padding: 56px 16px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+    line-height: 1.35;
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-sub {
+    max-width: 100%;
+  }
+
+
+  /* ==============================================
+     ページヘッダー
+     PC: padding 128px / h1 48px → SP: 縮小
+  =============================================== */
+  .page-header {
+    padding: 32px 16px 40px;
+  }
+
+  .page-header h1 {
+    font-size: clamp(28px, 7.5vw, 32px);
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .page-header p {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+
+  /* ==============================================
+     SECTION 1: 対応エリア
+     PC: grid 2カラム（地図左 / エリアカード右）
+     SP: 地図上 → エリアカード下（§SP変換リファレンス §07）
+         地図: aspect-ratio 16/9 + object-fit cover（§2-3）
+     ⚠️ TODO: .map-placeholder の PC height:420px を削除
+              sp-area.css の aspect-ratio で制御済み
+  =============================================== */
+  .area-section {
+    padding: 56px 16px;
+  }
+
+  .area-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    grid-template-columns: unset;
+  }
+
+  /* 地図: aspect-ratio で高さ制御 */
+  .map-placeholder {
+    aspect-ratio: 16 / 9;
+    height: auto !important;
+    border-radius: 8px;
+    width: 100%;
+  }
+
+  .area-cards {
+    gap: 16px;
+  }
+
+  .area-card {
+    padding: 20px 16px;
+  }
+
+  .area-card-title {
+    font-size: 15px;
+  }
+
+  .area-district {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .area-note {
+    font-size: 13px;
+    line-height: 1.75;
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+
+  /* ==============================================
+     SECTION 2: 出張費について
+     PC: grid 2カラム（テーブル左 / ノートボックス右）
+     SP: 1カラム縦積み（テーブル上 → ノートボックス下）
+         テーブル: 横スクロール前提（§3-4）
+  =============================================== */
+  .travel-section {
+    padding: 56px 16px;
+  }
+
+  .travel-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    grid-template-columns: unset;
+  }
+
+  /* テーブル横スクロールラッパー
+     ⚠️ TODO: sp-area.html で .travel-table を .travel-table-wrap で囲むこと */
+  .travel-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    /* スクロール可能の視覚ヒント */
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+            mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  }
+
+  .travel-table {
+    min-width: 480px;
+    font-size: 13px;
+  }
+
+  .travel-table th,
+  .travel-table td {
+    padding: 12px 14px;
+    white-space: nowrap;
+  }
+
+  .travel-note-box {
+    padding: 20px 16px;
+  }
+
+  .travel-note-box ul li {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+
+  /* ==============================================
+     SECTION 3: 最寄り駅・移動時間の考え方
+     PC: 3カラム → SP: 1カラム縦積み（§3-2）
+  =============================================== */
+  .access-section {
+    padding: 56px 16px;
+  }
+
+  .access-inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .access-card {
+    padding: 24px 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .access-card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .access-note {
+    margin-top: 24px;
+    max-width: 100%;
+    padding: 16px;
+    font-size: 13px;
+  }
+
+
+  /* ==============================================
+     SECTION 4: エリア外の相談窓口
+     PC: grid 2カラム（LINE誘導カード左 / 3ケース右）
+     SP: 1カラム縦積み（LINE誘導カード先に §SP変換リファレンス §07）
+         inline style 解除 → .out-cases クラスで管理
+  =============================================== */
+  .out-of-area-section {
+    padding: 56px 16px;
+  }
+
+  .out-of-area-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    grid-template-columns: unset;
+  }
+
+  .out-card {
+    padding: 28px 20px;
+  }
+
+  .out-card-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .out-card-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .out-card-text {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  /* LINE誘導ボタン: 100%幅 */
+  .out-card-actions .btn-line-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  /* 3ケース上部の説明テキスト: inline style 除去 → クラスで管理 */
+  .out-cases-intro {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  /* 3ケースカード群: inline style 除去 → クラスで管理 */
+  .out-cases {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .concept-card {
+    padding: 20px 16px;
+  }
+
+  .concept-card-title {
+    font-size: 14px;
+  }
+
+  .concept-card-text {
+    font-size: 13px;
+  }
+
+
+  /* ==============================================
+     CTAセクション（共通パターン）
+  =============================================== */
+  .cta-section {
+    padding: 56px 16px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-cta-white,
+  .btn-line-lg,
+  .btn-ig-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+
+  /* ==============================================
+     フッター（共通パターン）
+  =============================================== */
+  footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-sns-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ==============================================
+   ロゴ / フッター: SP非依存（全幅対応）
+=============================================== */
+.header-logo-plain {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: auto;
+  min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>More Friendsとは — More Friends</title>
+  <meta name="description" content="More Friendsとは、ペットと飼い主さまに寄り添うペットシッターサービスです。「お世話はタスクではなく信頼関係のプロセス」を理念に活動しています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+    /* ── ページ固有スタイル ── */
+
+    /* パンくず */
+    .breadcrumb {
+      padding: 80px 80px 0;
+      font-size: 11px;
+      color: var(--text-sub);
+      letter-spacing: 0.06em;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--primary); }
+    .breadcrumb span { opacity: 0.45; }
+
+    /* ── 1. ページヘッダー ── */
+    .page-header .section-title { font-size: 46px; line-height: 1.25; }
+    @media (max-width: 768px) { .page-header .section-title { font-size: 28px; } }
+
+    .page-header {
+      background: var(--bg-mid);
+      padding: 64px 80px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header-img .ph-img {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .page-header-lead {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 400;
+      line-height: 2;
+      margin-top: 20px;
+      max-width: 480px;
+    }
+
+    /* ── 2. サービス定義 ── */
+    .definition {
+      background: var(--bg2);
+      padding: 96px 80px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .definition-grid {
+      display: flex;
+      justify-content: center;
+      margin-top: 56px;
+    }
+    .definition-grid .def-card {
+      width: 72%;
+    }
+
+    .bottom-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .bottom-point {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bottom-point-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bottom-point-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary-l);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .bottom-point-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .bottom-point-text {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 400;
+      line-height: 1.8;
+    }
+    .def-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 36px 32px;
+    }
+    .def-card-vs {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      font-family: 'Zen Maru Gothic', sans-serif;
+    }
+    .def-card-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .def-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 14px;
+    }
+    .def-row-head {
+      background: var(--primary-l);
+      padding: 10px 16px;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--primary-d);
+      letter-spacing: 0.06em;
+      grid-column: 1 / -1;
+      border-bottom: 1px solid var(--border);
+    }
+    .def-row-col {
+      padding: 12px 16px;
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 13px;
+    }
+    .def-row-col:first-of-type {
+      border-right: 1px solid var(--border);
+    }
+    .def-col-label {
+      font-size: 11px;
+      color: var(--text-sub);
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .def-row-sep { border-top: 1px solid var(--border); grid-column: 1 / -1; }
+
+    /* ── 3. 3つの約束 ── */
+    .promises {
+      background: var(--bg);
+      padding: 96px 80px;
+    }
+    .promises-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .promise-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .promise-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--primary-l);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 20px;
+    }
+    .promise-num {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .promise-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .promise-kw {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 18px;
+      border-radius: 100px;
+      margin-bottom: 14px;
+      letter-spacing: 0.06em;
+    }
+    .promise-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.9;
+      text-align: left;
+    }
+
+    /* ── 4. シッティング哲学 ── */
+    .philosophy {
+      background: var(--bg-mid);
+      padding: 96px 80px;
+    }
+    .philosophy-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .philosophy-quote {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 26px;
+      color: var(--text);
+      line-height: 1.6;
+      border-left: 3px solid var(--primary);
+      padding-left: 28px;
+      margin-bottom: 28px;
+    }
+    .philosophy-body {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 2;
+    }
+    .philosophy-points {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .philosophy-point {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .philosophy-point-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary-l);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .philosophy-point-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .philosophy-point-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* ── 5. 信頼構築のプロセス ── */
+    .trust {
+      background: var(--bg2);
+      padding: 96px 80px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .trust-layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .trust-stat-block {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .trust-stat-num {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 64px;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .trust-stat-unit {
+      font-size: 20px;
+      color: var(--primary);
+    }
+    .trust-stat-label {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-top: 14px;
+    }
+    .trust-stat-note {
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 10px;
+    }
+    .trust-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .trust-step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 24px 28px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .trust-step:last-child { border-bottom: none; }
+    .trust-step-badge {
+      background: var(--primary-l);
+      color: var(--primary-d);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 100px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .trust-step-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .trust-step-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* ── 6. ターゲット ── */
+    .target {
+      background: var(--bg);
+      padding: 96px 80px;
+    }
+    .target-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .target-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px 28px;
+    }
+    .target-card-icon {
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+    .target-card-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .target-card-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.85;
+    }
+    .target-note {
+      margin-top: 48px;
+      background: var(--bg-mid);
+      border-left: 3px solid var(--primary);
+      padding: 20px 24px;
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<!-- parts/header.php -->
+<header>
+  <a href="/" class="header-logo">
+    <div class="ph-logo">More Friends</div>
+  </a>
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./about.html" style="color:var(--primary); font-weight:500;">More Friendsとは</a>
+    <a href="./service.html">サービス内容</a>
+    <a href="./price.html">料金プラン</a>
+    <a href="./flow.html">利用の流れ</a>
+    <a href="./sitter.html">シッター紹介</a>
+    <a href="./blog.html">ブログ</a>
+    <a href="#" class="btn-ig">Instagramで相談</a>
+    <a href="./contact.html" class="btn-line">LINEで相談</a>
+  </nav>
+  <!-- SP: ハンバーガーボタン -->
+  <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-nav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<main>
+
+<div style="height:64px"></div><!-- header offset -->
+
+<!-- ========== BREADCRUMB ========== -->
+<div class="breadcrumb">
+  <a href="/">Home</a>
+  <span>/</span>
+  <span style="color:var(--text)">More Friendsとは</span>
+</div>
+
+<!-- ========== 1. PAGE HEADER ========== -->
+<!-- parts/page-header.php -->
+<section class="page-header">
+  <div>
+    <span class="label">About More Friends</span>
+    <h1 class="section-title">
+      そっと心に触れる、<br>友達のような<br>存在でありたい。
+    </h1>
+    <p class="page-header-lead">
+      かけがえのない大切なペットさんと飼い主さまのお悩みに寄り添い、
+      楽しく・ポジティブに愛情を込めてお世話をさせていただく、
+      ペットシッターサービスです。<br><br>
+      ペットさんの揺るがない幸福があってこそ、
+      飼い主さまの幸せをサポートできると信じております。
+    </p>
+    <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="/contact" class="btn-primary">まず無料カウンセリング</a>
+      <a href="/service" class="btn-outline">サービス内容を見る</a>
+    </div>
+  </div>
+  <div class="page-header-img">
+    <!-- style="height" はワイヤー確認用の仮値。本番削除対象 -->
+    <div class="ph-img" style="height:360px;border-radius:8px;" data-label="ヘッダービジュアル / シッターとペットの写真"></div>
+  </div>
+</section>
+
+<!-- ========== 2. サービス定義 ========== -->
+<!-- parts/about-definition.php -->
+<section class="definition">
+  <div class="section-header">
+    <span class="label">What We Do</span>
+    <h2 class="section-title">More Friendsとは、どんなサービス？</h2>
+    <p class="section-sub">一般的なペットシッターやペットホテルとは、どう違うのかを整理しました。</p>
+  </div>
+
+  <div class="definition-grid">
+
+
+
+    <!-- VS ペットホテル -->
+    <div class="def-card">
+      <div class="def-card-vs">VS ペットホテル</div>
+      <div class="def-card-title">ストレスのかかり方がまったく違います</div>
+      <div class="def-row">
+        <div class="def-row-head">比較ポイント</div>
+        <div class="def-row-col">
+          <div class="def-col-label">ペットホテル</div>
+          知らない環境・知らない動物たちの中で過ごす。繊細な子は特にストレスが大きい。
+        </div>
+        <div class="def-row-col">
+          <div class="def-col-label">More Friends</div>
+          住み慣れた自宅でのお世話。環境が変わらないため、ストレスが最小限。
+        </div>
+        <div class="def-row-sep"></div>
+        <div class="def-row-col">
+          <div class="def-col-label">ペットホテル</div>
+          不特定多数のスタッフが対応。顔なじみになりにくい。
+        </div>
+        <div class="def-row-col">
+          <div class="def-col-label">More Friends</div>
+          担当シッターが固定。回を重ねるごとに信頼関係が深まる。
+        </div>
+        <div class="def-row-sep"></div>
+        <div class="def-row-col">
+          <div class="def-col-label">ペットホテル</div>
+          飼い主さまの細かい要望を伝えにくい。
+        </div>
+        <div class="def-row-col">
+          <div class="def-col-label">More Friends</div>
+          カウンセリングで細かい要望・生活習慣をすべて共有。「いつも通り」を再現。
+        </div>
+
+        <!-- 追加: 報告の詳しさ -->
+        <div class="def-row-sep"></div>
+        <div class="def-row-col">
+          <div class="def-col-label">ペットホテル</div>
+          お迎え時に口頭で一言程度。滞在中の様子はほとんど分からない。
+        </div>
+        <div class="def-row-col">
+          <div class="def-col-label">More Friends</div>
+          シッティング後2時間以内に詳細報告。行動の変化・気づきも細かく伝える。
+        </div>
+
+        <!-- 追加: 繊細な子・シニアへのリスク -->
+        <div class="def-row-sep"></div>
+        <div class="def-row-col">
+          <div class="def-col-label">ペットホテル</div>
+          環境変化のストレスで食欲・排泄に影響が出ることも。繊細な子・シニアほど負担が大きい。
+        </div>
+        <div class="def-row-col">
+          <div class="def-col-label">More Friends</div>
+          自宅なので環境変化ゼロ。ストレス起因の体調変化リスクが最小限。
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-points">
+    <div class="bottom-point">
+      <div class="bottom-point-head">
+        <div class="bottom-point-icon">📋</div>
+        <div class="bottom-point-title">シッティング後2時間以内に報告</div>
+      </div>
+      <div class="bottom-point-text">行動の変化・食欲・排泄・気づいたことをすべてお伝えします。</div>
+    </div>
+    <div class="bottom-point">
+      <div class="bottom-point-head">
+        <div class="bottom-point-icon">🏡</div>
+        <div class="bottom-point-title">「いつもの空気感」を再現</div>
+      </div>
+      <div class="bottom-point-text">飼い主さまが余裕のある日の空気感が、ペットさんの心の余裕に直結します。</div>
+    </div>
+    <div class="bottom-point">
+      <div class="bottom-point-head">
+        <div class="bottom-point-icon">👁️</div>
+        <div class="bottom-point-title">繊細な子・シニアほど自宅が向く</div>
+      </div>
+      <div class="bottom-point-text">環境変化のストレスは食欲・排泄・皮膚に表れます。自宅ならそのリスクがゼロ。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3. 3つの約束 ========== -->
+<!-- parts/about-promises.php -->
+<section class="promises">
+  <div class="section-header">
+    <span class="label">Our Promise</span>
+    <h2 class="section-title">More Friendsの3つの約束</h2>
+    <p class="section-sub">
+      飼い主さまとペットさんに、いつもこの3つを届けたいと思っています。
+    </p>
+  </div>
+
+  <div class="promises-grid">
+    <div class="promise-card">
+      <div class="promise-icon">🛡️</div>
+      <div class="promise-num">Promise 01</div>
+      <div class="promise-title">不安なご不在時間を<br>《安心》へ</div>
+      <span class="promise-kw">安心</span>
+      <p class="promise-text">
+        「出かけている間、ペットは大丈夫だろうか」という不安を、
+        安心感に変えるのがMore Friendsの最初の使命です。
+        2時間以内の詳細報告と、カウンセリングからはじまる丁寧な
+        関係構築がその根拠です。
+      </p>
+    </div>
+
+    <div class="promise-card">
+      <div class="promise-icon">🎉</div>
+      <div class="promise-num">Promise 02</div>
+      <div class="promise-title">寂しいお留守番を<br>《楽しいイベント》へ</div>
+      <span class="promise-kw">楽しさ</span>
+      <p class="promise-text">
+        「シッターさんが来てくれる日！」と、ペットさんが
+        お留守番を楽しみに感じてくれるような関係を目指しています。
+        「今日はたくさん遊べて楽しかったね。また来るね」という
+        お別れができることがゴールです。
+      </p>
+    </div>
+
+    <div class="promise-card">
+      <div class="promise-icon">💬</div>
+      <div class="promise-num">Promise 03</div>
+      <div class="promise-title">他人には言えない悩みを<br>《共有》できる存在に</div>
+      <span class="promise-kw">共有</span>
+      <p class="promise-text">
+        ペットのことは「ちょっと大げさかな」と思われそうで
+        なかなか誰にも言えない。そんな気持ちに寄り添える存在でありたい。
+        飼い主さまとペットさん、両方の「心許せる友達」を目指しています。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. シッティング哲学 ========== -->
+<!-- parts/about-philosophy.php -->
+<section class="philosophy">
+  <div class="section-header">
+    <span class="label">Philosophy</span>
+    <h2 class="section-title">お世話はタスクではない</h2>
+    <p class="section-sub">
+      シッティングに込めた考え方をお伝えします。
+    </p>
+  </div>
+
+  <div class="philosophy-inner">
+    <div>
+      <blockquote class="philosophy-quote">
+        時間の余裕は、<br>
+        ペットさんにとっての<br>
+        心の余裕に繋がる。
+      </blockquote>
+      <p class="philosophy-body">
+        忙しい朝に慌ただしくお世話をして「ごめんね！行ってきます！」とサッと
+        居なくなったとき、ペットさんはどんな表情をしていますか。<br><br>
+        それとは逆に、余裕のある日。飼い主さまがゆっくり準備をしながら
+        そばにいてくれる空気感のなかで、ペットさんは落ち着いているはずです。<br><br>
+        More Friendsのシッティングは、この「余裕のある空気感」を
+        できる限り再現することを大切にしています。せっかくシッターが来ているのだから、
+        寂しい想いや残念な気持ちには、させたくないのです。
+      </p>
+    </div>
+
+    <div class="philosophy-points">
+      <div class="philosophy-point">
+        <div class="philosophy-point-icon">🎯</div>
+        <div>
+          <div class="philosophy-point-title">タスク完了ではなく、信頼関係の構築が目的</div>
+          <div class="philosophy-point-text">
+            ごはん・トイレ・遊びを「こなす」のではなく、ペットさんの気持ちに
+            寄り添いながらお世話をすることで、回を重ねるごとに
+            より深い信頼関係が生まれます。
+          </div>
+        </div>
+      </div>
+      <div class="philosophy-point">
+        <div class="philosophy-point-icon">👁️</div>
+        <div>
+          <div class="philosophy-point-title">ストレスサインを見逃さない観察眼</div>
+          <div class="philosophy-point-text">
+            尻尾の動き、目の動き、食欲の変化。小さなサインを見逃さず、
+            ペットさんの状態を把握したうえでお世話の内容を
+            柔軟に調整します。
+          </div>
+        </div>
+      </div>
+      <div class="philosophy-point">
+        <div class="philosophy-point-icon">🏡</div>
+        <div>
+          <div class="philosophy-point-title">普段の生活の空気感を再現する</div>
+          <div class="philosophy-point-text">
+            カウンセリングで把握した声掛けの言葉、遊び方、触れ合い方を
+            できる限りそのままに。ペットさんにとって「いつも通り」の
+            安心感を届けます。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5. 信頼構築のプロセス ========== -->
+<!-- parts/about-trust.php -->
+<section class="trust">
+  <div class="section-header">
+    <span class="label">Trust Building</span>
+    <h2 class="section-title">初めてでも大丈夫。<br>慣れるまでのプロセス。</h2>
+    <p class="section-sub">
+      多くのペットさんは想像よりずっと早く打ち解けてくれます。
+    </p>
+  </div>
+
+  <div class="trust-layout">
+    <div>
+      <div class="trust-stat-block">
+        <div style="font-size:13px;color:var(--text-sub);margin-bottom:8px;letter-spacing:0.06em;">初対面から打ち解けるまでの時間</div>
+        <div class="trust-stat-num">5<span class="trust-stat-unit">〜</span>10<span style="font-size:28px;color:var(--primary);">分</span></div>
+        <div class="trust-stat-label">
+          大騒ぎするのは最初の5〜10分だけ。<br>
+          そのあとすぐ打ち解けられることの方が<strong style="color:var(--text);">8割</strong>です。
+        </div>
+        <div class="trust-stat-note">
+          ※残り1割は2〜3回のシッティングで急接近、<br>
+          残り1割は数ヶ月〜年単位でゆっくり距離が縮まります。
+        </div>
+      </div>
+      <div style="margin-top:20px;">
+        <!-- style="height" はワイヤー確認用の仮値。本番削除対象 -->
+        <div class="ph-img" style="height:180px;border-radius:8px;" data-label="シッターとペットが打ち解けている写真"></div>
+      </div>
+    </div>
+
+    <div class="trust-steps">
+      <div class="trust-step">
+        <span class="trust-step-badge">STEP 1</span>
+        <div>
+          <div class="trust-step-title">カウンセリング (面会) で、まずペットさんを観察する</div>
+          <div class="trust-step-text">
+            初対面時の反応、ストレスサイン、飼い主さまとの関係性をじっくり観察します。
+            「どんな触れ合いをされているか」「どんな声掛けをされているか」が
+            信頼構築のヒントになります。
+          </div>
+        </div>
+      </div>
+      <div class="trust-step">
+        <span class="trust-step-badge">STEP 2</span>
+        <div>
+          <div class="trust-step-title">無理に近づかず、ペットさんのペースに合わせる</div>
+          <div class="trust-step-text">
+            繊細な子・怖がりさんには特に、「存在に慣れること」を最優先にします。
+            お世話よりも信頼構築が先です。焦らないことが最大のコツ。
+          </div>
+        </div>
+      </div>
+      <div class="trust-step">
+        <span class="trust-step-badge">STEP 3</span>
+        <div>
+          <div class="trust-step-title">回を重ねるごとに「できること」が増えていく</div>
+          <div class="trust-step-text">
+            最初は遠くから見守るだけでも、次第にそばでお世話ができるように。
+            顔なじみになってからは急激に心の距離が縮まることがほとんどです。
+          </div>
+        </div>
+      </div>
+      <div class="trust-step">
+        <span class="trust-step-badge">STEP 4</span>
+        <div>
+          <div class="trust-step-title">「また来る日」を楽しみに待てるようになる</div>
+          <div class="trust-step-text">
+            お留守番自体がペットさんにとっての「楽しいイベント」に変わっていきます。
+            これがMore Friendsの最終的なゴールです。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6. ターゲット ========== -->
+<!-- parts/about-target.php -->
+<section class="target">
+  <div class="section-header">
+    <span class="label">For You</span>
+    <h2 class="section-title">こんな飼い主さんに<br>選んでいただいています</h2>
+    <p class="section-sub">
+      ペットのことを真剣に考えている方に、More Friendsは寄り添います。
+    </p>
+  </div>
+
+  <div class="target-grid">
+    <div class="target-card">
+      <div class="target-card-icon">🐾</div>
+      <div class="target-card-title">「お世話を頼むのにこんなに悩むの？」<br>と思ったことがある方</div>
+      <div class="target-card-text">
+        初めてシッターを頼むのに「何をどこまでしてくれるか分からない」「信頼できるか不安」という気持ちを大切にしている飼い主さんに、丁寧な説明とカウンセリングでお応えします。
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-card-icon">🏨</div>
+      <div class="target-card-title">ペットホテルが合わず<br>困っている方</div>
+      <div class="target-card-text">
+        「ホテルから帰るといつも元気がない」「繊細な子で預けるのが心配」という方に。住み慣れた自宅でのシッティングは、環境変化のストレスを最小限に抑えます。
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-card-icon">💭</div>
+      <div class="target-card-title">「他人には言えない」ペットの悩みを<br>持っている方</div>
+      <div class="target-card-text">
+        「ちょっと大げさかな」と思われそうで誰にも相談できなかったこと、More Friendsには何でも話してください。ペットのことを一緒に考えるパートナーでありたいと思っています。
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-card-icon">🔍</div>
+      <div class="target-card-title">シッターとの相性を<br>大切にしたい方</div>
+      <div class="target-card-text">
+        「以前頼んだシッターさんと何かモヤモヤした」という経験がある方にも。カウンセリングで相性を確認し、納得したうえでお世話を始めることができます。
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-card-icon">💌</div>
+      <div class="target-card-title">お世話の様子をきちんと<br>知りたい方</div>
+      <div class="target-card-text">
+        シッティング中の様子を細かく報告してほしい方に。行動の変化・気づいたこと・よかったことを2時間以内に丁寧にお伝えします。
+      </div>
+    </div>
+    <div class="target-card">
+      <div class="target-card-icon">🤝</div>
+      <div class="target-card-title">長く信頼できるシッターを<br>探している方</div>
+      <div class="target-card-text">
+        単発の利用ではなく、ペットさんのことをよく知っている「かかりつけシッター」を求めている方に。回を重ねるごとにお世話の質は上がっていきます。
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- ========== 7. CTA ========== -->
+<!-- parts/cta.php -->
+<section class="cta-section">
+  <span class="label">Contact</span>
+  <h2 class="section-title">まずはお気軽に<br>ご相談ください</h2>
+  <p>初回カウンセリングは実質無料。<br>どんな些細なことでもお聞きします。</p>
+  <div class="cta-buttons">
+    <a href="/contact.html" class="btn-cta-white">お問い合わせフォーム</a>
+    <a href="/contact.html" class="btn-line-lg">💬 LINEで相談する</a>
+    <a href="#" class="btn-ig-lg">Instagramで相談</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<!-- parts/footer.php -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="ph-logo footer-logo">More Friends</div>
+      <div class="footer-tagline">
+        そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+        東京都・千葉県のペットシッティングサービス
+      </div>
+      <div class="footer-sns">
+        <a href="#" class="footer-sns-btn" aria-label="LINE">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        </a>
+        <a href="#" class="footer-sns-btn" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">Service</p>
+        <ul>
+          <li><a href="./about.html">More Friendsとは</a></li>
+          <li><a href="./service.html">サービス内容</a></li>
+          <li><a href="./price.html">料金プラン</a></li>
+          <li><a href="./cancel.html">キャンセルポリシー</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">About</p>
+        <ul>
+          <li><a href="./sitter.html">シッター紹介</a></li>
+          <li><a href="./flow.html">利用の流れ</a></li>
+          <li><a href="./area.html">対応エリア</a></li>
+          <li><a href="./reviews.html">お客様の声</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">Info</p>
+        <ul>
+          <li><a href="./blog.html">ブログ</a></li>
+          <li><a href="./contact.html">お問い合わせ</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+          <li><a href="#">利用規約</a></li>
+          <li><a href="#">動物取扱業</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 More Friends. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.hamburger')?.addEventListener('click', function() {
+  const nav = document.getElementById('sp-nav');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+  nav.setAttribute('aria-hidden', !isOpen);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シッター紹介 — More Friends</title>
+  <!--
+    読み込み順:
+      1. wireframe-base.css
+      2. sp-wireframe-base.css
+      3. sp-sitter.css
+  -->
+  <link rel="stylesheet" href="wireframe-base.css">
+  <link rel="stylesheet" href="sp-wireframe-base.css">
+  <link rel="stylesheet" href="sp-sitter.css">
+</head>
+<body>
+
+  <!-- ========================================
+    ヘッダー（共通）
+    parts/header.php
+    編集区分: 固定
+  ========================================= -->
+  <header class="mf-header" role="banner">
+
+    <a href="index.html" class="mf-header__logo">
+      <span class="ph-logo"></span><!-- ワイヤー専用: 本番前に削除 -->
+      <span class="mf-sr-only">More Friends</span>
+    </a>
+
+    <div class="mf-header__actions">
+      <a
+        href="https://line.me/"
+        class="mf-btn mf-btn--icon mf-btn--line"
+        aria-label="LINEで相談する"
+        target="_blank"
+        rel="noopener noreferrer"
+      ><span aria-hidden="true">L</span></a>
+
+      <a
+        href="https://www.instagram.com/"
+        class="mf-btn mf-btn--icon mf-btn--ig"
+        aria-label="Instagramを見る"
+        target="_blank"
+        rel="noopener noreferrer"
+      ><span aria-hidden="true">IG</span></a>
+
+      <button
+        class="mf-header__toggle js-nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="global-nav"
+        aria-label="メニューを開く"
+      >
+        <span class="mf-header__toggle-line"></span>
+        <span class="mf-header__toggle-line"></span>
+        <span class="mf-header__toggle-line"></span>
+      </button>
+    </div>
+
+  </header>
+
+
+  <!-- ========================================
+    グローバルナビ（共通）
+    parts/global-nav.php
+    編集区分: 固定
+  ========================================= -->
+  <nav
+    id="global-nav"
+    class="mf-global-nav"
+    aria-label="グローバルナビゲーション"
+  >
+    <ul class="mf-global-nav__list">
+      <li class="mf-global-nav__item"><a href="about.html">More Friendsとは</a></li>
+      <li class="mf-global-nav__item"><a href="service.html">サービス内容</a></li>
+      <li class="mf-global-nav__item"><a href="price.html">料金プラン</a></li>
+      <li class="mf-global-nav__item"><a href="flow.html">利用の流れ</a></li>
+      <li class="mf-global-nav__item">
+        <a href="sitter.html" aria-current="page">シッター紹介</a>
+      </li>
+      <li class="mf-global-nav__item"><a href="area.html">対応エリア</a></li>
+      <li class="mf-global-nav__item"><a href="reviews.html">お客様の声</a></li>
+      <li class="mf-global-nav__item"><a href="blog.html">ブログ</a></li>
+      <li class="mf-global-nav__item"><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+
+
+  <main>
+
+    <!-- ========================================
+      ページヘッダー
+      parts/page-header.php
+      編集区分: 固定
+      SP変換: 縦積みそのまま
+    ========================================= -->
+    <section class="mf-page-header">
+      <div class="mf-container">
+
+        <span class="mf-section-label">SITTER</span>
+
+        <h1 class="mf-page-header__heading">
+          シッター紹介
+        </h1>
+
+        <p class="mf-page-header__body">
+          More Friends代表シッター、椎名春香のプロフィールです。
+          ペットへの想いや考え方をご紹介します。
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================
+      プロフィール（名前・写真・概要）（.v06-profile）
+      parts/section/sitter-profile.php
+      編集区分: 編集可（テキスト・画像）
+      SP変換:
+        PC: 横並び（写真左・テキスト右）→ SP: 写真上・テキスト下（§3-2）
+      背景: var(--bg)
+    ========================================= -->
+    <section class="mf-sitter-profile v06-profile mf-section">
+      <div class="mf-container">
+
+        <!-- [1] 写真（上） -->
+        <div class="mf-sitter-profile__avatar">
+          <!-- aspect-ratio 1:1 + object-fit: cover（§2-3） -->
+          <div class="mf-sitter-profile__avatar-img mf-media--1x1">
+            <!-- ワイヤー専用: 本番前に削除 -->
+            <div class="ph-img" style="width:100%;height:100%;" aria-hidden="true">
+              シッター写真
+            </div>
+            <!-- ⚠️ TODO: 本番では <img alt="椎名 春香"> に置き換え §7-4 -->
+          </div>
+        </div>
+
+        <!-- [2] テキスト（下） -->
+        <div class="mf-sitter-profile__body">
+
+          <div class="mf-sitter-profile__name-wrap">
+            <p class="mf-sitter-profile__role mf-text-sub">
+              More Friends 代表シッター
+            </p>
+            <h2 class="mf-sitter-profile__name">
+              椎名 春香
+              <span class="mf-sitter-profile__name-kana">（しいな はるか）</span>
+            </h2>
+          </div>
+
+          <p class="mf-sitter-profile__tagline">
+            「この子のことを、もっとわかりたい」と<br>
+            思ってもらえるシッターでいたい。
+          </p>
+
+          <p class="mf-text-body">
+            ペットさんの個性を大切に、飼い主さんと一緒に
+            その子に合ったケアを考えていきます。
+            慣れるまでの時間を大切にし、信頼関係を
+            ひとつひとつ積み上げることが私のスタイルです。
+          </p>
+
+          <!-- 資格バッジ（簡易表示） -->
+          <div class="mf-sitter-profile__badges">
+            <span class="mf-sitter-profile__badge">動物介護士</span>
+            <span class="mf-sitter-profile__badge">ペットシッター士</span>
+          </div>
+
+        </div><!-- /.mf-sitter-profile__body -->
+
+      </div>
+    </section><!-- /.mf-sitter-profile -->
+
+
+    <!-- ========================================
+      3テーマ概要（.v06-overview）
+      parts/section/sitter-overview.php
+      編集区分: 固定
+      SP変換: PC 3カラム → SP 1カラム縦積み（§3-2）
+      背景: var(--bg-mid) ← 交互
+    ========================================= -->
+    <section class="mf-sitter-overview v06-overview mf-section mf-section--bg-mid">
+      <div class="mf-container">
+
+        <span class="mf-section-label">ABOUT</span>
+        <h2 class="mf-heading-section mf-mb-6">
+          3つのテーマ
+        </h2>
+
+        <!-- PC 3カラム → SP 1カラム縦積み -->
+        <ul class="mf-sitter-overview__list mf-card-list">
+
+          <li class="mf-sitter-overview__item">
+            <div class="mf-sitter-overview__item-num" aria-hidden="true">01</div>
+            <div class="mf-sitter-overview__item-body">
+              <h3 class="mf-sitter-overview__item-heading">
+                ペットの個性を理解する
+              </h3>
+              <p class="mf-text-body mf-mt-2">
+                同じ犬種・猫種でも、個性はまったく違います。
+                その子だけの性格・好き嫌い・ペースを大切にします。
+              </p>
+            </div>
+          </li>
+
+          <li class="mf-sitter-overview__item">
+            <div class="mf-sitter-overview__item-num" aria-hidden="true">02</div>
+            <div class="mf-sitter-overview__item-body">
+              <h3 class="mf-sitter-overview__item-heading">
+                信頼関係を丁寧に築く
+              </h3>
+              <p class="mf-text-body mf-mt-2">
+                急がず、焦らず。ペットさんが「この人は安全だ」と
+                感じるまで、時間をかけて関係を育てます。
+              </p>
+            </div>
+          </li>
+
+          <li class="mf-sitter-overview__item">
+            <div class="mf-sitter-overview__item-num" aria-hidden="true">03</div>
+            <div class="mf-sitter-overview__item-body">
+              <h3 class="mf-sitter-overview__item-heading">
+                飼い主さんと一緒に考える
+              </h3>
+              <p class="mf-text-body mf-mt-2">
+                飼い主さんが一番その子のことを知っています。
+                二人三脚で、その子に合ったケアを見つけます。
+              </p>
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+    </section><!-- /.mf-sitter-overview -->
+
+
+    <!-- ========================================
+      ペットの個性（.v06-individuality）
+      parts/section/sitter-individuality.php
+      編集区分: 固定
+      SP変換: そのまま縦積み
+      背景: var(--bg) ← 交互
+      ※ セクション数最多（11）のためセクション間の余白・
+         見出しのメリハリが重要（§05）
+    ========================================= -->
+    <section class="mf-sitter-individuality v06-individuality mf-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">INDIVIDUALITY</span>
+        <h2 class="mf-heading-section mf-mb-4">
+          ペットの個性を大切にするということ
+        </h2>
+
+        <p class="mf-text-body">
+          「うちの子、なんで〇〇するんだろう？」
+          そういう疑問を一緒に考えるのが好きです。
+        </p>
+        <p class="mf-text-body mf-mt-4">
+          ペットさんの行動には必ず理由があります。
+          怖いから吠える。嬉しいから噛む。眠いから逃げる。
+          その子の言葉を読み解きながら、関わり方を変えていきます。
+        </p>
+        <p class="mf-text-body mf-mt-4">
+          マニュアル通りに動くのではなく、
+          目の前のペットさんに合わせて考えることが
+          私にとっての「ケア」です。
+        </p>
+
+        <!-- ビジュアル -->
+        <div class="mf-sitter-individuality__visual mf-media--16x9 mf-mt-6">
+          <div class="ph-img" style="width:100%;height:100%;" aria-hidden="true">
+            ビジュアル（16:9）
+          </div>
+        </div>
+
+      </div>
+    </section><!-- /.mf-sitter-individuality -->
+
+
+    <!-- ========================================
+      信頼関係（.v06-trust）
+      parts/section/sitter-trust.php
+      編集区分: 固定
+      SP変換: そのまま縦積み
+      背景: var(--bg-mid) ← 交互
+    ========================================= -->
+    <section class="mf-sitter-trust v06-trust mf-section mf-section--bg-mid">
+      <div class="mf-container">
+
+        <span class="mf-section-label">TRUST</span>
+        <h2 class="mf-heading-section mf-mb-4">
+          信頼は、積み重ねるもの
+        </h2>
+
+        <p class="mf-text-body">
+          初めて会ったとき、ペットさんが逃げても当然です。
+          人間だって、初対面の人にすぐ心を開く人は少ないですよね。
+        </p>
+        <p class="mf-text-body mf-mt-4">
+          だから焦りません。
+          2回目、3回目と顔を合わせるたびに、
+          少しずつ「知ってる人」になっていく。
+          その変化が、この仕事の醍醐味です。
+        </p>
+
+        <!-- 信頼ステップ（視覚的な補足） -->
+        <ul class="mf-sitter-trust__steps mf-mt-6">
+          <li class="mf-sitter-trust__step">
+            <span class="mf-sitter-trust__step-icon" aria-hidden="true">😶</span>
+            <p class="mf-sitter-trust__step-label">知らない人</p>
+          </li>
+          <li class="mf-sitter-trust__step-arrow" aria-hidden="true">→</li>
+          <li class="mf-sitter-trust__step">
+            <span class="mf-sitter-trust__step-icon" aria-hidden="true">🙂</span>
+            <p class="mf-sitter-trust__step-label">知ってる人</p>
+          </li>
+          <li class="mf-sitter-trust__step-arrow" aria-hidden="true">→</li>
+          <li class="mf-sitter-trust__step">
+            <span class="mf-sitter-trust__step-icon" aria-hidden="true">😊</span>
+            <p class="mf-sitter-trust__step-label">友達</p>
+          </li>
+        </ul>
+
+      </div>
+    </section><!-- /.mf-sitter-trust -->
+
+
+    <!-- ========================================
+      フィロソフィー（.v06-philosophy）
+      parts/section/sitter-philosophy.php
+      編集区分: 固定
+      SP変換: そのまま縦積み
+      背景: var(--bg) ← 交互
+    ========================================= -->
+    <section class="mf-sitter-philosophy v06-philosophy mf-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">PHILOSOPHY</span>
+        <h2 class="mf-heading-section mf-mb-4">
+          「友達になる」という仕事
+        </h2>
+
+        <p class="mf-text-body">
+          More Friendsという名前には、
+          「ペットさんに、もっと友達を増やしてあげたい」
+          という気持ちが込められています。
+        </p>
+        <p class="mf-text-body mf-mt-4">
+          シッターは「預かり屋」ではないと思っています。
+          ペットさんにとって「家族以外の安心できる人」。
+          そういう存在になれたとき、
+          飼い主さんも、ペットさんも、
+          どちらも穏やかな時間を過ごせると信じています。
+        </p>
+
+      </div>
+    </section><!-- /.mf-sitter-philosophy -->
+
+
+    <!-- ========================================
+      馴れるプロセス（.v06-acclimation）
+      parts/section/sitter-acclimation.php
+      編集区分: 固定
+      SP変換: そのまま縦積み（ステップ形式）
+      背景: var(--bg-mid) ← 交互
+    ========================================= -->
+    <section class="mf-sitter-acclimation v06-acclimation mf-section mf-section--bg-mid">
+      <div class="mf-container">
+
+        <span class="mf-section-label">PROCESS</span>
+        <h2 class="mf-heading-section mf-mb-6">
+          慣れるまでのプロセス
+        </h2>
+
+        <ol class="mf-flow-list" aria-label="慣れるまでのプロセス">
+
+          <li class="mf-flow-item">
+            <div class="mf-flow-item__num" aria-hidden="true">1</div>
+            <div class="mf-flow-item__body">
+              <h3 class="mf-flow-item__heading">存在を知ってもらう</h3>
+              <p class="mf-flow-item__text">
+                無料カウンセリングでご自宅を訪問。
+                何もしなくていい。同じ空間にいるだけで十分。
+              </p>
+            </div>
+          </li>
+
+          <li class="mf-flow-item">
+            <div class="mf-flow-item__num" aria-hidden="true">2</div>
+            <div class="mf-flow-item__body">
+              <h3 class="mf-flow-item__heading">近づく距離を少しずつ縮める</h3>
+              <p class="mf-flow-item__text">
+                お試しシッティングで短時間のケアを繰り返す。
+                ペットさんが自分から近づいてきたら第一関門突破。
+              </p>
+            </div>
+          </li>
+
+          <li class="mf-flow-item">
+            <div class="mf-flow-item__num" aria-hidden="true">3</div>
+            <div class="mf-flow-item__body">
+              <h3 class="mf-flow-item__heading">「いてほしい存在」になる</h3>
+              <p class="mf-flow-item__text">
+                玄関で待つようになったら、信頼の証。
+                そこまでくると、飼い主さんも安心して外出できます。
+              </p>
+            </div>
+          </li>
+
+        </ol>
+
+      </div>
+    </section><!-- /.mf-sitter-acclimation -->
+
+
+    <!-- ========================================
+      経歴・実績（.v06-career）
+      parts/section/sitter-career.php
+      編集区分: 編集可（更新時）
+      SP変換:
+        リスト量が多い → 折りたたみ（<details>/<summary>）（判断済み）
+        タップターゲット: summary 44px以上（§2-1）
+      背景: var(--bg) ← 交互
+    ========================================= -->
+    <section class="mf-sitter-career v06-career mf-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">CAREER</span>
+        <h2 class="mf-heading-section mf-mb-4">
+          経歴・実績
+        </h2>
+
+        <!-- 折りたたみ: <details>/<summary>（判断済み）
+             タップターゲット: summary 44px以上（§2-1） -->
+        <details class="mf-sitter-career__details">
+          <summary class="mf-sitter-career__summary">
+            <span class="mf-sitter-career__summary-text">経歴・実績を見る</span>
+            <span class="mf-sitter-career__summary-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9l6 6 6-6" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </summary>
+
+          <div class="mf-sitter-career__content">
+            <ul class="mf-sitter-career__list">
+
+              <li class="mf-sitter-career__item">
+                <span class="mf-sitter-career__year">2016年</span>
+                <p class="mf-sitter-career__desc">
+                  動物関連専門学校 卒業
+                </p>
+              </li>
+
+              <li class="mf-sitter-career__item">
+                <span class="mf-sitter-career__year">2016年</span>
+                <p class="mf-sitter-career__desc">
+                  動物病院にて動物看護助手として勤務（3年間）
+                </p>
+              </li>
+
+              <li class="mf-sitter-career__item">
+                <span class="mf-sitter-career__year">2019年</span>
+                <p class="mf-sitter-career__desc">
+                  ペットシッターサービス会社に転職・シッター業務に従事
+                </p>
+              </li>
+
+              <li class="mf-sitter-career__item">
+                <span class="mf-sitter-career__year">2021年</span>
+                <p class="mf-sitter-career__desc">
+                  動物介護士資格取得
+                </p>
+              </li>
+
+              <li class="mf-sitter-career__item">
+                <span class="mf-sitter-career__year">2022年</span>
+                <p class="mf-sitter-career__desc">
+                  ペットシッター士資格取得
+                </p>
+              </li>
+
+              <li class="mf-sitter-career__item">
+                <span class="mf-sitter-career__year">2023年</span>
+                <p class="mf-sitter-career__desc">
+                  More Friends 独立開業
+                </p>
+              </li>
+
+              <li class="mf-sitter-career__item">
+                <span class="mf-sitter-career__year">〜現在</span>
+                <p class="mf-sitter-career__desc">
+                  累計シッティング件数 500件以上 / 顧客満足度98%
+                </p>
+              </li>
+
+            </ul>
+          </div><!-- /.mf-sitter-career__content -->
+
+        </details><!-- /.mf-sitter-career__details -->
+
+      </div>
+    </section><!-- /.mf-sitter-career -->
+
+
+    <!-- ========================================
+      資格・認定（.v06-cert）
+      parts/section/sitter-cert.php
+      編集区分: 編集可（更新時）
+      SP変換:
+        リスト量が多い → 折りたたみ（<details>/<summary>）（判断済み）
+        タップターゲット: summary 44px以上（§2-1）
+      背景: var(--bg-mid) ← 交互
+    ========================================= -->
+    <section class="mf-sitter-cert v06-cert mf-section mf-section--bg-mid">
+      <div class="mf-container">
+
+        <span class="mf-section-label">CERTIFICATION</span>
+        <h2 class="mf-heading-section mf-mb-4">
+          資格・認定
+        </h2>
+
+        <!-- 折りたたみ（判断済み） -->
+        <details class="mf-sitter-cert__details">
+          <summary class="mf-sitter-cert__summary">
+            <span class="mf-sitter-cert__summary-text">資格・認定を見る</span>
+            <span class="mf-sitter-cert__summary-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9l6 6 6-6" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </summary>
+
+          <div class="mf-sitter-cert__content">
+            <ul class="mf-sitter-cert__list">
+
+              <li class="mf-sitter-cert__item">
+                <span class="mf-sitter-cert__badge" aria-hidden="true">✓</span>
+                <div class="mf-sitter-cert__body">
+                  <p class="mf-sitter-cert__name">動物介護士</p>
+                  <p class="mf-sitter-cert__org mf-text-sub">
+                    一般社団法人 日本動物介護センター
+                  </p>
+                </div>
+              </li>
+
+              <li class="mf-sitter-cert__item">
+                <span class="mf-sitter-cert__badge" aria-hidden="true">✓</span>
+                <div class="mf-sitter-cert__body">
+                  <p class="mf-sitter-cert__name">ペットシッター士</p>
+                  <p class="mf-sitter-cert__org mf-text-sub">
+                    公益社団法人 日本愛玩動物協会
+                  </p>
+                </div>
+              </li>
+
+              <li class="mf-sitter-cert__item">
+                <span class="mf-sitter-cert__badge" aria-hidden="true">✓</span>
+                <div class="mf-sitter-cert__body">
+                  <p class="mf-sitter-cert__name">動物取扱業 登録済み</p>
+                  <p class="mf-sitter-cert__org mf-text-sub">
+                    千葉県知事登録
+                  </p>
+                </div>
+              </li>
+
+              <li class="mf-sitter-cert__item">
+                <span class="mf-sitter-cert__badge" aria-hidden="true">✓</span>
+                <div class="mf-sitter-cert__body">
+                  <p class="mf-sitter-cert__name">ペット賠償責任保険 加入済み</p>
+                  <p class="mf-sitter-cert__org mf-text-sub">
+                    シッティング中の万一に備えた保険に加入しています
+                  </p>
+                </div>
+              </li>
+
+            </ul>
+          </div><!-- /.mf-sitter-cert__content -->
+
+        </details><!-- /.mf-sitter-cert__details -->
+
+      </div>
+    </section><!-- /.mf-sitter-cert -->
+
+
+    <!-- ========================================
+      名前の由来（.v06-origin）
+      parts/section/sitter-origin.php
+      編集区分: 固定
+      SP変換: そのまま縦積み
+      背景: var(--bg) ← 交互
+    ========================================= -->
+    <section class="mf-sitter-origin v06-origin mf-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">NAME</span>
+        <h2 class="mf-heading-section mf-mb-4">
+          「More Friends」という名前
+        </h2>
+
+        <p class="mf-text-body">
+          サービスの名前を考えるとき、一番最初に浮かんだのが
+          「ペットさんに、もっと友達を増やしてあげたい」
+          という言葉でした。
+        </p>
+        <p class="mf-text-body mf-mt-4">
+          家族の外にも、安心できる人がいる。
+          そういう環境を作ることが、
+          ペットさんにとっても、飼い主さんにとっても、
+          豊かな生活につながると信じています。
+        </p>
+        <p class="mf-text-body mf-mt-4">
+          「また来てくれた！」と尻尾を振ってくれる瞬間が、
+          私にとっての一番の喜びです。
+        </p>
+
+        <!-- ビジュアル -->
+        <div class="mf-sitter-origin__visual mf-media--4x3 mf-mt-6">
+          <div class="ph-img" style="width:100%;height:100%;" aria-hidden="true">
+            ビジュアル（4:3）
+          </div>
+        </div>
+
+      </div>
+    </section><!-- /.mf-sitter-origin -->
+
+
+    <!-- ========================================
+      最終CTAセクション
+      parts/section/cta.php（共通パーツ）
+      編集区分: 固定
+      SP変換: 3択ボタン縦積み100%
+        構成: 無料カウンセリング / LINEで相談 / Instagramで相談
+    ========================================= -->
+    <section class="mf-cta-section">
+      <div class="mf-container">
+
+        <p class="mf-cta-section__label">まずは顔合わせから</p>
+        <h2 class="mf-cta-section__heading">
+          ペットさんと椎名の<br>相性を確かめてください。
+        </h2>
+
+        <div class="mf-cta-section__buttons">
+
+          <a href="contact.html" class="mf-btn mf-btn--primary">
+            無料カウンセリングを申し込む
+          </a>
+
+          <a
+            href="https://line.me/"
+            class="mf-btn mf-btn--line"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            💬 LINEで相談する
+          </a>
+
+          <a
+            href="https://www.instagram.com/"
+            class="mf-btn mf-btn--ig"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📷 Instagramで相談
+          </a>
+
+        </div>
+
+      </div>
+    </section><!-- /.mf-cta-section -->
+
+  </main>
+
+
+  <!-- ========================================
+    フッター（共通）
+    parts/footer.php
+    編集区分: 固定
+  ========================================= -->
+  <footer class="mf-footer" role="contentinfo">
+    <div class="mf-footer__inner">
+
+      <div class="mf-footer__logo">
+        <span class="ph-logo"></span><!-- ワイヤー専用: 本番前に削除 -->
+        <span class="mf-sr-only">More Friends</span>
+      </div>
+
+      <nav class="mf-footer__nav" aria-label="フッターナビゲーション">
+        <a href="about.html">More Friendsとは</a>
+        <a href="service.html">サービス内容</a>
+        <a href="price.html">料金プラン</a>
+        <a href="flow.html">利用の流れ</a>
+        <a href="sitter.html" aria-current="page">シッター紹介</a>
+        <a href="area.html">対応エリア</a>
+        <a href="reviews.html">お客様の声</a>
+        <a href="blog.html">ブログ</a>
+        <a href="cancel.html">キャンセルポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+
+      <div class="mf-footer__sns">
+        <a
+          href="https://line.me/"
+          class="mf-btn mf-btn--line mf-btn--icon"
+          aria-label="LINEで相談する"
+          target="_blank"
+          rel="noopener noreferrer"
+        >L</a>
+        <a
+          href="https://www.instagram.com/"
+          class="mf-btn mf-btn--ig mf-btn--icon"
+          aria-label="Instagramを見る"
+          target="_blank"
+          rel="noopener noreferrer"
+        >IG</a>
+      </div>
+
+      <p class="mf-footer__copy">
+        <small>&copy; 2026 More Friends. All rights reserved.</small>
+      </p>
+
+    </div>
+  </footer>
+
+
+  <!-- ========================================
+    JS: ハンバーガーメニュー（共通）
+    ⚠️ TODO: 本番では外部JSファイルに切り出す
+    ※ 経歴・資格の折りたたみは <details>/<summary>
+       のネイティブ動作を使用（JS不要）
+  ========================================= -->
+  <script>
+    (function () {
+      const toggle = document.querySelector('.js-nav-toggle');
+      const nav    = document.getElementById('global-nav');
+      if (!toggle || !nav) return;
+
+      toggle.addEventListener('click', function () {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        nav.classList.toggle('is-open', !isOpen);
+        toggle.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-label', 'メニューを開く');
+          toggle.focus();
+        }
+      });
+
+      document.addEventListener('click', function (e) {
+        if (
+          nav.classList.contains('is-open') &&
+          !nav.contains(e.target) &&
+          !toggle.contains(e.target)
+        ) {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-label', 'メニューを開く');
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

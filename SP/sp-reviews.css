@@ -1,0 +1,471 @@
+/*
+  sp-reviews.css
+  More Friends — お客様の声（reviews）SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css             共通トークン・リセット・ハンバーガー基本制御
+    2. [reviews.html inline <style>]  PCレイアウト + 既存 @media（PC確認用 inline）
+    3. sp-reviews.css                 ← このファイル（768px以下を正式ブレークポイントで上書き）
+
+  方針:
+    - クラス名は reviews.html の既存クラスをそのまま使う
+    - SP固有のレイアウト変更のみをここに記述する
+    - 本番CSSではない。wireframe確認用（§7-3）
+    - theme.json + 本番CSS に置き換えること
+
+  参照: SP変換リファレンス.md §08 / 03_SPワイヤー専用ルール.md
+  ブレークポイント: max-width: 768px（--bp-sp に相当）
+
+  主要SP変換:
+    - stats-grid（3項目）: SP でも横並び維持（§3-2 数字が短い実績カードの例外条件）
+      ただし stat-num-lg を縮小し横幅に収める
+    - reviews-grid: PC 3カラム → SP 1カラム縦積み（§3-2）
+      ループ単位: .review-card
+    - section-header の inline style（text-align:center / label:text-align:center）→ クラス管理
+    - PC版 @media(max-width:640px) の nav制御 → ドロワー方式に置き換え
+    - ⚠️ reviews.html の既存 @media(max-width:640px) が干渉するため
+      このファイルで max-width:768px として再定義し確実に上書きする
+*/
+
+
+@media (max-width: 768px) {
+
+  /* ==============================================
+     SP ヘッダー（共通パターン）
+     ⚠️ PC版 @media(max-width:640px) の nav a:not(.btn-line) { display:none } を
+        上書きしてドロワー方式に置き換える
+  =============================================== */
+
+  header nav:not(.open) {
+    display: none;
+  }
+
+  /* PC版 @media(640px)の nav a 個別非表示を解除してドロワーに統一 */
+  header nav a {
+    display: flex;
+  }
+
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sp-header .header-logo,
+  header .header-logo {
+    font-size: 13px;
+    min-width: auto;
+    min-height: 36px;
+    padding: 6px 14px;
+  }
+
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn:first-child {
+    border-left: none;
+  }
+
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 0;
+    border-left-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .sp-header__action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    height: 16px;
+    background: transparent;
+  }
+
+  .hamburger-lines span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-icon {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-label {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: transparent;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines span {
+    background: #fff;
+    width: 18px;
+    height: 1.5px;
+  }
+
+  /* ドロワーナビ */
+  header nav.open {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
+    z-index: 99;
+    border-top: 1px solid var(--border);
+  }
+
+  header nav.open a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+    min-height: 52px;
+    color: var(--text);
+    text-decoration: none;
+    /* PC版 btn-ig / btn-line のスタイルを解除してドロワー内で統一表示 */
+    background: none;
+    border-radius: 0;
+    letter-spacing: 0.08em;
+  }
+
+  header nav.open a::after {
+    content: '›';
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 18px;
+  }
+
+  header nav.open a.is-current {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+
+  /* ==============================================
+     共通: セクションパディング
+  =============================================== */
+  section {
+    padding: 56px 16px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+    line-height: 1.35;
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-sub {
+    max-width: 100%;
+  }
+
+
+  /* ==============================================
+     ① ページヘッダー
+     PC: padding 120px 80px → SP: 縮小
+  =============================================== */
+  .page-hero {
+    padding: 32px 16px 40px;
+  }
+
+  .page-hero-inner {
+    max-width: 100%;
+  }
+
+  .page-hero-title {
+    font-size: clamp(28px, 7.5vw, 36px);
+    margin-bottom: 14px;
+  }
+
+  .page-hero-lead {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  /* <br> → SP で自然折り返し
+     ⚠️ TODO: 本番では page-hero-lead の <br> を削除すること */
+  .page-hero-lead br {
+    display: none;
+  }
+
+
+  /* ==============================================
+     ② 実績サマリー（stats）
+     PC: stats-grid 3カラム
+     SP: 横並び維持（§3-2 数字が短い実績カードの例外条件に合致）
+         stat-num-lg を縮小して横幅に収める
+         §SP変換リファレンス §08:「実績数字は3項目の横並び維持可」
+  =============================================== */
+  .stats-section {
+    padding: 48px 16px;
+  }
+
+  /* section-header の inline style="text-align:center; margin-bottom:48px;" → クラス管理 */
+  .section-header--center {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .section-header--center .label {
+    text-align: center;
+  }
+
+  /* stats-grid: 横並び維持（数字が短いため §3-2 例外） */
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+  }
+
+  .stat-item {
+    padding: 24px 12px;
+  }
+
+  /* stat-num-lg: SP幅に合わせてフォントサイズ縮小 */
+  .stat-num-lg {
+    font-size: clamp(28px, 7vw, 40px);
+    margin-bottom: 6px;
+  }
+
+  .stat-num-lg small {
+    font-size: clamp(14px, 4vw, 20px);
+  }
+
+  .stat-label-lg {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+
+  /* ==============================================
+     ③ 口コミカード一覧
+     PC: reviews-grid 3カラム → SP: 1カラム縦積み（§3-2）
+     ループ単位: .review-card
+  =============================================== */
+  .reviews-section {
+    padding: 56px 16px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .review-card {
+    padding: 24px 20px;
+    gap: 16px;
+    border-radius: 8px;
+  }
+
+  .review-card-header {
+    gap: 12px;
+  }
+
+  .review-name {
+    font-size: 13px;
+  }
+
+  .review-pet {
+    font-size: 11px;
+  }
+
+  .review-body {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  .review-body::before {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+
+  .review-tag {
+    font-size: 11px;
+    padding: 4px 12px;
+  }
+
+  .reviews-note {
+    font-size: 12px;
+    margin-top: 32px;
+    text-align: left;
+  }
+
+
+  /* ==============================================
+     CTAセクション（共通パターン）
+  =============================================== */
+  .cta-section {
+    padding: 56px 16px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-cta-white,
+  .btn-line-lg,
+  .btn-ig-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+
+  /* ==============================================
+     フッター（共通パターン）
+  =============================================== */
+  footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-sns-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ==============================================
+   ロゴ / フッター: SP非依存（全幅対応）
+=============================================== */
+.header-logo-plain {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: auto;
+  min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}

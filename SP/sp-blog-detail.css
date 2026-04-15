@@ -1,0 +1,584 @@
+/*
+  sp-blog-detail.css
+  More Friends — ブログ記事詳細（blog-detail）SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css           共通トークン・リセット・ハンバーガー基本制御
+    2. [blog-detail.html inline <style>]  PCレイアウト（PC確認用 inline）
+    3. sp-blog-detail.css           ← このファイル（768px以下を正式ブレークポイントで上書き）
+
+  方針:
+    - クラス名は blog-detail.html の既存クラスをそのまま使う
+    - SP固有のレイアウト変更のみをここに記述する
+    - 本番CSSではない。wireframe確認用（§7-3）
+    - theme.json + 本番CSS に置き換えること
+
+  参照: SP変換リファレンス.md §10 / 03_SPワイヤー専用ルール.md
+  ブレークポイント: max-width: 768px（--bp-sp に相当）
+
+  主要SP変換:
+    - article-layout: PC grid 2カラム → SP 1カラム（サイドバーは本文後に移動）
+    - サイドバーCTAを article-body の直後に表示
+    - 最終CTAは 2択（フォーム / LINE）Instagram なし（§SP変換リファレンス §10）
+    - 関連記事: 3カラム → 1カラム
+*/
+
+
+@media (max-width: 768px) {
+
+  /* ==============================================
+     SP ヘッダー（共通パターン）
+  =============================================== */
+
+  header nav:not(.open) {
+    display: none;
+  }
+
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sp-header .header-logo,
+  header .header-logo {
+    font-size: 13px;
+    min-width: auto;
+    min-height: 36px;
+    padding: 6px 14px;
+  }
+
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn:first-child {
+    border-left: none;
+  }
+
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 0;
+    border-left-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .sp-header__action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    height: 16px;
+    background: transparent;
+  }
+
+  .hamburger-lines span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-icon {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-label {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: transparent;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines span {
+    background: #fff;
+    width: 18px;
+    height: 1.5px;
+  }
+
+  /* ドロワーナビ */
+  header nav.open {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
+    z-index: 99;
+    border-top: 1px solid var(--border);
+  }
+
+  header nav.open a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+    min-height: 52px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  header nav.open a::after {
+    content: '›';
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 18px;
+  }
+
+  header nav.open a.is-current {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+
+  /* ==============================================
+     パンくず
+     PC: padding 88px → SP: 縮小・折り返し対応
+  =============================================== */
+  .breadcrumb {
+    padding: 16px 16px 0;
+    font-size: 11px;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+  }
+
+  .breadcrumb-current {
+    color: var(--text);
+  }
+
+
+  /* ==============================================
+     記事レイアウト
+     PC: grid 2カラム（本文 1fr / サイドバー 300px）
+     SP: 1カラム（サイドバーは本文後に移動 §SP変換リファレンス §10）
+         padding縮小
+  =============================================== */
+  .article-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 24px 16px 48px;
+    max-width: 100%;
+  }
+
+  /* サイドバーを本文後に移動（DOM順で main → aside なので CSS flexだけで成立） */
+  .sidebar {
+    padding-top: 40px;
+    order: 2;
+  }
+
+  main {
+    order: 1;
+  }
+
+
+  /* ==============================================
+     記事ヘッダー
+  =============================================== */
+  .article-header {
+    margin-bottom: 24px;
+  }
+
+  .article-title {
+    font-size: clamp(20px, 5.5vw, 24px);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  /* h1 の <br> タグは SP で自然折り返しに委ねる
+     ⚠️ TODO: 本番では article-title の <br> を削除すること */
+  .article-title br {
+    display: none;
+  }
+
+  .article-meta {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 11px;
+  }
+
+
+  /* ==============================================
+     アイキャッチ画像
+     PC: aspect-ratio 16/7 → SP: 16/9 に変更（縦長すぎ防止）
+  =============================================== */
+  .article-eyecatch {
+    aspect-ratio: 16 / 9;
+    margin-bottom: 32px;
+    border-radius: 6px;
+    font-size: 11px;
+  }
+
+
+  /* ==============================================
+     本文エリア
+  =============================================== */
+  .article-body {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .article-body h2 {
+    font-size: 18px;
+    margin: 40px 0 14px;
+    padding-bottom: 8px;
+  }
+
+  .article-body h3 {
+    font-size: 15px;
+    margin: 28px 0 10px;
+  }
+
+  .article-body p {
+    margin: 0 0 18px;
+  }
+
+  .article-body blockquote {
+    margin: 24px 0;
+    padding: 16px 20px;
+    font-size: 13px;
+  }
+
+  .article-body .article-img-ph {
+    aspect-ratio: 16 / 9;
+    margin: 24px 0;
+    font-size: 11px;
+  }
+
+  /* ul: inline style 除去 → クラスで管理 */
+  .article-checklist {
+    margin: 0 0 20px;
+    padding-left: 1.4em;
+    line-height: 2.2;
+    font-size: 14px;
+    color: var(--text-sub);
+  }
+
+  /* タグ */
+  .article-tags {
+    margin-top: 32px;
+    padding-top: 24px;
+  }
+
+
+  /* ==============================================
+     著者プロフィール
+  =============================================== */
+  .author-card {
+    margin-top: 32px;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .author-photo {
+    width: 56px;
+    height: 56px;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-size: 15px;
+  }
+
+  .author-bio {
+    font-size: 13px;
+  }
+
+
+  /* ==============================================
+     サイドバー（本文後に配置）
+     - サイドバーCTA: ピンク背景 → SP でも維持
+     - btn-cta-white-sm / btn-line-sm: 44px以上確保（§2-1）
+     - 目次・カテゴリ・新着記事: そのまま縦積みで表示
+  =============================================== */
+  .sidebar-block {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .sidebar-cta {
+    padding: 24px 20px;
+    margin-bottom: 20px;
+  }
+
+  /* サイドバーCTAボタン: 44px以上確保（§2-1） */
+  .btn-cta-white-sm {
+    padding: 14px 24px;
+    font-size: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-line-sm {
+    padding: 14px 24px;
+    font-size: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .sidebar-cta .btn-ig {
+    padding: 14px 24px;
+    font-size: 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 新着記事リスト: inline style 除去 → クラス管理
+     .recent-posts-list / .recent-post-item / .recent-post-thumb / .recent-post-body */
+  .recent-posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .recent-post-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .recent-post-thumb {
+    width: 64px;
+    height: 44px;
+    background: var(--ph-bg);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--ph-text);
+    flex-shrink: 0;
+  }
+
+  .recent-post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .recent-post-title {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .recent-post-date {
+    font-size: 10px;
+    color: var(--text-sub);
+  }
+
+
+  /* ==============================================
+     関連記事
+     PC: 3カラム → SP: 1カラム縦積み（§3-2）
+     ループ単位: .blog-card（§3-5）
+  =============================================== */
+  .related-section {
+    padding: 56px 16px;
+  }
+
+  .related-section .section-title {
+    font-size: clamp(22px, 5.5vw, 26px);
+    margin-bottom: 24px;
+  }
+
+  /* inline style="font-size:28px; margin-bottom:40px;" 除去 */
+  .related-section h2 {
+    font-size: clamp(22px, 5.5vw, 26px) !important;
+    margin-bottom: 24px !important;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .blog-thumb {
+    aspect-ratio: 16 / 9;
+  }
+
+  .blog-body {
+    padding: 16px 20px 20px;
+  }
+
+
+  /* ==============================================
+     CTAセクション
+     ※ blog-detail は 2択（フォーム / LINE）
+        Instagram ボタンなし（§SP変換リファレンス §10）
+  =============================================== */
+  .cta-section {
+    padding: 56px 16px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-cta-white,
+  .btn-line-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+
+  /* ==============================================
+     フッター（共通パターン）
+  =============================================== */
+  footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-sns-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ==============================================
+   ロゴ / フッター: SP非依存（全幅対応）
+=============================================== */
+.header-logo-plain {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: auto;
+  min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}

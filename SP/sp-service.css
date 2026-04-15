@@ -1,0 +1,608 @@
+/*
+  sp-service.css
+  More Friends — サービス内容（service）SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css            共通トークン・リセット・ハンバーガー基本制御
+    2. [service.html inline <style>] PCレイアウト + 既存 @media（PC確認用 inline）
+    3. sp-service.css                ← このファイル（768px以下を正式ブレークポイントで上書き）
+
+  方針:
+    - クラス名は service.html の既存クラスをそのまま使う
+    - SP固有のレイアウト変更のみをここに記述する
+    - 本番CSSではない。wireframe確認用（§7-3）
+    - theme.json + 本番CSS に置き換えること
+
+  参照: SP変換リファレンス.md §04 / 03_SPワイヤー専用ルール.md
+  ブレークポイント: max-width: 768px（--bp-sp に相当）
+
+  主要SP変換:
+    - services-grid: PC 2カラム → SP 1カラム縦積み（§3-2）
+    - pets-grid: PC 3カラム → SP 1カラム縦積み（§3-2）
+    - flow-layout: PC grid 2カラム（steps / aside）→ SP 1カラム縦積み
+    - philosophy-grid: PC 3カラム → SP 1カラム（§3-2）
+    - philosophy-section（dark bg）: コントラスト確認必須（§SP変換リファレンス §04）
+    - CTA: 4択（カウンセリング / 利用の流れ / LINE / Instagram）→ 縦積み100%幅
+    - body { padding-top:64px } → sticky化で0に
+*/
+
+
+@media (max-width: 768px) {
+
+  /* ==============================================
+     SP ヘッダー（共通パターン）
+  =============================================== */
+
+  header nav:not(.open) {
+    display: none;
+  }
+
+  /* PC版 @media(640px) の nav a 個別 inline style を上書き */
+  header nav a {
+    display: flex;
+  }
+
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* body { padding-top:64px } → sticky化で解除 */
+  body {
+    padding-top: 0;
+  }
+
+  .sp-header .header-logo,
+  header .header-logo {
+    font-size: 13px;
+    min-width: auto;
+    min-height: 36px;
+    padding: 6px 14px;
+  }
+
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn:first-child {
+    border-left: none;
+  }
+
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 0;
+    border-left-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .sp-header__action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    height: 16px;
+    background: transparent;
+  }
+
+  .hamburger-lines span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-icon {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-label {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: transparent;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines span {
+    background: #fff;
+    width: 18px;
+    height: 1.5px;
+  }
+
+  /* ドロワーナビ */
+  header nav.open {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
+    z-index: 99;
+    border-top: 1px solid var(--border);
+  }
+
+  header nav.open a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+    min-height: 52px;
+    color: var(--text);
+    text-decoration: none;
+    background: none;
+    border-radius: 0;
+  }
+
+  header nav.open a::after {
+    content: '›';
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 18px;
+  }
+
+  header nav.open a.is-current {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+
+  /* ==============================================
+     共通: セクションパディング
+  =============================================== */
+  section {
+    padding: 56px 16px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+    line-height: 1.35;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-sub {
+    max-width: 100%;
+  }
+
+
+  /* ==============================================
+     1. ページヘッダー
+     PC: padding 80px → SP: 縮小 / body padding-top解除
+  =============================================== */
+  .page-header {
+    padding: 32px 16px 40px;
+  }
+
+  .breadcrumb {
+    font-size: 11px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+  }
+
+  .page-header .section-title {
+    font-size: clamp(26px, 7vw, 32px);
+    margin-bottom: 14px;
+  }
+
+  .page-header .section-sub {
+    font-size: 14px;
+    max-width: 100%;
+    line-height: 1.85;
+  }
+
+
+  /* ==============================================
+     2. 対応サービス一覧
+     PC: services-grid 2カラム → SP: 1カラム縦積み（§3-2）
+     borderは維持（grid の border設計のため 1カラム化で調整）
+  =============================================== */
+  .services-section {
+    padding: 56px 16px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .services-grid .service-item {
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 20px;
+  }
+
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .service-title {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .service-text {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+
+  /* ==============================================
+     3. 対象ペット
+     PC: pets-grid 3カラム → SP: 1カラム縦積み（§3-2）
+     pet-note の <br> → SP で自然折り返し
+     ⚠️ TODO: 本番では pet-note の <br> を削除すること
+  =============================================== */
+  .pets-section {
+    padding: 56px 16px;
+  }
+
+  .pets-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .pet-card {
+    padding: 24px 20px;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  /* pet-card を横並び（絵文字左 / テキスト右）に変換してコンパクトに */
+  .pet-emoji {
+    font-size: 32px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pet-name {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .pet-note {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .pet-note br {
+    display: none;
+  }
+
+  .pets-notice {
+    padding: 16px 20px;
+    gap: 12px;
+    border-radius: 6px;
+  }
+
+  .pets-notice-text {
+    font-size: 13px;
+  }
+
+
+  /* ==============================================
+     4. シッティングの進め方
+     PC: flow-layout grid 2カラム（steps左 / aside右）
+     SP: 1カラム縦積み（steps上 → aside下）
+  =============================================== */
+  .flow-section {
+    padding: 56px 16px;
+  }
+
+  .flow-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .vstep {
+    gap: 18px;
+    padding-bottom: 24px;
+  }
+
+  .vstep-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  /* コネクター線: vstep-icon の left位置に合わせて調整 */
+  .vstep:not(:last-child)::after {
+    left: 21px;
+    top: 46px;
+  }
+
+  .vstep-title {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .vstep-text {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .flow-aside {
+    gap: 16px;
+  }
+
+  .flow-aside-card {
+    padding: 20px 16px;
+    border-radius: 6px;
+  }
+
+  .flow-aside-card .icon {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .flow-aside-card h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .flow-aside-card p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+
+  /* ==============================================
+     5. +30分をおすすめする理由（philosophy-section）
+     PC: philosophy-grid 3カラム → SP: 1カラム縦積み（§3-2）
+     dark background: コントラスト確認必須（§SP変換リファレンス §04）
+     ⚠️ TODO: philosophy-section の dark bg + var(--dark-sub) テキストのコントラストを
+              本番実装前に実機でWCAG AA（4.5:1）確認すること
+  =============================================== */
+  .philosophy-section {
+    padding: 56px 16px;
+  }
+
+  .philosophy-section .section-title {
+    font-size: clamp(22px, 6vw, 28px);
+    margin-bottom: 16px;
+  }
+
+  .philosophy-lead {
+    font-size: 14px;
+    line-height: 1.9;
+    max-width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .philosophy-card {
+    padding: 24px 20px;
+    border-radius: 6px;
+  }
+
+  .philosophy-card .num {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .philosophy-card h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .philosophy-card p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .philosophy-quote {
+    margin-top: 32px;
+    padding: 24px 20px;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .philosophy-quote p {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  .philosophy-quote cite {
+    font-size: 11px;
+    margin-top: 12px;
+  }
+
+
+  /* ==============================================
+     6. CTAセクション
+     ※ service.html は 4択（カウンセリング / 利用の流れ / LINE / Instagram）
+        §SP変換リファレンス §04: 4択はすべて縦積み100%幅
+  =============================================== */
+  .cta-section {
+    padding: 56px 16px;
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(22px, 6vw, 28px);
+    margin-bottom: 12px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  /* 4択すべてを統一サイズで縦積み */
+  .btn-cta-white,
+  .btn-outline,
+  .btn-line-lg,
+  .btn-ig-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  /* CTA内のアウトラインボタン（白背景上）: 白文字→ピンク枠に調整 */
+  .cta-section .btn-outline {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+  }
+
+
+  /* ==============================================
+     フッター（共通パターン）
+  =============================================== */
+  footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-sns-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ==============================================
+   ロゴ / フッター: SP非依存（全幅対応）
+=============================================== */
+.header-logo-plain {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: auto;
+  min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}

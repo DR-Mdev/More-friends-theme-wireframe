@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>対応エリア — More Friends</title>
+  <meta name="description" content="More Friendsの対応エリア。東京都・千葉県の対応エリア一覧と出張費の考え方をご案内します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500&display=swap" rel="stylesheet">
+  <!--
+    読み込み順:
+      1. wireframe-base.css      共通トークン・共通コンポーネント
+      2. [inline <style>]        area.html PCレイアウト（wireframe確認用）
+      3. sp-area.css             SP上書き（768px以下）← 追加
+  -->
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+    /* ── area.html ページ固有スタイル（PCレイアウト） ──
+       SP では sp-area.css の @media (max-width: 768px) で上書きされる */
+
+    /* body offset: SP では sp-area.css の padding-top: 0 で上書き */
+    body { padding-top: 64px; }
+
+    /* ページヘッダー */
+    .page-header {
+      background: var(--bg-mid);
+      padding: 128px 80px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .label { margin-bottom: 12px; }
+    .page-header h1 { font-size: 48px; font-weight: 400; color: var(--text); line-height: 1.25; margin-bottom: 16px; }
+    .page-header p { font-size: 15px; color: var(--text-sub); max-width: 480px; line-height: 1.9; }
+
+    /* セクション 1: 対応エリア */
+    .area-section { background: var(--bg2); border-bottom: 1px solid var(--border); }
+    .area-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .map-placeholder { background: var(--ph-bg); border-radius: 8px; border: 1px solid var(--border); height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--ph-text); }
+    .map-placeholder .map-icon { font-size: 40px; }
+    .map-placeholder p { font-size: 12px; letter-spacing: 0.08em; }
+    .area-cards { display: flex; flex-direction: column; gap: 24px; }
+    .area-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; }
+    .area-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .area-card-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--primary-l); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .area-card-title { font-size: 16px; font-weight: 500; color: var(--text); }
+    .area-districts { display: flex; flex-wrap: wrap; gap: 8px; }
+    .area-district { font-size: 12px; color: var(--text-sub); background: var(--bg-mid); border: 1px solid var(--border); border-radius: 4px; padding: 4px 12px; }
+    .area-note { margin-top: 14px; font-size: 12px; color: var(--text-sub); line-height: 1.8; border-top: 1px solid var(--border); padding-top: 14px; }
+
+    /* セクション 2: 出張費 */
+    .travel-section { background: var(--bg); }
+    .travel-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .travel-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .travel-table th, .travel-table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+    .travel-table th { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: var(--text-sub); background: var(--bg-mid); }
+    .travel-table td { color: var(--text); }
+    .travel-table tr:last-child td { border-bottom: none; }
+    .travel-highlight { color: var(--primary); font-weight: 500; }
+    .travel-note-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; }
+    .travel-note-box .note-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .travel-note-box ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .travel-note-box ul li { font-size: 13px; color: var(--text-sub); padding-left: 18px; position: relative; line-height: 1.7; }
+    .travel-note-box ul li::before { content: '🐾'; position: absolute; left: 0; font-size: 11px; top: 2px; }
+
+    /* セクション 3: アクセス */
+    .access-section { background: var(--bg-mid); }
+    .access-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 56px; }
+    .access-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 32px 28px; text-align: center; }
+    .access-card-icon { font-size: 32px; margin-bottom: 16px; }
+    .access-card-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+    .access-card-text { font-size: 13px; color: var(--text-sub); line-height: 1.8; }
+    .access-card-badge { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 500; color: var(--primary); background: var(--primary-l); border-radius: 100px; padding: 4px 14px; }
+    .access-note { margin-top: 40px; padding: 20px 28px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; font-size: 13px; color: var(--text-sub); line-height: 1.9; max-width: 640px; }
+
+    /* セクション 4: エリア外 */
+    .out-of-area-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .out-of-area-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .out-card { background: var(--bg); border: 1.5px dashed var(--border); border-radius: 8px; padding: 40px 36px; text-align: center; }
+    .out-card-icon { font-size: 40px; margin-bottom: 16px; }
+    .out-card-title { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 12px; }
+    .out-card-text { font-size: 13px; color: var(--text-sub); line-height: 1.9; margin-bottom: 24px; }
+    .out-card-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    /* inline style 解除用クラス（PC/SP共通） */
+    .out-cases-intro { font-size: 14px; color: var(--text); line-height: 1.9; margin-bottom: 28px; max-width: 100%; }
+    .out-cases { display: flex; flex-direction: column; gap: 16px; }
+  </style>
+  <link rel="stylesheet" href="sp-area.css">
+</head>
+
+<body>
+
+  <!-- ========================================
+    header
+    parts/header.php
+    編集区分: 固定
+    SP変換:
+      - グローバルナビ非表示 → ハンバーガー収納
+      - ヘッダー右側: Instagram + LINE + MENU ボタン
+      - sp-index.html / sp-about.html と同一構造（DOM二重化なし §7-1）
+  ========================================= -->
+  <header class="sp-header">
+    <a href="./sp-index.html" class="header-logo-plain">
+      <img src="MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    </a>
+
+    <div class="sp-header__actions">
+
+      <a
+        href="#"
+        class="sp-header__action-btn sp-header__action-btn--ig"
+        aria-label="Instagramで相談・予約する"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </span>
+        <span class="sp-header__action-label">相談予約</span>
+      </a>
+
+      <a
+        href="https://line.me/"
+        class="sp-header__action-btn sp-header__action-btn--line"
+        aria-label="LINEで相談する"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        </span>
+        <span class="sp-header__action-label">LINE相談</span>
+      </a>
+
+      <button
+        class="hamburger sp-header__action-btn sp-header__action-btn--menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="sp-nav"
+        aria-label="メニューを開く"
+      >
+        <span class="sp-header__action-icon" aria-hidden="true">
+          <span class="hamburger-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </span>
+        <span class="sp-header__action-label">MENU</span>
+      </button>
+    </div>
+
+    <nav id="sp-nav" aria-hidden="true">
+      <a href="./sp-about.html">More Friendsとは</a>
+      <a href="./sp-service.html">サービス内容</a>
+      <a href="./sp-price.html">料金プラン</a>
+      <a href="./sp-flow.html">利用の流れ</a>
+      <a href="./sp-sitter.html">シッター紹介</a>
+      <a href="./sp-area.html" class="is-current">対応エリア</a>
+      <a href="./sp-reviews.html">お客様の声</a>
+      <a href="./sp-blog.html">ブログ</a>
+      <a href="./sp-contact.html">お問い合わせ</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========================================
+      ページヘッダー
+      parts/page-header.php
+      編集区分: 固定
+      SP変換: padding縮小 / h1 クランプ
+    ========================================= -->
+    <section class="page-header">
+      <span class="label">Service Area</span>
+      <h1>対応エリア</h1>
+      <p>現在、東京都・千葉県の一部エリアでサービスを提供しています。<br>ご自宅エリアが対象かどうか、お気軽にご確認ください。</p>
+    </section>
+
+    <!-- ========================================
+      SECTION 1: 対応エリア
+      parts/area-map.php
+      編集区分: 固定
+      SP変換:
+        - PC: grid 2カラム（地図左 / エリアカード右）
+        - SP: 地図上 → エリアカード下（縦積み）
+        - 地図: aspect-ratio 16/9（§2-3）
+      ⚠️ TODO: .map-placeholder の PC CSS height:420px を削除
+               sp-area.css の aspect-ratio: 16/9 で制御済み
+    ========================================= -->
+    <section class="area-section">
+      <div class="section-header">
+        <span class="label">Coverage Area</span>
+        <h2 class="section-title">対応エリア</h2>
+        <p class="section-sub">ご自宅への訪問が可能なエリアを掲載しています。エリア外の場合もまずはご相談ください。</p>
+      </div>
+
+      <div class="area-inner">
+
+        <!-- 地図プレースホルダー（上に表示） -->
+        <!-- ワイヤー専用: .map-placeholder 本番前に Google Map embed に差し替え -->
+        <div class="map-placeholder">
+          <div class="map-icon">🗾</div>
+          <p>東京都・千葉県 対応エリアマップ</p>
+          <p>（本番実装時 Google Map 埋め込み）</p>
+        </div>
+
+        <!-- エリアカード（地図の下に表示） -->
+        <div class="area-cards">
+
+          <div class="area-card">
+            <div class="area-card-header">
+              <div class="area-card-icon">🗼</div>
+              <div class="area-card-title">東京都</div>
+            </div>
+            <div class="area-districts">
+              <span class="area-district">世田谷区</span>
+              <span class="area-district">目黒区</span>
+              <span class="area-district">渋谷区</span>
+              <span class="area-district">港区</span>
+              <span class="area-district">新宿区</span>
+              <span class="area-district">文京区</span>
+              <span class="area-district">台東区</span>
+              <span class="area-district">墨田区</span>
+              <span class="area-district">江東区</span>
+              <span class="area-district">江戸川区</span>
+              <span class="area-district">葛飾区</span>
+              <span class="area-district">足立区</span>
+              <span class="area-district">他エリア要相談</span>
+            </div>
+            <p class="area-note">上記以外の東京都内エリアはお問い合わせください。移動時間・交通費によってご対応の可否をご案内します。</p>
+          </div>
+
+          <div class="area-card">
+            <div class="area-card-header">
+              <div class="area-card-icon">🌊</div>
+              <div class="area-card-title">千葉県</div>
+            </div>
+            <div class="area-districts">
+              <span class="area-district">千葉市</span>
+              <span class="area-district">市川市</span>
+              <span class="area-district">船橋市</span>
+              <span class="area-district">習志野市</span>
+              <span class="area-district">浦安市</span>
+              <span class="area-district">松戸市</span>
+              <span class="area-district">柏市</span>
+              <span class="area-district">他エリア要相談</span>
+            </div>
+            <p class="area-note">千葉県内も対応しています。ご不明な場合はカウンセリング前にLINEでエリア確認のみのご相談も歓迎です。</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+      SECTION 2: 出張費について
+      parts/travel-fee.php
+      編集区分: 固定
+      SP変換:
+        - PC: grid 2カラム（テーブル左 / ノートボックス右）
+        - SP: 1カラム縦積み（テーブル上 → ノートボックス下）
+        - テーブル: .travel-table-wrap で横スクロール対応（§3-4）
+      ⚠️ TODO: .travel-table を .travel-table-wrap で囲むこと（sp-area.css 対応済み）
+    ========================================= -->
+    <section class="travel-section">
+      <div class="section-header">
+        <span class="label">Travel Cost</span>
+        <h2 class="section-title">出張費について</h2>
+        <p class="section-sub">交通費は実費でご請求します。事前にお見積もりをお伝えしますのでご安心ください。</p>
+      </div>
+
+      <div class="travel-inner">
+
+        <!-- テーブル: .travel-table-wrap で横スクロール -->
+        <div class="travel-table-wrap">
+          <table class="travel-table">
+            <thead>
+              <tr>
+                <th>項目</th>
+                <th>内容</th>
+                <th>備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>出張費（交通費）</td>
+                <td class="travel-highlight">実費</td>
+                <td>電車・バスなど公共交通機関の往復実費</td>
+              </tr>
+              <tr>
+                <td>算出タイミング</td>
+                <td>カウンセリング前にご案内</td>
+                <td>ご住所確認後に概算をお伝えします</td>
+              </tr>
+              <tr>
+                <td>請求タイミング</td>
+                <td>シッティング料金と同時</td>
+                <td>シッティング3日前までのお支払い</td>
+              </tr>
+              <tr>
+                <td>複数回ご利用の場合</td>
+                <td>毎回実費</td>
+                <td>定期割引などは現在準備中</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="travel-note-box">
+          <div class="note-title">🐾 出張費に関するお知らせ</div>
+          <ul>
+            <li>ご住所を教えていただければ、カウンセリング日程調整の段階で出張費の概算をお伝えします。</li>
+            <li>遠方の場合は交通費が高くなることがありますが、事前に必ずご説明してから進めますのでご安心ください。</li>
+            <li>同一日に複数箇所の訪問が可能な場合、交通費の実費分担についてご相談できることがあります。</li>
+            <li>カウンセリング（面会）時の交通費も実費でいただく場合があります。詳細はお問い合わせください。</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================
+      SECTION 3: 最寄り駅・移動時間の考え方
+      parts/access.php
+      編集区分: 固定
+      SP変換: 3カラム → 1カラム縦積み（§3-2）
+    ========================================= -->
+    <section class="access-section">
+      <div class="section-header">
+        <span class="label">Access Guide</span>
+        <h2 class="section-title">最寄り駅・<br>移動時間の考え方</h2>
+        <p class="section-sub">シッターは公共交通機関を利用してご自宅に伺います。目安の移動時間をご参考ください。</p>
+      </div>
+
+      <div class="access-inner">
+        <div class="access-card">
+          <div class="access-card-icon">🚃</div>
+          <div class="access-card-title">最寄り駅から徒歩圏内</div>
+          <div class="access-card-text">最寄り駅から徒歩10分以内のご自宅が最もスムーズにご対応できます。</div>
+          <div class="access-card-badge">対応しやすい</div>
+        </div>
+        <div class="access-card">
+          <div class="access-card-icon">🚌</div>
+          <div class="access-card-title">バス利用が必要な場合</div>
+          <div class="access-card-text">バス利用が必要なエリアも対応可能です。移動時間が長い場合は事前にご相談ください。</div>
+          <div class="access-card-badge">要ご相談</div>
+        </div>
+        <div class="access-card">
+          <div class="access-card-icon">⏱</div>
+          <div class="access-card-title">移動時間の目安</div>
+          <div class="access-card-text">シッタースタート地点から片道60分以内を目安にしています。それ以上かかる場合は個別に検討します。</div>
+          <div class="access-card-badge">片道60分目安</div>
+        </div>
+      </div>
+
+      <div class="access-note">
+        ＊ 移動時間はシッティング料金に含まれません。交通費のみ実費でご負担いただきます。<br>
+        ＊ 駅からのルートや最寄りバス停など、アクセス情報をカウンセリング前にお教えいただけるとスムーズです。
+      </div>
+    </section>
+
+    <!-- ========================================
+      SECTION 4: エリア外の相談窓口
+      parts/outside-area.php
+      編集区分: 固定
+      SP変換:
+        - PC: grid 2カラム（LINE誘導カード左 / 3ケース右）
+        - SP: LINE誘導カード先 → 3ケース後（縦積み）
+        - inline style を .out-cases-intro / .out-cases クラスに置き換え
+      ⚠️ TODO: PC の inline style="display:flex; flex-direction:column; gap:16px;"
+               → .out-cases クラスに移行済み（本番 inline style 削除）
+    ========================================= -->
+    <section class="out-of-area-section">
+      <div class="section-header">
+        <span class="label">Out of Area</span>
+        <h2 class="section-title">エリア外のお客様へ</h2>
+        <p class="section-sub">対応エリア外でも、まずはご相談ください。状況によってご対応できる場合があります。</p>
+      </div>
+
+      <div class="out-of-area-inner">
+
+        <!-- LINE誘導カード（SP: 先に表示） -->
+        <div class="out-card">
+          <div class="out-card-icon">💬</div>
+          <div class="out-card-title">まずはLINEで<br>エリア確認だけでも</div>
+          <div class="out-card-text">
+            「うちのエリアは対応できますか?」という確認だけでも大歓迎です。<br>
+            正式な申し込みの前に、お気軽にLINEでお声がけください。
+          </div>
+          <div class="out-card-actions">
+            <a href="#" class="btn-line-lg">LINEで確認する</a>
+          </div>
+        </div>
+
+        <!-- 3ケース（SP: LINE誘導カードの後に表示） -->
+        <div>
+          <!-- inline style 除去 → .out-cases-intro クラスで管理 -->
+          <p class="out-cases-intro">
+            以下のような場合もお気軽にご相談ください。シッティング以外のご提案ができる場合もあります。
+          </p>
+
+          <!-- inline style 除去 → .out-cases クラスで管理 -->
+          <div class="out-cases">
+            <div class="concept-card">
+              <div class="concept-card-icon">🗺</div>
+              <div>
+                <div class="concept-card-title">引っ越し予定のお客様</div>
+                <div class="concept-card-text">近日中に対応エリア内への転居を予定されている場合は、事前のカウンセリングから受け付けています。</div>
+              </div>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-icon">📍</div>
+              <div>
+                <div class="concept-card-title">エリア境界付近のお客様</div>
+                <div class="concept-card-text">掲載エリアの境界付近にお住まいの場合は、実際の移動時間を確認した上で対応可否をご案内します。</div>
+              </div>
+            </div>
+            <div class="concept-card">
+              <div class="concept-card-icon">📧</div>
+              <div>
+                <div class="concept-card-title">フォームからのお問い合わせも可能</div>
+                <div class="concept-card-text">LINEが難しい場合は、お問い合わせフォームからもご連絡いただけます。2営業日以内に返信します。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================
+      CTAセクション
+      parts/cta.php
+      編集区分: 固定
+      SP変換: ボタン3択 → 縦積み100%幅（§4-5）
+    ========================================= -->
+    <section class="cta-section">
+      <span class="label">Contact</span>
+      <h2 class="section-title">まずはお気軽に<br>ご相談ください</h2>
+      <p>初回カウンセリングは実質無料。<br>エリア確認だけのご連絡もお気軽にどうぞ。</p>
+      <div class="cta-buttons">
+        <a href="./sp-contact.html" class="btn-cta-white">お問い合わせフォーム</a>
+        <a href="https://line.me/" class="btn-line-lg">💬 LINEで相談する</a>
+        <a href="#" class="btn-ig-lg">Instagramで相談</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+    フッター
+    parts/footer.php
+    編集区分: 固定
+    SP変換: grid 2カラム → 1カラム縦積み
+  ========================================= -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <img src="MoreFriends_RGB_white_cropped.png" alt="More Friends" class="footer-logo-img">
+        <div class="footer-tagline">
+          そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+          東京都・千葉県のペットシッティングサービス
+        </div>
+        <div class="footer-sns">
+          <a href="#" class="footer-sns-btn" aria-label="LINE">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </a>
+          <a href="#" class="footer-sns-btn" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Service</p>
+          <ul>
+            <li><a href="./sp-about.html">More Friendsとは</a></li>
+            <li><a href="./sp-service.html">サービス内容</a></li>
+            <li><a href="./sp-price.html">料金プラン</a></li>
+            <li><a href="./sp-cancel.html">キャンセルポリシー</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">About</p>
+          <ul>
+            <li><a href="./sp-sitter.html">シッター紹介</a></li>
+            <li><a href="./sp-flow.html">利用の流れ</a></li>
+            <li><a href="./sp-area.html">対応エリア</a></li>
+            <li><a href="./sp-reviews.html">お客様の声</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Info</p>
+          <ul>
+            <li><a href="./sp-blog.html">ブログ</a></li>
+            <li><a href="./sp-contact.html">お問い合わせ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">利用規約</a></li>
+            <li><a href="#">動物取扱業</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 More Friends. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+  // ハンバーガーメニュー開閉（§2-2）
+  document.querySelector('.hamburger')?.addEventListener('click', function() {
+    const nav = document.getElementById('sp-nav');
+    const isOpen = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+    nav.setAttribute('aria-hidden', !isOpen);
+  });
+
+  // Escape キーでナビを閉じる（§2-2）
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const nav = document.getElementById('sp-nav');
+      const toggle = document.querySelector('.hamburger');
+      if (nav && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        nav.setAttribute('aria-hidden', 'true');
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.focus();
+      }
+    }
+  });
+  </script>
+
+</body>
+
+</html>

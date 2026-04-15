@@ -1,0 +1,549 @@
+/*
+  sp-contact.css
+  More Friends — お問い合わせ（contact）SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css           共通トークン・リセット・ハンバーガー基本制御
+    2. [contact.html inline <style>]  PCレイアウト（PC確認用 inline）
+    3. sp-contact.css               ← このファイル（768px以下を正式ブレークポイントで上書き）
+
+  方針:
+    - クラス名は contact.html の既存クラスをそのまま使う
+    - SP固有のレイアウト変更のみをここに記述する
+    - 本番CSSではない。wireframe確認用（§7-3）
+    - theme.json + 本番CSS に置き換えること
+
+  参照: SP変換リファレンス.md §12 / 03_SPワイヤー専用ルール.md
+  ブレークポイント: max-width: 768px（--bp-sp に相当）
+
+  主要SP変換:
+    - contact-layout: PC grid 2カラム → SP 1カラム（フォーム先・サイドパネル後）
+    - form-row-2col（メール/電話 / ペット種類/頭数）→ 1カラム（§3-6 フォームは1カラム必須）
+    - contact-side の position:sticky → 通常フロー
+    - btn-submit: 44px以上確保（§2-1）
+    - inline style群 → クラス管理
+*/
+
+
+@media (max-width: 768px) {
+
+  /* ==============================================
+     SP ヘッダー（共通パターン）
+  =============================================== */
+
+  header nav:not(.open) {
+    display: none;
+  }
+
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sp-header .header-logo,
+  header .header-logo {
+    font-size: 13px;
+    min-width: auto;
+    min-height: 36px;
+    padding: 6px 14px;
+  }
+
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn:first-child {
+    border-left: none;
+  }
+
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 0;
+    border-left-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .sp-header__action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    height: 16px;
+    background: transparent;
+  }
+
+  .hamburger-lines span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-icon {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-label {
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: transparent;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines span {
+    background: #fff;
+    width: 18px;
+    height: 1.5px;
+  }
+
+  /* ドロワーナビ */
+  header nav.open {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
+    z-index: 99;
+    border-top: 1px solid var(--border);
+  }
+
+  header nav.open a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+    min-height: 52px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  header nav.open a::after {
+    content: '›';
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 18px;
+  }
+
+  header nav.open a.is-current {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+
+  /* ==============================================
+     共通: セクションパディング
+  =============================================== */
+  section {
+    padding: 56px 16px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+    line-height: 1.35;
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+  }
+
+
+  /* ==============================================
+     ページヘッダー
+     PC: padding-top 64px / padding 各80px → SP: 縮小
+  =============================================== */
+  .page-header {
+    padding: 32px 16px 40px;
+  }
+
+  .page-breadcrumb {
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+
+  .page-header-title {
+    font-size: clamp(24px, 6.5vw, 30px);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+
+  .page-header-lead {
+    font-size: 14px;
+    max-width: 100%;
+    line-height: 1.85;
+  }
+
+
+  /* ==============================================
+     メインレイアウト
+     PC: grid 2カラム（フォーム 1fr / サイドパネル 360px）
+     SP: 1カラム（フォーム先 → サイドパネル後）
+         DOM順は フォーム → サイドパネルのため CSS flexだけで成立
+  =============================================== */
+  .contact-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 16px 56px;
+    grid-template-columns: unset;
+  }
+
+
+  /* ==============================================
+     フォームラッパー
+     PC: padding 48px → SP: 縮小 / border-radius 縮小
+  =============================================== */
+  .contact-form-wrap {
+    padding: 28px 20px 32px;
+    border-radius: 8px;
+  }
+
+  .contact-form-title {
+    font-size: clamp(20px, 5.5vw, 24px);
+    margin-bottom: 8px;
+  }
+
+  /* h2 の <br> → SP で自然折り返しに委ねる
+     ⚠️ TODO: 本番では contact-form-title の <br> を削除すること */
+  .contact-form-title br {
+    display: none;
+  }
+
+  .contact-form-sub {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .counseling-note {
+    padding: 16px;
+    margin-bottom: 24px;
+    gap: 12px;
+  }
+
+  .counseling-note-text {
+    font-size: 13px;
+  }
+
+
+  /* ==============================================
+     フォーム項目
+     §3-6: SPでは1カラム必須
+     - ラベルは <label> で明示
+     - form-row-2col → 1カラム縦積み
+     - 項目幅 100%（.form-input はもともと width:100%）
+     - inline style群 → クラス管理
+  =============================================== */
+  .form-row {
+    margin-bottom: 20px;
+  }
+
+  .form-row label {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  /* メール/電話 2列 → 1カラム縦積み（§3-6） */
+  .form-row-2col {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 0;
+  }
+
+  /* form-row-2col 内の .form-row: margin-bottom 復元
+     （PC では inline style="margin-bottom:0" で打ち消していた） */
+  .form-row-2col .form-row {
+    margin-bottom: 0;
+  }
+
+  /* フォームヒント: inline style 除去 → クラスで管理 */
+  .form-hint {
+    font-size: 11px;
+    line-height: 1.65;
+    margin-top: 6px;
+  }
+
+  /* ヒントの上マージン調整: inline style="margin-top:-16px; margin-bottom:24px;" → クラス化 */
+  .form-hint--after-2col {
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+
+  .form-hint--between {
+    margin-top: 6px;
+    margin-bottom: 20px;
+  }
+
+  /* select の inline style="cursor:pointer;" → CSS管理 */
+  select.form-input {
+    cursor: pointer;
+    appearance: auto; /* iOS でネイティブ select を維持 */
+  }
+
+  .form-input {
+    font-size: 16px; /* iOS でズームを防ぐため 16px 以上（§3-6相当）*/
+    padding: 13px 14px;
+    min-height: 44px; /* タップターゲット 44px 確保（§2-1） */
+  }
+
+  textarea.form-input {
+    min-height: 120px;
+    font-size: 16px;
+  }
+
+  .form-privacy {
+    font-size: 12px;
+    margin-bottom: 24px;
+  }
+
+  /* 送信ボタン: 44px 以上確保済み（padding 18px + font 15px）（§2-1） */
+  .btn-submit {
+    min-height: 52px;
+    font-size: 16px;
+    padding: 16px 24px;
+    border-radius: 6px;
+  }
+
+
+  /* ==============================================
+     サイドパネル
+     PC: position:sticky; top:80px → SP: 通常フロー
+     LINE カード → 返信目安 → 対応エリアの順で縦積み
+  =============================================== */
+  .contact-side {
+    position: static;
+    top: auto;
+    gap: 16px;
+  }
+
+  .line-card {
+    padding: 24px 20px;
+    border-radius: 8px;
+  }
+
+  .line-card-title {
+    font-size: 17px;
+  }
+
+  /* line-card-title の <br> → SP で自然折り返しに委ねる */
+  .line-card-title br {
+    display: none;
+  }
+
+  .line-card-sub {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  /* line-card-sub の <br> → SP で自然折り返しに */
+  .line-card-sub br {
+    display: none;
+  }
+
+  .btn-line-block {
+    padding: 14px 24px;
+    font-size: 15px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .line-qr {
+    width: 72px;
+    height: 72px;
+    margin-top: 12px;
+  }
+
+  .info-card {
+    padding: 20px 16px;
+    border-radius: 8px;
+  }
+
+  .info-row {
+    font-size: 13px;
+    padding: 10px 0;
+  }
+
+  /* access-card の inline style → .access-card-note クラスで管理 */
+  .access-card {
+    padding: 20px 16px;
+    border-radius: 8px;
+  }
+
+  .access-card-note {
+    font-size: 11px;
+    color: var(--text);
+    margin-top: 12px;
+    line-height: 1.7;
+  }
+
+
+  /* ==============================================
+     CTAセクション（共通パターン）
+  =============================================== */
+  .cta-section {
+    padding: 56px 16px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-cta-white,
+  .btn-line-lg,
+  .btn-ig-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+
+  /* ==============================================
+     フッター（共通パターン）
+  =============================================== */
+  footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-sns-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ==============================================
+   ロゴ / フッター: SP非依存（全幅対応）
+=============================================== */
+.header-logo-plain {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: auto;
+  min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,375 @@
+
+/* ============================================================
+  sp-contact.css
+  More Friends — お問い合わせページ SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css
+    2. sp-wireframe-base.css  ← .mf-form 定義済み
+    3. sp-contact.css         ← このファイル（ページ固有上書き）
+
+  主な変換:
+    - フォームは PC でも1カラム → SP でそのまま使用（§3-6 / §12）
+    - ラベルは <label> で明示済み（プレースホルダーのみ禁止 §3-6）
+    - btn-submit: min-height 44px以上 / 幅100%（§12 ⚠️）
+    - btn-line-block: 幅100%維持（§12）
+    - テキストエリア: min-height のみ（固定height禁止 §7-2）
+
+  ⚠️ 本番CSSではない。wireframe確認用。
+============================================================ */
+
+@media (max-width: 768px) {
+
+/* ============================================================
+  1. ページヘッダー
+============================================================ */
+
+  .mf-page-header {
+    padding: 40px 16px 48px;
+    background: var(--bg-mid, #f7f5f0);
+  }
+
+  .mf-page-header__heading {
+    font-size: clamp(24px, 6vw, 30px);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .mf-page-header__body {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+
+/* ============================================================
+  2. フォームセクション
+  PCも1カラムのためレイアウト変換なし（§3-6 / §12）
+  ページ固有の細部スタイルのみ定義
+============================================================ */
+
+  .mf-contact-form {
+    padding: 48px 16px;
+  }
+
+  /* フォーム全体 */
+  .mf-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* グループ間余白 */
+  .mf-form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* ラベル（§3-6: 必ず <label> で明示） */
+  .mf-form__label {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* 必須バッジ */
+  .mf-form__required {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    background: #d32f2f;
+    border-radius: 3px;
+    padding: 2px 6px;
+    line-height: 1;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  /* 任意バッジ */
+  .mf-form__optional {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-sub, #555);
+    background: var(--bg-mid, #f7f5f0);
+    border: 1px solid var(--border, #e0e0e0);
+    border-radius: 3px;
+    padding: 2px 6px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  /* テキスト入力・セレクト: 幅100%（§3-6） */
+  .mf-form__input,
+  .mf-form__select {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;   /* iOS でズームしない最小サイズ */
+    font-family: inherit;
+    line-height: 1.5;
+    border: 1.5px solid var(--border, #e0e0e0);
+    border-radius: 8px;
+    background: var(--bg, #fff);
+    color: var(--text, #1a1a1a);
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color .15s;
+  }
+
+  .mf-form__input:focus,
+  .mf-form__select:focus {
+    border-color: var(--primary, #4a7c59);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74,124,89,.12);
+  }
+
+  /* aria-invalid: エラー状態 */
+  .mf-form__input[aria-invalid="true"],
+  .mf-form__select[aria-invalid="true"],
+  .mf-form__textarea[aria-invalid="true"] {
+    border-color: #d32f2f;
+  }
+
+  /* セレクト: 矢印アイコン */
+  .mf-form__select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%23555' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+  }
+
+  /* テキストエリア: 固定height禁止 → min-height のみ（§7-2） */
+  .mf-form__textarea {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-family: inherit;
+    line-height: 1.7;
+    border: 1.5px solid var(--border, #e0e0e0);
+    border-radius: 8px;
+    background: var(--bg, #fff);
+    color: var(--text, #1a1a1a);
+    min-height: 140px;   /* 固定height禁止 → min-height のみ（§7-2） */
+    height: auto;        /* 固定height除去の念押し */
+    resize: vertical;
+    transition: border-color .15s;
+  }
+
+  .mf-form__textarea:focus {
+    border-color: var(--primary, #4a7c59);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74,124,89,.12);
+  }
+
+  /* 補足テキスト */
+  .mf-form__note {
+    font-size: 13px;
+    color: var(--text-sub, #555);
+    line-height: 1.5;
+  }
+
+  /* エラーテキスト（§3-6: 入力欄の近くに配置）*/
+  .mf-form__error {
+    font-size: 13px;
+    color: #d32f2f;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .mf-form__error::before {
+    content: "!";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #d32f2f;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* チェックボックスリスト */
+  .mf-form__fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mf-form__fieldset legend.mf-form__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  .mf-form__checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* チェックボックスラベル: タップターゲット44px確保（§2-1） */
+  .mf-form__checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 15px;
+    line-height: 1.5;
+    border-radius: 6px;
+    cursor: pointer;
+    background: var(--bg-mid, #f7f5f0);
+    transition: background .1s;
+  }
+
+  .mf-form__checkbox-label:has(.mf-form__checkbox:checked) {
+    background: rgba(74,124,89,.08);
+  }
+
+  /* チェックボックス本体 */
+  .mf-form__checkbox {
+    width:  20px;
+    height: 20px;
+    flex-shrink: 0;
+    border: 2px solid var(--border, #e0e0e0);
+    border-radius: 4px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--bg, #fff);
+    cursor: pointer;
+    transition: background .1s, border-color .1s;
+  }
+
+  .mf-form__checkbox:checked {
+    background: var(--primary, #4a7c59);
+    border-color: var(--primary, #4a7c59);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .mf-form__checkbox:focus-visible {
+    outline: 2px solid var(--primary, #4a7c59);
+    outline-offset: 2px;
+  }
+
+  /* プライバシーポリシー同意 */
+  .mf-form__privacy {
+    background: transparent;
+    padding: 0;
+    gap: 12px;
+  }
+
+  .mf-form__privacy-link {
+    color: var(--primary, #4a7c59);
+    text-decoration: underline;
+  }
+
+  /* 送信ボタン
+     §3-6: 44px以上 / 幅100%
+     §12 ⚠️: PCワイヤーのインラインstyle定義を除去してこちらで管理 */
+  .mf-form__submit,
+  .btn-submit {
+    width: 100%;
+    min-height: 44px;       /* §2-1 / §3-6 / §12 */
+    padding: 14px 24px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--primary, #4a7c59);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity .15s;
+    letter-spacing: .04em;
+  }
+
+  .mf-form__submit:active,
+  .btn-submit:active {
+    opacity: .75;
+  }
+
+  /* フォーカスリング */
+  .mf-form__submit:focus-visible,
+  .btn-submit:focus-visible {
+    outline: 2px solid var(--primary, #4a7c59);
+    outline-offset: 3px;
+  }
+
+
+/* ============================================================
+  3. LINE相談ブロック
+  btn-line-block: ブロック幅ボタン / SP で幅100%維持（§12）
+============================================================ */
+
+  .mf-contact-line {
+    padding: 48px 16px;
+  }
+
+  /* btn-line-block: 幅100% / 44px以上（§12） */
+  .mf-contact-line__btn,
+  .btn-line-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 56px;   /* LINE誘導は視認性高めのため56pxに設定 */
+    font-size: 17px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    background: #06c755;
+    color: #fff;
+    transition: opacity .15s;
+  }
+
+  .mf-contact-line__btn:active,
+  .btn-line-block:active {
+    opacity: .8;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ============================================================
+  PC幅での打ち消し
+============================================================ */
+
+@media (min-width: 769px) {
+
+  /* PC でのボタン幅を auto に戻す（PC定義に従う） */
+  .mf-form__submit,
+  .btn-submit {
+    width: auto;
+  }
+
+  .mf-contact-line__btn,
+  .btn-line-block {
+    width: auto;
+  }
+
+}
+
+/* ============================================================
+  END OF sp-contact.css
+============================================================ */

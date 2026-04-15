@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>トップページ — More Friends</title>
+  <meta name="description" content="東京都・千葉県のペットシッターサービス「More Friends」。愛するペットをまるで友達のように大切にお世話します。初回カウンセリング無料。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wireframe-base.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <!-- parts/header.php -->
+  <header>
+    <a href="/" class="header-logo">
+      <div class="ph-logo">More Friends</div>
+    </a>
+    <nav id="sp-nav" aria-hidden="true">
+      <a href="./about.html">More Friendsとは</a>
+      <a href="./service.html">サービス内容</a>
+      <a href="./price.html">料金プラン</a>
+      <a href="./flow.html">利用の流れ</a>
+      <a href="./sitter.html">シッター紹介</a>
+      <a href="./blog.html">ブログ</a>
+      <a href="#" class="btn-ig">Instagramで相談</a>
+      <a href="./contact.html" class="btn-line">LINEで相談</a>
+    </nav>
+    <!-- SP: ハンバーガーボタン -->
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+
+    <!-- ========== 1. HERO ========== -->
+    <!-- parts/hero.php -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Pet Sitting Service</div>
+        <h1 class="hero-h1">
+          そっと心に触れる、<br>
+          <em>友達のような</em><br>
+          存在でありたい。
+        </h1>
+        <p class="hero-tagline">
+          かけがえのない大切なペットさんと飼い主さまの<br>
+          不安を「安心」に変え、寂しいお留守番を<br>
+          「楽しいイベント」に変えるペットシッターサービスです。
+        </p>
+        <div class="hero-cta">
+          <a href="./contact.html" class="btn-cta-main">まず無料カウンセリング</a>
+          <a href="./service.html" class="btn-outline">サービスを見る</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">60<small>分〜</small></div>
+            <div class="stat-label">シッティング対応</div>
+          </div>
+          <div>
+            <div class="stat-num">東京<small>/千葉</small></div>
+            <div class="stat-label">対応エリア</div>
+          </div>
+          <div>
+            <div class="stat-num">24h</div>
+            <div class="stat-label">LINEで相談受付</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <!-- style="height" はワイヤー確認用の仮値。本番削除対象 -->
+        <div class="ph-img" style="width:100%; height:100%; min-height:480px; border-radius:0; overflow:hidden;"
+          data-label="メイン写真 / シッターとペット"></div>
+      </div>
+    </section>
+
+    <!-- ========== 2. コンセプト ========== -->
+    <!-- parts/concept.php -->
+    <section class="concept">
+      <div class="concept-grid">
+        <div>
+          <span class="label">About More Friends</span>
+          <h2 class="section-title">More Friends<br>とは？</h2>
+          <blockquote class="concept-quote">
+            不安なご不在時間を、安心へ。<br>
+            寂しいお留守番を、<br>スペシャルな時間へ。
+          </blockquote>
+          <p class="concept-body">
+            More Friendsは、ペットシッターという枠を超えて、ペットさんにとっての「ベストフレンド」を目指しています。
+            お世話はタスクではなく、信頼関係を築くプロセス。飼い主さまの普段の生活の空気感を、できる限り再現することを大切にしています。
+          </p>
+          <a href="./about.html" class="btn-outline btn-outline-sm section-link">More Friendsの想いを読む</a>
+        </div>
+        <div class="concept-right">
+          <div class="concept-card">
+            <div class="concept-card-icon">😰</div>
+            <div>
+              <div class="concept-card-title">お留守番中の不安を解消</div>
+              <div class="concept-card-text">「ちゃんと食べてるかな」「寂しくないかな」——飼い主さまが抱える不安を、信頼できるシッターが安心に変えます。</div>
+            </div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-icon">🐾</div>
+            <div>
+              <div class="concept-card-title">ペットのストレスをゼロに</div>
+              <div class="concept-card-text">慣れ親しんだお家での生活リズムを守ります。ペットホテルへの移動も、見知らぬ環境への適応も必要ありません。</div>
+            </div>
+          </div>
+          <div class="concept-card">
+            <div class="concept-card-icon">💬</div>
+            <div>
+              <div class="concept-card-title">ペットの友達になる存在</div>
+              <div class="concept-card-text">人にもペットにも「心許せる友達」でありたい——それがMore Friendsという名前の由来です。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 3. Why More Friends ========== -->
+    <!-- parts/why.php -->
+    <section class="why">
+      <div class="section-header">
+        <span class="label">Why More Friends</span>
+        <h2 class="section-title">選ばれる3つの理由</h2>
+        <p class="section-sub">ペットホテルや他のシッターと、何が違うのか。More Friendsが大切にしていることをお伝えします。</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-num">01</div>
+          <div class="why-title">自宅でいつも通りの生活を守る</div>
+          <div class="why-text">慣れ親しんだ環境・においの中で過ごすことが、ペットの心身にとって最もストレスフリー。ペットホテルへの移動なし、環境変化なし。</div>
+        </div>
+        <div class="why-card">
+          <div class="why-num">02</div>
+          <div class="why-title">信頼関係から始まるシッティング</div>
+          <div class="why-text">初回カウンセリングで必ず対面し、ペットさんのペースで関係を築きます。8割のペットは5〜10分で打ち解けます。突然のシッティングはしません。</div>
+        </div>
+        <div class="why-card">
+          <div class="why-num">03</div>
+          <div class="why-title">動物取扱責任者による安心品質</div>
+          <div class="why-text">シッター椎名春香は動物取扱責任者の資格を保有。大手シッター会社での経験を経て独立。一頭一頭の個性に合ったケアを提供します。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 4. サービス概要 ========== -->
+    <!-- parts/services.php -->
+    <section class="services-section">
+      <div class="section-header">
+        <span class="label">Services</span>
+        <h2 class="section-title">サービス内容</h2>
+        <p class="section-sub">日常のお留守番から急なお出かけまで、さまざまなシーンに対応します。</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-icon">🏠</div>
+          <div>
+            <div class="service-title">出社中のお留守番</div>
+            <div class="service-text">お仕事中の定期的なシッティング。毎日のルーティンを守ることで、ペットの生活リズムを安定させます。</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">✈️</div>
+          <div>
+            <div class="service-title">旅行・出張中のケア</div>
+            <div class="service-text">数日間の連続シッティングにも対応。ご不在中も毎日状況をご報告します。</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🌙</div>
+          <div>
+            <div class="service-title">急な残業・深夜帰宅</div>
+            <div class="service-text">突然の長時間不在も、事前登録済みのお客様には柔軟に対応。夜間・早朝は割増料金が適用されます。</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🦮</div>
+          <div>
+            <div class="service-title">お散歩代行</div>
+            <div class="service-text">シッティング中のお散歩はもちろん、お散歩単体でのご依頼も承ります（要カウンセリング）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="section-more">
+        <a href="./service.html" class="btn-outline">サービス詳細を見る</a>
+      </div>
+    </section>
+
+    <!-- ========== 5. 料金サマリー ========== -->
+    <!-- parts/price-summary.php -->
+    <section class="basic-price-section">
+      <span class="section-label">Basic Pricing</span>
+      <h2>基本料金</h2>
+      <p class="section-desc">シッティング時間に応じた基本料金です。すべて税込・明朗会計です。</p>
+
+      <div class="price-value-note">
+        <strong>なぜ60分6,600円なのか。</strong><br>
+        単なるお世話の時間ではなく、ペットさんとの信頼関係を育む時間です。
+        到着後すぐに行動せず、まずペットさんのペースに寄り添う「余白の時間」を含めているからこそ、心身ともに安定したシッティングが実現できます。
+      </div>
+
+      <div class="price-grid">
+        <div class="price-card">
+          <div class="price-duration">シッティング 60分</div>
+          <div class="price-amount">¥6,600</div>
+          <div class="price-unit">税込</div>
+        </div>
+        <div class="price-card featured">
+          <div class="price-duration">シッティング 90分</div>
+          <div class="price-amount">¥9,900</div>
+          <div class="price-unit">税込</div>
+          <div class="price-note-tag">人気プラン</div>
+        </div>
+        <div class="price-card">
+          <div class="price-duration">シッティング 120分</div>
+          <div class="price-amount">¥13,200</div>
+          <div class="price-unit">税込</div>
+        </div>
+        <div class="price-card">
+          <div class="price-duration">シッティング 180分</div>
+          <div class="price-amount">¥16,500</div>
+          <div class="price-unit">税込</div>
+          <div class="price-note-tag">約17%割引</div>
+        </div>
+      </div>
+
+      <div class="price-footnotes">
+        <div class="price-footnote">夜間・早朝（21:00〜9:00）は20%割増</div>
+        <div class="price-footnote">前日・当日予約は20%割増</div>
+        <div class="price-footnote">GW・お盆・年末年始は20%割増</div>
+        <div class="price-footnote">当日延長は15分2,200円</div>
+      </div>
+
+      <div class="section-more">
+        <a href="./price.html" class="btn-cta-white">料金の詳細を見る</a>
+      </div>
+    </section>
+
+    <!-- ========== 6. 利用の流れ ========== -->
+    <!-- parts/flow-summary.php -->
+    <section class="flow-section">
+      <div class="section-header">
+        <span class="label">How It Works</span>
+        <h2 class="section-title">ご利用の流れ</h2>
+        <p class="section-sub">はじめてのご依頼も、4ステップでスムーズに。まずはお気軽にお問い合わせください。</p>
+      </div>
+      <div class="flow-grid">
+        <div class="flow-card">
+          <div class="flow-card-num">STEP 01</div>
+          <div class="flow-icon">📩</div>
+          <div class="flow-card-title">お問い合わせ</div>
+          <div class="flow-card-text">LINEまたはフォームからご連絡ください。希望日程や状況を簡単に教えていただきます。</div>
+          <span class="flow-card-note">📍 LINE / フォームどちらでもOK</span>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card-num">STEP 02</div>
+          <div class="flow-icon">🤝</div>
+          <div class="flow-card-title">無料カウンセリング</div>
+          <div class="flow-card-text">ペットさんとの初対面。性格・生活リズム・ご要望をじっくりヒアリングします。</div>
+          <span class="flow-card-note">⏱ 約60〜90分</span>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card-num">STEP 03</div>
+          <div class="flow-icon">💳</div>
+          <div class="flow-card-title">お支払い・鍵の受け渡し</div>
+          <div class="flow-card-text">シッティング3日前までにお支払い完了。当日の鍵の受け渡し方法を確認します。</div>
+          <span class="flow-card-note">⚠ 入金確認後に進みます</span>
+        </div>
+        <div class="flow-card">
+          <div class="flow-card-num">STEP 04</div>
+          <div class="flow-icon">🐶</div>
+          <div class="flow-card-title">シッティング当日</div>
+          <div class="flow-card-text">訪問後はお写真・レポートをご報告。安心してお仕事・旅行をお楽しみください。</div>
+          <span class="flow-card-note">📸 写真付きレポートをお届け</span>
+        </div>
+      </div>
+      <div class="section-more lg">
+        <a href="./flow.html" class="btn-cta-white">詳しい流れを確認する</a>
+      </div>
+    </section>
+
+    <!-- ========== 7. シッター紹介 ========== -->
+    <!-- parts/profile-summary.php -->
+    <section class="profile-section">
+      <div class="profile-inner">
+        <div>
+          <!-- style="height" はワイヤー確認用の仮値。本番削除対象 -->
+          <div class="ph-img" style="height:300px; border-radius:8px;"
+            data-label="シッター写真 / 椎名春香がペットと向き合うポートレート"></div>
+        </div>
+        <div>
+          <span class="label">Sitter Profile</span>
+          <div class="profile-name">椎名 春香</div>
+          <div class="profile-role">動物取扱責任者 / More Friends 代表シッター</div>
+          <p class="profile-body">
+            大手ペットシッター会社での経験を経て、「お世話はタスクではない」という信念のもとMore Friendsを創業。
+            ペットさんが安心して心身ともに安定して過ごせることを最大の目的に、一頭一頭の個性に寄り添ったシッティングを実践しています。
+          </p>
+          <div class="tags profile-tags">
+            <span class="tag">動物取扱責任者</span>
+            <span class="tag">東京都・千葉県対応</span>
+            <span class="tag">犬・猫・小動物</span>
+          </div>
+          <a href="./sitter.html" class="btn-outline btn-outline-sm">プロフィール詳細を見る</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 8. ブログ最新記事 ========== -->
+    <!-- parts/blog-recent.php -->
+    <section class="blog-section">
+      <div class="section-header">
+        <span class="label">Blog</span>
+        <h2 class="section-title">お役立ち情報</h2>
+        <p class="section-sub">ペットケアのヒントや、More Friendsの日常をお届けします。</p>
+      </div>
+      <div class="blog-grid">
+        <!-- ループ単位: .blog-card -->
+        <div class="blog-card">
+          <!-- style="height" はワイヤー確認用の仮値。本番削除対象 -->
+          <div class="ph-img" style="height:180px;" data-label="記事サムネイル / お留守番が苦手な犬の記事"></div>
+          <div class="blog-body">
+            <div class="blog-cat">ペットケア</div>
+            <div class="blog-title">お留守番が苦手な犬でも安心できる環境づくり5つのポイント</div>
+            <div class="blog-date">2026.03.10</div>
+          </div>
+        </div>
+        <!-- ループ単位: .blog-card -->
+        <div class="blog-card">
+          <div class="ph-img" style="height:180px;" data-label="記事サムネイル / ペットホテルvsシッター比較記事"></div>
+          <div class="blog-body">
+            <div class="blog-cat">お役立ち情報</div>
+            <div class="blog-title">ペットホテルとペットシッター、どちらが向いている？比較チェックリスト</div>
+            <div class="blog-date">2026.02.28</div>
+          </div>
+        </div>
+        <!-- ループ単位: .blog-card -->
+        <div class="blog-card">
+          <div class="ph-img" style="height:180px;" data-label="記事サムネイル / カウンセリングの内容紹介記事"></div>
+          <div class="blog-body">
+            <div class="blog-cat">シッターの日常</div>
+            <div class="blog-title">初めてのカウンセリングで必ずお伝えしていること</div>
+            <div class="blog-date">2026.02.14</div>
+          </div>
+        </div>
+      </div>
+      <div class="section-more">
+        <a href="./blog.html" class="btn-outline">ブログ一覧を見る</a>
+      </div>
+    </section>
+
+    <!-- ========== 9. CTA セクション ========== -->
+    <!-- parts/cta.php -->
+    <section class="cta-section" id="contact">
+      <span class="label">Get Started</span>
+      <h2 class="section-title">まず、気軽にご相談ください。</h2>
+      <p>
+        初回カウンセリングはご予約確定で実質無料。<br>
+        ペットさんと飼い主さまにとって、本当に合うシッターかどうかを一緒に確かめましょう。
+      </p>
+      <div class="cta-buttons">
+        <a href="./contact.html" class="btn-cta-white">無料カウンセリングを申し込む</a>
+        <a href="#" class="btn-line-lg">LINEで相談</a>
+        <a href="#" class="btn-ig-lg">Instagramで相談</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <!-- parts/footer.php -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="ph-logo footer-logo">More Friends</div>
+        <div class="footer-tagline">
+          そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+          東京都・千葉県のペットシッティングサービス
+        </div>
+        <div class="footer-sns">
+          <a href="#" class="footer-sns-btn" aria-label="LINE">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </a>
+          <a href="#" class="footer-sns-btn" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Service</p>
+          <ul>
+            <li><a href="./about.html">More Friendsとは</a></li>
+            <li><a href="./service.html">サービス内容</a></li>
+            <li><a href="./price.html">料金プラン</a></li>
+            <li><a href="./cancel.html">キャンセルポリシー</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">About</p>
+          <ul>
+            <li><a href="./sitter.html">シッター紹介</a></li>
+            <li><a href="./flow.html">利用の流れ</a></li>
+            <li><a href="./area.html">対応エリア</a></li>
+            <li><a href="./reviews.html">お客様の声</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Info</p>
+          <ul>
+            <li><a href="./blog.html">ブログ</a></li>
+            <li><a href="./contact.html">お問い合わせ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">利用規約</a></li>
+            <li><a href="#">動物取扱業</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 More Friends. All rights reserved.</span>
+    </div>
+  </footer>
+
+<script>
+document.querySelector('.hamburger')?.addEventListener('click', function() {
+  const nav = document.getElementById('sp-nav');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+  nav.setAttribute('aria-hidden', !isOpen);
+});
+</script>
+
+</body>
+
+</html>

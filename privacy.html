@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー — More Friends</title>
+  <meta name="description" content="More Friendsのプライバシーポリシーです。お客様の個人情報の取り扱いについて説明しています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+    /* ── ページ固有スタイル ── */
+
+    /* パンくず */
+    .breadcrumb {
+      padding: 80px 80px 0;
+      font-size: 11px;
+      color: var(--text-sub);
+      letter-spacing: 0.06em;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--primary); }
+    .breadcrumb span { opacity: 0.45; }
+
+    /* ── ページヘッダー ── */
+    .page-header {
+      background: var(--bg-mid);
+      padding: 64px 80px 72px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .label { margin-bottom: 14px; }
+    .page-header .section-title { font-size: 40px; line-height: 1.25; }
+    .page-header-lead {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.9;
+      margin-top: 16px;
+      max-width: 560px;
+    }
+
+    /* ── 本文エリア ── */
+    .privacy-body {
+      padding: 80px 80px 120px;
+      max-width: 900px;
+    }
+
+    /* 制定日 */
+    .privacy-meta {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 各条文ブロック */
+    .privacy-article {
+      margin-bottom: 52px;
+    }
+
+    /* 条文見出し */
+    .privacy-article h2 {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    /* 条文本文 */
+    .privacy-article p {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 2;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    /* 小見出し（利用者に関する情報 等） */
+    .privacy-article .sub-heading {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin: 20px 0 10px;
+    }
+
+    /* リスト */
+    .privacy-article ol,
+    .privacy-article ul {
+      margin: 8px 0 16px 1.4em;
+      padding: 0;
+    }
+    .privacy-article ol { list-style-type: none; counter-reset: ol-counter; }
+    .privacy-article ol li { counter-increment: ol-counter; position: relative; padding-left: 1.6em; }
+    .privacy-article ol li::before {
+      content: "(" counter(ol-counter) ")";
+      position: absolute;
+      left: 0;
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+    .privacy-article ul { list-style: none; }
+    .privacy-article ul li {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 2;
+      padding-left: 1.2em;
+      position: relative;
+    }
+    .privacy-article ul li::before {
+      content: "・";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    .privacy-article li { font-size: 14px; color: var(--text); line-height: 2; }
+
+    /* 問い合わせブロック */
+    .contact-box {
+      background: var(--bg-mid);
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin-top: 24px;
+    }
+    .contact-box p {
+      margin-bottom: 6px;
+    }
+
+    /* 注記（※本条は〜） */
+    .privacy-note {
+      font-size: 12px;
+      color: var(--text-sub);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ========== HEADER ========== -->
+<!-- parts/header.php -->
+<header>
+  <a href="/" class="header-logo">
+    <div class="ph-logo">More Friends</div>
+  </a>
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./about.html">More Friendsとは</a>
+    <a href="./service.html">サービス内容</a>
+    <a href="./price.html">料金プラン</a>
+    <a href="./flow.html">利用の流れ</a>
+    <a href="./sitter.html">シッター紹介</a>
+    <a href="./blog.html">ブログ</a>
+    <a href="#" class="btn-ig">Instagramで相談</a>
+    <a href="./contact.html" class="btn-line">LINEで相談</a>
+  </nav>
+  <!-- SP: ハンバーガーボタン -->
+  <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-nav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<main>
+
+<div style="height:64px"></div><!-- header offset -->
+
+<!-- ========== BREADCRUMB ========== -->
+<div class="breadcrumb">
+  <a href="/">Home</a>
+  <span>/</span>
+  <span style="color:var(--text)">プライバシーポリシー</span>
+</div>
+
+<!-- ========== PAGE HEADER ========== -->
+<div class="page-header">
+  <span class="label">Privacy Policy</span>
+  <h1 class="section-title">プライバシーポリシー</h1>
+  <p class="page-header-lead">
+    Dorado合同会社（事業所名：More Friends）は、利用者の皆様からお預かりする個人情報の重要性を認識し、適正な取り扱いを行います。
+  </p>
+</div>
+
+<!-- ========== BODY ========== -->
+<div class="privacy-body">
+
+  <p class="privacy-meta">制定日：2025年12月1日</p>
+
+  <!-- 第1条 -->
+  <div class="privacy-article">
+    <h2>第1条（基本方針）</h2>
+    <p>Dorado合同会社（事業所名：More Friends）（以下「当社」といいます。）は、当社が提供する訪問型ペットシッティングサービス（以下「本サービス」といいます。）の運営にあたり、利用者の皆様からお預かりする個人情報の重要性を認識し、個人情報の保護に関する法律（以下「個人情報保護法」といいます。）その他の関係法令およびガイドラインを遵守し、以下のとおりプライバシーポリシー（以下「本ポリシー」といいます。）を定め、個人情報を適正に取り扱います。</p>
+  </div>
+
+  <!-- 第2条 -->
+  <div class="privacy-article">
+    <h2>第2条（個人情報の定義）</h2>
+    <p>本ポリシーにおいて「個人情報」とは、個人情報保護法第2条第1項に定める個人情報をいい、生存する個人に関する情報であって、氏名、住所、電話番号、メールアドレスその他の記述等により特定の個人を識別できるもの、または個人識別符号が含まれるものをいいます。</p>
+  </div>
+
+  <!-- 第3条 -->
+  <div class="privacy-article">
+    <h2>第3条（取得する情報）</h2>
+    <p>当社は、本サービスの提供にあたり、以下の情報を取得することがあります。</p>
+
+    <p class="sub-heading">利用者に関する情報</p>
+    <ol>
+      <li>氏名、住所、電話番号、メールアドレスその他の連絡先情報</li>
+      <li>本人確認のために提示または提出いただく書類に記載された情報</li>
+      <li>緊急連絡先として届出いただいた方の氏名および連絡先</li>
+      <li>サービス提供場所（利用者宅等）の所在地および住宅環境に関する情報</li>
+      <li>合鍵およびキーボックスに関する情報（預託方法、設置場所、暗証番号等）</li>
+      <li>決済に必要な情報（銀行口座情報等。ただし、クレジットカード情報については決済サービス提供元であるSquare, Inc.が管理しており、当社は保持しません。）</li>
+    </ol>
+
+    <p class="sub-heading">ペットに関する情報</p>
+    <ol>
+      <li>ペットの種類、頭数、名前、年齢、性別</li>
+      <li>性格、行動特性、飼育状況</li>
+      <li>健康状態、既往症、現在の病気・怪我・体調不良の有無</li>
+      <li>感染症の有無および寄生虫症に関する情報</li>
+      <li>ワクチン接種状況およびその証明書類</li>
+      <li>投薬に関する情報（薬剤の種類、投薬量、投薬時刻、投薬手順等）</li>
+      <li>かかりつけ動物病院の名称および連絡先</li>
+    </ol>
+
+    <p class="sub-heading">サービス提供に伴い取得する情報</p>
+    <ol>
+      <li>事前カウンセリングにおけるヒアリング内容および記録</li>
+      <li>サービス提供中に撮影したペットの写真</li>
+      <li>サービス実施状況に関するレポートおよび業務記録</li>
+      <li>メッセージングアプリ（LINE等）、電子メール、電話等を通じたやり取りの記録</li>
+      <li>Instagram等のSNSを通じたお問い合わせ・やり取りの記録</li>
+    </ol>
+
+    <p class="sub-heading">ウェブサイト等を通じて取得する情報（当社ウェブサイト開設後に適用）</p>
+    <ol>
+      <li>Cookie（クッキー）およびこれに類する技術により取得される閲覧履歴、アクセスログ等の情報</li>
+      <li>アクセス解析ツール（Googleアナリティクス等）により収集されるトラフィックデータ</li>
+      <li>広告配信サービスを通じて取得されるアクセス情報</li>
+    </ol>
+  </div>
+
+  <!-- 第4条 -->
+  <div class="privacy-article">
+    <h2>第4条（情報の取得方法）</h2>
+    <p>当社は、以下の方法により個人情報を取得します。</p>
+    <ul>
+      <li>メッセージングアプリ（LINE等）、電子メール、電話、Instagram等のSNS、その他当社が認める手段を通じた申込み・問い合わせ</li>
+      <li>事前カウンセリング（対面によるヒアリング）</li>
+      <li>申込書面、見積書、サービス内容説明書その他当社が提示する書面への記入</li>
+      <li>本人確認書類の提示または提出</li>
+      <li>サービス提供中の現場での確認・記録</li>
+      <li>決済サービス（Square等）を通じた決済処理に伴う取得</li>
+      <li>当社ウェブサイトにおけるCookie等の自動取得技術（ウェブサイト開設後に適用）</li>
+    </ul>
+  </div>
+
+  <!-- 第5条 -->
+  <div class="privacy-article">
+    <h2>第5条（利用目的）</h2>
+    <p>当社は、取得した個人情報を、以下の目的の範囲内で利用します。</p>
+    <ul>
+      <li>本サービスの申込受付、事前カウンセリングの実施、契約の締結および履行</li>
+      <li>本人確認の実施</li>
+      <li>サービス提供日時の調整、訪問スケジュールの管理</li>
+      <li>サービス提供中および提供後の利用者への連絡・報告（レポート・写真の送付を含む）</li>
+      <li>緊急時における利用者、緊急連絡先、動物病院、警察、消防その他関係機関への連絡・対応</li>
+      <li>投薬その他利用者の指示に基づく対応</li>
+      <li>合鍵の預託、管理、返却に関する対応</li>
+      <li>利用料金の算定、請求、決済処理、返金対応</li>
+      <li>消耗品の不足時における買い物代行および費用精算</li>
+      <li>サービスの品質向上、業務改善、トラブル防止</li>
+      <li>事例紹介等を目的としたウェブサイト、SNS、ブログ、資料等への写真・レポートの掲載（第8条に定める条件に従います。）</li>
+      <li>当社スタッフ、業務委託先および代行スタッフへの業務遂行に必要な範囲での情報共有</li>
+      <li>保険会社への保険金請求に関する対応</li>
+      <li>紛争解決、法的手続への対応</li>
+      <li>法令に基づく対応</li>
+      <li>当社ウェブサイトの運営・改善、アクセス状況の分析、広告の配信・効果測定（ウェブサイト開設後に適用）</li>
+    </ul>
+  </div>
+
+  <!-- 第6条 -->
+  <div class="privacy-article">
+    <h2>第6条（第三者提供）</h2>
+    <p>当社は、以下のいずれかに該当する場合を除き、あらかじめ利用者の同意を得ることなく、個人情報を第三者に提供しません。</p>
+    <ul>
+      <li>法令に基づく場合</li>
+      <li>人の生命、身体または財産の保護のために必要がある場合であって、利用者の同意を得ることが困難であるとき</li>
+      <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって、利用者の同意を得ることが困難であるとき</li>
+      <li>国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、利用者の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき</li>
+    </ul>
+  </div>
+
+  <!-- 第7条 -->
+  <div class="privacy-article">
+    <h2>第7条（業務委託・代行・緊急時の情報共有）</h2>
+    <p>当社は、本サービスの全部または一部を第三者に委託する場合、または代行スタッフにより対応する場合があります。この場合、業務遂行に必要な範囲で、以下の情報を委託先または代行スタッフに提供することがあります。</p>
+    <ol>
+      <li>利用者の氏名、住所、連絡先</li>
+      <li>ペットおよび利用者に関するカウンセリング情報（健康状態、性格、注意事項等）</li>
+      <li>サービス内容および実施条件</li>
+      <li>合鍵またはキーボックスに関する情報</li>
+    </ol>
+    <p>当社は、前項の情報を提供するにあたり、委託先または代行スタッフとの間で守秘義務および情報管理義務を課す契約を締結し、適切な監督を行います。</p>
+    <p>緊急時対応として、以下の場合に、利用者の個人情報またはペットに関する情報を関係先に提供することがあります。</p>
+    <ol>
+      <li>ペットの体調不良、怪我、事故等が生じた場合における、かかりつけ動物病院または近隣の動物病院への情報提供</li>
+      <li>利用者と連絡が取れない場合における、緊急連絡先への連絡</li>
+      <li>火災、ガス漏れ、侵入被害その他の異常が生じた場合における、警察、消防その他関係機関への通報・情報提供</li>
+      <li>保険金請求に関連して、当社が加入する賠償責任保険の保険会社への情報提供</li>
+    </ol>
+    <p>クレジットカード決済に関しては、決済サービス提供元であるSquare, Inc.に対し、決済処理に必要な範囲で情報が提供されます。当社はクレジットカード番号等の決済情報を保持しません。</p>
+  </div>
+
+  <!-- 第8条 -->
+  <div class="privacy-article">
+    <h2>第8条（写真・レポート・記録の取扱い）</h2>
+    <p>当社は、本サービスの提供および品質向上、業務記録、トラブル防止を目的として、ペットおよびサービス提供状況に関する写真または簡易な記録を取得することがあります。</p>
+    <p>前項の写真およびレポートは、利用者への報告・共有のために送付することがあります。撮影は、ペットおよびサービスに関連する範囲に限定し、利用者のプライバシーに配慮して行います。</p>
+    <p>当社は、取得した写真およびレポートを、当社のサービス品質向上、業務改善、事例紹介等を目的として利用することがあります。当該利用には、当社が運営するウェブサイト、ブログ、SNS、資料等への掲載が含まれる場合があります。</p>
+    <p>利用者は、写真およびレポートの公開利用を希望しない場合には、あらかじめ当社に申し出ることにより、当該利用を拒否することができます。当社は、当該申出があった場合、公開目的での利用を行いません。</p>
+  </div>
+
+  <!-- 第9条 -->
+  <div class="privacy-article">
+    <h2>第9条（安全管理措置）</h2>
+    <p>当社は、取得した個人情報の漏えい、滅失、毀損等を防止するため、以下の安全管理措置を講じます。</p>
+    <ul>
+      <li><strong>組織的措置：</strong>個人情報保護の責任者を設置し、個人情報の取扱いに関する管理体制を整備します。</li>
+      <li><strong>人的措置：</strong>当社スタッフに対し、個人情報の適正な取扱いに関する教育を実施し、守秘義務を課します。業務委託先および代行スタッフに対しても、守秘義務および情報管理義務に関する契約を締結します。</li>
+      <li><strong>物理的措置：</strong>合鍵は専用キーボックスを通じて管理し、個人情報を記載した書類は施錠可能な場所に保管する等、紛失・盗難防止のための措置を講じます。</li>
+      <li><strong>技術的措置：</strong>個人情報を取り扱う端末へのアクセス制限、パスワード管理その他不正アクセス防止のための措置を講じます。</li>
+    </ul>
+  </div>
+
+  <!-- 第10条 -->
+  <div class="privacy-article">
+    <h2>第10条（個人情報の保管期間）</h2>
+    <p>当社は、利用目的の達成に必要な期間、個人情報を保管します。利用目的を達成し、保管の必要がなくなった場合は、合理的な期間内に適切な方法により消去または廃棄します。ただし、法令に基づき保管が義務づけられている場合は、当該法令の定めに従います。</p>
+  </div>
+
+  <!-- 第11条 -->
+  <div class="privacy-article">
+    <h2>第11条（Cookie・アクセス解析・広告について）</h2>
+    <p class="privacy-note">※ 本条は、当社ウェブサイト開設後に適用されます。</p>
+
+    <p><strong>Cookieについて</strong><br>
+    当社のウェブサイトでは、利用者の利便性向上およびウェブサイトの改善のため、Cookie（クッキー）を使用することがあります。Cookieとは、ウェブサイトへのアクセスに関する情報をブラウザに保存する仕組みであり、氏名、住所、電話番号等の個人情報は含まれません。利用者は、ブラウザの設定によりCookieの受け入れを拒否することができますが、一部の機能が利用できなくなる場合があります。</p>
+
+    <p><strong>アクセス解析ツールについて</strong><br>
+    当社のウェブサイトでは、Google LLCが提供するアクセス解析ツール「Googleアナリティクス」を利用することがあります。Googleアナリティクスは、Cookieを使用してトラフィックデータを収集しますが、当該データは匿名で収集されており、特定の個人を識別するものではありません。利用者は、ブラウザの設定またはGoogleアナリティクスオプトアウトアドオンの導入により、データの収集を拒否することができます。</p>
+
+    <p><strong>広告配信について</strong><br>
+    当社のウェブサイトでは、Google LLC、Meta Platforms, Inc.その他の広告配信事業者のサービスを利用し、広告を配信することがあります。これらのサービスでは、Cookieや広告識別子等を利用して、利用者の過去のアクセス情報に基づく広告を配信する場合があります。利用者は、各広告配信事業者の設定画面からパーソナライズ広告を無効にすることができます。</p>
+  </div>
+
+  <!-- 第12条 -->
+  <div class="privacy-article">
+    <h2>第12条（開示・訂正・利用停止等）</h2>
+    <p>利用者は、当社に対し、個人情報保護法の定めに基づき、自己に関する保有個人データについて、以下の請求を行うことができます。</p>
+    <ol>
+      <li>利用目的の通知</li>
+      <li>開示</li>
+      <li>内容の訂正、追加または削除</li>
+      <li>利用の停止または消去</li>
+      <li>第三者への提供の停止</li>
+    </ol>
+    <p>前項の請求を行う場合は、第14条に定める問い合わせ窓口までご連絡ください。当社は、請求者がご本人であることを確認のうえ、合理的な期間内に対応いたします。</p>
+    <p>利用の停止または消去を行った結果、本サービスの全部または一部を提供できなくなる場合がありますので、あらかじめご了承ください。</p>
+  </div>
+
+  <!-- 第13条 -->
+  <div class="privacy-article">
+    <h2>第13条（本ポリシーの変更）</h2>
+    <p>当社は、必要と判断した場合には、本ポリシーの内容を変更することがあります。</p>
+    <p>本ポリシーの変更は、当社が利用者に対し、電子メール、メッセージングアプリ、当社ウェブサイトその他当社が適切と判断する方法により通知した時点から効力を生じるものとします。</p>
+  </div>
+
+  <!-- 第14条 -->
+  <div class="privacy-article">
+    <h2>第14条（問い合わせ窓口）</h2>
+    <p>個人情報の取扱いに関するお問い合わせ、開示等のご請求、苦情およびご相談は、以下の窓口までご連絡ください。</p>
+    <div class="contact-box">
+      <p><strong>Dorado合同会社　More Friends担当</strong></p>
+      <p>東京都中央区東日本橋二丁目28番4号 日本橋CETビル2階</p>
+      <p>連絡先：LINEビジネスアカウント @morefriends</p>
+    </div>
+  </div>
+
+</div><!-- /privacy-body -->
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<!-- parts/footer.php -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="ph-logo footer-logo">More Friends</div>
+      <div class="footer-tagline">
+        そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+        東京都・千葉県のペットシッティングサービス
+      </div>
+      <div class="footer-sns">
+        <a href="#" class="footer-sns-btn" aria-label="LINE">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.630 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.630 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        </a>
+        <a href="#" class="footer-sns-btn" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">Service</p>
+        <ul>
+          <li><a href="./about.html">More Friendsとは</a></li>
+          <li><a href="./service.html">サービス内容</a></li>
+          <li><a href="./price.html">料金プラン</a></li>
+          <li><a href="./cancel.html">キャンセルポリシー</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">About</p>
+        <ul>
+          <li><a href="./sitter.html">シッター紹介</a></li>
+          <li><a href="./flow.html">利用の流れ</a></li>
+          <li><a href="./area.html">対応エリア</a></li>
+          <li><a href="./reviews.html">お客様の声</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">Info</p>
+        <ul>
+          <li><a href="./blog.html">ブログ</a></li>
+          <li><a href="./contact.html">お問い合わせ</a></li>
+          <li><a href="./privacy.html" style="color:var(--primary);">プライバシーポリシー</a></li>
+          <li><a href="#">利用規約</a></li>
+          <li><a href="#">動物取扱業</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 More Friends. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.hamburger')?.addEventListener('click', function() {
+  const nav = document.getElementById('sp-nav');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+  nav.setAttribute('aria-hidden', !isOpen);
+});
+</script>
+
+</body>
+</html>

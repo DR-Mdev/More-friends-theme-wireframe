@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ — More Friends</title>
+  <meta name="description" content="More Friendsへのお問い合わせ・カウンセリング申込みフォーム。まずはお気軽にご相談ください。LINEでのご相談も受け付けています。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500&family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+    /* ── ページヘッダー ── */
+    .page-header {
+      padding-top: 64px;
+      background: var(--bg-mid);
+      padding-bottom: 64px;
+      padding-left: 80px;
+      padding-right: 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .label { margin-bottom: 16px; }
+    .page-header-title {
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .page-header-lead {
+      font-size: 15px;
+      color: var(--text-sub);
+      line-height: 1.9;
+      max-width: 520px;
+    }
+    .page-breadcrumb {
+      font-size: 11px;
+      color: var(--text-sub);
+      letter-spacing: 0.06em;
+      margin-bottom: 28px;
+    }
+    .page-breadcrumb a { color: var(--primary); text-decoration: none; }
+    .page-breadcrumb span { margin: 0 6px; opacity: 0.5; }
+
+    /* ── メインレイアウト (2カラム) ── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 56px;
+      align-items: start;
+      padding: 80px 80px;
+    }
+
+    /* ── フォーム ── */
+    .contact-form-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px 48px;
+    }
+    .contact-form-wrap .label { margin-bottom: 8px; }
+    .contact-form-title {
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .contact-form-sub {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+    .form-row {
+      margin-bottom: 24px;
+    }
+    .form-row label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .form-row label .req {
+      display: inline-block;
+      font-size: 10px;
+      color: #fff;
+      background: var(--primary);
+      padding: 1px 6px;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .form-row label .opt {
+      display: inline-block;
+      font-size: 10px;
+      color: var(--text-sub);
+      background: var(--border);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--primary);
+    }
+    .form-input::placeholder {
+      color: var(--ph-text);
+      font-size: 13px;
+    }
+    textarea.form-input {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.7;
+    }
+    .form-row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .form-hint {
+      font-size: 11px;
+      color: var(--text);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    /* カウンセリング無料バナー */
+    .counseling-note {
+      background: var(--primary-l);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .counseling-note-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .counseling-note-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .counseling-note-text strong {
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .form-privacy {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .form-privacy a { color: var(--primary); }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 18px 36px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-submit:hover { background: var(--primary-d); }
+
+    /* ── サイドパネル ── */
+    .contact-side {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: sticky;
+      top: 80px;
+    }
+
+    /* LINEカード */
+    .line-card {
+      background: #06C755;
+      border-radius: 12px;
+      padding: 32px 28px;
+      color: #fff;
+      text-align: center;
+    }
+    .line-card-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 8px;
+    }
+    .line-card-title {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .line-card-sub {
+      font-size: 12px;
+      color: #fff;
+      font-weight: 500;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .btn-line-block {
+      display: block;
+      width: 100%;
+      background: #fff;
+      color: #06C755;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 14px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+    .btn-line-block:hover { opacity: 0.9; }
+    .line-qr {
+      width: 80px;
+      height: 80px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 16px auto 0;
+      font-size: 11px;
+      opacity: 0.75;
+      letter-spacing: 0.04em;
+    }
+
+    /* 返信目安カード */
+    .info-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 28px;
+    }
+    .info-card-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.7;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .info-row-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* アクセスカード */
+    .access-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 28px;
+    }
+    .access-card-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 16px;
+      letter-spacing: 0.04em;
+    }
+    .access-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .access-item-icon { flex-shrink: 0; font-size: 14px; }
+
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<!-- parts/header.php -->
+<header>
+  <a href="/" class="header-logo">
+    <div class="ph-logo">More Friends</div>
+  </a>
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./about.html">More Friendsとは</a>
+    <a href="./service.html">サービス内容</a>
+    <a href="./price.html">料金プラン</a>
+    <a href="./flow.html">利用の流れ</a>
+    <a href="./sitter.html">シッター紹介</a>
+    <a href="./blog.html">ブログ</a>
+    <a href="#" class="btn-ig">Instagramで相談</a>
+    <a href="./contact.html" class="btn-line">LINEで相談</a>
+  </nav>
+  <!-- SP: ハンバーガーボタン -->
+  <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-nav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<main>
+
+<!-- ─── PAGE HEADER ─── -->
+<!-- parts/page-header.php -->
+<section class="page-header">
+  <p class="page-breadcrumb">
+    <a href="/">Home</a><span>/</span>お問い合わせ
+  </p>
+  <span class="label">Contact</span>
+  <h1 class="page-header-title">まず、気軽にご相談ください。</h1>
+  <p class="page-header-lead">
+    ペットのこと、些細な疑問でもお気軽にどうぞ。<br>
+    フォームかLINE、どちらでもお受けしています。<br>
+    初回カウンセリングは、ご予約確定の場合<strong>実質無料</strong>です。
+  </p>
+</section>
+
+<!-- ─── MAIN CONTACT LAYOUT ─── -->
+<!-- parts/contact-form.php -->
+<div class="contact-layout">
+
+  <!-- フォーム -->
+  <div class="contact-form-wrap">
+    <span class="label">Inquiry Form</span>
+    <h2 class="contact-form-title">お問い合わせ・<br>カウンセリング申込み</h2>
+    <p class="contact-form-sub">
+      以下のフォームにご記入の上、送信してください。<br>
+      通常1〜2営業日以内にご返信いたします。
+    </p>
+
+    <!-- カウンセリング無料バナー -->
+    <div class="counseling-note">
+      <div class="counseling-note-icon">🎁</div>
+      <div class="counseling-note-text">
+        <strong>初回カウンセリングは実質無料</strong><br>
+        ご予約確定後にシッティングを実施する場合、カウンセリング費用はシッティング料金に含まれます。まずはお気軽にお申し込みください。
+      </div>
+    </div>
+
+    <!-- お名前 -->
+    <div class="form-row">
+      <label for="name">お名前<span class="req">必須</span></label>
+      <input class="form-input" type="text" id="name" placeholder="例：田中 花子" />
+    </div>
+
+    <!-- メール / 電話 -->
+    <div class="form-row-2col">
+      <div class="form-row" style="margin-bottom:0">
+        <label for="email">メールアドレス<span class="req">必須</span></label>
+        <input class="form-input" type="email" id="email" placeholder="example@mail.com" />
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label for="tel">電話番号<span class="opt">任意</span></label>
+        <input class="form-input" type="tel" id="tel" placeholder="090-0000-0000" />
+      </div>
+    </div>
+    <p class="form-hint" style="margin-top:-16px; margin-bottom:24px;">※ 折り返しのご連絡はメールが基本です。お電話をご希望の場合はメッセージ欄にご記入ください。</p>
+
+    <!-- ペットの種類・頭数 -->
+    <div class="form-row-2col">
+      <div class="form-row" style="margin-bottom:0">
+        <label for="pet-type">ペットの種類<span class="req">必須</span></label>
+        <select class="form-input" id="pet-type" style="cursor:pointer;">
+          <option value="" disabled selected>選択してください</option>
+          <option>犬</option>
+          <option>猫</option>
+          <option>小動物（うさぎ・ハムスター等）</option>
+          <option>鳥類</option>
+          <option>その他</option>
+        </select>
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label for="pet-count">頭数<span class="req">必須</span></label>
+        <select class="form-input" id="pet-count" style="cursor:pointer;">
+          <option value="" disabled selected>選択してください</option>
+          <option>1頭</option>
+          <option>2頭</option>
+          <option>3頭</option>
+          <option>4頭以上（要相談）</option>
+        </select>
+      </div>
+    </div>
+    <p class="form-hint" style="margin-top:6px; margin-bottom:24px;">※ 3頭まで追加料金なし。4頭以上はカルテ作成手数料（3,300円）が発生する場合があります。</p>
+
+    <!-- 希望日程 -->
+    <div class="form-row">
+      <label for="schedule">ご希望の日程（概略）<span class="opt">任意</span></label>
+      <input class="form-input" type="text" id="schedule" placeholder="例：4月中旬以降、平日 / 5月2日〜5日のGW期間" />
+      <p class="form-hint">※ 確定日程はカウンセリング後に調整します。まずは概略で構いません。</p>
+    </div>
+
+    <!-- メッセージ -->
+    <div class="form-row">
+      <label for="message">メッセージ・ご相談内容<span class="opt">任意</span></label>
+      <textarea class="form-input" id="message" rows="5" placeholder="例：繊細な子なので、慣れるまでのことが心配です。どんな流れになるか教えてもらえますか？"></textarea>
+      <p class="form-hint">気になること・不安なことは何でもお書きください。</p>
+    </div>
+
+    <!-- プライバシー同意 -->
+    <p class="form-privacy">
+      送信前に<a href="/privacy">プライバシーポリシー</a>をご確認ください。
+      フォームを送信することで、個人情報の取り扱いについてご同意いただいたものとみなします。
+    </p>
+
+    <button class="btn-submit" type="button">
+      <span>🐾</span> 送信する
+    </button>
+  </div>
+
+  <!-- サイドパネル -->
+  <div class="contact-side">
+
+    <!-- parts/line-card.php -->
+    <!-- LINE カード -->
+    <div class="line-card">
+      <p class="line-card-eyebrow">LINE Inquiry</p>
+      <h3 class="line-card-title">もっと気軽に<br>話したい方はLINEへ</h3>
+      <p class="line-card-sub">
+        細かいことを文章にするのが<br>
+        苦手な方も、LINEなら気軽にどうぞ。<br>
+        24時間メッセージ受付中です。
+      </p>
+      <a href="#" class="btn-line-block">💬 LINEで相談する</a>
+      <div class="line-qr">QR CODE</div>
+    </div>
+
+    <!-- 返信目安カード -->
+    <div class="info-card">
+      <p class="info-card-title">📋 ご連絡・返信について</p>
+      <div class="info-row">
+        <span class="info-row-icon">⏱</span>
+        <div>
+          <span class="info-row-label">返信目安</span>
+          1〜2営業日以内にメールでご返信します
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">📅</span>
+        <div>
+          <span class="info-row-label">カウンセリング所要時間</span>
+          約60〜90分（ご自宅にて）
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">💴</span>
+        <div>
+          <span class="info-row-label">カウンセリング費用</span>
+          予約確定の場合、実質無料<br>
+          <span style="font-size:11px; opacity:0.75;">※キャンセル時は3,300円発生します</span>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-row-icon">💳</span>
+        <div>
+          <span class="info-row-label">お支払い期限</span>
+          シッティング3日前まで
+        </div>
+      </div>
+    </div>
+
+    <!-- 対応エリアカード -->
+    <div class="access-card">
+      <p class="access-card-title">📍 対応エリア</p>
+      <div class="access-item">
+        <span class="access-item-icon">🗼</span>
+        <span>東京都（各区・市）</span>
+      </div>
+      <div class="access-item">
+        <span class="access-item-icon">🌊</span>
+        <span>千葉県（主要エリア）</span>
+      </div>
+      <div class="access-item">
+        <span class="access-item-icon">🚃</span>
+        <span>出張費は実費（交通費相当）</span>
+      </div>
+      <p style="font-size:11px; color:var(--text); margin-top:12px; line-height:1.7;">
+        エリア外の方もまずはご相談ください。<br>
+        場所によっては対応できる場合があります。
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── CTA SECTION ─── -->
+<!-- parts/cta.php -->
+<section class="cta-section">
+  <span class="label">Contact</span>
+  <h2 class="section-title">まずはお気軽に<br>ご相談ください</h2>
+  <p>初回カウンセリングは実質無料。<br>ペットさんのこと、どんな些細なことでもお聞きします。</p>
+  <div class="cta-buttons">
+    <a href="#form" class="btn-cta-white">お問い合わせフォーム</a>
+    <a href="#" class="btn-line-lg">💬 LINEで相談する</a>
+    <a href="#" class="btn-ig-lg">Instagramで相談</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<!-- parts/footer.php -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="ph-logo footer-logo">More Friends</div>
+      <div class="footer-tagline">
+        そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+        東京都・千葉県のペットシッティングサービス
+      </div>
+      <div class="footer-sns">
+        <a href="#" class="footer-sns-btn" aria-label="LINE">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        </a>
+        <a href="#" class="footer-sns-btn" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">Service</p>
+        <ul>
+          <li><a href="./about.html">More Friendsとは</a></li>
+          <li><a href="./service.html">サービス内容</a></li>
+          <li><a href="./price.html">料金プラン</a></li>
+          <li><a href="./cancel.html">キャンセルポリシー</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">About</p>
+        <ul>
+          <li><a href="./sitter.html">シッター紹介</a></li>
+          <li><a href="./flow.html">利用の流れ</a></li>
+          <li><a href="./area.html">対応エリア</a></li>
+          <li><a href="./reviews.html">お客様の声</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">Info</p>
+        <ul>
+          <li><a href="./blog.html">ブログ</a></li>
+          <li><a href="./contact.html">お問い合わせ</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+          <li><a href="#">利用規約</a></li>
+          <li><a href="#">動物取扱業</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 More Friends. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.hamburger')?.addEventListener('click', function() {
+  const nav = document.getElementById('sp-nav');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+  nav.setAttribute('aria-hidden', !isOpen);
+});
+</script>
+
+</body>
+</html>

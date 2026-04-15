@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>料金プラン — More Friends</title>
+  <!--
+    読み込み順:
+      1. wireframe-base.css
+      2. sp-wireframe-base.css
+      3. sp-price.css
+  -->
+  <link rel="stylesheet" href="wireframe-base.css">
+  <link rel="stylesheet" href="sp-wireframe-base.css">
+  <link rel="stylesheet" href="sp-price.css">
+</head>
+<body>
+
+  <!-- ========================================
+    ヘッダー（共通）
+    parts/header.php
+    編集区分: 固定
+  ========================================= -->
+  <header class="mf-header" role="banner">
+
+    <a href="index.html" class="mf-header__logo">
+      <span class="ph-logo"></span><!-- ワイヤー専用: 本番前に削除 -->
+      <span class="mf-sr-only">More Friends</span>
+    </a>
+
+    <div class="mf-header__actions">
+      <a
+        href="https://line.me/"
+        class="mf-btn mf-btn--icon mf-btn--line"
+        aria-label="LINEで相談する"
+        target="_blank"
+        rel="noopener noreferrer"
+      ><span aria-hidden="true">L</span></a>
+
+      <a
+        href="https://www.instagram.com/"
+        class="mf-btn mf-btn--icon mf-btn--ig"
+        aria-label="Instagramを見る"
+        target="_blank"
+        rel="noopener noreferrer"
+      ><span aria-hidden="true">IG</span></a>
+
+      <button
+        class="mf-header__toggle js-nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="global-nav"
+        aria-label="メニューを開く"
+      >
+        <span class="mf-header__toggle-line"></span>
+        <span class="mf-header__toggle-line"></span>
+        <span class="mf-header__toggle-line"></span>
+      </button>
+    </div>
+
+  </header>
+
+
+  <!-- ========================================
+    グローバルナビ（共通）
+    parts/global-nav.php
+    編集区分: 固定
+  ========================================= -->
+  <nav
+    id="global-nav"
+    class="mf-global-nav"
+    aria-label="グローバルナビゲーション"
+  >
+    <ul class="mf-global-nav__list">
+      <li class="mf-global-nav__item"><a href="about.html">More Friendsとは</a></li>
+      <li class="mf-global-nav__item"><a href="service.html">サービス内容</a></li>
+      <li class="mf-global-nav__item">
+        <a href="price.html" aria-current="page">料金プラン</a>
+      </li>
+      <li class="mf-global-nav__item"><a href="flow.html">利用の流れ</a></li>
+      <li class="mf-global-nav__item"><a href="sitter.html">シッター紹介</a></li>
+      <li class="mf-global-nav__item"><a href="area.html">対応エリア</a></li>
+      <li class="mf-global-nav__item"><a href="reviews.html">お客様の声</a></li>
+      <li class="mf-global-nav__item"><a href="blog.html">ブログ</a></li>
+      <li class="mf-global-nav__item"><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+
+
+  <main>
+
+    <!-- ========================================
+      ページヘッダー（.page-hero）
+      parts/page-header.php
+      編集区分: 固定
+      SP変換: 縦積みそのまま
+    ========================================= -->
+    <section class="mf-page-header">
+      <div class="mf-container">
+
+        <span class="mf-section-label">PRICE</span>
+
+        <h1 class="mf-page-header__heading">
+          料金プラン
+        </h1>
+
+        <p class="mf-page-header__body">
+          シッティング内容・時間・頻度に合わせて、
+          柔軟にご対応します。まずは無料カウンセリングで
+          ご相談ください。
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================
+      基本料金（.basic-price-section）
+      parts/section/price-basic.php
+      編集区分: 固定（料率変更は管理者のみ）
+      SP変換:
+        PC: 4カラム (.price-grid) → SP: 1カラム縦積み（§3-2）
+        featuredカードを先頭に配置（order:-1 / §03特記事項）
+        ⚠️ TODO: price-value-note の dark bg コントラスト確認（WCAG AA）
+    ========================================= -->
+    <section class="mf-price-basic mf-section price-page-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">BASIC</span>
+        <h2 class="mf-heading-section mf-mb-2">
+          基本料金
+        </h2>
+        <p class="mf-text-sub mf-mb-8">
+          すべて税込み表示。出張費・割増料金は別途。
+        </p>
+
+        <!-- PC 4カラム → SP 1カラム
+             featuredカードを order:-1 で先頭に（§03特記事項） -->
+        <ul class="mf-price-grid" aria-label="基本料金プラン一覧">
+
+          <!-- featured（おすすめ）: order:-1 で先頭へ -->
+          <li class="mf-price-card mf-price-card--featured">
+            <div class="mf-price-card__badge">⭐ おすすめ</div>
+            <div class="mf-price-card__body">
+              <p class="mf-price-card__plan-type">定期ご利用</p>
+              <h3 class="mf-price-card__plan-name">定期シッティング</h3>
+              <div class="mf-price-card__price-wrap">
+                <span class="mf-price-card__price">¥3,500</span>
+                <span class="mf-price-card__unit">/ 30分〜</span>
+              </div>
+              <p class="mf-price-card__desc">
+                月4回以上のご利用で10%オフ。定期的なケアに最適です。
+              </p>
+              <ul class="mf-price-card__features">
+                <li>月4回以上で割引適用</li>
+                <li>定期スケジュールを固定可</li>
+                <li>担当シッター固定</li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- 通常カード 1 -->
+          <li class="mf-price-card">
+            <div class="mf-price-card__body">
+              <p class="mf-price-card__plan-type">スポット</p>
+              <h3 class="mf-price-card__plan-name">スポットシッティング</h3>
+              <div class="mf-price-card__price-wrap">
+                <span class="mf-price-card__price">¥4,000</span>
+                <span class="mf-price-card__unit">/ 30分〜</span>
+              </div>
+              <p class="mf-price-card__desc">
+                1回単位でご利用可能。急なご依頼にも対応します。
+              </p>
+              <ul class="mf-price-card__features">
+                <li>1回から依頼可能</li>
+                <li>前日までの予約OK</li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- 通常カード 2 -->
+          <li class="mf-price-card">
+            <div class="mf-price-card__body">
+              <p class="mf-price-card__plan-type">お泊まり</p>
+              <h3 class="mf-price-card__plan-name">お泊まりシッティング</h3>
+              <div class="mf-price-card__price-wrap">
+                <span class="mf-price-card__price">¥8,000</span>
+                <span class="mf-price-card__unit">/ 1泊〜</span>
+              </div>
+              <p class="mf-price-card__desc">
+                旅行・出張などの長期不在に。シッターがご自宅に泊まります。
+              </p>
+              <ul class="mf-price-card__features">
+                <li>1泊からご利用可</li>
+                <li>複数泊の場合は別途ご相談</li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- 通常カード 3 -->
+          <li class="mf-price-card">
+            <div class="mf-price-card__body">
+              <p class="mf-price-card__plan-type">お散歩</p>
+              <h3 class="mf-price-card__plan-name">お散歩代行</h3>
+              <div class="mf-price-card__price-wrap">
+                <span class="mf-price-card__price">¥2,500</span>
+                <span class="mf-price-card__unit">/ 30分〜</span>
+              </div>
+              <p class="mf-price-card__desc">
+                お散歩のみのご依頼に対応しています。
+              </p>
+              <ul class="mf-price-card__features">
+                <li>お散歩ルートは事前に確認</li>
+                <li>定期依頼も可</li>
+              </ul>
+            </div>
+          </li>
+
+        </ul><!-- /.mf-price-grid -->
+
+        <!-- ⚠️ TODO: dark background でのテキストコントラスト確認
+             WCAG AA: 通常テキスト 4.5:1 以上 / 大テキスト 3:1 以上
+             本番実装前に実際の背景色と文字色で比率を測定すること -->
+        <div class="mf-price-value-note price-value-note mf-mt-6">
+          <p class="mf-price-value-note__text">
+            「30分は短くない？」と思う方へ。
+            More Friendsの30分は、ペットさんに寄り添うための
+            "質の時間"です。長ければいいわけではありません。
+          </p>
+        </div>
+
+      </div>
+    </section><!-- /.mf-price-basic -->
+
+
+    <!-- ========================================
+      割増料金（.price-page-section）
+      parts/section/price-extra.php
+      編集区分: 固定（料率変更は管理者のみ）
+      SP変換: 縦積み（PCも縦構成のため変換なし）
+      背景色: var(--bg-mid) で交互塗り分け維持
+    ========================================= -->
+    <section class="mf-price-extra mf-section mf-section--bg-mid price-page-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">EXTRA</span>
+        <h2 class="mf-heading-section mf-mb-6">
+          割増料金
+        </h2>
+
+        <ul class="mf-price-extra__list">
+
+          <li class="mf-price-extra__item">
+            <div class="mf-price-extra__item-head">
+              <h3 class="mf-price-extra__item-heading">時間延長</h3>
+              <span class="mf-price-extra__item-price">+¥500 / 15分ごと</span>
+            </div>
+            <p class="mf-text-sub mf-mt-1">
+              基本時間を超えた場合、15分ごとに加算されます。
+            </p>
+          </li>
+
+          <li class="mf-price-extra__item">
+            <div class="mf-price-extra__item-head">
+              <h3 class="mf-price-extra__item-heading">多頭飼育（2頭目以降）</h3>
+              <span class="mf-price-extra__item-price">+¥500 / 1頭ごと</span>
+            </div>
+            <p class="mf-text-sub mf-mt-1">
+              2頭目以降は1頭につき¥500が追加されます。
+            </p>
+          </li>
+
+          <li class="mf-price-extra__item">
+            <div class="mf-price-extra__item-head">
+              <h3 class="mf-price-extra__item-heading">早朝・深夜（20:00〜8:00）</h3>
+              <span class="mf-price-extra__item-price">+¥1,000 / 回</span>
+            </div>
+            <p class="mf-text-sub mf-mt-1">
+              早朝・深夜の時間帯は深夜割増料金が発生します。
+            </p>
+          </li>
+
+          <li class="mf-price-extra__item">
+            <div class="mf-price-extra__item-head">
+              <h3 class="mf-price-extra__item-heading">祝日・年末年始</h3>
+              <span class="mf-price-extra__item-price">+¥500 / 回</span>
+            </div>
+            <p class="mf-text-sub mf-mt-1">
+              祝日・12/29〜1/3 は祝日割増料金が加算されます。
+            </p>
+          </li>
+
+        </ul><!-- /.mf-price-extra__list -->
+
+      </div>
+    </section><!-- /.mf-price-extra -->
+
+
+    <!-- ========================================
+      その他料金（.price-page-section）
+      parts/section/price-other.php
+      編集区分: 固定
+      SP変換: 縦積みそのまま
+      背景色: var(--bg) で交互塗り分け維持
+    ========================================= -->
+    <section class="mf-price-other mf-section price-page-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">OTHER</span>
+        <h2 class="mf-heading-section mf-mb-6">
+          その他料金
+        </h2>
+
+        <ul class="mf-price-extra__list">
+
+          <li class="mf-price-extra__item">
+            <div class="mf-price-extra__item-head">
+              <h3 class="mf-price-extra__item-heading">出張費</h3>
+              <span class="mf-price-extra__item-price">基本エリア無料</span>
+            </div>
+            <p class="mf-text-sub mf-mt-1">
+              稲毛区全域および近隣エリアは無料。
+              エリア外は距離・交通手段に応じて別途ご案内します。
+            </p>
+            <p class="mf-mt-2">
+              <a href="area.html" class="mf-price-other__link">
+                対応エリアを確認する →
+              </a>
+            </p>
+          </li>
+
+          <li class="mf-price-extra__item">
+            <div class="mf-price-extra__item-head">
+              <h3 class="mf-price-extra__item-heading">消耗品・緊急対応費</h3>
+              <span class="mf-price-extra__item-price">実費</span>
+            </div>
+            <p class="mf-text-sub mf-mt-1">
+              シッティング中に必要となったペットフード・薬・
+              獣医受診などの実費は別途ご請求します。
+              事前にご相談の上、対応します。
+            </p>
+          </li>
+
+        </ul>
+
+      </div>
+    </section><!-- /.mf-price-other -->
+
+
+    <!-- ========================================
+      初回カウンセリング（.price-page-section）
+      parts/section/price-counseling.php
+      編集区分: 固定
+      SP変換: 縦積みそのまま
+      背景色: var(--bg-mid) で交互塗り分け維持
+    ========================================= -->
+    <section class="mf-price-counseling mf-section mf-section--bg-mid price-page-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">COUNSELING</span>
+        <h2 class="mf-heading-section mf-mb-4">
+          初回カウンセリング
+        </h2>
+
+        <!-- 無料であることを強調 -->
+        <div class="mf-price-counseling__highlight">
+          <span class="mf-price-counseling__free-badge">無料</span>
+          <p class="mf-price-counseling__free-note">
+            初回カウンセリングは完全無料です
+          </p>
+        </div>
+
+        <p class="mf-text-body mf-mt-4">
+          初めてご依頼いただく前に、必ず無料カウンセリングを実施します。
+          ご自宅へお伺いし、ペットさんとシッターが顔合わせをする時間です。
+          カウンセリング後にシッティングをご依頼いただかなくても、
+          費用は一切かかりません。
+        </p>
+
+        <ul class="mf-price-counseling__list mf-mt-6">
+          <li>所要時間: 約30〜60分</li>
+          <li>ペットさんの様子によって短くなることもあります</li>
+          <li>ご予約・キャンセルはいつでも可能です</li>
+        </ul>
+
+        <div class="mf-cta-group mf-mt-8">
+          <a href="contact.html" class="mf-btn mf-btn--primary">
+            無料カウンセリングを申し込む
+          </a>
+        </div>
+
+      </div>
+    </section><!-- /.mf-price-counseling -->
+
+
+    <!-- ========================================
+      お支払い方法・期限（.price-page-section）
+      parts/section/price-payment.php
+      編集区分: 固定
+      SP変換: 縦積みそのまま
+      背景色: var(--bg) で交互塗り分け維持
+    ========================================= -->
+    <section class="mf-price-payment mf-section price-page-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">PAYMENT</span>
+        <h2 class="mf-heading-section mf-mb-6">
+          お支払い方法・期限
+        </h2>
+
+        <ul class="mf-price-payment__list">
+
+          <li class="mf-price-payment__item">
+            <div class="mf-price-payment__icon" aria-hidden="true">🏦</div>
+            <div class="mf-price-payment__body">
+              <h3 class="mf-price-payment__heading">銀行振込</h3>
+              <p class="mf-text-body mf-mt-1">
+                翌月末締め・翌月末払い。
+                請求書をLINEまたはメールでお送りします。
+              </p>
+            </div>
+          </li>
+
+          <li class="mf-price-payment__item">
+            <div class="mf-price-payment__icon" aria-hidden="true">💴</div>
+            <div class="mf-price-payment__body">
+              <h3 class="mf-price-payment__heading">現金払い</h3>
+              <p class="mf-text-body mf-mt-1">
+                シッティング当日に現金でのお支払いも対応しています。
+                領収書の発行も可能です。
+              </p>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="mf-price-payment__note mf-mt-6">
+          <p class="mf-text-sub">
+            ※ お支払い方法はカウンセリング時にご確認ください。<br>
+            ※ 領収書の発行を希望される場合は事前にお知らせください。
+          </p>
+        </div>
+
+      </div>
+    </section><!-- /.mf-price-payment -->
+
+
+    <!-- ========================================
+      キャンセルポリシーリンク（.price-page-section）
+      parts/section/price-cancel.php
+      編集区分: 固定
+      SP変換:
+        内容薄くリンクだけのセクション
+        → SP では btn-outline ボタン1つのみで十分（§03）
+      背景色: var(--bg-mid) で交互塗り分け維持
+    ========================================= -->
+    <section class="mf-price-cancel mf-section mf-section--bg-mid price-page-section">
+      <div class="mf-container">
+
+        <span class="mf-section-label">CANCEL</span>
+        <h2 class="mf-heading-section mf-mb-4">
+          キャンセルポリシー
+        </h2>
+
+        <p class="mf-text-body mf-mb-6">
+          ご予約後のキャンセルについては、キャンセルポリシーをご確認ください。
+        </p>
+
+        <!-- §03: SP ではボタン1つのみで十分 -->
+        <a href="cancel.html" class="mf-btn mf-btn--outline">
+          詳細はキャンセルポリシーページへ
+        </a>
+
+      </div>
+    </section><!-- /.mf-price-cancel -->
+
+
+    <!-- ========================================
+      最終CTAセクション
+      parts/section/cta.php（共通パーツ）
+      編集区分: 固定
+      SP変換: 3択ボタン縦積み100%
+        構成: 無料カウンセリング / LINEで気軽に相談 / Instagramで相談
+    ========================================= -->
+    <section class="mf-cta-section">
+      <div class="mf-container">
+
+        <p class="mf-cta-section__label">料金についてのご質問も歓迎です</p>
+        <h2 class="mf-cta-section__heading">
+          まずは無料カウンセリングで<br>お気軽にご相談を。
+        </h2>
+
+        <div class="mf-cta-section__buttons">
+
+          <a href="contact.html" class="mf-btn mf-btn--primary">
+            無料カウンセリングを申し込む
+          </a>
+
+          <a
+            href="https://line.me/"
+            class="mf-btn mf-btn--line"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            💬 LINEで気軽に相談
+          </a>
+
+          <a
+            href="https://www.instagram.com/"
+            class="mf-btn mf-btn--ig"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📷 Instagramで相談
+          </a>
+
+        </div>
+
+      </div>
+    </section><!-- /.mf-cta-section -->
+
+  </main>
+
+
+  <!-- ========================================
+    フッター（共通）
+    parts/footer.php
+    編集区分: 固定
+  ========================================= -->
+  <footer class="mf-footer" role="contentinfo">
+    <div class="mf-footer__inner">
+
+      <div class="mf-footer__logo">
+        <span class="ph-logo"></span><!-- ワイヤー専用: 本番前に削除 -->
+        <span class="mf-sr-only">More Friends</span>
+      </div>
+
+      <nav class="mf-footer__nav" aria-label="フッターナビゲーション">
+        <a href="about.html">More Friendsとは</a>
+        <a href="service.html">サービス内容</a>
+        <a href="price.html" aria-current="page">料金プラン</a>
+        <a href="flow.html">利用の流れ</a>
+        <a href="sitter.html">シッター紹介</a>
+        <a href="area.html">対応エリア</a>
+        <a href="reviews.html">お客様の声</a>
+        <a href="blog.html">ブログ</a>
+        <a href="cancel.html">キャンセルポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+
+      <div class="mf-footer__sns">
+        <a
+          href="https://line.me/"
+          class="mf-btn mf-btn--line mf-btn--icon"
+          aria-label="LINEで相談する"
+          target="_blank"
+          rel="noopener noreferrer"
+        >L</a>
+        <a
+          href="https://www.instagram.com/"
+          class="mf-btn mf-btn--ig mf-btn--icon"
+          aria-label="Instagramを見る"
+          target="_blank"
+          rel="noopener noreferrer"
+        >IG</a>
+      </div>
+
+      <p class="mf-footer__copy">
+        <small>&copy; 2026 More Friends. All rights reserved.</small>
+      </p>
+
+    </div>
+  </footer>
+
+
+  <!-- ========================================
+    JS: ハンバーガーメニュー（共通）
+    ⚠️ TODO: 本番では外部JSファイルに切り出す
+  ========================================= -->
+  <script>
+    (function () {
+      const toggle = document.querySelector('.js-nav-toggle');
+      const nav    = document.getElementById('global-nav');
+      if (!toggle || !nav) return;
+
+      toggle.addEventListener('click', function () {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        nav.classList.toggle('is-open', !isOpen);
+        toggle.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-label', 'メニューを開く');
+          toggle.focus();
+        }
+      });
+
+      document.addEventListener('click', function (e) {
+        if (
+          nav.classList.contains('is-open') &&
+          !nav.contains(e.target) &&
+          !toggle.contains(e.target)
+        ) {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-label', 'メニューを開く');
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

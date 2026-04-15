@@ -1,0 +1,785 @@
+/*
+  sp-sitter.css
+  More Friends — シッター紹介（sitter）SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css            共通トークン・リセット
+    2. [sitter.html inline <style>]  PCレイアウト + 既存 @media (wireframe確認用)
+    3. sp-sitter.css                 ← このファイル（768px以下を正式ブレークポイントで上書き）
+
+  方針:
+    - クラス名は sitter.html の既存クラスをそのまま使う
+    - SP固有のレイアウト変更のみをここに記述する
+    - 本番CSSではない。wireframe確認用（§7-3）
+    - theme.json + 本番CSS に置き換えること
+
+  参照: SP変換リファレンス.md §05 / 03_SPワイヤー専用ルール.md
+  ブレークポイント: max-width: 768px（--bp-sp に相当）
+  ※ PC版の @media(max-width:640px) をこのファイルで上書きして統一
+
+  セクション構成（全11セクション）:
+    1. ページヘッダー (.page-header)
+    2. プロフィール (.v06-profile)        grid 360px 1fr → 縦積み
+    3. テーマ概要 (.v06-overview)          縦型ステップ → そのまま
+    4. ペットの個性 (.v06-individuality)   3カラム → 1カラム
+    5. 信頼と健康 (.v06-trust)             2カラム → 1カラム
+    6. フィロソフィー (.v06-philosophy)    daily-compare 2カラム → 1カラム
+    7. 馴れるプロセス (.v06-acclimation)   ratio-cards 3カラム → 1カラム
+    8. 経歴 (.v06-career)                 grid 120px 1fr → 80px 1fr
+    9. 資格 (.v06-cert)                   4カラム → 1カラム
+   10. 名前の由来 (.v06-origin)            dark bg / quote縮小
+   11. CTA (.cta-section)                 3択縦積み
+
+  主要inline style除去:
+    - .v06-profile__photo .ph-img の min-height:440px → aspect-ratio: 3/4 で管理
+    - .v06-career__list の list-style:none → CSS管理
+*/
+
+
+@media (max-width: 768px) {
+
+  /* ==============================================
+     SP ヘッダー（共通パターン）
+     ⚠️ PC版 @media(640px) のハンバーガー等を上書き
+  =============================================== */
+
+  header nav:not(.open) {
+    display: none;
+  }
+
+  header nav a {
+    display: flex;
+  }
+
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn:first-child { border-left: none; }
+
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff; border-left-color: transparent; border-radius: 0;
+  }
+
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff; border-left-color: transparent; border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff; border-radius: 0; border-left-color: transparent;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px; min-width: 56px; min-height: 44px; padding: 8px 6px 6px;
+    font-size: 9px; letter-spacing: 0.08em;
+  }
+
+  .sp-header__action-icon {
+    display: flex; align-items: center; justify-content: center; width: 22px; height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px; font-weight: 500; letter-spacing: 0.06em; line-height: 1; white-space: nowrap;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; width: auto; height: 16px; background: transparent;
+  }
+
+  .hamburger-lines span {
+    display: block; width: 18px; height: 1.5px; background: #fff; border-radius: 2px; flex-shrink: 0;
+  }
+
+  /* ドロワーナビ */
+  header nav.open {
+    position: fixed; top: 60px; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex !important; flex-direction: column; gap: 0; padding: 0;
+    overflow-y: auto; z-index: 99; border-top: 1px solid var(--border);
+  }
+
+  header nav.open a {
+    display: flex; align-items: center;
+    padding: 16px 24px; font-size: 15px;
+    border-bottom: 1px solid var(--border);
+    min-height: 52px; color: var(--text); text-decoration: none;
+    background: none; border-radius: 0;
+  }
+
+  header nav.open a::after {
+    content: '›'; margin-left: auto; color: var(--primary); font-size: 18px;
+  }
+
+  header nav.open a.is-current {
+    color: var(--primary); font-weight: 500;
+  }
+
+
+  /* ==============================================
+     共通: セクション余白
+     全セクション padding 96px 80px → 56px 16px
+  =============================================== */
+  .v06-profile,
+  .v06-overview,
+  .v06-individuality,
+  .v06-trust,
+  .v06-philosophy,
+  .v06-acclimation,
+  .v06-career,
+  .v06-cert,
+  .v06-origin {
+    padding: 56px 16px;
+  }
+
+  .section-title {
+    font-size: clamp(22px, 5.5vw, 28px);
+    line-height: 1.35;
+  }
+
+  .section-sub {
+    max-width: 100%;
+  }
+
+  /* si / si--mid / si--narrow: max-width解除 */
+  .si, .si--mid, .si--narrow {
+    max-width: 100%;
+  }
+
+
+  /* ==============================================
+     1. ページヘッダー
+     PC: padding 120px 80px → SP: 縮小
+  =============================================== */
+  .page-header {
+    padding: 32px 16px 40px;
+  }
+
+  .page-header-title {
+    font-size: clamp(26px, 7vw, 32px);
+    margin-bottom: 14px;
+  }
+
+  .page-header-lead {
+    font-size: 14px;
+    max-width: 100%;
+    line-height: 1.85;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .page-header-lead br {
+    display: none;
+  }
+
+
+  /* ==============================================
+     2. プロフィール
+     PC: grid 360px 1fr（写真左 / テキスト右）
+     SP: flex縦積み（写真上 → テキスト下）
+         position:sticky → static
+         .ph-img の inline style="min-height:440px;" → aspect-ratio: 3/4 で管理
+     ⚠️ TODO: 本番では .ph-img の inline style を削除し aspect-ratio: 3/4 で管理
+  =============================================== */
+  .v06-profile__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    grid-template-columns: unset;
+  }
+
+  .v06-profile__photo {
+    position: static;
+    top: auto;
+  }
+
+  /* ph-img（ワイヤー用プレースホルダー）: SP では aspect-ratio で制御 */
+  .v06-profile__photo .ph-img {
+    min-height: unset;
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .v06-profile__ruby {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .v06-profile__name {
+    font-size: clamp(28px, 7vw, 36px);
+    margin-bottom: 6px;
+  }
+
+  .v06-profile__role {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  .v06-profile__body {
+    font-size: 14px;
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-profile__body br {
+    display: none;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+
+  /* ==============================================
+     3. テーマ概要（overview）
+     縦型ステップはそのまま使用可。padding縮小のみ
+     section-title / section-sub の <br> → display:none
+  =============================================== */
+  .v06-overview__steps {
+    margin-top: 32px;
+  }
+
+  .v06-overview__step {
+    grid-template-columns: 52px 1fr;
+    gap: 16px;
+    padding-bottom: 32px;
+  }
+
+  .v06-overview__step-num {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .v06-overview__step-content {
+    padding-top: 6px;
+  }
+
+  .v06-overview__step-title {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .v06-overview__step-text {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  .v06-overview__tip {
+    margin-top: 32px;
+    padding: 16px 20px;
+    gap: 12px;
+    border-radius: 6px;
+  }
+
+  .v06-overview__tip-text {
+    font-size: 13px;
+  }
+
+  /* section-title の <br> → SP で自然折り返し */
+  .v06-overview .section-title br,
+  .v06-individuality .section-title br,
+  .v06-trust .section-title br,
+  .v06-philosophy .section-title br,
+  .v06-acclimation .section-title br,
+  .v06-origin .section-title br {
+    display: none;
+  }
+
+  /* section-sub の <br> → SP で自然折り返し */
+  .v06-overview .section-sub br {
+    display: none;
+  }
+
+
+  /* ==============================================
+     4. ペットさんの個性
+     PC: v06-individuality__cards 3カラム → SP: 1カラム（§3-2）
+     ループ単位: .v06-reaction-card
+  =============================================== */
+  .v06-individuality__cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .v06-reaction-card {
+    padding: 24px 20px;
+    border-radius: 8px;
+    text-align: left;
+  }
+
+  .v06-reaction-card__emoji {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .v06-reaction-card__type {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .v06-reaction-card__title {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .v06-reaction-card__text {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+
+  /* ==============================================
+     5. 信頼関係と健康
+     PC: v06-trust__grid 2カラム → SP: 1カラム縦積み（§3-2）
+  =============================================== */
+  .v06-trust__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .v06-trust__body {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-trust__body br {
+    display: none;
+  }
+
+  .v06-trust__impacts-label {
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+
+  .v06-health-items {
+    gap: 12px;
+  }
+
+  .v06-health-item {
+    padding: 16px 18px;
+  }
+
+  .v06-health-item__title {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .v06-health-item__text {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+
+
+  /* ==============================================
+     6. フィロソフィー
+     PC: v06-daily-compare 2カラム → SP: 1カラム縦積み（§3-2）
+  =============================================== */
+  .v06-philosophy__body {
+    font-size: 14px;
+    line-height: 1.85;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-philosophy__body br {
+    display: none;
+  }
+
+  .v06-episode {
+    padding: 20px 20px;
+    margin-bottom: 24px;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .v06-episode__text {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-episode__text br {
+    display: none;
+  }
+
+  .v06-daily-compare {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .v06-daily-card {
+    padding: 24px 20px;
+    border-radius: 8px;
+  }
+
+  .v06-daily-card__emoji {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .v06-daily-card__title {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .v06-daily-card__text {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+
+  /* ==============================================
+     7. 馴れるプロセス
+     PC: v06-ratio-cards 3カラム → SP: 1カラム縦積み（§3-2）
+     v06-delicate: padding縮小
+  =============================================== */
+  .v06-acclimation__lead {
+    font-size: 14px;
+    line-height: 1.85;
+    margin-top: 24px;
+    margin-bottom: 32px;
+    max-width: 100%;
+  }
+
+  /* 割合バー: 高さ縮小 */
+  .v06-ratio-bar {
+    height: 44px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+
+  .v06-ratio-bar__seg {
+    font-size: 12px;
+  }
+
+  .v06-ratio-cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 6px;
+  }
+
+  .v06-ratio-card {
+    padding: 20px 18px;
+    border-radius: 8px;
+  }
+
+  .v06-ratio-card__pct {
+    font-size: 32px;
+    margin-bottom: 6px;
+  }
+
+  .v06-ratio-card__pct span {
+    font-size: 18px;
+  }
+
+  .v06-ratio-card__title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .v06-ratio-card__text {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .v06-delicate {
+    margin-top: 40px;
+    padding: 24px 20px;
+    border-radius: 8px;
+  }
+
+  .v06-delicate__title {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-delicate__title br {
+    display: none;
+  }
+
+  .v06-delicate__text {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-delicate__text br {
+    display: none;
+  }
+
+
+  /* ==============================================
+     8. 経歴・実績
+     PC: v06-career__item grid 120px 1fr → SP: 80px 1fr（年号縮小）
+     v06-career__list の inline style="list-style:none;" → CSS管理
+     ループ単位: .v06-career__item
+  =============================================== */
+
+  /* inline style="list-style:none;" → CSS管理 */
+  .v06-career__list {
+    list-style: none;
+    margin-top: 32px;
+    padding: 0;
+  }
+
+  .v06-career__item {
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    padding-bottom: 32px;
+  }
+
+  .v06-career__year {
+    font-size: 11px;
+    padding-top: 4px;
+  }
+
+  .v06-career__content {
+    padding-left: 20px;
+    padding-bottom: 32px;
+  }
+
+  .v06-career__title {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .v06-career__text {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+
+  /* ==============================================
+     9. 資格・認定
+     PC: v06-cert__grid 4カラム → SP: 1カラム縦積み（§3-2）
+     ループ単位: .v06-cert-card
+  =============================================== */
+  .v06-cert__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .v06-cert-card {
+    padding: 24px 20px;
+    border-radius: 8px;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .v06-cert-card__num {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 12px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .v06-cert-card__name {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-cert-card__name br {
+    display: none;
+  }
+
+  .v06-cert-card__text {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .v06-cert__note {
+    margin-top: 24px;
+    padding: 16px 18px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+
+
+  /* ==============================================
+     10. 名前の由来
+     dark background — コントラスト確認済み
+     v06-origin__quote: padding縮小 / font-size縮小
+     <br> → SP で自然折り返し
+     ⚠️ TODO: dark bg テキストコントラスト → 本番実装前に実機でWCAG AA確認
+  =============================================== */
+  .v06-origin__inner {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .v06-origin .section-title {
+    font-size: clamp(20px, 5.5vw, 26px);
+  }
+
+  .v06-origin__quote {
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 32px 0 24px;
+    padding: 24px 20px;
+    border-radius: 8px;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-origin__quote br {
+    display: none;
+  }
+
+  .v06-origin__body {
+    font-size: 13px;
+    line-height: 1.9;
+    text-align: left;
+  }
+
+  /* <br> → SP で自然折り返し */
+  .v06-origin__body br {
+    display: none;
+  }
+
+  .v06-origin__sig {
+    font-size: 12px;
+    margin-top: 24px;
+    text-align: left;
+  }
+
+
+  /* ==============================================
+     11. CTAセクション（共通パターン）3択
+  =============================================== */
+  .cta-section {
+    padding: 56px 16px;
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(22px, 5.5vw, 26px);
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-cta-white,
+  .btn-line-lg,
+  .btn-ig-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+
+  /* ==============================================
+     フッター（共通パターン）
+  =============================================== */
+  footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-sns-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ==============================================
+   ロゴ / フッター: SP非依存
+=============================================== */
+.header-logo-plain {
+  display: flex; align-items: center;
+  background: transparent; padding: 0; border-radius: 0;
+  min-width: auto; min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px; width: auto; display: block;
+}
+
+.footer-logo-img {
+  height: 56px; width: auto; display: block; margin-bottom: 16px;
+}

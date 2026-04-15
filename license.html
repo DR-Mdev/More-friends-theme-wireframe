@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>動物取扱業 — More Friends</title>
+  <meta name="description" content="More Friendsの第一種動物取扱業者標識です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+    .breadcrumb {
+      padding: 80px 80px 0;
+      font-size: 11px;
+      color: var(--text-sub);
+      letter-spacing: 0.06em;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--primary); }
+    .breadcrumb span { opacity: 0.45; }
+
+    .page-header {
+      background: var(--bg-mid);
+      padding: 64px 80px 72px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .label { margin-bottom: 14px; }
+    .page-header .section-title { font-size: 40px; line-height: 1.25; }
+    .page-header-lead {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.9;
+      margin-top: 16px;
+      max-width: 560px;
+    }
+
+    /* ── 本文エリア ── */
+    .license-body {
+      padding: 80px 80px 120px;
+      max-width: 760px;
+    }
+
+    /* ── 標識カード ── */
+    .license-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .license-card-heading {
+      background: var(--bg-dark);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 16px 28px;
+      text-align: center;
+    }
+    .license-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .license-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .license-table tr:last-child {
+      border-bottom: none;
+    }
+    .license-table th {
+      width: 200px;
+      padding: 18px 28px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-sub);
+      text-align: left;
+      vertical-align: top;
+      background: var(--bg-mid);
+      white-space: nowrap;
+    }
+    .license-table td {
+      padding: 18px 28px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .license-table td .reg-number {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    /* ── 補足テキスト ── */
+    .license-note {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.9;
+      padding: 20px 24px;
+      background: var(--bg-mid);
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ========== HEADER ========== -->
+<!-- parts/header.php -->
+<header>
+  <a href="/" class="header-logo">
+    <div class="ph-logo">More Friends</div>
+  </a>
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./about.html">More Friendsとは</a>
+    <a href="./service.html">サービス内容</a>
+    <a href="./price.html">料金プラン</a>
+    <a href="./flow.html">利用の流れ</a>
+    <a href="./sitter.html">シッター紹介</a>
+    <a href="./blog.html">ブログ</a>
+    <a href="#" class="btn-ig">Instagramで相談</a>
+    <a href="./contact.html" class="btn-line">LINEで相談</a>
+  </nav>
+  <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-nav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<main>
+
+<div style="height:64px"></div><!-- header offset -->
+
+<!-- ========== BREADCRUMB ========== -->
+<div class="breadcrumb">
+  <a href="/">Home</a>
+  <span>/</span>
+  <span style="color:var(--text)">動物取扱業</span>
+</div>
+
+<!-- ========== PAGE HEADER ========== -->
+<div class="page-header">
+  <span class="label">Animal Handling License</span>
+  <h1 class="section-title">動物取扱業</h1>
+  <p class="page-header-lead">
+    More Friendsは、動物の愛護及び管理に関する法律に基づく第一種動物取扱業者として、東京都に登録しています。
+  </p>
+</div>
+
+<!-- ========== BODY ========== -->
+<div class="license-body">
+
+  <!-- 標識カード -->
+  <div class="license-card">
+    <div class="license-card-heading">第一種動物取扱業者標識</div>
+    <table class="license-table">
+      <tr>
+        <th>氏名又は名称</th>
+        <td>Dorado合同会社 代表 椎名 穣</td>
+      </tr>
+      <tr>
+        <th>事業所名</th>
+        <td>More Friends</td>
+      </tr>
+      <tr>
+        <th>事業所所在地</th>
+        <td>東京都中央区東日本橋二丁目28番4号<br>日本橋CETビル2階</td>
+      </tr>
+      <tr>
+        <th>第一種動物取扱業<br>の種別</th>
+        <td>保管</td>
+      </tr>
+      <tr>
+        <th>登録番号</th>
+        <td><span class="reg-number">25東京都保第008891号</span></td>
+      </tr>
+      <tr>
+        <th>登録年月日</th>
+        <td>令和7年11月26日</td>
+      </tr>
+      <tr>
+        <th>登録有効期限末日</th>
+        <td>令和12年11月25日</td>
+      </tr>
+      <tr>
+        <th>動物取扱責任者氏名</th>
+        <td>椎名春香</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 補足 -->
+  <p class="license-note">
+    動物の愛護及び管理に関する法律（動物愛護管理法）第10条に基づき、第一種動物取扱業者として東京都に登録しています。登録内容に変更が生じた場合は、速やかに更新手続きを行います。
+  </p>
+
+</div><!-- /license-body -->
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<!-- parts/footer.php -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="ph-logo footer-logo">More Friends</div>
+      <div class="footer-tagline">
+        そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+        東京都・千葉県のペットシッティングサービス
+      </div>
+      <div class="footer-sns">
+        <a href="#" class="footer-sns-btn" aria-label="LINE">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        </a>
+        <a href="#" class="footer-sns-btn" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">Service</p>
+        <ul>
+          <li><a href="./about.html">More Friendsとは</a></li>
+          <li><a href="./service.html">サービス内容</a></li>
+          <li><a href="./price.html">料金プラン</a></li>
+          <li><a href="./cancel.html">キャンセルポリシー</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">About</p>
+        <ul>
+          <li><a href="./sitter.html">シッター紹介</a></li>
+          <li><a href="./flow.html">利用の流れ</a></li>
+          <li><a href="./area.html">対応エリア</a></li>
+          <li><a href="./reviews.html">お客様の声</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <p class="footer-nav-heading">Info</p>
+        <ul>
+          <li><a href="./blog.html">ブログ</a></li>
+          <li><a href="./contact.html">お問い合わせ</a></li>
+          <li><a href="./privacy.html">プライバシーポリシー</a></li>
+          <li><a href="./terms.html">利用規約</a></li>
+          <li><a href="./license.html" style="color:var(--primary);">動物取扱業</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 More Friends. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.hamburger')?.addEventListener('click', function() {
+  const nav = document.getElementById('sp-nav');
+  const isOpen = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', isOpen);
+  nav.setAttribute('aria-hidden', !isOpen);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シッター紹介 — More Friends</title>
+  <meta name="description" content="ペットシッター椎名春香のプロフィール。動物取扱責任者として、ペットと飼い主さまの「ベストフレンド」を目指すシッターの想いをご紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wireframe-base.css">
+  <style>
+
+    /* =============================================
+       BREAKPOINTS (一元管理)
+       ============================================= */
+    :root {
+      --bp-tab: 1024px;
+      --bp-sp:   640px;
+      --header-h: 64px;
+    }
+
+    /* =============================================
+       PAGE HEADER (変更なし)
+       ============================================= */
+    .page-header {
+      background: var(--bg-mid);
+      padding: 120px 80px 72px;
+    }
+    .page-header-eyebrow {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .page-header-title {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .page-header-lead {
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 400;
+      max-width: 560px;
+      line-height: 1.9;
+    }
+
+    /* =============================================
+       INNER WRAPPERS
+       ============================================= */
+    .si         { max-width: 1100px; margin: 0 auto; }
+    .si--mid    { max-width: 960px;  margin: 0 auto; }
+    .si--narrow { max-width: 800px;  margin: 0 auto; }
+
+    /* =============================================
+       2. PROFILE SECTION
+       parts/sitter-v06-profile.php
+       ============================================= */
+    .v06-profile {
+      padding: 96px 80px;
+      background: var(--bg2);
+    }
+    .v06-profile__grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .v06-profile__photo {
+      position: sticky;
+      top: calc(var(--header-h) + 24px);
+    }
+    .v06-profile__photo .ph-img {
+      /* ワイヤー確認用の仮高さ。本番はaspect-ratio: 3/4 で管理し min-height は削除する */
+      min-height: 440px;
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .v06-profile__ruby {
+      font-size: 13px;
+      color: var(--text-sub);
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+      font-weight: 400;
+    }
+    .v06-profile__name {
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .v06-profile__role {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      margin-bottom: 28px;
+    }
+    .v06-profile__body {
+      font-size: 15px;
+      line-height: 1.95;
+      color: var(--text);
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+
+    /* =============================================
+       3. SERVICE OVERVIEW SECTION
+       parts/sitter-v06-overview.php
+       ============================================= */
+    .v06-overview {
+      padding: 96px 80px;
+      background: var(--bg-mid);
+    }
+    .v06-overview__steps {
+      display: flex;
+      flex-direction: column;
+      margin-top: 56px;
+    }
+    .v06-overview__step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 28px;
+      padding-bottom: 48px;
+    }
+    .v06-overview__step:last-child { padding-bottom: 0; }
+    .v06-overview__step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .v06-overview__step-num {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      min-height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .v06-overview__step-line {
+      width: 2px;
+      flex: 1;
+      min-height: 32px;
+      background: var(--primary-l);
+      margin-top: 8px;
+    }
+    .v06-overview__step:last-child .v06-overview__step-line { display: none; }
+    .v06-overview__step-content { padding-top: 10px; }
+    .v06-overview__step-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .v06-overview__step-text {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .v06-overview__tip {
+      margin-top: 48px;
+      background: #fff;
+      border: 1.5px solid var(--primary-l);
+      border-radius: 8px;
+      padding: 24px 32px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .v06-overview__tip-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .v06-overview__tip-text {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .v06-overview__tip-text strong {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* =============================================
+       4. INDIVIDUALITY SECTION
+       parts/sitter-v06-individuality.php
+       ============================================= */
+    .v06-individuality {
+      padding: 96px 80px;
+      background: var(--bg);
+    }
+    .v06-individuality__cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .v06-reaction-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+    }
+    .v06-reaction-card__emoji {
+      font-size: 36px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .v06-reaction-card__type {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .v06-reaction-card__title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .v06-reaction-card__text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.85;
+      font-weight: 400;
+    }
+
+    /* =============================================
+       5. TRUST & HEALTH SECTION
+       parts/sitter-v06-trust.php
+       ============================================= */
+    .v06-trust {
+      padding: 96px 80px;
+      background: var(--bg2);
+    }
+    .v06-trust__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 56px;
+    }
+    .v06-trust__body {
+      font-size: 15px;
+      line-height: 1.95;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .v06-trust__impacts-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-sub);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .v06-health-items {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .v06-health-item {
+      background: var(--bg);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+    }
+    .v06-health-item__title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .v06-health-item__text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    /* =============================================
+       6. PHILOSOPHY SECTION
+       parts/sitter-v06-philosophy.php
+       ============================================= */
+    .v06-philosophy {
+      padding: 96px 80px;
+      background: var(--bg-mid);
+    }
+    .v06-philosophy__body {
+      font-size: 15px;
+      line-height: 1.95;
+      color: var(--text);
+      font-weight: 400;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .v06-episode {
+      background: #fff;
+      border-left: 3px solid var(--primary);
+      padding: 32px 36px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 40px;
+    }
+    .v06-episode__label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: block;
+      font-weight: 500;
+    }
+    .v06-episode__text {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .v06-daily-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .v06-daily-card {
+      border-radius: 10px;
+      padding: 32px 28px;
+    }
+    .v06-daily-card--busy {
+      background: #fff;
+      border: 1px solid var(--border);
+    }
+    .v06-daily-card--relaxed {
+      background: var(--primary);
+    }
+    .v06-daily-card__emoji {
+      font-size: 28px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .v06-daily-card__badge {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    .v06-daily-card--busy .v06-daily-card__badge  { color: var(--text-sub); }
+    .v06-daily-card--relaxed .v06-daily-card__badge { color: rgba(255,255,255,0.7); }
+    .v06-daily-card__title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+    .v06-daily-card--busy .v06-daily-card__title    { color: var(--text); }
+    .v06-daily-card--relaxed .v06-daily-card__title { color: #fff; }
+    .v06-daily-card__text {
+      font-size: 13px;
+      line-height: 1.85;
+      font-weight: 400;
+    }
+    .v06-daily-card--busy .v06-daily-card__text    { color: var(--text); }
+    .v06-daily-card--relaxed .v06-daily-card__text { color: rgba(255,255,255,0.88); }
+
+    /* =============================================
+       7. ACCLIMATION SECTION
+       parts/sitter-v06-acclimation.php
+       ============================================= */
+    .v06-acclimation {
+      padding: 96px 80px;
+      background: var(--bg);
+    }
+    .v06-acclimation__lead {
+      font-size: 15px;
+      line-height: 1.95;
+      color: var(--text);
+      font-weight: 400;
+      margin-top: 40px;
+      margin-bottom: 48px;
+      max-width: 640px;
+    }
+    /* 馴れる割合バー */
+    .v06-ratio-bar {
+      display: flex;
+      height: 52px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .v06-ratio-bar__seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .v06-ratio-bar__seg--a { flex: 8; background: var(--primary);   color: #fff; }
+    .v06-ratio-bar__seg--b { flex: 1; background: #D4859A;          color: #fff; }
+    .v06-ratio-bar__seg--c { flex: 1; background: #EDCAD3;          color: var(--primary-d); }
+    /* ループ単位: .v06-ratio-card を3件繰り返す */
+    .v06-ratio-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 8px;
+    }
+    .v06-ratio-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 24px;
+    }
+    .v06-ratio-card__pct {
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--primary-l);
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    .v06-ratio-card__pct span { font-size: 22px; }
+    .v06-ratio-card__title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .v06-ratio-card__text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.85;
+      font-weight: 400;
+    }
+    /* 繊細な子への想いブロック */
+    .v06-delicate {
+      margin-top: 64px;
+      background: var(--primary-l);
+      border-radius: 12px;
+      padding: 40px 48px;
+    }
+    .v06-delicate__label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--primary-d);
+      margin-bottom: 16px;
+      display: block;
+      font-weight: 500;
+    }
+    .v06-delicate__title {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .v06-delicate__text {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* =============================================
+       8. CAREER SECTION
+       parts/sitter-v06-career.php
+       ============================================= */
+    .v06-career {
+      padding: 96px 80px;
+      background: var(--bg2);
+    }
+    /* ループ単位: .v06-career__item を必要件数繰り返す */
+    .v06-career__list {
+      margin-top: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .v06-career__item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      padding-bottom: 48px;
+    }
+    .v06-career__item:last-child { padding-bottom: 0; }
+    .v06-career__year {
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-align: right;
+      padding-top: 4px;
+    }
+    .v06-career__content {
+      border-left: 2px solid var(--primary-l);
+      padding-left: 32px;
+      padding-bottom: 48px;
+      position: relative;
+    }
+    .v06-career__item:last-child .v06-career__content {
+      padding-bottom: 0;
+    }
+    .v06-career__content::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--bg2);
+    }
+    .v06-career__title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .v06-career__text {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* =============================================
+       9. CERT SECTION
+       parts/sitter-v06-certs.php
+       ============================================= */
+    .v06-cert {
+      padding: 96px 80px;
+      background: var(--bg);
+    }
+    /* ループ単位: .v06-cert-card を4件繰り返す */
+    .v06-cert__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .v06-cert-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+    }
+    .v06-cert-card__num {
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: 50%;
+      background: var(--primary-l);
+      color: var(--primary-d);
+      font-size: 13px;
+      font-weight: 500;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .v06-cert-card__name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .v06-cert-card__text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.85;
+      font-weight: 400;
+    }
+    .v06-cert__note {
+      margin-top: 40px;
+      padding: 20px 28px;
+      background: var(--primary-l);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--primary-d);
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    /* =============================================
+       10. ORIGIN SECTION
+       parts/sitter-v06-origin.php
+       ============================================= */
+    .v06-origin {
+      padding: 96px 80px;
+      background: var(--bg-dark);
+    }
+    .v06-origin__inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .v06-origin .label        { color: var(--dark-label); }
+    .v06-origin .section-title { color: #fff; }
+    .v06-origin__quote {
+      font-size: 19px;
+      color: #fff;
+      line-height: 1.85;
+      font-weight: 400;
+      margin: 48px 0 32px;
+      padding: 40px 48px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .v06-origin__body {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.95;
+      font-weight: 400;
+    }
+    .v06-origin__sig {
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--dark-label);
+      letter-spacing: 0.08em;
+    }
+
+    /* =============================================
+       RESPONSIVE — tablet (max-width: 1024px)
+       ============================================= */
+    @media (max-width: 1024px) {
+      .page-header { padding: 120px 40px 64px; }
+
+      .v06-profile,
+      .v06-overview,
+      .v06-individuality,
+      .v06-trust,
+      .v06-philosophy,
+      .v06-acclimation,
+      .v06-career,
+      .v06-cert,
+      .v06-origin { padding: 72px 40px; }
+
+      .v06-profile__grid { grid-template-columns: 280px 1fr; gap: 48px; }
+      .v06-trust__grid   { grid-template-columns: 1fr; gap: 40px; }
+      .v06-daily-compare { grid-template-columns: 1fr; }
+      .v06-individuality__cards { grid-template-columns: 1fr; gap: 16px; }
+      .v06-ratio-cards   { grid-template-columns: 1fr; }
+      .v06-cert__grid    { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* =============================================
+       RESPONSIVE — mobile (max-width: 640px)
+       ============================================= */
+    @media (max-width: 640px) {
+      .page-header { padding: 100px 20px 56px; }
+      .page-header-title { font-size: 32px; }
+
+      .v06-profile,
+      .v06-overview,
+      .v06-individuality,
+      .v06-trust,
+      .v06-philosophy,
+      .v06-acclimation,
+      .v06-career,
+      .v06-cert,
+      .v06-origin { padding: 56px 20px; }
+
+      /* profile */
+      .v06-profile__grid   { grid-template-columns: 1fr; gap: 32px; }
+      .v06-profile__photo  { position: static; }
+      .v06-profile__photo .ph-img { min-height: 280px; }
+      .v06-profile__name   { font-size: 32px; }
+
+      /* overview steps */
+      .v06-overview__step { grid-template-columns: 52px 1fr; gap: 16px; }
+
+      /* career */
+      .v06-career__item   { grid-template-columns: 80px 1fr; gap: 16px; }
+      .v06-career__year   { font-size: 11px; }
+
+      /* cert */
+      .v06-cert__grid { grid-template-columns: 1fr; }
+
+      /* acclimation */
+      .v06-delicate { padding: 28px 24px; }
+      .v06-delicate__title { font-size: 17px; }
+
+      /* origin */
+      .v06-origin__quote { padding: 24px 20px; font-size: 16px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ========== HEADER (変更なし) ========== -->
+  <!-- parts/header.php -->
+  <header>
+    <a href="/" class="header-logo">
+      <div class="ph-logo">More Friends</div>
+    </a>
+    <nav id="sp-nav" aria-hidden="true">
+      <a href="./about.html">More Friendsとは</a>
+      <a href="./service.html">サービス内容</a>
+      <a href="./price.html">料金プラン</a>
+      <a href="./flow.html">利用の流れ</a>
+      <a href="./sitter.html">シッター紹介</a>
+      <a href="./blog.html">ブログ</a>
+      <a href="#" class="btn-ig">Instagramで相談</a>
+      <a href="./contact.html" class="btn-line">LINEで相談</a>
+    </nav>
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+
+    <!-- ========== 1. ページヘッダー (変更なし) ========== -->
+    <!-- parts/page-header.php -->
+    <section class="page-header">
+      <span class="page-header-eyebrow">Sitter Profile</span>
+      <h1 class="page-header-title">シッター紹介</h1>
+      <p class="page-header-lead">
+        More Friendsのペットシッター、椎名春香のプロフィールページです。<br>
+        どんな人間が、どんな想いでお世話をするのか。<br>
+        ぜひ一度、お読みいただけると嬉しいです。
+      </p>
+    </section>
+
+    <!-- ========== 2. プロフィール ========== -->
+    <!-- parts/sitter-v06-profile.php -->
+    <section class="v06-profile">
+      <div class="si v06-profile__grid">
+
+        <div class="v06-profile__photo">
+          <!-- ワイヤー確認用。本番ではaspect-ratio: 3/4 で管理し min-height は削除する -->
+          <div class="ph-img"
+            style="min-height:440px;"
+            data-label="椎名春香のポートレート写真。ペットと向き合う笑顔のカット">
+          </div>
+        </div>
+
+        <div>
+          <span class="label">More Friends 代表シッター</span>
+          <p class="v06-profile__ruby">しいな はるか</p>
+          <h2 class="v06-profile__name">椎名 春香</h2>
+          <p class="v06-profile__role">動物取扱責任者 / ペットシッター</p>
+          <p class="v06-profile__body">
+            はじめまして。More Friendsにご興味を持っていただき、誠にありがとうございます。<br><br>
+            超繊細さん・怖がりさんから、パワフル＆わんぱくっ子まで。
+            犬・猫・エキゾチックアニマル（爬虫類・両生類含む）と日々向き合いながら、
+            お世話をいつも楽しく・ポジティブにさせていただいています。<br><br>
+            大手ペットシッター会社での経験を経て独立し、
+            「お世話はタスクではなく、信頼関係を築くプロセス」という信念のもとMore Friendsを立ち上げました。
+          </p>
+          <div class="tags">
+            <span class="tag">動物取扱責任者</span>
+            <span class="tag">愛犬飼育管理士</span>
+            <span class="tag">犬猫ストレスケアアドバイザー</span>
+            <span class="tag">ペットセラピーインストラクター</span>
+            <span class="tag">東京都・千葉県対応</span>
+            <span class="tag">犬・猫・エキゾチックアニマル</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== 3. このページの3つのテーマ ========== -->
+    <!-- parts/sitter-v06-overview.php -->
+    <section class="v06-overview">
+      <div class="si--narrow">
+        <span class="label">About This Page</span>
+        <h2 class="section-title">3つのテーマで<br>More Friendsをご紹介します</h2>
+        <p class="section-sub">
+          シッティングの進め方・哲学・経歴について、<br>
+          ボリュームのある内容ですので、気が向いた時にゆっくりお読みいただけると嬉しいです。
+        </p>
+        <div class="v06-overview__steps">
+
+          <div class="v06-overview__step">
+            <div class="v06-overview__step-left">
+              <div class="v06-overview__step-num">1</div>
+              <div class="v06-overview__step-line"></div>
+            </div>
+            <div class="v06-overview__step-content">
+              <p class="v06-overview__step-title">サービスの進め方</p>
+              <p class="v06-overview__step-text">
+                ペットシッターのお仕事は「はじめまして」のご挨拶から始まります。
+                飼い主様の予算感や普段のお世話にかかる時間をベースにシッティング分数を算出しますが、
+                可能であれば最低＋30分は多めにお時間をいただくことをおすすめしています。
+                場合によっては、本番シッティングの前に数回の慣れるためのシッティングをご提案することもあります。
+              </p>
+            </div>
+          </div>
+
+          <div class="v06-overview__step">
+            <div class="v06-overview__step-left">
+              <div class="v06-overview__step-num">2</div>
+              <div class="v06-overview__step-line"></div>
+            </div>
+            <div class="v06-overview__step-content">
+              <p class="v06-overview__step-title">シッティング哲学・世界観</p>
+              <p class="v06-overview__step-text">
+                「お世話＝作業タスク」ではなく、飼い主様とペットさんの日常生活を限りなく再現すること。
+                信頼関係の構築と、心に余裕のある時間づくりが、ペットさんの幸福につながると信じています。
+                その根底にある考え方と、シッターとしての転換点となったエピソードをご紹介します。
+              </p>
+            </div>
+          </div>
+
+          <div class="v06-overview__step">
+            <div class="v06-overview__step-left">
+              <div class="v06-overview__step-num">3</div>
+            </div>
+            <div class="v06-overview__step-content">
+              <p class="v06-overview__step-title">経歴と実績</p>
+              <p class="v06-overview__step-text">
+                大手ペットシッター会社での豊富な現場経験から独立。
+                犬・猫・エキゾチックアニマルまで幅広い種類のペットさんと向き合い続けてきた実績をもとに、
+                継続的に資格取得と知識のアップデートを行っています。
+              </p>
+            </div>
+          </div>
+
+        </div>
+        <div class="v06-overview__tip">
+          <div class="v06-overview__tip-icon">🐾</div>
+          <p class="v06-overview__tip-text">
+            <strong>シッティング時間について:</strong>
+            飼い主様の予算感や普段のお世話時間をベースに分数を算出します。
+            可能であれば最低<strong>＋30分</strong>の余裕をおすすめしています。
+            慣れるためのシッティングをご提案することもありますので、カウンセリング時にお気軽にご相談ください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 4. ペットさんの個性 ========== -->
+    <!-- parts/sitter-v06-individuality.php -->
+    <section class="v06-individuality">
+      <div class="si">
+        <span class="label">Individuality</span>
+        <h2 class="section-title">すべてのペットさんに<br>「個性」があります</h2>
+        <p class="section-sub">
+          犬種・猫種・種類に関わらず、全員が大きく異なる個性を持っています。
+          初対面の反応も、その子その子でまったく違います。どれも正常で健全な反応です。
+        </p>
+        <!-- ループ単位: .v06-reaction-card を必要件数繰り返す -->
+        <div class="v06-individuality__cards">
+
+          <div class="v06-reaction-card">
+            <div class="v06-reaction-card__emoji">✨</div>
+            <p class="v06-reaction-card__type">Happy Type</p>
+            <p class="v06-reaction-card__title">「誰か遊びにきたー！」</p>
+            <p class="v06-reaction-card__text">
+              はじめましての瞬間からフルパワーで歓迎してくれる子。
+              元々甘えん坊さんは、はじめましてから「好きモード」全開です。
+              最初の5〜10分だけ大騒ぎして、その後すぐ打ち解けてくれます。
+            </p>
+          </div>
+
+          <div class="v06-reaction-card">
+            <div class="v06-reaction-card__emoji">💦</div>
+            <p class="v06-reaction-card__type">Cautious Type</p>
+            <p class="v06-reaction-card__title">「怖いっ、隠れよう！」</p>
+            <p class="v06-reaction-card__text">
+              知らない人に驚いて、じっと様子をうかがう忍者のような子。
+              プレッシャーをかけず、その子のペースを大切に。
+              2〜3回のシッティングで急激に心の距離が縮まることが多いです。
+            </p>
+          </div>
+
+          <div class="v06-reaction-card">
+            <div class="v06-reaction-card__emoji">🛡️</div>
+            <p class="v06-reaction-card__type">Guardian Type</p>
+            <p class="v06-reaction-card__title">「知らない人は危ない！」</p>
+            <p class="v06-reaction-card__text">
+              仁王立ちで玄関からその奥までをブロックする、強い守護者気質の子。
+              ご自宅は自身のテリトリー。この反応はとても正常で健全なサインです。
+              根気よく時間をかけて信頼関係を育みます。
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 5. 信頼関係と健康 ========== -->
+    <!-- parts/sitter-v06-trust.php -->
+    <section class="v06-trust">
+      <div class="si">
+        <span class="label">Trust &amp; Health</span>
+        <h2 class="section-title">信頼関係が、ペットさんの<br>健康を守ります</h2>
+        <div class="v06-trust__grid">
+
+          <div>
+            <p class="v06-trust__body">
+              信頼関係を築けないまま、無理にお世話を進めようとするとペットさんに相当なストレスがかかります。
+              シッティングの時間いっぱいが不安と警戒心で満ちてしまうことも少なくありません。<br><br>
+              ストレス（不安感や警戒心）で食欲が失せ、繊細であればあるほど、
+              飼い主様が帰宅後もしばらくその気持ちが消えずに食事が喉を通らないこともゼロではありません。<br><br>
+              特にパピー/キトンやシニアは、食事を摂取できないと生命維持に支障をきたします。
+              だからこそ「まず存在に慣れてもらうこと」が、すべてのお世話の出発点です。
+            </p>
+          </div>
+
+          <div>
+            <p class="v06-trust__impacts-label">ストレスが体に現れやすいサイン</p>
+            <div class="v06-health-items">
+              <div class="v06-health-item">
+                <p class="v06-health-item__title">食事・排泄の変化</p>
+                <p class="v06-health-item__text">
+                  不安で食欲が失せ、帰宅後もしばらく食事が進まないことも。
+                  便秘や下痢など、排泄への影響も出やすいサインのひとつです。
+                  溜め込みすぎは内臓への負担、継続的な下痢は腸や肛門を傷つけます。
+                </p>
+              </div>
+              <div class="v06-health-item">
+                <p class="v06-health-item__title">皮膚疾患・嘔吐</p>
+                <p class="v06-health-item__text">
+                  継続的なストレスは皮膚に出ることも。
+                  嘔吐や過剰なグルーミングなど、様々なかたちで体の外に表れます。
+                </p>
+              </div>
+              <div class="v06-health-item">
+                <p class="v06-health-item__title">精神的な変化</p>
+                <p class="v06-health-item__text">
+                  普段と違う行動・鳴き声・表情など、心の状態は必ず体や行動に表れます。
+                  早期に気づいて対応することが、ペットさんの安心につながります。
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 6. 時間の余裕という哲学 ========== -->
+    <!-- parts/sitter-v06-philosophy.php -->
+    <section class="v06-philosophy">
+      <div class="si--narrow">
+        <span class="label">Philosophy</span>
+        <h2 class="section-title">「お世話はタスクではない」<br>に気づいた瞬間</h2>
+        <p class="v06-philosophy__body">
+          大手シッター会社に在籍していた頃、私は「ご要望に何としてでもお応えしなければ」という強い信念のもと、
+          シッティング数・お世話内容・時間厳守に強いこだわりを持ち、自分に鞭を打ち続けていました。
+        </p>
+
+        <div class="v06-episode">
+          <span class="v06-episode__label">気づきのエピソード</span>
+          <p class="v06-episode__text">
+            「この子いつも人懐っこいのに、今日は雰囲気が違う。」<br>
+            「もしかして、この子のことを全然理解できていないかもしれない。」<br>
+            「時間がなさすぎて、お世話の本質を見失っていないか。」<br><br>
+            目まぐるしく多忙な現場のなかで、ふとそんな違和感が生まれました。
+            シッティング中の意識が、ペットさんや飼い主様ではなく、
+            「完璧にこなせるか」という自分自身に向いてしまっていたことに気づいたのです。
+          </p>
+        </div>
+
+        <p class="v06-philosophy__body">
+          少しご自身の経験を思い起こしてみてください。
+          出社前のバタバタしている時間に、ペットさんがおもちゃを持ってきて「遊ぼ！」と誘ってくる。
+          時間がないから、ご飯だけパッと置いて「ごめんね！行ってきます！」と去っていく。
+          そんな時の、あの寂しげな目を覚えていますか？<br><br>
+          心に余裕のある日は、ペットさんをゆっくり見守り、「今日も上手に食べて偉いね！」と声をかけられる。
+          家の中に流れる「余裕の空気感」が、ペットさんの心の余裕に直結しています。
+          その空気感を限りなく再現することが、私がシッターとして目指す形です。
+        </p>
+
+        <div class="v06-daily-compare">
+          <div class="v06-daily-card v06-daily-card--busy">
+            <div class="v06-daily-card__emoji">😰</div>
+            <p class="v06-daily-card__badge">忙しい日</p>
+            <p class="v06-daily-card__title">時間がなく、心に余裕がない</p>
+            <p class="v06-daily-card__text">
+              ご飯だけパッと置いてすぐ出発。
+              ペットさんは寂しげな目でお見送り。
+              お世話が「タスク処理」になってしまっている状態。
+            </p>
+          </div>
+          <div class="v06-daily-card v06-daily-card--relaxed">
+            <div class="v06-daily-card__emoji">🌸</div>
+            <p class="v06-daily-card__badge">余裕のある日</p>
+            <p class="v06-daily-card__title">穏やかな空気感が、家全体に流れる</p>
+            <p class="v06-daily-card__text">
+              食事を見守り、遊びの時間も持てる。
+              家の中に余白と温かさがあふれ、
+              ペットさんも安心して過ごせる。
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== 7. 馴れるプロセスと割合 ========== -->
+    <!-- parts/sitter-v06-acclimation.php -->
+    <section class="v06-acclimation">
+      <div class="si">
+        <span class="label">Acclimation</span>
+        <h2 class="section-title">馴れるプロセスを、<br>大切にしています</h2>
+        <p class="v06-acclimation__lead">
+          「馴れる」という時間は動物にとっても、人間にとっても本当に大切なプロセスです。
+          大好きなご家族が不在だからこそ、見知らぬシッターと馴れる時間がその子にとっての大切な第一歩。
+          下記はおおよその目安として、ご参考ください。
+        </p>
+
+        <div class="v06-ratio-bar">
+          <div class="v06-ratio-bar__seg v06-ratio-bar__seg--a">80%</div>
+          <div class="v06-ratio-bar__seg v06-ratio-bar__seg--b">10%</div>
+          <div class="v06-ratio-bar__seg v06-ratio-bar__seg--c">10%</div>
+        </div>
+
+        <!-- ループ単位: .v06-ratio-card を3件繰り返す -->
+        <div class="v06-ratio-cards">
+
+          <div class="v06-ratio-card">
+            <p class="v06-ratio-card__pct">80<span>%</span></p>
+            <p class="v06-ratio-card__title">最初だけ大騒ぎ、その後すぐ打ち解ける</p>
+            <p class="v06-ratio-card__text">
+              はじめの5〜10分だけ大騒ぎ！
+              そのあと比較的すぐに打ち解けてくれます。
+              元々甘えん坊さんは、はじめましてから好きモードな子もいます。
+            </p>
+          </div>
+
+          <div class="v06-ratio-card">
+            <p class="v06-ratio-card__pct">10<span>%</span></p>
+            <p class="v06-ratio-card__title">2〜3回で急激に心の距離が縮まる</p>
+            <p class="v06-ratio-card__text">
+              2〜3回のシッティングで顔なじみになり、急激に心の距離が近づきます。
+              「毎週」「隔週」または月1〜2回の頻度が効果的です。
+            </p>
+          </div>
+
+          <div class="v06-ratio-card">
+            <p class="v06-ratio-card__pct">10<span>%</span></p>
+            <p class="v06-ratio-card__title">数ヶ月〜年単位でゆっくり心を開く</p>
+            <p class="v06-ratio-card__text">
+              その子のペースで、少しずつ心を開いてくださいます。
+              定期的に会う頻度を設けることで、ゆっくりと確実に関係が育まれていきます。
+            </p>
+          </div>
+
+        </div>
+
+        <div class="v06-delicate">
+          <span class="v06-delicate__label">繊細な子への想い</span>
+          <p class="v06-delicate__title">もっとじっくり時間をかけて、<br>信頼関係を最優先に。</p>
+          <p class="v06-delicate__text">
+            繊細で怖がりさんのペットさん達には特に、じっくり時間をかけて信頼構築を最優先でお世話をさせていただきたい。
+            そう願うことが多くなりました。<br><br>
+            カウンセリング（面会）時のペットさんの観察・理解と、飼い主様とペットさんの関係性や歩みを知ること。
+            普段どのような触れ合いをされているか、どんな声掛けをしているか、どんな癖があるかを知ることで、
+            初めて会うシッターが関係構築のスピードを上げることが可能になります。
+            ここにたくさんのヒントが隠されていると、経験上強く感じています。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 8. 経歴・実績 ========== -->
+    <!-- parts/sitter-v06-career.php -->
+    <section class="v06-career">
+      <div class="si--narrow">
+        <span class="label">Career</span>
+        <h2 class="section-title">経歴・実績</h2>
+        <!-- ループ単位: .v06-career__item を必要件数繰り返す -->
+        <ol class="v06-career__list" style="list-style:none;">
+
+          <li class="v06-career__item">
+            <div class="v06-career__year">〜2022年</div>
+            <div class="v06-career__content">
+              <p class="v06-career__title">大手ペットシッター会社にて経験を積む</p>
+              <p class="v06-career__text">
+                大手ペットシッターサービス会社に所属し、依頼をお断りしなければならないほど多くのシッティングを経験。
+                犬・猫から小動物・エキゾチックアニマルまで幅広い種類・頭数のお世話を担当。
+                複数シッターが関わる現場で、飼い主様とペットさんへの「向き合い方」を深く考えるようになる。
+              </p>
+            </div>
+          </li>
+
+          <li class="v06-career__item">
+            <div class="v06-career__year">2022年〜</div>
+            <div class="v06-career__content">
+              <p class="v06-career__title">独立・More Friends 創業</p>
+              <p class="v06-career__text">
+                「お世話＝タスク達成」からの脱却を決意し独立。飼い主様の日常生活を限りなく再現し、
+                ペットさんが「楽しかった」と感じられるシッティングを追求するためにMore Friendsを設立。
+                千葉県を拠点に、東京都・千葉県全域でサービスを展開中。
+              </p>
+            </div>
+          </li>
+
+          <li class="v06-career__item">
+            <div class="v06-career__year">現在</div>
+            <div class="v06-career__content">
+              <p class="v06-career__title">多様なペットさんと日々向き合う</p>
+              <p class="v06-career__text">
+                犬・猫・エキゾチックアニマル（爬虫類・両生類含む）のシッティングを継続的に担当。
+                繊細な子・怖がりさんへの信頼構築を得意とし、
+                「2〜3回で急激に心の距離が縮まった」というご報告を多くいただいています。
+                資格取得も継続し、知識とスキルを常にアップデート中。
+              </p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== 9. 資格・認定 ========== -->
+    <!-- parts/sitter-v06-certs.php -->
+    <section class="v06-cert">
+      <div class="si--mid">
+        <span class="label">Certification</span>
+        <h2 class="section-title">資格・認定</h2>
+        <!-- ループ単位: .v06-cert-card を3件繰り返す -->
+        <div class="v06-cert__grid">
+
+          <div class="v06-cert-card">
+            <div class="v06-cert-card__num">01</div>
+            <p class="v06-cert-card__name">動物取扱責任者 /<br>愛犬飼育管理士</p>
+            <p class="v06-cert-card__text">
+              法律に基づく動物取扱業の責任者資格。
+              適切な飼育・管理に関する専門知識を保有しています。
+            </p>
+          </div>
+
+          <div class="v06-cert-card">
+            <div class="v06-cert-card__num">02</div>
+            <p class="v06-cert-card__name">犬猫ストレスケア<br>アドバイザー</p>
+            <p class="v06-cert-card__text">
+              犬・猫のストレスサインを読み取り、
+              心身のケアを適切に行うための専門資格。
+            </p>
+          </div>
+
+          <div class="v06-cert-card">
+            <div class="v06-cert-card__num">03</div>
+            <p class="v06-cert-card__name">ペットセラピー<br>インストラクター</p>
+            <p class="v06-cert-card__text">
+              動物との触れ合いを通じたセラピー的アプローチを
+              実践する認定資格。
+            </p>
+          </div>
+
+          <div class="v06-cert-card">
+            <div class="v06-cert-card__num">04</div>
+            <p class="v06-cert-card__name">ペットセーバー<br>First Responder</p>
+            <p class="v06-cert-card__text">
+              犬・猫の心肺蘇生法・止血・搬送など
+              救命救急の知識と技術を習得した国際認定資格。
+            </p>
+          </div>
+
+        </div>
+        <p class="v06-cert__note">
+          ※ 資格はすべて有効期限内のものを取得・維持しています。
+          知識とスキルを継続的にアップデートするため、今後も学びを続けていきます。
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== 10. More Friendsの名前の由来 ========== -->
+    <!-- parts/sitter-v06-origin.php -->
+    <section class="v06-origin">
+      <div class="v06-origin__inner">
+        <span class="label">Name Origin</span>
+        <h2 class="section-title">More Friendsという<br>名前について</h2>
+        <blockquote class="v06-origin__quote">
+          「人にもペットさんにとっても、心許せる友達になりたい。<br>
+          人も動物も本当に大好きだから、<br>
+          欲張ってたくさんお友達を増やそうよ！」
+        </blockquote>
+        <p class="v06-origin__body">
+          そんな気持ちで立ち上げたのが、More Friendsです。<br><br>
+          どこまで行ってもペットさんの家族は1つしかありません。
+          ですが、ペットシッターの努力次第でペットさんのベストフレンドになることは可能です。
+          飼い主様ともご信頼関係を結べることになれば、他人には言えない悩みや不安をシェアできる、
+          別の形でのフレンドになれると信じております。<br><br>
+          ペットさんの揺るがない幸福があってこそ、飼い主様の幸せをサポートできる。
+          楽しく・ポジティブに物事を変えていきたい。そんな想いです。
+        </p>
+        <p class="v06-origin__sig">More Friends  椎名 春香</p>
+      </div>
+    </section>
+
+    <!-- ========== 11. CTA (変更なし) ========== -->
+    <!-- parts/cta.php -->
+    <section class="cta-section" id="contact">
+      <span class="label">Get Started</span>
+      <h2 class="section-title">まず、気軽にご相談ください。</h2>
+      <p>
+        初回カウンセリングはご予約確定で実質無料。<br>
+        ペットさんと飼い主さまにとって、本当に合うシッターかどうかを一緒に確かめましょう。
+      </p>
+      <div class="cta-buttons">
+        <a href="./contact.html" class="btn-cta-white">無料カウンセリングを申し込む</a>
+        <a href="#" class="btn-line-lg">LINEで相談</a>
+        <a href="#" class="btn-ig-lg">Instagramで相談</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER (変更なし) ========== -->
+  <!-- parts/footer.php -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="ph-logo footer-logo">More Friends</div>
+        <div class="footer-tagline">
+          そっと心に触れる、<br>友達のような存在でありたい。<br><br>
+          東京都・千葉県のペットシッティングサービス
+        </div>
+        <div class="footer-sns">
+          <a href="#" class="footer-sns-btn" aria-label="LINE">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </a>
+          <a href="#" class="footer-sns-btn" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Service</p>
+          <ul>
+            <li><a href="./about.html">More Friendsとは</a></li>
+            <li><a href="./service.html">サービス内容</a></li>
+            <li><a href="./price.html">料金プラン</a></li>
+            <li><a href="./cancel.html">キャンセルポリシー</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">About</p>
+          <ul>
+            <li><a href="./sitter.html">シッター紹介</a></li>
+            <li><a href="./flow.html">利用の流れ</a></li>
+            <li><a href="./area.html">対応エリア</a></li>
+            <li><a href="./reviews.html">お客様の声</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <p class="footer-nav-heading">Info</p>
+          <ul>
+            <li><a href="./blog.html">ブログ</a></li>
+            <li><a href="./contact.html">お問い合わせ</a></li>
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">利用規約</a></li>
+            <li><a href="#">動物取扱業</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 More Friends. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.hamburger')?.addEventListener('click', function () {
+      const nav = document.getElementById('sp-nav');
+      const isOpen = nav.classList.toggle('open');
+      this.setAttribute('aria-expanded', isOpen);
+      nav.setAttribute('aria-hidden', !isOpen);
+    });
+  </script>
+
+</body>
+</html>

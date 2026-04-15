@@ -1,0 +1,665 @@
+/*
+  sp-index.css
+  More Friends — トップページ SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css  共通トークン・リセット・ハンバーガー基本制御
+    2. index.css           PCレイアウト（640px以下の既存上書きも含む）
+    3. sp-index.css        ← このファイル（768px以下を正式ブレークポイントで上書き）
+
+  方針:
+    - クラス名は index.html / index.css の既存クラスをそのまま使う
+    - SP固有のレイアウト変更のみをここに記述する
+    - 本番CSSではない。wireframe確認用（§7-3）
+    - theme.json + 本番CSS に置き換えること
+
+  参照: SP変換リファレンス.md §01 / 03_SPワイヤー専用ルール.md
+  ブレークポイント: max-width: 768px（--bp-sp に相当）
+*/
+
+
+@media (max-width: 768px) {
+
+  /* ==============================================
+     SP ヘッダー
+     Olive Sitter 参照: ロゴ左 + 右側に「アイコン+ラベル」ボタン群 + MENU
+
+     .sp-header__actions: 右側ボタンエリア
+     .sp-header__action-btn: 各ボタン（アイコン上 + ラベル下の縦並び）
+     44×44px タップターゲット確保（§2-1）
+  =============================================== */
+
+  /* PCのヘッダーナビを非表示 */
+  header nav:not(.open) {
+    display: none;
+  }
+
+  /* SP専用ヘッダー全体 */
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ロゴ */
+  .sp-header .header-logo,
+  header .header-logo {
+    font-size: 13px;
+    min-width: auto;
+    min-height: 36px;
+    padding: 6px 14px;
+  }
+
+  /* 右側ボタンエリア */
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* 各アクションボタン（アイコン + ラベル縦並び）
+     タップターゲット: 最小 44×44px（§2-1） */
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn:first-child {
+    border-left: none;
+  }
+
+  /* Instagram ボタン */
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  /* LINE ボタン */
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  /* MENU ボタン */
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 0;
+    border-left-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  /* アクションボタン内アイコンエリア */
+  .sp-header__action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* 特定性を (0,2,0) に上げて .hamburger span (0,1,1) に勝つ */
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    height: 16px;
+    background: transparent;
+  }
+
+  .hamburger-lines span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* wireframe-base.css の .hamburger span（height:2px）の影響を打ち消す */
+  .sp-header__action-btn--menu .sp-header__action-icon {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-label {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #fff;
+  }
+
+  /* 3本線を白に上書き */
+  .sp-header__action-btn--menu .hamburger-lines span {
+    background: #fff;
+    width: 18px;
+    height: 1.5px;
+    border-radius: 2px;
+    display: block;
+  }
+
+  /* ドロワーナビ（開いたとき）*/
+  header nav.open {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
+    z-index: 99;
+    border-top: 1px solid var(--border);
+  }
+
+  header nav.open a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+    min-height: 52px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  header nav.open a::after {
+    content: '›';
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 18px;
+  }
+
+
+  /* ==============================================
+     ヒーロー直下ショートカット①: 3リンク
+     Olive Sitter 参照: 3等分グリッド、アイコン上 + ラベル下
+     背景: var(--bg)、区切り線あり
+  =============================================== */
+
+  .sp-shortcut-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--bg);
+    border-bottom: 2px solid var(--border);
+    padding: 0;
+  }
+
+  .sp-shortcut-nav__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 8px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    min-height: 80px;
+    border-right: 1px solid var(--border);
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .sp-shortcut-nav__item:last-child {
+    border-right: none;
+  }
+
+  .sp-shortcut-nav__item:active,
+  .sp-shortcut-nav__item:focus {
+    background: var(--primary-l);
+    border-bottom-color: var(--primary);
+  }
+
+  .sp-shortcut-nav__icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .sp-shortcut-nav__label {
+    font-size: 11px;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+
+  /* ==============================================
+     ヒーロー直下ショートカット②: 2ボタン
+     Olive Sitter 参照: 2等分の横並びボタン、border で区切り
+     背景: var(--bg-mid)
+  =============================================== */
+
+  .sp-shortcut-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    background: var(--bg-mid);
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .sp-shortcut-btns__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 12px 8px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .sp-shortcut-btns__btn:active,
+  .sp-shortcut-btns__btn:focus {
+    background: var(--primary-l);
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+
+  /* ==============================================
+     共通: セクションパディング
+  =============================================== */
+  section {
+    padding: 56px 16px;
+  }
+
+  .basic-price-section,
+  .flow-section,
+  .profile-section,
+  .blog-section {
+    padding: 56px 16px;
+  }
+
+  /* ショートカットセクションは余白不要 */
+  .sp-shortcut-nav,
+  .sp-shortcut-btns {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .sp-shortcut-btns {
+    padding: 12px 16px;
+  }
+
+  /* セクション見出し */
+  .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+    line-height: 1.35;
+  }
+
+  .cta-section .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+
+  /* ==============================================
+     ヒーロー
+  =============================================== */
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    padding-top: 60px;
+  }
+
+  .hero-left {
+    padding: 24px 16px 32px;
+  }
+
+  .hero-h1 {
+    font-size: clamp(28px, 7.5vw, 32px);
+    margin-bottom: 16px;
+  }
+
+  .hero-h1 br,
+  .hero-tagline br {
+    display: none;
+  }
+
+  .hero-tagline {
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .hero-cta .btn-cta-main,
+  .hero-cta .btn-outline {
+    text-align: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  .hero-stats {
+    gap: 20px;
+    flex-wrap: nowrap;
+    padding-top: 24px;
+  }
+
+  .stat-num { font-size: 26px; }
+  .stat-num small { font-size: 14px; }
+  .stat-label { font-size: 11px; }
+
+  .hero-right {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    min-height: auto;
+  }
+
+  .hero-right .ph-img {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: auto !important;
+    border-radius: 0;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+
+  /* ==============================================
+     コンセプト
+  =============================================== */
+
+  .concept {
+    padding-bottom: 24px;
+  }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .concept-grid > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .concept-quote {
+    font-size: 18px;
+    margin: 0;
+  }  .concept-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  /* カードを縦積みに変更（flow-card に合わせる） */
+  .concept-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 24px 20px;
+  }
+
+
+  /* ==============================================
+     選ばれる3つの理由
+  =============================================== */
+
+     .why-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 12px;
+  }  .why-card { padding: 28px 20px; }
+  .why-num { font-size: 36px; margin-bottom: 12px; }
+
+
+  /* ==============================================
+     サービス一覧
+  =============================================== */
+
+  .services-grid { grid-template-columns: 1fr; }
+
+
+  /* ==============================================
+     料金サマリー
+  =============================================== */
+
+  .price-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .price-card.featured { order: -1; }
+  .price-card { padding: 24px 20px; }
+  .price-amount { font-size: 28px; }
+
+  .price-footnotes {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+
+  /* ==============================================
+     ご利用の流れ
+  =============================================== */
+
+  .flow-section .flow-grid,
+  .flow-grid { grid-template-columns: 1fr; gap: 16px; }
+  .flow-card { padding: 24px 20px; }
+
+  .flow-section .section-more {
+    margin-top: 24px;
+  }
+
+
+  /* ==============================================
+     シッター紹介
+  =============================================== */
+
+  .profile-inner { grid-template-columns: 1fr; gap: 24px; }
+
+  .profile-tags {
+    margin-bottom: 16px;
+  }
+
+  .profile-inner .ph-img {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+
+  /* ==============================================
+     ブログ
+  =============================================== */
+
+  .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  .blog-section .section-more {
+    margin-top: 24px;
+  }
+
+  .blog-card .ph-img {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+
+  /* ==============================================
+     section-more ボタン
+  =============================================== */
+
+  .section-more .btn-outline,
+  .section-more .btn-cta-white {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+
+  /* ==============================================
+     CTA セクション
+  =============================================== */
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-cta-white,
+  .btn-line-lg,
+  .btn-ig-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+
+  /* ==============================================
+     フッター
+  =============================================== */
+
+  footer { padding: 40px 16px 24px; }
+
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-nav { gap: 24px; flex-wrap: wrap; }
+  .footer-sns-btn { width: 44px; height: 44px; }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+} /* end @media (max-width: 768px) */
+
+/* ヘッダーロゴ: ボックスなし・背景透過 */
+.header-logo-plain {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: auto;
+  min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+/* フッターロゴ */
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* 料金・フローセクション内の白ボタン: ピンク枠で視認性向上 */
+.basic-price-section .btn-cta-white,
+.flow-section .btn-cta-white {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+
+.basic-price-section .btn-cta-white:hover,
+.flow-section .btn-cta-white:hover {
+  background: var(--primary);
+  color: #fff;
+}

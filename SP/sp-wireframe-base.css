@@ -1,0 +1,1154 @@
+
+/* ============================================================
+  sp-wireframe-base.css
+  More Friends — SPワイヤー共通ベーススタイル
+
+  このファイルの役割:
+  - SPワイヤー確認用の共通トークン・リセット・コンポーネント定義
+  - 本番CSSではない（wireframe-base.css と同様の位置づけ）
+  - 本番実装時は theme.json / 本番CSS に置き換える
+
+  参照ルール: 03_SPワイヤー専用ルール.md
+  対象幅: max-width 768px（--bp-sp）
+  命名規則: mf- プレフィックス + BEM
+  更新: 2026-03-28
+============================================================ */
+
+
+/* ============================================================
+  1. カスタムプロパティ（デザイントークン）
+  §4 SPデザイントークンの標準値
+============================================================ */
+
+:root {
+
+  /* --- ブレークポイント --- */
+  --bp-sp:  768px;
+  --bp-tab: 1024px;
+
+  /* --- コンテナ余白 --- */
+  --sp-padding-x:       16px;   /* 標準左右余白 */
+  --sp-padding-x-wide:  20px;   /* 狭い画面で窮屈なら許容 */
+
+  /* --- セクション上下余白（3段階） --- */
+  --sp-section-py-sm:   48px;
+  --sp-section-py-md:   56px;
+  --sp-section-py-lg:   64px;
+
+  /* --- 余白スケール（4の倍数系） --- */
+  --sp-space-1:   4px;
+  --sp-space-2:   8px;
+  --sp-space-3:  12px;
+  --sp-space-4:  16px;
+  --sp-space-6:  24px;
+  --sp-space-8:  32px;
+  --sp-space-10: 40px;
+  --sp-space-12: 48px;
+  --sp-space-16: 64px;
+
+  /* --- タップターゲット最小値 --- */
+  --sp-tap-min: 44px;  /* §2-1: 主要ボタン・メニュー・アイコンの最低高さ */
+  --sp-tap-gap:  8px;  /* §2-1: 隣接ターゲット間の最低余白 */
+
+  /* --- フォント --- */
+  --sp-font-body:    16px;
+  --sp-font-sub:     14px;
+  --sp-font-btn:     16px;
+  --sp-font-heading: clamp(24px, 5vw, 28px);
+  --sp-font-h1:      clamp(28px, 7vw, 32px);
+
+  --sp-lh-body:  1.7;
+  --sp-lh-sub:   1.6;
+  --sp-lh-tight: 1.3;
+
+  /* --- カラー（ワイヤー用プレースホルダー: wireframe-base.css の var(--*) に合わせて上書き可） --- */
+  --mf-color-primary:   #4a7c59;   /* ブランドグリーン（仮） */
+  --mf-color-line:      #06c755;   /* LINE公式グリーン */
+  --mf-color-ig:        #e1306c;   /* Instagram（仮） */
+  --mf-color-text:      #1a1a1a;
+  --mf-color-text-sub:  #555;
+  --mf-color-bg:        #fff;
+  --mf-color-bg-mid:    #f7f5f0;
+  --mf-color-bg-dark:   #2b2b2b;
+  --mf-color-border:    #e0e0e0;
+  --mf-color-ph:        #d0cdc8;   /* プレースホルダー要素の背景色 */
+
+  /* --- ボーダー半径 --- */
+  --mf-radius-sm:  4px;
+  --mf-radius-md:  8px;
+  --mf-radius-lg: 12px;
+  --mf-radius-pill: 999px;
+
+  /* --- シャドウ --- */
+  --mf-shadow-card: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+
+/* ============================================================
+  2. リセット & ベース
+============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin:  0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--sp-font-body);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  font-size:   var(--sp-font-body);
+  line-height: var(--sp-lh-body);
+  color:       var(--mf-color-text);
+  background:  var(--mf-color-bg);
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;           /* aspect-ratio に干渉しないよう auto を維持 */
+}
+
+/* ヘッダーアクションボタン内のSVGはautoを解除 */
+.sp-header__action-icon svg {
+  display: inline;
+  height: 22px;
+  width: 22px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background: none;
+}
+
+/* ヘッダーアクションボタン（Instagram・LINE・MENU）のリセット打ち消し */
+.sp-header__action-btn {
+  background: revert;
+}
+
+/* フォーカスリング（アクセシビリティ） */
+:focus-visible {
+  outline: 2px solid var(--mf-color-primary);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+  3. コンテナ
+============================================================ */
+
+/* 標準コンテナ: セクション内コンテンツ幅 */
+.mf-container {
+  width: 100%;
+  padding-left:  var(--sp-padding-x);
+  padding-right: var(--sp-padding-x);
+}
+
+/* 狭い画面用の拡張余白（任意） */
+.mf-container--wide {
+  padding-left:  var(--sp-padding-x-wide);
+  padding-right: var(--sp-padding-x-wide);
+}
+
+/* セクション共通の上下余白 */
+.mf-section {
+  padding-top:    var(--sp-section-py-sm);
+  padding-bottom: var(--sp-section-py-sm);
+}
+.mf-section--md {
+  padding-top:    var(--sp-section-py-md);
+  padding-bottom: var(--sp-section-py-md);
+}
+.mf-section--lg {
+  padding-top:    var(--sp-section-py-lg);
+  padding-bottom: var(--sp-section-py-lg);
+}
+
+/* 背景色バリエーション */
+.mf-section--bg-mid  { background: var(--mf-color-bg-mid); }
+.mf-section--bg-dark {
+  background: var(--mf-color-bg-dark);
+  color: #fff;
+}
+
+
+/* ============================================================
+  4. タイポグラフィ
+  §4-3 フォント基準
+============================================================ */
+
+.mf-heading-hero {
+  font-size:   var(--sp-font-h1);
+  line-height: var(--sp-lh-tight);
+  font-weight: 700;
+}
+
+.mf-heading-section {
+  font-size:   var(--sp-font-heading);
+  line-height: var(--sp-lh-tight);
+  font-weight: 700;
+}
+
+.mf-text-body {
+  font-size:   var(--sp-font-body);
+  line-height: var(--sp-lh-body);
+}
+
+.mf-text-sub {
+  font-size:   var(--sp-font-sub);
+  line-height: var(--sp-lh-sub);
+  color:       var(--mf-color-text-sub);
+}
+
+/* 禁止: 本文に固定heightを当てない（§7-2） */
+
+
+/* ============================================================
+  5. ヘッダー
+  §2-2 モバイルナビゲーション / 付録A-1
+============================================================ */
+
+.mf-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 var(--sp-padding-x);
+  background: var(--mf-color-bg);
+  border-bottom: 1px solid var(--mf-color-border);
+}
+
+/* ロゴ */
+.mf-header__logo {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ヘッダー右側: SNSボタン群 + ハンバーガー */
+.mf-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-tap-gap);
+}
+
+/* ハンバーガーボタン
+   §2-2: button / aria-expanded / aria-controls / Escape対応
+   付録A-1 のコードを基準とする                              */
+.mf-header__toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width:  var(--sp-tap-min);
+  height: var(--sp-tap-min);
+  border-radius: var(--mf-radius-sm);
+}
+
+.mf-header__toggle-line {
+  display: block;
+  width:  22px;
+  height: 2px;
+  background: var(--mf-color-text);
+  border-radius: 2px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* 開いた状態 */
+.mf-header__toggle[aria-expanded="true"] .mf-header__toggle-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.mf-header__toggle[aria-expanded="true"] .mf-header__toggle-line:nth-child(2) {
+  opacity: 0;
+}
+.mf-header__toggle[aria-expanded="true"] .mf-header__toggle-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* グローバルナビ（ドロワー）
+   Disclosureパターン: §2-2
+   PC/SPでHTML二重化せずCSSで表示制御 */
+.mf-global-nav {
+  position: fixed;
+  inset: 56px 0 0 0;
+  background: var(--mf-color-bg);
+  padding: var(--sp-space-6) var(--sp-padding-x);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .25s ease;
+  z-index: 99;
+}
+
+.mf-global-nav.is-open {
+  transform: translateX(0);
+}
+
+.mf-global-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mf-global-nav__item a {
+  display: flex;
+  align-items: center;
+  min-height: var(--sp-tap-min);
+  padding: var(--sp-space-3) 0;
+  font-size: var(--sp-font-body);
+  border-bottom: 1px solid var(--mf-color-border);
+}
+
+
+/* ============================================================
+  6. フッター
+  SP: 縦積み
+============================================================ */
+
+.mf-footer {
+  padding: var(--sp-section-py-sm) var(--sp-padding-x);
+  background: var(--mf-color-bg-mid);
+  border-top: 1px solid var(--mf-color-border);
+}
+
+.mf-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-6);
+}
+
+.mf-footer__logo {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mf-footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mf-footer__nav a {
+  display: flex;
+  align-items: center;
+  min-height: var(--sp-tap-min);
+  font-size: var(--sp-font-sub);
+  border-bottom: 1px solid var(--mf-color-border);
+}
+
+.mf-footer__sns {
+  display: flex;
+  gap: var(--sp-space-4);
+}
+
+.mf-footer__copy {
+  font-size: var(--sp-font-sub);
+  color: var(--mf-color-text-sub);
+}
+
+
+/* ============================================================
+  7. ボタン
+  §4-5 ボタン基準 / §3-3 ファーストビュー
+============================================================ */
+
+/* ベースボタン: 高さ44px以上・文字16px以上を保証 */
+.mf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-space-2);
+  min-height: var(--sp-tap-min);
+  padding: 0 var(--sp-space-4);
+  font-size: var(--sp-font-btn);
+  font-weight: 700;
+  line-height: 1.2;
+  border-radius: var(--mf-radius-md);
+  transition: opacity .15s ease;
+  cursor: pointer;
+  text-align: center;
+}
+.mf-btn:active { opacity: .75; }
+
+/* 主要CTA: 幅100% */
+.mf-btn--primary {
+  width: 100%;
+  background: var(--mf-color-primary);
+  color: #fff;
+}
+
+/* アウトライン */
+.mf-btn--outline {
+  width: 100%;
+  background: transparent;
+  color: var(--mf-color-primary);
+  border: 2px solid var(--mf-color-primary);
+}
+
+/* LINEボタン */
+.mf-btn--line {
+  width: 100%;
+  background: var(--mf-color-line);
+  color: #fff;
+}
+
+/* Instagramボタン */
+.mf-btn--ig {
+  width: 100%;
+  background: var(--mf-color-ig);
+  color: #fff;
+}
+
+/* アイコンボタン（ヘッダー内SNS等）: 正方形44px */
+.mf-btn--icon {
+  width:  var(--sp-tap-min);
+  height: var(--sp-tap-min);
+  padding: 0;
+  border-radius: var(--mf-radius-sm);
+}
+
+/* CTAボタングループ: 縦積み（§3-3 / §4-5） */
+.mf-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-3);
+  width: 100%;
+}
+
+
+/* ============================================================
+  8. CTAセクション（全ページ共通）
+  SP変換リファレンス §共通要素: ボタン縦積み100%
+============================================================ */
+
+.mf-cta-section {
+  padding: var(--sp-section-py-md) var(--sp-padding-x);
+  background: var(--mf-color-bg-mid);
+  text-align: center;
+}
+
+.mf-cta-section__label {
+  font-size: var(--sp-font-sub);
+  color: var(--mf-color-text-sub);
+  margin-bottom: var(--sp-space-2);
+}
+
+.mf-cta-section__heading {
+  font-size: var(--sp-font-heading);
+  line-height: var(--sp-lh-tight);
+  font-weight: 700;
+  margin-bottom: var(--sp-space-6);
+}
+
+.mf-cta-section__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-3);
+}
+
+
+/* ============================================================
+  9. ページヘッダー（各ページ共通）
+  §3-3 ファーストビューの変換ルール
+============================================================ */
+
+.mf-page-header {
+  padding: var(--sp-section-py-sm) var(--sp-padding-x);
+  background: var(--mf-color-bg-mid);
+}
+
+.mf-page-header__label {
+  font-size: var(--sp-font-sub);
+  color: var(--mf-color-text-sub);
+  margin-bottom: var(--sp-space-2);
+}
+
+.mf-page-header__heading {
+  font-size: var(--sp-font-h1);
+  line-height: var(--sp-lh-tight);
+  font-weight: 700;
+  margin-bottom: var(--sp-space-4);
+}
+
+.mf-page-header__body {
+  font-size: var(--sp-font-body);
+  line-height: var(--sp-lh-body);
+  margin-bottom: var(--sp-space-6);
+}
+
+.mf-page-header__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-3);
+}
+
+
+/* ============================================================
+  10. ヒーローセクション（トップページ）
+  §3-3 順序: ラベル→h1→説明文→主CTA→副CTA→ビジュアル
+============================================================ */
+
+.mf-hero {
+  padding: var(--sp-section-py-sm) var(--sp-padding-x);
+}
+
+.mf-hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-6);
+}
+
+/* テキストブロック */
+.mf-hero__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-4);
+}
+
+.mf-hero__label {
+  font-size: var(--sp-font-sub);
+  color: var(--mf-color-text-sub);
+}
+
+/* §3-3 禁止: h1途中改行を見た目固定で埋め込まない */
+.mf-hero__heading {
+  font-size:   var(--sp-font-h1);
+  line-height: var(--sp-lh-tight);
+  font-weight: 700;
+}
+
+.mf-hero__tagline {
+  font-size:   var(--sp-font-body);
+  line-height: var(--sp-lh-body);
+}
+
+.mf-hero__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-3);
+}
+
+/* ビジュアルブロック（テキストの後に配置） */
+.mf-hero__visual {
+  aspect-ratio: 4 / 3;    /* §2-3 aspect-ratio + object-fit */
+  overflow: hidden;
+  border-radius: var(--mf-radius-md);
+  background: var(--mf-color-ph);
+}
+.mf-hero__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 実績数字（短い数字のみ横並び維持可 §3-2） */
+.mf-hero__stats {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--sp-space-4);
+  padding: var(--sp-space-4) 0;
+  border-top: 1px solid var(--mf-color-border);
+}
+.mf-hero__stat-item {
+  text-align: center;
+  flex: 1;
+}
+.mf-hero__stat-num {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--mf-color-primary);
+}
+.mf-hero__stat-label {
+  font-size: var(--sp-font-sub);
+  color: var(--mf-color-text-sub);
+}
+
+
+/* ============================================================
+  11. カード（汎用）
+  §3-2 横並び→1カラム縦積み
+============================================================ */
+
+/* カードリスト: 原則1カラム */
+.mf-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-6);
+}
+
+/* 例外: 小アイコン付き要約カード・サムネイル一覧は2カラム可（§3-2） */
+.mf-card-list--2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-space-4);
+}
+
+/* 汎用カード */
+.mf-card {
+  background: var(--mf-color-bg);
+  border: 1px solid var(--mf-color-border);
+  border-radius: var(--mf-radius-md);
+  overflow: hidden;
+  box-shadow: var(--mf-shadow-card);
+}
+
+.mf-card__media {
+  aspect-ratio: 16 / 9;  /* §2-3 付録A-2 */
+  overflow: hidden;
+  background: var(--mf-color-ph);
+}
+.mf-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mf-card__body {
+  padding: var(--sp-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-2);
+}
+
+.mf-card__heading {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: var(--sp-lh-tight);
+}
+
+.mf-card__text {
+  font-size: var(--sp-font-body);
+  line-height: var(--sp-lh-body);
+}
+
+/* featuredカード（料金: おすすめを先頭へ §price） */
+.mf-card--featured {
+  border-color: var(--mf-color-primary);
+  border-width: 2px;
+}
+
+
+/* ============================================================
+  12. 比較表 → カード型（§3-4）
+  §3-4 優先: カード型 / 列比較が必要な場合のみ横スクロール
+============================================================ */
+
+/* カード型比較 */
+.mf-compare-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-4);
+}
+
+/* 横スクロールテーブル（列比較が必要な場合のみ） */
+.mf-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--mf-color-border);
+  border-radius: var(--mf-radius-md);
+}
+.mf-table-scroll table {
+  border-collapse: collapse;
+  min-width: 540px;
+  font-size: var(--sp-font-sub);
+}
+.mf-table-scroll th,
+.mf-table-scroll td {
+  padding: var(--sp-space-3) var(--sp-space-4);
+  border-bottom: 1px solid var(--mf-color-border);
+  white-space: nowrap;
+  text-align: left;
+}
+.mf-table-scroll thead th {
+  background: var(--mf-color-bg-mid);
+  font-weight: 700;
+}
+
+
+/* ============================================================
+  13. FAQ（アコーディオン）
+  §3-5 ループ単位: .c-faq__item / §7-6 / §flow 44px確保
+============================================================ */
+
+.mf-faq-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--mf-color-border);
+}
+
+/* ループ単位 */
+.c-faq__item {
+  border-bottom: 1px solid var(--mf-color-border);
+}
+
+/* <details> / <summary> 構造推奨 */
+.c-faq__item summary,
+.c-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--sp-tap-min);   /* §flow: タップターゲット44px以上 */
+  padding: var(--sp-space-3) 0;
+  font-size: var(--sp-font-body);
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;   /* <summary> のデフォルトマーカーを除去 */
+}
+.c-faq__item summary::-webkit-details-marker { display: none; }
+
+.c-faq__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  transition: transform .2s ease;
+}
+details[open] .c-faq__icon {
+  transform: rotate(180deg);
+}
+
+.c-faq__answer {
+  padding: 0 0 var(--sp-space-4);
+  font-size: var(--sp-font-body);
+  line-height: var(--sp-lh-body);
+  color: var(--mf-color-text-sub);
+}
+
+
+/* ============================================================
+  14. フォーム
+  §3-6 SPフォームルール
+============================================================ */
+
+.mf-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-6);
+}
+
+.mf-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-space-2);
+}
+
+/* ラベルは必ず <label> で明示（プレースホルダーのみ禁止） */
+.mf-form__label {
+  font-size: var(--sp-font-body);
+  font-weight: 700;
+}
+
+.mf-form__required {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: #d32f2f;
+  border-radius: var(--mf-radius-sm);
+  padding: 1px 5px;
+  margin-left: var(--sp-space-1);
+  vertical-align: middle;
+}
+
+/* 入力欄は幅100% */
+.mf-form__input,
+.mf-form__textarea,
+.mf-form__select {
+  width: 100%;
+  padding: var(--sp-space-3) var(--sp-space-4);
+  font-size: var(--sp-font-body);
+  font-family: inherit;
+  line-height: var(--sp-lh-body);
+  border: 1px solid var(--mf-color-border);
+  border-radius: var(--mf-radius-md);
+  background: var(--mf-color-bg);
+  color: var(--mf-color-text);
+  appearance: none;
+  transition: border-color .15s;
+}
+.mf-form__input:focus,
+.mf-form__textarea:focus,
+.mf-form__select:focus {
+  border-color: var(--mf-color-primary);
+  outline: none;
+}
+
+.mf-form__textarea {
+  min-height: 120px;
+  resize: vertical;   /* 固定heightは禁止（§7-2）→ min-height で対応 */
+}
+
+/* エラー文: 入力欄の近くに（§3-6） */
+.mf-form__error {
+  font-size: var(--sp-font-sub);
+  color: #d32f2f;
+}
+
+/* 送信ボタン: 44px以上・幅100%（§3-6） */
+.mf-form__submit {
+  width: 100%;
+  min-height: var(--sp-tap-min);
+  padding: 0 var(--sp-space-4);
+  font-size: var(--sp-font-btn);
+  font-weight: 700;
+  color: #fff;
+  background: var(--mf-color-primary);
+  border: none;
+  border-radius: var(--mf-radius-md);
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.mf-form__submit:active { opacity: .75; }
+
+
+/* ============================================================
+  15. ステップ・フロー
+  §06 flow.html: 1カラム縦積み
+============================================================ */
+
+.mf-flow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+/* コネクター線（縦） */
+.mf-flow-list::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--mf-color-border);
+  z-index: 0;
+}
+
+.mf-flow-item {
+  display: flex;
+  gap: var(--sp-space-4);
+  padding: var(--sp-space-6) 0;
+  position: relative;
+  z-index: 1;
+}
+
+.mf-flow-item__num {
+  flex-shrink: 0;
+  width:  40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--mf-color-primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mf-flow-item__body {
+  flex: 1;
+  padding-top: var(--sp-space-1);
+}
+
+.mf-flow-item__heading {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: var(--sp-lh-tight);
+  margin-bottom: var(--sp-space-2);
+}
+
+.mf-flow-item__text {
+  font-size: var(--sp-font-body);
+  line-height: var(--sp-lh-body);
+}
+
+
+/* ============================================================
+  16. 画像ラッパー（汎用）
+  §2-3 aspect-ratio + object-fit / 付録A-2
+============================================================ */
+
+/* 16:9（ブログカード・地図等） */
+.mf-media--16x9 {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--mf-color-ph);
+}
+
+/* 4:3（ヒーロービジュアル等） */
+.mf-media--4x3 {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--mf-color-ph);
+}
+
+/* 1:1（アバター等） */
+.mf-media--1x1 {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--mf-color-ph);
+}
+
+.mf-media--16x9 img,
+.mf-media--4x3 img,
+.mf-media--1x1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 全体表示: contain（画像全体を見せたい場合） */
+.mf-media--contain img {
+  object-fit: contain;
+}
+
+
+/* ============================================================
+  17. プレースホルダー要素（ワイヤー専用）
+  §5-5: 本番前に削除する対象
+  <!-- ワイヤー専用: 本番前に削除 -->
+============================================================ */
+
+/* ダミー画像枠 */
+.ph-img {
+  background: var(--mf-color-ph);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: var(--sp-font-sub);
+  font-style: italic;
+}
+
+/* ダミーロゴ枠 */
+.ph-logo {
+  display: inline-block;
+  background: var(--mf-color-ph);
+  width: 120px;
+  height: 32px;
+  border-radius: var(--mf-radius-sm);
+}
+
+/* ワイヤーノート */
+.wf-note {
+  background: #fffbcc;
+  border: 1px dashed #c8b400;
+  border-radius: var(--mf-radius-sm);
+  padding: var(--sp-space-3);
+  font-size: var(--sp-font-sub);
+  color: #555;
+  font-style: italic;
+}
+
+
+/* ============================================================
+  18. フィルター（ブログ一覧）
+  §09 blog: 横スクロール
+============================================================ */
+
+.mf-filter-bar {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--sp-space-2);
+  /* スクロール可能の視覚ヒント: 右端フェードアウト */
+  -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+          mask-image: linear-gradient(to right, black 80%, transparent 100%);
+}
+
+.mf-filter-bar__inner {
+  display: flex;
+  gap: var(--sp-space-2);
+  white-space: nowrap;
+}
+
+.mf-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--sp-tap-min);
+  padding: 0 var(--sp-space-4);
+  font-size: var(--sp-font-sub);
+  font-weight: 700;
+  border: 1px solid var(--mf-color-border);
+  border-radius: var(--mf-radius-pill);
+  background: var(--mf-color-bg);
+  color: var(--mf-color-text);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.mf-filter-btn.is-active {
+  background: var(--mf-color-primary);
+  color: #fff;
+  border-color: var(--mf-color-primary);
+}
+
+
+/* ============================================================
+  19. ページネーション
+  §09 blog: div.page-btn → button タグ化推奨
+============================================================ */
+
+.mf-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-space-2);
+  padding: var(--sp-space-8) 0;
+}
+
+/* ⚠️ TODO: PCワイヤーの div.page-btn は button に変更すること */
+.mf-pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width:  var(--sp-tap-min);
+  min-height: var(--sp-tap-min);
+  font-size: var(--sp-font-body);
+  font-weight: 700;
+  border: 1px solid var(--mf-color-border);
+  border-radius: var(--mf-radius-md);
+  background: var(--mf-color-bg);
+  cursor: pointer;
+  transition: background .15s;
+}
+.mf-pagination__btn.is-active,
+.mf-pagination__btn:hover {
+  background: var(--mf-color-primary);
+  color: #fff;
+  border-color: var(--mf-color-primary);
+}
+
+
+/* ============================================================
+  20. パンくずリスト
+============================================================ */
+
+.mf-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-space-1) var(--sp-space-2);
+  padding: var(--sp-space-3) var(--sp-padding-x);
+  font-size: var(--sp-font-sub);
+  color: var(--mf-color-text-sub);
+}
+
+.mf-breadcrumb__sep {
+  color: var(--mf-color-border);
+}
+
+
+/* ============================================================
+  21. sticky / fixed（§7-8）
+  SPワイヤー段階で位置・高さを確定
+  CTA固定は主CTAのみに限定
+============================================================ */
+
+/* 固定フッターCTA（主CTAのみ）: 必要なページだけ有効化 */
+.mf-fixed-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  padding: var(--sp-space-3) var(--sp-padding-x);
+  background: var(--mf-color-bg);
+  border-top: 1px solid var(--mf-color-border);
+  /* stickyヘッダーとfixed CTAの併用は慎重に（§7-8） */
+}
+
+
+/* ============================================================
+  22. ユーティリティ
+============================================================ */
+
+/* SP表示/非表示 */
+.mf-sp-only { display: block; }
+.mf-pc-only { display: none; }
+
+/* テキスト */
+.mf-text-center { text-align: center; }
+.mf-text-left   { text-align: left; }
+
+/* 色 */
+.mf-color-primary { color: var(--mf-color-primary); }
+.mf-color-sub     { color: var(--mf-color-text-sub); }
+
+/* マージンユーティリティ（スケールに従う §4-4） */
+.mf-mt-2  { margin-top: var(--sp-space-2);  }
+.mf-mt-4  { margin-top: var(--sp-space-4);  }
+.mf-mt-6  { margin-top: var(--sp-space-6);  }
+.mf-mt-8  { margin-top: var(--sp-space-8);  }
+.mf-mt-12 { margin-top: var(--sp-space-12); }
+
+.mf-mb-2  { margin-bottom: var(--sp-space-2);  }
+.mf-mb-4  { margin-bottom: var(--sp-space-4);  }
+.mf-mb-6  { margin-bottom: var(--sp-space-6);  }
+.mf-mb-8  { margin-bottom: var(--sp-space-8);  }
+.mf-mb-12 { margin-bottom: var(--sp-space-12); }
+
+/* スクリーンリーダー専用 */
+.mf-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ============================================================
+  23. @media — SP以外での打ち消し
+  このCSSはSPワイヤー専用のため、768px超では無効化が必要な場合は
+  ページ側CSSで上書きすること。
+  （wireframe-base.css との連携で使い分ける）
+============================================================ */
+
+@media (min-width: 769px) {
+  /* PC幅ではSP専用表示/非表示を反転 */
+  .mf-sp-only { display: none; }
+  .mf-pc-only { display: block; }
+
+  /* PC幅ではハンバーガーを非表示 */
+  .mf-header__toggle { display: none; }
+
+  /* PC幅ではグローバルナビをドロワーから通常表示へ戻す */
+  .mf-global-nav {
+    position: static;
+    transform: none;
+    padding: 0;
+    overflow: visible;
+  }
+}
+
+
+/* ============================================================
+  END OF sp-wireframe-base.css
+  本番実装時は theme.json / 本番CSS に置き換えること。
+  このファイル自体を本番CSSとして使わないこと（§7-3）。
+============================================================ */

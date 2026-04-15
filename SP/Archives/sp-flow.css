@@ -1,0 +1,425 @@
+
+/* ============================================================
+  sp-price.css
+  More Friends — 料金プランページ SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css
+    2. sp-wireframe-base.css
+    3. sp-price.css ← このファイル
+
+  主な変換:
+    - 基本料金カード: PC 4カラム → SP 1カラム
+    - featured カードを order:-1 で先頭に配置
+    - price-value-note: dark bg コントラスト要確認（§03 ⚠️）
+    - 各 .price-page-section: 背景色の交互塗り分け維持
+    - キャンセルポリシーリンク: ボタン1つのみ（§03）
+
+  ⚠️ 本番CSSではない。wireframe確認用。
+============================================================ */
+
+@media (max-width: 768px) {
+
+/* ============================================================
+  1. ページヘッダー
+============================================================ */
+
+  .mf-page-header {
+    padding: 40px 16px 48px;
+    background: var(--bg-mid, #f7f5f0);
+  }
+
+  .mf-page-header__heading {
+    font-size: clamp(26px, 6.5vw, 32px);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .mf-page-header__body {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+
+/* ============================================================
+  2. 基本料金カード（.mf-price-basic）
+  PC: 4カラム (.price-grid) → SP: 1カラム縦積み
+  featured カードを先頭に（order:-1）
+============================================================ */
+
+  .mf-price-basic {
+    padding: 48px 16px;
+  }
+
+  /* PC 4カラム grid を解除 → flexbox 1カラム */
+  .mf-price-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    grid-template-columns: unset;
+  }
+
+  /* featured カードを先頭へ（§03特記事項） */
+  .mf-price-card--featured {
+    order: -1;
+  }
+
+  /* 料金カード共通 */
+  .mf-price-card {
+    background: var(--bg, #fff);
+    border: 1px solid var(--border, #e0e0e0);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+
+  /* featured カード: 強調ボーダー */
+  .mf-price-card--featured {
+    border-color: var(--primary, #4a7c59);
+    border-width: 2px;
+  }
+
+  /* featured バッジ */
+  .mf-price-card__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    background: var(--primary, #4a7c59);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+  }
+
+  /* カード本文 */
+  .mf-price-card__body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mf-price-card__plan-type {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary, #4a7c59);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .mf-price-card__plan-name {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  /* 料金表示 */
+  .mf-price-card__price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .mf-price-card__price {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--primary, #4a7c59);
+  }
+
+  .mf-price-card__unit {
+    font-size: 14px;
+    color: var(--text-sub, #555);
+  }
+
+  .mf-price-card__desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-sub, #555);
+  }
+
+  /* 特徴リスト */
+  .mf-price-card__features {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 14px;
+    background: var(--bg-mid, #f7f5f0);
+    border-radius: 6px;
+    margin-top: 4px;
+  }
+
+  .mf-price-card__features li {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-sub, #555);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .mf-price-card__features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary, #4a7c59);
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  /* ⚠️ TODO: price-value-note — dark background でのコントラスト確認
+     WCAG AA: 通常テキスト 4.5:1 以上 / 大テキスト 3:1 以上
+     実際の背景色（rgba）と文字色を測定後に本番CSSで確定すること */
+  .mf-price-value-note,
+  .price-value-note {
+    padding: 20px;
+    border-radius: 8px;
+    background: var(--bg-dark, #2b2b2b);
+    /* ⚠️ TODO: 下記テキスト色のコントラスト比を実測すること */
+    color: rgba(255,255,255,.9);
+  }
+
+  .mf-price-value-note__text {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+
+/* ============================================================
+  3. 割増料金・その他料金（.mf-price-extra / .mf-price-other）
+  SP変換: 縦積みそのまま
+  背景色の交互塗り分け: .mf-section--bg-mid / 白 で維持
+============================================================ */
+
+  .mf-price-extra,
+  .mf-price-other {
+    padding: 48px 16px;
+  }
+
+  /* リスト */
+  .mf-price-extra__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border, #e0e0e0);
+  }
+
+  /* 各アイテム */
+  .mf-price-extra__item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border, #e0e0e0);
+  }
+
+  /* アイテムヘッド: 名称と料金を横並び */
+  .mf-price-extra__item-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .mf-price-extra__item-heading {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .mf-price-extra__item-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary, #4a7c59);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* その他料金のリンク */
+  .mf-price-other__link {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary, #4a7c59);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+
+/* ============================================================
+  4. 初回カウンセリング（.mf-price-counseling）
+  SP変換: 縦積みそのまま
+  無料であることを視覚的に強調
+============================================================ */
+
+  .mf-price-counseling {
+    padding: 48px 16px;
+  }
+
+  /* 無料強調エリア */
+  .mf-price-counseling__highlight {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--bg, #fff);
+    border-radius: 8px;
+    border: 2px solid var(--primary, #4a7c59);
+  }
+
+  .mf-price-counseling__free-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    padding: 6px 12px;
+    background: var(--primary, #4a7c59);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .mf-price-counseling__free-note {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  /* 特徴リスト */
+  .mf-price-counseling__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 20px;
+    background: var(--bg, #fff);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary, #4a7c59);
+  }
+
+  .mf-price-counseling__list li {
+    font-size: 15px;
+    line-height: 1.6;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .mf-price-counseling__list li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--primary, #4a7c59);
+    font-weight: 700;
+  }
+
+  /* カウンセリングCTA */
+  .mf-price-counseling .mf-btn--primary {
+    width: 100%;
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+
+/* ============================================================
+  5. お支払い方法（.mf-price-payment）
+  SP変換: 縦積みそのまま
+============================================================ */
+
+  .mf-price-payment {
+    padding: 48px 16px;
+  }
+
+  .mf-price-payment__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mf-price-payment__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg-mid, #f7f5f0);
+    border-radius: 8px;
+  }
+
+  .mf-price-payment__icon {
+    flex-shrink: 0;
+    font-size: 28px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .mf-price-payment__body {
+    flex: 1;
+  }
+
+  .mf-price-payment__heading {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .mf-price-payment__note {
+    border-top: 1px solid var(--border, #e0e0e0);
+    padding-top: 16px;
+  }
+
+
+/* ============================================================
+  6. キャンセルポリシーリンク（.mf-price-cancel）
+  §03: SP ではボタン1つのみで十分
+============================================================ */
+
+  .mf-price-cancel {
+    padding: 40px 16px;
+  }
+
+  .mf-price-cancel .mf-btn--outline {
+    width: 100%;
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+
+/* ============================================================
+  7. セクション間の境界線
+  .price-page-section 同士の境界を section 間の padding で処理
+  border-top/bottom は thin で存在感なし → SP では padding 増で対応（§03）
+============================================================ */
+
+  .price-page-section + .price-page-section {
+    /* padding が各セクションに設定済みのため追加の border は不要 */
+  }
+
+} /* end @media (max-width: 768px) */
+
+
+/* ============================================================
+  PC幅での打ち消し
+============================================================ */
+
+@media (min-width: 769px) {
+
+  /* 料金グリッドを PC 4カラムに戻す */
+  .mf-price-grid {
+    display: grid;
+  }
+
+  /* featured カードの order をリセット */
+  .mf-price-card--featured {
+    order: unset;
+  }
+
+  /* 支払いリストを PC 定義に戻す */
+  .mf-price-payment__list {
+    display: grid;
+  }
+
+}
+
+/* ============================================================
+  END OF sp-price.css
+============================================================ */
