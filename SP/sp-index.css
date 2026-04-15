@@ -192,6 +192,11 @@
   .hamburger {
     position: relative;
     z-index: 101;
+    pointer-events: auto;
+  }
+
+  #sp-nav {
+    pointer-events: auto;
   }
 
   /* 3本線を白に上書き */
