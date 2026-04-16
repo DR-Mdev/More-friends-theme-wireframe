@@ -172,18 +172,19 @@
       </button>
     </div>
 
-    <nav id="sp-nav" aria-hidden="true">
-      <a href="./sp-about.html">More Friendsとは</a>
-      <a href="./sp-service.html">サービス内容</a>
-      <a href="./sp-price.html" class="is-current">料金プラン</a>
-      <a href="./sp-flow.html">利用の流れ</a>
-      <a href="./sp-sitter.html">シッター紹介</a>
-      <a href="./sp-area.html">対応エリア</a>
-      <a href="./sp-reviews.html">お客様の声</a>
-      <a href="./sp-blog.html">ブログ</a>
-      <a href="./sp-contact.html">お問い合わせ</a>
-    </nav>
   </header>
+
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./sp-about.html">More Friendsとは</a>
+    <a href="./sp-service.html">サービス内容</a>
+    <a href="./sp-price.html" class="is-current">料金プラン</a>
+    <a href="./sp-flow.html">利用の流れ</a>
+    <a href="./sp-sitter.html">シッター紹介</a>
+    <a href="./sp-area.html">対応エリア</a>
+    <a href="./sp-reviews.html">お客様の声</a>
+    <a href="./sp-blog.html">ブログ</a>
+    <a href="./sp-contact.html">お問い合わせ</a>
+  </nav>
 
   <main>
 
@@ -577,27 +578,46 @@
   </footer>
 
   <script>
-  // ハンバーガーメニュー開閉（§2-2）
-  document.querySelector('.hamburger')?.addEventListener('click', function() {
+  (function () {
     const nav = document.getElementById('sp-nav');
-    const isOpen = nav.classList.toggle('open');
-    this.setAttribute('aria-expanded', isOpen);
-    nav.setAttribute('aria-hidden', !isOpen);
-  });
+    const toggle = document.getElementById('sp-menu-toggle') || document.querySelector('.hamburger');
+    if (!nav || !toggle) return;
 
-  // Escape キーでナビを閉じる（§2-2）
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const nav = document.getElementById('sp-nav');
-      const toggle = document.querySelector('.hamburger');
-      if (nav && nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        nav.setAttribute('aria-hidden', 'true');
-        toggle?.setAttribute('aria-expanded', 'false');
-        toggle?.focus();
-      }
+    function setMenuState(isOpen) {
+      nav.classList.toggle('open', isOpen);
+      nav.style.display = isOpen ? 'flex' : 'none';
+      nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
-  });
+
+    toggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      setMenuState(!nav.classList.contains('open'));
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!nav.classList.contains('open')) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
+      setMenuState(false);
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        setMenuState(false);
+      });
+    });
+
+    setMenuState(false);
+  })();
   </script>
 
 </body>

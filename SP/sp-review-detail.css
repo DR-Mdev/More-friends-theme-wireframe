@@ -13,10 +13,12 @@
 @media (max-width: 768px) {
 
   /* ==============================================
-     SP ヘッダー（共通パターン）
+     SP ヘッダー
   =============================================== */
-  header nav:not(.open) { display: none; }
-  header nav a { display: flex; }
+  #sp-nav {
+    display: none;
+    pointer-events: auto;
+  }
 
   header,
   .sp-header {
@@ -31,6 +33,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .sp-header .header-logo,
+  header .header-logo {
+    font-size: 13px;
+    min-width: auto;
+    min-height: 36px;
+    padding: 0;
   }
 
   .sp-header__actions {
@@ -59,16 +69,22 @@
     border-left: 1px solid var(--border);
   }
 
+  .sp-header__action-btn:first-child {
+    border-left: none;
+  }
+
   .sp-header__action-btn--ig {
     background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     color: #fff;
     border-left-color: transparent;
+    border-radius: 0;
   }
 
   .sp-header__action-btn--line {
     background: #06C755;
     color: #fff;
     border-left-color: transparent;
+    border-radius: 0;
   }
 
   .sp-header__action-btn--menu {
@@ -76,6 +92,13 @@
     color: #fff;
     border-radius: 0;
     border-left-color: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
     min-width: 56px;
     min-height: 44px;
     padding: 8px 6px 6px;
@@ -107,6 +130,7 @@
     gap: 5px;
     width: auto;
     height: 16px;
+    background: transparent;
   }
 
   .hamburger-lines span {
@@ -115,20 +139,28 @@
     height: 1.5px;
     background: #fff;
     border-radius: 2px;
+    flex-shrink: 0;
   }
 
-  .sp-header__action-btn--menu .sp-header__action-label {
-    font-size: 9px;
-    font-weight: 500;
-    color: #fff;
+  .hamburger {
+    position: relative;
+    z-index: 101;
+    pointer-events: auto;
   }
 
-  /* ドロワーナビ */
-  header nav.open {
+  #sp-nav {
+    pointer-events: auto;
+  }
+
+  #sp-nav.open {
     position: fixed;
     top: 60px;
-    left: 0; right: 0; bottom: 0;
-    background: rgba(255, 255, 255, 0.98);
+    left: 48px;
+    right: 0;
+    bottom: auto;
+    height: auto;
+    max-height: calc(100dvh - 60px);
+    background: #fff;
     display: flex !important;
     flex-direction: column;
     gap: 0;
@@ -136,34 +168,46 @@
     overflow-y: auto;
     z-index: 99;
     border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 12px 24px rgba(38, 23, 15, 0.08);
   }
 
-  header nav.open a {
+  #sp-nav.open a {
     display: flex;
     align-items: center;
-    padding: 16px 24px;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 18px 12px 20px;
     font-size: 15px;
-    border-bottom: 1px solid var(--border);
-    min-height: 52px;
+    font-weight: 500;
+    line-height: 1.4;
+    min-height: 44px;
     color: var(--text);
+    text-align: left;
     text-decoration: none;
-    background: none;
+    background: #fff;
+    border-bottom: none;
     border-radius: 0;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
+    opacity: 1;
+    visibility: visible;
   }
 
-  header nav.open a::after {
+  #sp-nav.open a::after {
     content: '›';
     margin-left: auto;
     color: var(--primary);
     font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
   }
 
-  header nav.open a.is-current {
+  #sp-nav.open a.is-current {
     color: var(--primary);
     font-weight: 500;
   }
-
   /* ==============================================
      共通: パディング・タイポ
   =============================================== */
@@ -420,3 +464,4 @@
   display: block;
   margin-bottom: 16px;
 }
+

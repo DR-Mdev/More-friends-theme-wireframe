@@ -15,6 +15,7 @@
       3. sp-area.css             SP上書き（768px以下）← 追加
   -->
   <link rel="stylesheet" href="../wireframe-base.css">
+  <link rel="stylesheet" href="sp-wireframe-base.css">
   <style>
     /* ── area.html ページ固有スタイル（PCレイアウト） ──
        SP では sp-area.css の @media (max-width: 768px) で上書きされる */
@@ -98,9 +99,9 @@
       - ヘッダー右側: Instagram + LINE + MENU ボタン
       - sp-index.html / sp-about.html と同一構造（DOM二重化なし §7-1）
   ========================================= -->
-  <header class="sp-header">
-    <a href="./sp-index.html" class="header-logo-plain">
-        <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+      <header class="sp-header">
+    <a href="./sp-index.html" class="header-logo">
+      <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
     </a>
 
     <div class="sp-header__actions">
@@ -132,6 +133,7 @@
       </a>
 
       <button
+        id="sp-menu-toggle"
         class="hamburger sp-header__action-btn sp-header__action-btn--menu"
         type="button"
         aria-expanded="false"
@@ -149,18 +151,18 @@
       </button>
     </div>
 
-    <nav id="sp-nav" aria-hidden="true">
-      <a href="./sp-about.html">More Friendsとは</a>
-      <a href="./sp-service.html">サービス内容</a>
-      <a href="./sp-price.html">料金プラン</a>
-      <a href="./sp-flow.html">利用の流れ</a>
-      <a href="./sp-sitter.html">シッター紹介</a>
-      <a href="./sp-area.html" class="is-current">対応エリア</a>
-      <a href="./sp-reviews.html">お客様の声</a>
-      <a href="./sp-blog.html">ブログ</a>
-      <a href="./sp-contact.html">お問い合わせ</a>
-    </nav>
   </header>
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./sp-about.html">More Friendsとは</a>
+    <a href="./sp-service.html">サービス内容</a>
+    <a href="./sp-price.html">料金プラン</a>
+    <a href="./sp-flow.html">利用の流れ</a>
+    <a href="./sp-sitter.html">シッター紹介</a>
+    <a href="./sp-area.html">対応エリア</a>
+    <a href="./sp-reviews.html">お客様の声</a>
+    <a href="./sp-blog.html">ブログ</a>
+    <a href="./sp-contact.html">お問い合わせ</a>
+  </nav>
 
   <main>
 
@@ -171,6 +173,11 @@
       SP変換: padding縮小 / h1 クランプ
     ========================================= -->
     <section class="page-header">
+      <div class="breadcrumb">
+        <a href="./sp-index.html">ホーム</a>
+        <span>›</span>
+        <span class="breadcrumb-current">対応エリア</span>
+      </div>
       <span class="label">Service Area</span>
       <h1>対応エリア</h1>
       <p>現在、東京都・千葉県の一部エリアでサービスを提供しています。<br>ご自宅エリアが対象かどうか、お気軽にご確認ください。</p>
@@ -507,27 +514,46 @@
   </footer>
 
   <script>
-  // ハンバーガーメニュー開閉（§2-2）
-  document.querySelector('.hamburger')?.addEventListener('click', function() {
+  (function () {
     const nav = document.getElementById('sp-nav');
-    const isOpen = nav.classList.toggle('open');
-    this.setAttribute('aria-expanded', isOpen);
-    nav.setAttribute('aria-hidden', !isOpen);
-  });
+    const toggle = document.getElementById('sp-menu-toggle') || document.querySelector('.hamburger');
+    if (!nav || !toggle) return;
 
-  // Escape キーでナビを閉じる（§2-2）
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const nav = document.getElementById('sp-nav');
-      const toggle = document.querySelector('.hamburger');
-      if (nav && nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        nav.setAttribute('aria-hidden', 'true');
-        toggle?.setAttribute('aria-expanded', 'false');
-        toggle?.focus();
-      }
+    function setMenuState(isOpen) {
+      nav.classList.toggle('open', isOpen);
+      nav.style.display = isOpen ? 'flex' : 'none';
+      nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
-  });
+
+    toggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      setMenuState(!nav.classList.contains('open'));
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!nav.classList.contains('open')) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
+      setMenuState(false);
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        setMenuState(false);
+      });
+    });
+
+    setMenuState(false);
+  })();
   </script>
 
 </body>

@@ -222,18 +222,19 @@
       </button>
     </div>
 
-    <nav id="sp-nav" aria-hidden="true">
-      <a href="./sp-about.html">More Friendsとは</a>
-      <a href="./sp-service.html">サービス内容</a>
-      <a href="./sp-price.html">料金プラン</a>
-      <a href="./sp-flow.html">利用の流れ</a>
-      <a href="./sp-sitter.html" class="is-current">シッター紹介</a>
-      <a href="./sp-area.html">対応エリア</a>
-      <a href="./sp-reviews.html">お客様の声</a>
-      <a href="./sp-blog.html">ブログ</a>
-      <a href="./sp-contact.html">お問い合わせ</a>
-    </nav>
   </header>
+
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./sp-about.html">More Friendsとは</a>
+    <a href="./sp-service.html">サービス内容</a>
+    <a href="./sp-price.html">料金プラン</a>
+    <a href="./sp-flow.html">利用の流れ</a>
+    <a href="./sp-sitter.html" class="is-current">シッター紹介</a>
+    <a href="./sp-area.html">対応エリア</a>
+    <a href="./sp-reviews.html">お客様の声</a>
+    <a href="./sp-blog.html">ブログ</a>
+    <a href="./sp-contact.html">お問い合わせ</a>
+  </nav>
 
   <main>
 
@@ -245,6 +246,11 @@
       ⚠️ TODO: page-header-lead の <br> を本番で削除すること
     ========================================= -->
     <section class="page-header">
+      <div class="breadcrumb">
+        <a href="./sp-index.html">ホーム</a>
+        <span>›</span>
+        <span class="breadcrumb-current">シッター紹介</span>
+      </div>
       <span class="page-header-eyebrow">Sitter Profile</span>
       <h1 class="page-header-title">シッター紹介</h1>
       <p class="page-header-lead">
@@ -882,43 +888,9 @@
     const toggle = document.getElementById('sp-menu-toggle');
     if (!nav || !toggle) return;
 
-    function applyOpenStyles() {
-      nav.style.display = 'flex';
-      nav.style.position = 'fixed';
-      nav.style.top = '60px';
-      nav.style.left = '0';
-      nav.style.right = '0';
-      nav.style.bottom = '0';
-      nav.style.width = '100%';
-      nav.style.background = 'rgba(255, 255, 255, 0.98)';
-      nav.style.flexDirection = 'column';
-      nav.style.gap = '0';
-      nav.style.padding = '0';
-      nav.style.overflowY = 'auto';
-      nav.style.zIndex = '9999';
-      nav.style.borderTop = '1px solid var(--border)';
-    }
-
-    function clearInlineMenuStyles() {
-      nav.style.display = 'none';
-      nav.style.position = '';
-      nav.style.top = '';
-      nav.style.left = '';
-      nav.style.right = '';
-      nav.style.bottom = '';
-      nav.style.width = '';
-      nav.style.background = '';
-      nav.style.flexDirection = '';
-      nav.style.gap = '';
-      nav.style.padding = '';
-      nav.style.overflowY = '';
-      nav.style.zIndex = '';
-      nav.style.borderTop = '';
-    }
-
     function closeMenu() {
       nav.classList.remove('open');
-      clearInlineMenuStyles();
+      nav.style.display = 'none';
       nav.setAttribute('aria-hidden', 'true');
       toggle.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
@@ -926,7 +898,7 @@
 
     function openMenu() {
       nav.classList.add('open');
-      applyOpenStyles();
+      nav.style.display = 'flex';
       nav.setAttribute('aria-hidden', 'false');
       toggle.setAttribute('aria-expanded', 'true');
       document.body.style.overflow = 'hidden';

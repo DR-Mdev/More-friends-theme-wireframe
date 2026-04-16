@@ -16,6 +16,7 @@
       3. sp-about.css            SP上書き（768px以下）← 追加
   -->
   <link rel="stylesheet" href="../wireframe-base.css">
+  <link rel="stylesheet" href="sp-wireframe-base.css">
   <style>
     /* ── about.html ページ固有スタイル（PCレイアウト） ──
        SP では sp-about.css の @media (max-width: 768px) で上書きされる */
@@ -151,15 +152,13 @@
       - ヘッダー右側: Instagram + LINE + MENU ボタン（アイコン + ラベル縦並び）
       - sp-index.html と同一構造（DOM二重化なし §7-1）
   ========================================= -->
-  <header class="sp-header">
+      <header class="sp-header">
     <a href="./sp-index.html" class="header-logo">
       <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
     </a>
 
-    <!-- ヘッダー右アクションエリア -->
     <div class="sp-header__actions">
 
-      <!-- Instagram 相談予約ボタン -->
       <a
         href="https://www.instagram.com/morefriends_petsitter"
         class="sp-header__action-btn sp-header__action-btn--ig"
@@ -173,7 +172,6 @@
         <span class="sp-header__action-label">相談予約</span>
       </a>
 
-      <!-- LINE 相談ボタン -->
       <a
         href="https://lin.ee/9WqPEjj"
         class="sp-header__action-btn sp-header__action-btn--line"
@@ -187,7 +185,6 @@
         <span class="sp-header__action-label">LINE相談</span>
       </a>
 
-      <!-- ハンバーガーボタン（§2-2 / 付録A-1） -->
       <button
         id="sp-menu-toggle"
         class="hamburger sp-header__action-btn sp-header__action-btn--menu"
@@ -207,34 +204,20 @@
       </button>
     </div>
 
-    <!-- ドロワーナビ（ハンバーガー開閉） -->
-    <nav id="sp-nav" aria-hidden="true">
-      <!-- is-current: カレントページをハイライト -->
-      <a href="./sp-about.html" class="is-current">More Friendsとは</a>
-      <a href="./sp-service.html">サービス内容</a>
-      <a href="./sp-price.html">料金プラン</a>
-      <a href="./sp-flow.html">利用の流れ</a>
-      <a href="./sp-sitter.html">シッター紹介</a>
-      <a href="./sp-area.html">対応エリア</a>
-      <a href="./sp-reviews.html">お客様の声</a>
-      <a href="./sp-blog.html">ブログ</a>
-      <a href="./sp-contact.html">お問い合わせ</a>
-    </nav>
   </header>
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./sp-about.html">More Friendsとは</a>
+    <a href="./sp-service.html">サービス内容</a>
+    <a href="./sp-price.html">料金プラン</a>
+    <a href="./sp-flow.html">利用の流れ</a>
+    <a href="./sp-sitter.html">シッター紹介</a>
+    <a href="./sp-area.html">対応エリア</a>
+    <a href="./sp-reviews.html">お客様の声</a>
+    <a href="./sp-blog.html">ブログ</a>
+    <a href="./sp-contact.html">お問い合わせ</a>
+  </nav>
 
   <main>
-
-    <!-- ========================================
-      パンくず
-      parts/breadcrumb.php
-      編集区分: 固定
-      SP変換: padding を 16px に縮小
-    ========================================= -->
-    <div class="breadcrumb">
-      <a href="./sp-index.html">Home</a>
-      <span class="breadcrumb-sep">/</span>
-      <span class="breadcrumb-current">More Friendsとは</span>
-    </div>
 
     <!-- ========================================
       1. ページヘッダー
@@ -250,6 +233,11 @@
                sp-about.css の aspect-ratio で制御済み
     ========================================= -->
     <section class="page-header">
+      <div class="breadcrumb">
+        <a href="./sp-index.html">ホーム</a>
+        <span>›</span>
+        <span class="breadcrumb-current">More Friendsとは</span>
+      </div>
       <div>
         <span class="label">About More Friends</span>
         <h1 class="section-title">
@@ -744,70 +732,23 @@
 
     if (!toggle || !nav) return;
 
-    function applyOpenStyles() {
-      nav.style.display = 'flex';
-      nav.style.position = 'fixed';
-      nav.style.top = '60px';
-      nav.style.left = '0';
-      nav.style.right = '0';
-      nav.style.bottom = '0';
-      nav.style.width = '100%';
-      nav.style.background = 'rgba(255, 255, 255, 0.98)';
-      nav.style.flexDirection = 'column';
-      nav.style.gap = '0';
-      nav.style.padding = '0';
-      nav.style.overflowY = 'auto';
-      nav.style.zIndex = '9999';
-      nav.style.borderTop = '1px solid var(--border)';
-    }
-
-    function clearInlineMenuStyles() {
-      nav.style.display = 'none';
-      nav.style.position = '';
-      nav.style.top = '';
-      nav.style.left = '';
-      nav.style.right = '';
-      nav.style.bottom = '';
-      nav.style.width = '';
-      nav.style.background = '';
-      nav.style.flexDirection = '';
-      nav.style.gap = '';
-      nav.style.padding = '';
-      nav.style.overflowY = '';
-      nav.style.zIndex = '';
-      nav.style.borderTop = '';
-    }
-
-    function closeMenu() {
-      nav.classList.remove('open');
-      clearInlineMenuStyles();
-      nav.setAttribute('aria-hidden', 'true');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    }
-
-    function openMenu() {
-      nav.classList.add('open');
-      applyOpenStyles();
-      nav.setAttribute('aria-hidden', 'false');
-      toggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
+    function setMenuState(isOpen) {
+      nav.classList.toggle('open', isOpen);
+      nav.style.display = isOpen ? 'flex' : 'none';
+      nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
 
     toggle.addEventListener('click', function (event) {
       event.preventDefault();
       event.stopPropagation();
-
-      if (nav.classList.contains('open')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
+      setMenuState(!nav.classList.contains('open'));
     });
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && nav.classList.contains('open')) {
-        closeMenu();
+        setMenuState(false);
         toggle.focus();
       }
     });
@@ -815,14 +756,16 @@
     document.addEventListener('click', function (event) {
       if (!nav.classList.contains('open')) return;
       if (nav.contains(event.target) || toggle.contains(event.target)) return;
-      closeMenu();
+      setMenuState(false);
     });
 
     nav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', closeMenu);
+      link.addEventListener('click', function () {
+        setMenuState(false);
+      });
     });
 
-    closeMenu();
+    setMenuState(false);
   })();
   </script>
 

@@ -21,14 +21,21 @@
 @media (max-width: 768px) {
 
   /* ==============================================
-     SP ヘッダー（共通パターン）
+  /* ==============================================
+     SP ヘッダー
+     Olive Sitter 参照: ロゴ左 + 右側に「アイコン+ラベル」ボタン群 + MENU
+
+     .sp-header__actions: 右側ボタンエリア
+     .sp-header__action-btn: 各ボタン（アイコン上 + ラベル下の縦並び）
      44×44px タップターゲット確保（§2-1）
   =============================================== */
 
-  header nav:not(.open) {
+  /* PCのヘッダーナビを非表示 */
+  #sp-nav {
     display: none;
   }
 
+  /* SP専用ヘッダー全体 */
   header,
   .sp-header {
     position: sticky;
@@ -44,10 +51,7 @@
     justify-content: space-between;
   }
 
-  body {
-    padding-top: 0;
-  }
-
+  /* ロゴ */
   .sp-header .header-logo,
   header .header-logo {
     font-size: 13px;
@@ -56,12 +60,15 @@
     padding: 6px 14px;
   }
 
+  /* 右側ボタンエリア */
   .sp-header__actions {
     display: flex;
     align-items: center;
     gap: 0;
   }
 
+  /* 各アクションボタン（アイコン + ラベル縦並び）
+     タップターゲット: 最小 44×44px（§2-1） */
   .sp-header__action-btn {
     display: flex;
     flex-direction: column;
@@ -86,6 +93,7 @@
     border-left: none;
   }
 
+  /* Instagram ボタン */
   .sp-header__action-btn--ig {
     background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     color: #fff;
@@ -93,6 +101,7 @@
     border-radius: 0;
   }
 
+  /* LINE ボタン */
   .sp-header__action-btn--line {
     background: #06C755;
     color: #fff;
@@ -100,11 +109,14 @@
     border-radius: 0;
   }
 
+  /* MENU ボタン */
   .sp-header__action-btn--menu {
     background: var(--bg-dark);
     color: #fff;
     border-radius: 0;
     border-left-color: transparent;
+    appearance: none;
+    -webkit-appearance: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -117,6 +129,7 @@
     letter-spacing: 0.08em;
   }
 
+  /* アクションボタン内アイコンエリア */
   .sp-header__action-icon {
     display: flex;
     align-items: center;
@@ -133,6 +146,7 @@
     white-space: nowrap;
   }
 
+  /* 特定性を (0,2,0) に上げて .hamburger span (0,1,1) に勝つ */
   .sp-header__action-btn--menu .hamburger-lines {
     display: flex;
     flex-direction: column;
@@ -153,36 +167,58 @@
     flex-shrink: 0;
   }
 
+  /* wireframe-base.css の .hamburger span（height:2px）の影響を打ち消す */
   .sp-header__action-btn--menu .sp-header__action-icon {
     width: auto;
     height: auto;
     background: transparent;
     border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .sp-header__action-btn--menu .sp-header__action-label {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
     display: block;
     font-size: 9px;
     font-weight: 500;
     letter-spacing: 0.08em;
     color: #fff;
-    background: transparent;
   }
 
+  .hamburger {
+    position: relative;
+    z-index: 101;
+    pointer-events: auto;
+  }
+
+  #sp-nav {
+    pointer-events: auto;
+  }
+
+  /* 3本線を白に上書き */
   .sp-header__action-btn--menu .hamburger-lines span {
     background: #fff;
     width: 18px;
     height: 1.5px;
+    border-radius: 2px;
+    display: block;
   }
 
-  /* ドロワーナビ */
-  header nav.open {
+  /* ドロワーナビ（開いたとき）*/
+  #sp-nav.open {
     position: fixed;
     top: 60px;
-    left: 0;
+    left: 48px;
     right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.98);
+    bottom: auto;
+    height: auto;
+    max-height: calc(100dvh - 60px);
+    background: #fff;
     display: flex !important;
     flex-direction: column;
     gap: 0;
@@ -190,59 +226,90 @@
     overflow-y: auto;
     z-index: 99;
     border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 12px 24px rgba(38, 23, 15, 0.08);
   }
 
-  header nav.open a {
+  #sp-nav.open a {
     display: flex;
     align-items: center;
-    padding: 16px 24px;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 18px 12px 20px;
     font-size: 15px;
-    border-bottom: 1px solid var(--border);
-    min-height: 52px;
+    font-weight: 500;
+    line-height: 1.4;
+    min-height: 44px;
     color: var(--text);
+    text-align: left;
     text-decoration: none;
+    background: #fff;
+    border-bottom: none;
+    border-radius: 0;
+    letter-spacing: 0;
+    opacity: 1;
+    visibility: visible;
   }
 
-  header nav.open a::after {
+  #sp-nav.open a::after {
     content: '›';
     margin-left: auto;
     color: var(--primary);
     font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
   }
 
-  header nav.open a.is-current {
+  #sp-nav.open a.is-current {
     color: var(--primary);
     font-weight: 500;
   }
 
-
-  /* ==============================================
-     共通: セクションパディング
-  =============================================== */
-  section {
-    padding: 56px 16px;
+  .header-logo {
+    line-height: 0;
   }
 
-  .section-title {
-    font-size: clamp(24px, 6vw, 28px);
-    line-height: 1.35;
+  .header-logo .site-logo-img--header {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px 6px;
+    flex-wrap: wrap;
+    font-size: 11px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: var(--text-sub);
   }
 
-  .cta-section .section-title {
-    font-size: clamp(24px, 6vw, 28px);
+  .breadcrumb a {
+    color: var(--text-sub);
+    text-decoration: none;
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 
-  .section-header {
-    margin-bottom: 32px;
+  .breadcrumb span {
+    color: var(--primary);
+    opacity: 1;
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 
-
-  /* ==============================================
+  .breadcrumb-current {
+    color: var(--text);
+    opacity: 1;
+  }
      1. ページヘッダー
      PC: padding 72px 80px → SP: 縮小
   =============================================== */
   .page-header {
-    padding: 32px 16px 40px;
+    padding: 16px 16px 40px;
   }
 
   .page-header .section-title {
@@ -475,3 +542,4 @@
   display: block;
   margin-bottom: 16px;
 }
+

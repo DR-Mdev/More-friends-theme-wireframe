@@ -21,7 +21,7 @@
        SP では sp-blog.css の @media (max-width: 768px) で上書きされる */
 
     /* body offset: SP では sp-blog.css の padding-top: 0 で上書き */
-    body { padding-top: 64px; }
+    body { padding-top: 0; }
 
     /* ページヘッダー */
     .page-header {
@@ -117,9 +117,9 @@
       - ヘッダー右側: Instagram + LINE + MENU ボタン
       - sp-index.html と同一構造（DOM二重化なし §7-1）
   ========================================= -->
-  <header class="sp-header">
-    <a href="./sp-index.html" class="header-logo-plain">
-        <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    <header class="sp-header">
+    <a href="./sp-index.html" class="header-logo">
+      <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
     </a>
 
     <div class="sp-header__actions">
@@ -151,6 +151,7 @@
       </a>
 
       <button
+        id="sp-menu-toggle"
         class="hamburger sp-header__action-btn sp-header__action-btn--menu"
         type="button"
         aria-expanded="false"
@@ -168,18 +169,18 @@
       </button>
     </div>
 
-    <nav id="sp-nav" aria-hidden="true">
-      <a href="./sp-about.html">More Friendsとは</a>
-      <a href="./sp-service.html">サービス内容</a>
-      <a href="./sp-price.html">料金プラン</a>
-      <a href="./sp-flow.html">利用の流れ</a>
-      <a href="./sp-sitter.html">シッター紹介</a>
-      <a href="./sp-area.html">対応エリア</a>
-      <a href="./sp-reviews.html">お客様の声</a>
-      <a href="./sp-blog.html" class="is-current">ブログ</a>
-      <a href="./sp-contact.html">お問い合わせ</a>
-    </nav>
   </header>
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./sp-about.html">More Friendsとは</a>
+    <a href="./sp-service.html">サービス内容</a>
+    <a href="./sp-price.html">料金プラン</a>
+    <a href="./sp-flow.html">利用の流れ</a>
+    <a href="./sp-sitter.html">シッター紹介</a>
+    <a href="./sp-area.html">対応エリア</a>
+    <a href="./sp-reviews.html">お客様の声</a>
+    <a href="./sp-blog.html">ブログ</a>
+    <a href="./sp-contact.html">お問い合わせ</a>
+  </nav>
 
   <main>
 
@@ -190,6 +191,11 @@
       SP変換: padding縮小 / section-title クランプ
     ========================================= -->
     <section class="page-header">
+      <div class="breadcrumb">
+        <a href="./sp-index.html">ホーム</a>
+        <span>›</span>
+        <span class="breadcrumb-current">ブログ</span>
+      </div>
       <span class="label">Blog</span>
       <h1 class="section-title">ペットシッターコラム</h1>
       <p class="section-sub">ペットとの暮らしをもっと豊かに。お留守番のコツ・シッター選びの知識・日常のケアまで、飼い主さんに役立つ情報をお届けします。</p>

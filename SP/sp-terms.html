@@ -26,6 +26,7 @@
     .breadcrumb a { color: var(--text-sub); text-decoration: none; }
     .breadcrumb a:hover { color: var(--primary); }
     .breadcrumb span { opacity: 0.45; }
+    .breadcrumb-current { color: var(--text); opacity: 1; }
 
     /* ── ページヘッダー ── */
     .page-header {
@@ -211,6 +212,221 @@
       color: var(--text);
       margin-bottom: 8px;
     }
+
+    .terms-toc-card {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 4px 6px;
+        flex-wrap: wrap;
+        font-size: 11px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+        color: var(--text-sub);
+      }
+
+      .breadcrumb a {
+        color: var(--text-sub);
+        text-decoration: none;
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+
+      .breadcrumb span {
+        color: var(--primary);
+        opacity: 1;
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+
+      .breadcrumb-current {
+        color: var(--text);
+        opacity: 1;
+      }
+
+      .page-header {
+        padding: 16px 16px 40px;
+      }
+
+      .page-header .section-title {
+        font-size: clamp(26px, 7vw, 32px);
+        line-height: 1.35;
+      }
+
+      .page-header-lead {
+        font-size: 14px;
+        line-height: 1.85;
+        max-width: 100%;
+      }
+
+      .terms-layout {
+        gap: 24px;
+        padding: 24px 0 56px;
+      }
+      .terms-layout,
+      .terms-content-layout,
+      .terms-grid,
+      .terms-body-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .terms-toc,
+      .terms-sidebar,
+      .terms-index {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        order: 1;
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        float: none !important;
+        clear: both;
+        margin: 0;
+        z-index: auto;
+        transform: none;
+        align-self: stretch;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+      }
+
+      .terms-meta,
+      .terms-summary,
+      .terms-dates {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        order: 2;
+        position: static !important;
+        float: none !important;
+        clear: both;
+        margin: 0;
+        padding: 0 16px;
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--text-sub);
+      }
+
+      .terms-body,
+      .terms-article,
+      .terms-main {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        order: 3;
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        float: none !important;
+        clear: both;
+        margin: 0;
+        z-index: auto;
+        transform: none;
+        padding: 0 16px 56px;
+      }
+
+      .terms-toc + .terms-meta,
+      .terms-meta + .terms-body,
+      .terms-toc + .terms-body {
+        margin-top: 0;
+      }
+
+      .terms-toc h2,
+      .terms-toc-title {
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: var(--primary);
+        margin-bottom: 12px;
+      }
+
+      .terms-toc ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .terms-toc li {
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--text);
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .terms-toc li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .terms-body h2,
+      .terms-article h2,
+      .terms-main h2 {
+        font-size: 22px;
+        line-height: 1.4;
+        margin: 32px 0 12px;
+      }
+
+      .terms-body h3,
+      .terms-article h3,
+      .terms-main h3 {
+        font-size: 17px;
+        line-height: 1.5;
+        margin: 24px 0 10px;
+      }
+
+      .terms-body p,
+      .terms-body li,
+      .terms-article p,
+      .terms-article li,
+      .terms-main p,
+      .terms-main li {
+        font-size: 14px;
+        line-height: 1.95;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      body {
+        padding-top: 0;
+      }
+
+      .page-header {
+        padding: 16px 16px 40px;
+      }
+
+      .page-header .section-title {
+        font-size: clamp(26px, 7vw, 32px);
+        line-height: 1.35;
+      }
+
+      .page-header-lead {
+        font-size: 14px;
+        line-height: 1.85;
+        max-width: 100%;
+      }
+
+      .terms-layout {
+        gap: 24px;
+        padding: 24px 0 56px;
+      }
+    }
   </style>
 </head>
 
@@ -222,16 +438,6 @@
   <a href="./sp-index.html" class="header-logo">
     <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
   </a>
-  <nav id="sp-nav" aria-hidden="true">
-    <a href="./sp-about.html">More Friendsとは</a>
-    <a href="./sp-service.html">サービス内容</a>
-    <a href="./sp-price.html">料金プラン</a>
-    <a href="./sp-flow.html">利用の流れ</a>
-    <a href="./sp-sitter.html">シッター紹介</a>
-    <a href="./sp-blog.html">ブログ</a>
-    <a href="https://www.instagram.com/morefriends_petsitter" class="btn-ig" target="_blank" rel="noopener noreferrer">Instagramで相談</a>
-    <a href="https://lin.ee/9WqPEjj" class="btn-line" target="_blank" rel="noopener noreferrer">LINEで相談</a>
-  </nav>
   <button id="sp-menu-toggle" class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-nav">
     <span></span>
     <span></span>
@@ -239,19 +445,25 @@
   </button>
 </header>
 
+<nav id="sp-nav" aria-hidden="true">
+  <a href="./sp-about.html">More Friendsとは</a>
+  <a href="./sp-service.html">サービス内容</a>
+  <a href="./sp-price.html">料金プラン</a>
+  <a href="./sp-flow.html">利用の流れ</a>
+  <a href="./sp-sitter.html">シッター紹介</a>
+  <a href="./sp-blog.html">ブログ</a>
+  <a href="https://www.instagram.com/morefriends_petsitter" class="btn-ig" target="_blank" rel="noopener noreferrer">Instagramで相談</a>
+  <a href="https://lin.ee/9WqPEjj" class="btn-line" target="_blank" rel="noopener noreferrer">LINEで相談</a>
+</nav>
+
 <main>
-
-<div style="height:64px"></div><!-- header offset -->
-
-<!-- ========== BREADCRUMB ========== -->
-<div class="breadcrumb">
-  <a href="./sp-index.html">Home</a>
-  <span>/</span>
-  <span style="color:var(--text)">利用規約</span>
-</div>
-
 <!-- ========== PAGE HEADER ========== -->
 <div class="page-header">
+  <div class="breadcrumb">
+    <a href="./sp-index.html">ホーム</a>
+    <span>›</span>
+    <span class="breadcrumb-current">利用規約</span>
+  </div>
   <span class="label">Terms of Service</span>
   <h1 class="section-title">利用規約</h1>
   <p class="page-header-lead">
@@ -285,10 +497,10 @@
     </ul>
   </aside>
 
+  <p class="terms-meta">施行日：2025年12月1日</p>
+
   <!-- ── 本文 ── -->
   <div class="terms-body">
-
-    <p class="terms-meta">施行日：2025年12月1日</p>
 
     <!-- ===== 第1章 ===== -->
     <p class="terms-chapter" id="ch1">第1章　総則</p>
@@ -953,12 +1165,54 @@
     nav.style.borderTop = '';
   }
 
+  function applyLinkOpenStyles() {
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.style.display = 'flex';
+      link.style.alignItems = 'center';
+      link.style.justifyContent = 'flex-start';
+      link.style.width = '100%';
+      link.style.minHeight = '52px';
+      link.style.padding = '16px 24px';
+      link.style.fontSize = '15px';
+      link.style.color = 'var(--text)';
+      link.style.background = 'transparent';
+      link.style.textDecoration = 'none';
+      link.style.borderBottom = '1px solid var(--border)';
+      link.style.borderRadius = '0';
+      link.style.letterSpacing = '0';
+      link.style.opacity = '1';
+      link.style.visibility = 'visible';
+    });
+  }
+
+  function clearLinkInlineStyles() {
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.style.display = '';
+      link.style.alignItems = '';
+      link.style.justifyContent = '';
+      link.style.width = '';
+      link.style.minHeight = '';
+      link.style.padding = '';
+      link.style.fontSize = '';
+      link.style.color = '';
+      link.style.background = '';
+      link.style.textDecoration = '';
+      link.style.borderBottom = '';
+      link.style.borderRadius = '';
+      link.style.letterSpacing = '';
+      link.style.opacity = '';
+      link.style.visibility = '';
+    });
+  }
+
   function setMenuState(isOpen) {
     nav.classList.toggle('open', isOpen);
     if (isOpen) {
       applyOpenStyles();
+      applyLinkOpenStyles();
     } else {
       clearInlineMenuStyles();
+      clearLinkInlineStyles();
     }
     nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');

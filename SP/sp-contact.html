@@ -95,8 +95,8 @@
     SP変換: グローバルナビ → ハンバーガー収納
   ========================================= -->
   <header class="sp-header">
-    <a href="./sp-index.html" class="header-logo-plain">
-        <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    <a href="./sp-index.html" class="header-logo">
+        <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
     </a>
 
     <div class="sp-header__actions">
@@ -146,18 +146,19 @@
       </button>
     </div>
 
-    <nav id="sp-nav" aria-hidden="true">
-      <a href="./sp-about.html">More Friendsとは</a>
-      <a href="./sp-service.html">サービス内容</a>
-      <a href="./sp-price.html">料金プラン</a>
-      <a href="./sp-flow.html">利用の流れ</a>
-      <a href="./sp-sitter.html">シッター紹介</a>
-      <a href="./sp-area.html">対応エリア</a>
-      <a href="./sp-reviews.html">お客様の声</a>
-      <a href="./sp-blog.html">ブログ</a>
-      <a href="./sp-contact.html" class="is-current">お問い合わせ</a>
-    </nav>
   </header>
+
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./sp-about.html">More Friendsとは</a>
+    <a href="./sp-service.html">サービス内容</a>
+    <a href="./sp-price.html">料金プラン</a>
+    <a href="./sp-flow.html">利用の流れ</a>
+    <a href="./sp-sitter.html">シッター紹介</a>
+    <a href="./sp-area.html">対応エリア</a>
+    <a href="./sp-reviews.html">お客様の声</a>
+    <a href="./sp-blog.html">ブログ</a>
+    <a href="./sp-contact.html" class="is-current">お問い合わせ</a>
+  </nav>
 
   <main>
 
@@ -470,7 +471,6 @@
       nav.style.display = 'none';
       nav.setAttribute('aria-hidden', 'true');
       toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
     }
 
     function openMenu() {
@@ -478,7 +478,6 @@
       nav.style.display = 'flex';
       nav.setAttribute('aria-hidden', 'false');
       toggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden';
     }
 
     toggle.addEventListener('click', function (event) {

@@ -12,17 +12,19 @@
   <link rel="stylesheet" href="../wireframe-base.css">
   <style>
     .breadcrumb {
-      padding: 80px 80px 0;
-      font-size: 11px;
-      color: var(--text-sub);
-      letter-spacing: 0.06em;
       display: flex;
-      gap: 8px;
       align-items: center;
+      gap: 4px 6px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      color: var(--text-sub);
     }
-    .breadcrumb a { color: var(--text-sub); text-decoration: none; }
+    .breadcrumb a { color: var(--text-sub); text-decoration: none; flex: 0 0 auto; white-space: nowrap; }
     .breadcrumb a:hover { color: var(--primary); }
-    .breadcrumb span { opacity: 0.45; }
+    .breadcrumb span { color: var(--primary); opacity: 1; flex: 0 0 auto; white-space: nowrap; }
+    .breadcrumb-current { color: var(--text); opacity: 1; }
 
     .page-header {
       background: var(--bg-mid);
@@ -106,6 +108,143 @@
       border-radius: 6px;
       border: 1px solid var(--border);
     }
+
+    .license-card {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        padding: 16px 16px 40px;
+      }
+
+      .page-header .section-title {
+        font-size: clamp(26px, 7vw, 32px);
+        line-height: 1.35;
+      }
+
+      .page-header-lead {
+        font-size: 14px;
+        line-height: 1.85;
+        max-width: 100%;
+      }
+
+      #sp-nav:not(.open) {
+        display: none;
+      }
+
+      #sp-nav.open {
+        position: fixed;
+        top: 60px;
+        left: 48px;
+        right: 0;
+        bottom: auto;
+        height: auto;
+        max-height: calc(100dvh - 60px);
+        background: #fff;
+        display: flex !important;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        overflow-y: auto;
+        z-index: 99;
+        border-top: 1px solid var(--border);
+        border-left: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 12px 24px rgba(38, 23, 15, 0.08);
+      }
+
+      #sp-nav.open a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        width: 100%;
+        padding: 12px 18px 12px 20px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.4;
+        min-height: 44px;
+        color: var(--text);
+        text-align: left;
+        text-decoration: none;
+        background: #fff;
+        border-bottom: none;
+        border-radius: 0;
+        letter-spacing: 0;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #sp-nav.open a::after {
+        content: '›';
+        margin-left: auto;
+        color: var(--primary);
+        font-size: 18px;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .license-table,
+      .license-info-table,
+      .license-table-wrap table,
+      .license-section table {
+        display: none;
+      }
+
+      .license-card {
+        display: block;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-top: 24px;
+      }
+
+      .license-card__title {
+        background: var(--bg-dark);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.5;
+        padding: 14px 16px;
+      }
+
+      .license-card__list {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .license-card__row {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 14px 16px;
+        border-top: 1px solid var(--border);
+        background: var(--bg);
+      }
+
+      .license-card__row:first-child {
+        border-top: none;
+      }
+
+      .license-card__label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: var(--text-sub);
+        line-height: 1.5;
+      }
+
+      .license-card__value {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text);
+        line-height: 1.8;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+    }
   </style>
 </head>
 
@@ -117,16 +256,6 @@
   <a href="./sp-index.html" class="header-logo">
     <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
   </a>
-  <nav id="sp-nav" aria-hidden="true">
-    <a href="./sp-about.html">More Friendsとは</a>
-    <a href="./sp-service.html">サービス内容</a>
-    <a href="./sp-price.html">料金プラン</a>
-    <a href="./sp-flow.html">利用の流れ</a>
-    <a href="./sp-sitter.html">シッター紹介</a>
-    <a href="./sp-blog.html">ブログ</a>
-    <a href="https://www.instagram.com/morefriends_petsitter" class="btn-ig" target="_blank" rel="noopener noreferrer">Instagramで相談</a>
-    <a href="https://lin.ee/9WqPEjj" class="btn-line" target="_blank" rel="noopener noreferrer">LINEで相談</a>
-  </nav>
   <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-nav">
     <span></span>
     <span></span>
@@ -134,19 +263,26 @@
   </button>
 </header>
 
+<nav id="sp-nav" aria-hidden="true">
+  <a href="./sp-about.html">More Friendsとは</a>
+  <a href="./sp-service.html">サービス内容</a>
+  <a href="./sp-price.html">料金プラン</a>
+  <a href="./sp-flow.html">利用の流れ</a>
+  <a href="./sp-sitter.html">シッター紹介</a>
+  <a href="./sp-blog.html">ブログ</a>
+  <a href="https://www.instagram.com/morefriends_petsitter" class="btn-ig" target="_blank" rel="noopener noreferrer">Instagramで相談</a>
+  <a href="https://lin.ee/9WqPEjj" class="btn-line" target="_blank" rel="noopener noreferrer">LINEで相談</a>
+</nav>
+
 <main>
-
-<div style="height:64px"></div><!-- header offset -->
-
-<!-- ========== BREADCRUMB ========== -->
-<div class="breadcrumb">
-  <a href="./sp-index.html">Home</a>
-  <span>/</span>
-  <span style="color:var(--text)">動物取扱業</span>
-</div>
 
 <!-- ========== PAGE HEADER ========== -->
 <div class="page-header">
+  <div class="breadcrumb">
+    <a href="./sp-index.html">ホーム</a>
+    <span>›</span>
+    <span class="breadcrumb-current">動物取扱業</span>
+  </div>
   <span class="label">Animal Handling License</span>
   <h1 class="section-title">動物取扱業</h1>
   <p class="page-header-lead">
@@ -194,6 +330,42 @@
         <td>椎名春香</td>
       </tr>
     </table>
+
+    <div class="license-card__title">第一種動物取扱業者標識</div>
+    <div class="license-card__list">
+      <div class="license-card__row">
+        <div class="license-card__label">氏名又は名称</div>
+        <div class="license-card__value">Dorado合同会社 代表 椎名 穣</div>
+      </div>
+      <div class="license-card__row">
+        <div class="license-card__label">事業所名</div>
+        <div class="license-card__value">More Friends</div>
+      </div>
+      <div class="license-card__row">
+        <div class="license-card__label">事業所所在地</div>
+        <div class="license-card__value">東京都中央区東日本橋二丁目28番4号<br>日本橋CETビル2階</div>
+      </div>
+      <div class="license-card__row">
+        <div class="license-card__label">第一種動物取扱業の種別</div>
+        <div class="license-card__value">保管</div>
+      </div>
+      <div class="license-card__row">
+        <div class="license-card__label">登録番号</div>
+        <div class="license-card__value"><span class="reg-number">25東京都保第008891号</span></div>
+      </div>
+      <div class="license-card__row">
+        <div class="license-card__label">登録年月日</div>
+        <div class="license-card__value">令和7年11月26日</div>
+      </div>
+      <div class="license-card__row">
+        <div class="license-card__label">登録有効期限末日</div>
+        <div class="license-card__value">令和12年11月25日</div>
+      </div>
+      <div class="license-card__row">
+        <div class="license-card__label">動物取扱責任者氏名</div>
+        <div class="license-card__value">椎名春香</div>
+      </div>
+    </div>
   </div>
 
   <!-- 補足 -->
@@ -263,12 +435,46 @@
 </footer>
 
 <script>
-document.querySelector('.hamburger')?.addEventListener('click', function() {
+(function () {
   const nav = document.getElementById('sp-nav');
-  const isOpen = nav.classList.toggle('open');
-  this.setAttribute('aria-expanded', isOpen);
-  nav.setAttribute('aria-hidden', !isOpen);
-});
+  const toggle = document.getElementById('sp-menu-toggle') || document.querySelector('.hamburger');
+  if (!nav || !toggle) return;
+
+  function setMenuState(isOpen) {
+    nav.classList.toggle('open', isOpen);
+    nav.style.display = isOpen ? 'flex' : 'none';
+    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  toggle.addEventListener('click', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    setMenuState(!nav.classList.contains('open'));
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && nav.classList.contains('open')) {
+      setMenuState(false);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!nav.classList.contains('open')) return;
+    if (nav.contains(event.target) || toggle.contains(event.target)) return;
+    setMenuState(false);
+  });
+
+  nav.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      setMenuState(false);
+    });
+  });
+
+  setMenuState(false);
+})();
 </script>
 
 </body>

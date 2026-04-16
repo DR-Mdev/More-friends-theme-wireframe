@@ -20,9 +20,6 @@
     /* ── service.html ページ固有スタイル（PCレイアウト） ──
        SP では sp-service.css の @media (max-width: 768px) で上書きされる */
 
-    /* body offset: SP では sp-service.css の padding-top: 0 で上書き */
-    body { padding-top: 64px; }
-
     /* ページヘッダー */
     .page-header { background: var(--bg-mid); padding: 80px 80px 72px; border-bottom: 1px solid var(--border); }
     .page-header .label { margin-bottom: 12px; }
@@ -102,8 +99,8 @@
       - nav の inline style="color:var(--primary); font-weight:500;" → is-current クラスに移行
   ========================================= -->
   <header class="sp-header">
-    <a href="./sp-index.html" class="header-logo-plain">
-        <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    <a href="./sp-index.html" class="header-logo">
+      <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
     </a>
 
     <div class="sp-header__actions">
@@ -152,19 +149,20 @@
       </button>
     </div>
 
-    <nav id="sp-nav" aria-hidden="true">
-      <a href="./sp-about.html">More Friendsとは</a>
-      <!-- inline style 除去 → is-current クラスに移行 -->
-      <a href="./sp-service.html" class="is-current">サービス内容</a>
-      <a href="./sp-price.html">料金プラン</a>
-      <a href="./sp-flow.html">利用の流れ</a>
-      <a href="./sp-sitter.html">シッター紹介</a>
-      <a href="./sp-area.html">対応エリア</a>
-      <a href="./sp-reviews.html">お客様の声</a>
-      <a href="./sp-blog.html">ブログ</a>
-      <a href="./sp-contact.html">お問い合わせ</a>
-    </nav>
   </header>
+
+  <nav id="sp-nav" aria-hidden="true">
+    <a href="./sp-about.html">More Friendsとは</a>
+    <!-- inline style 除去 → is-current クラスに移行 -->
+    <a href="./sp-service.html" class="is-current">サービス内容</a>
+    <a href="./sp-price.html">料金プラン</a>
+    <a href="./sp-flow.html">利用の流れ</a>
+    <a href="./sp-sitter.html">シッター紹介</a>
+    <a href="./sp-area.html">対応エリア</a>
+    <a href="./sp-reviews.html">お客様の声</a>
+    <a href="./sp-blog.html">ブログ</a>
+    <a href="./sp-contact.html">お問い合わせ</a>
+  </nav>
 
   <main>
 
