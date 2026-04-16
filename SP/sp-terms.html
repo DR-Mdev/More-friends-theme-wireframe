@@ -919,9 +919,47 @@
   const toggle = document.getElementById('sp-menu-toggle') || document.querySelector('.hamburger');
   if (!nav || !toggle) return;
 
+  function applyOpenStyles() {
+    nav.style.display = 'flex';
+    nav.style.position = 'fixed';
+    nav.style.top = '60px';
+    nav.style.left = '0';
+    nav.style.right = '0';
+    nav.style.bottom = '0';
+    nav.style.width = '100%';
+    nav.style.background = 'rgba(255, 255, 255, 0.98)';
+    nav.style.flexDirection = 'column';
+    nav.style.gap = '0';
+    nav.style.padding = '0';
+    nav.style.overflowY = 'auto';
+    nav.style.zIndex = '9999';
+    nav.style.borderTop = '1px solid var(--border)';
+  }
+
+  function clearInlineMenuStyles() {
+    nav.style.display = 'none';
+    nav.style.position = '';
+    nav.style.top = '';
+    nav.style.left = '';
+    nav.style.right = '';
+    nav.style.bottom = '';
+    nav.style.width = '';
+    nav.style.background = '';
+    nav.style.flexDirection = '';
+    nav.style.gap = '';
+    nav.style.padding = '';
+    nav.style.overflowY = '';
+    nav.style.zIndex = '';
+    nav.style.borderTop = '';
+  }
+
   function setMenuState(isOpen) {
     nav.classList.toggle('open', isOpen);
-    nav.style.display = isOpen ? 'flex' : 'none';
+    if (isOpen) {
+      applyOpenStyles();
+    } else {
+      clearInlineMenuStyles();
+    }
     nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     document.body.style.overflow = isOpen ? 'hidden' : '';
