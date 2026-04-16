@@ -15,6 +15,7 @@
       3. sp-blog-detail.css           SP上書き（768px以下）← 追加
   -->
   <link rel="stylesheet" href="../wireframe-base.css">
+  <link rel="stylesheet" href="sp-wireframe-base.css">
   <style>
     /* ── blog-detail.html ページ固有スタイル（PCレイアウト） ──
        SP では sp-blog-detail.css の @media (max-width: 768px) で上書きされる */
@@ -492,8 +493,8 @@
           <ul>
             <li><a href="./sp-blog.html">ブログ</a></li>
             <li><a href="./sp-contact.html">お問い合わせ</a></li>
-            <li><a href="./privacy.html">プライバシーポリシー</a></li>
-            <li><a href="./terms.html">利用規約</a></li>
+            <li><a href="./sp-privacy.html">プライバシーポリシー</a></li>
+            <li><a href="./sp-terms.html">利用規約</a></li>
             <li><a href="./license.html">動物取扱業</a></li>
           </ul>
         </div>
@@ -505,27 +506,46 @@
   </footer>
 
   <script>
-  // ハンバーガーメニュー開閉（§2-2）
-  document.querySelector('.hamburger')?.addEventListener('click', function() {
+  (function () {
     const nav = document.getElementById('sp-nav');
-    const isOpen = nav.classList.toggle('open');
-    this.setAttribute('aria-expanded', isOpen);
-    nav.setAttribute('aria-hidden', !isOpen);
-  });
+    const toggle = document.getElementById('sp-menu-toggle') || document.querySelector('.hamburger');
+    if (!nav || !toggle) return;
 
-  // Escape キーでナビを閉じる（§2-2）
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const nav = document.getElementById('sp-nav');
-      const toggle = document.querySelector('.hamburger');
-      if (nav && nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        nav.setAttribute('aria-hidden', 'true');
-        toggle?.setAttribute('aria-expanded', 'false');
-        toggle?.focus();
-      }
+    function setMenuState(isOpen) {
+      nav.classList.toggle('open', isOpen);
+      nav.style.display = isOpen ? 'flex' : 'none';
+      nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
-  });
+
+    toggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      setMenuState(!nav.classList.contains('open'));
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!nav.classList.contains('open')) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
+      setMenuState(false);
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        setMenuState(false);
+      });
+    });
+
+    setMenuState(false);
+  })();
 
   // マーカーアンダーライン（IntersectionObserver）
   const markers = document.querySelectorAll('.marker');
