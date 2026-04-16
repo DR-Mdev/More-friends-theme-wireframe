@@ -1169,6 +1169,28 @@ details[open] .c-faq__icon {
     justify-content: space-between;
   }
 
+  .header-logo,
+  .header-logo-plain {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    text-decoration: none;
+  }
+
+  .header-logo-img,
+  .site-logo-img--header {
+    display: block;
+    height: 48px;
+    width: auto;
+    max-width: none;
+  }
+
+  .site-logo-img--footer {
+    display: block;
+    height: 40px;
+    width: auto;
+  }
+
   .sp-header__actions {
     display: flex;
     align-items: center;
@@ -1218,8 +1240,6 @@ details[open] .c-faq__icon {
     color: #fff;
     border-radius: 0;
     border-left-color: transparent;
-    appearance: none;
-    -webkit-appearance: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1230,6 +1250,8 @@ details[open] .c-faq__icon {
     padding: 8px 6px 6px;
     font-size: 9px;
     letter-spacing: 0.08em;
+    appearance: none;
+    -webkit-appearance: none;
   }
 
   .sp-header__action-icon {
@@ -1248,7 +1270,28 @@ details[open] .c-faq__icon {
     white-space: nowrap;
   }
 
-  .sp-header__action-btn--menu .hamburger-lines {
+  .hamburger {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    position: relative;
+    z-index: 101;
+    cursor: pointer;
+    pointer-events: auto;
+    background: var(--bg-dark);
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .hamburger-lines {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1259,7 +1302,8 @@ details[open] .c-faq__icon {
     background: transparent;
   }
 
-  .sp-header__action-btn--menu .hamburger-lines span {
+  .hamburger span,
+  .hamburger-lines span {
     display: block;
     width: 18px;
     height: 1.5px;
@@ -1268,18 +1312,17 @@ details[open] .c-faq__icon {
     flex-shrink: 0;
   }
 
-  .hamburger {
-    position: relative;
-    z-index: 101;
-    pointer-events: auto;
-  }
-
   #sp-nav {
     display: none;
     pointer-events: auto;
   }
 
-  #sp-nav.open {
+  header nav:not(.open) {
+    display: none;
+  }
+
+  #sp-nav.open,
+  header nav.open {
     position: fixed;
     top: 60px;
     left: 0;
@@ -1295,7 +1338,8 @@ details[open] .c-faq__icon {
     border-top: 1px solid var(--border);
   }
 
-  #sp-nav.open a {
+  #sp-nav.open a,
+  header nav.open a {
     display: flex;
     align-items: center;
     padding: 16px 24px;
@@ -1304,38 +1348,22 @@ details[open] .c-faq__icon {
     min-height: 52px;
     color: var(--text);
     text-decoration: none;
+    background: none;
+    border-radius: 0;
   }
 
-  #sp-nav.open a::after {
+  #sp-nav.open a::after,
+  header nav.open a::after {
     content: '›';
     margin-left: auto;
     color: var(--primary);
     font-size: 18px;
   }
 
-  #sp-nav.open a.is-current {
+  #sp-nav.open a.is-current,
+  header nav.open a.is-current {
     color: var(--primary);
     font-weight: 500;
-  }
-
-  .header-logo,
-  .header-logo-plain {
-    line-height: 0;
-  }
-
-  .header-logo .site-logo-img--header,
-  .header-logo-img {
-    height: 48px;
-    width: auto;
-    display: block;
-  }
-
-  .footer-logo .site-logo-img--footer,
-  .footer-logo-img {
-    width: 170px;
-    height: auto;
-    display: block;
-    margin-bottom: 16px;
   }
 
   .cta-section {
@@ -1386,48 +1414,6 @@ details[open] .c-faq__icon {
     align-items: flex-start;
     gap: 8px;
     font-size: 11px;
-  }
-
-  header nav:not(.open) {
-    display: none;
-  }
-
-  header nav.open {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.98);
-    display: flex !important;
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-    overflow-y: auto;
-    z-index: 99;
-    border-top: 1px solid var(--border);
-  }
-
-  header nav.open a {
-    display: flex;
-    align-items: center;
-    padding: 16px 24px;
-    font-size: 15px;
-    border-bottom: 1px solid var(--border);
-    min-height: 52px;
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  header nav.open a::after {
-    content: '›';
-    margin-left: auto;
-    color: var(--primary);
-    font-size: 18px;
-  }
-
-  .sp-header__action-btn--menu .hamburger-lines span {
-    background: #fff;
   }
 }
 
