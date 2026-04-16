@@ -152,8 +152,8 @@
       - sp-index.html と同一構造（DOM二重化なし §7-1）
   ========================================= -->
   <header class="sp-header">
-    <a href="./sp-index.html" class="header-logo-plain">
-        <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="header-logo-img">
+    <a href="./sp-index.html" class="header-logo">
+        <img src="../assets/MoreFriends_RGB_color_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--header">
     </a>
 
     <!-- ヘッダー右アクションエリア -->
@@ -189,6 +189,7 @@
 
       <!-- ハンバーガーボタン（§2-2 / 付録A-1） -->
       <button
+        id="sp-menu-toggle"
         class="hamburger sp-header__action-btn sp-header__action-btn--menu"
         type="button"
         aria-expanded="false"
@@ -684,7 +685,9 @@
   <footer>
     <div class="footer-top">
       <div>
-        <img src="../assets/MoreFriends_RGB_white_cropped.png" alt="More Friends" class="footer-logo-img">
+        <a href="./sp-index.html" class="footer-logo">
+          <img src="../assets/MoreFriends_RGB_white_cropped.png" alt="More Friends" class="site-logo-img site-logo-img--footer">
+        </a>
         <div class="footer-tagline">
           そっと心に触れる、<br>友達のような存在でありたい。<br><br>
           東京都・千葉県のペットシッティングサービス
@@ -722,9 +725,9 @@
           <ul>
             <li><a href="./sp-blog.html">ブログ</a></li>
             <li><a href="./sp-contact.html">お問い合わせ</a></li>
-            <li><a href="./privacy.html">プライバシーポリシー</a></li>
-            <li><a href="./terms.html">利用規約</a></li>
-            <li><a href="./license.html">動物取扱業</a></li>
+            <li><a href="./sp-privacy.html">プライバシーポリシー</a></li>
+            <li><a href="./sp-terms.html">利用規約</a></li>
+            <li><a href="./sp-license.html">動物取扱業</a></li>
           </ul>
         </div>
       </div>
@@ -735,27 +738,58 @@
   </footer>
 
   <script>
-  // ハンバーガーメニュー開閉（§2-2）
-  document.querySelector('.hamburger')?.addEventListener('click', function() {
+  (function () {
+    const toggle = document.getElementById('sp-menu-toggle');
     const nav = document.getElementById('sp-nav');
-    const isOpen = nav.classList.toggle('open');
-    this.setAttribute('aria-expanded', isOpen);
-    nav.setAttribute('aria-hidden', !isOpen);
-  });
 
-  // Escape キーでナビを閉じる（§2-2）
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const nav = document.getElementById('sp-nav');
-      const toggle = document.querySelector('.hamburger');
-      if (nav && nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        nav.setAttribute('aria-hidden', 'true');
-        toggle?.setAttribute('aria-expanded', 'false');
-        toggle?.focus();
-      }
+    if (!toggle || !nav) return;
+
+    function closeMenu() {
+      nav.classList.remove('open');
+      nav.style.display = 'none';
+      nav.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     }
-  });
+
+    function openMenu() {
+      nav.classList.add('open');
+      nav.style.display = 'flex';
+      nav.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    toggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (nav.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!nav.classList.contains('open')) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
+      closeMenu();
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeMenu);
+    });
+
+    closeMenu();
+  })();
   </script>
 
 </body>
