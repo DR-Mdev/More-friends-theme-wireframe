@@ -603,7 +603,7 @@
       toggle.setAttribute('aria-expanded', 'true');
     }
 
-    function toggleMenu(event) {
+    toggle.addEventListener('click', function (event) {
       event.preventDefault();
       event.stopPropagation();
 
@@ -612,20 +612,18 @@
       } else {
         openMenu();
       }
-    }
+    });
 
-    toggle.addEventListener('click', toggleMenu);
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && nav.classList.contains('open')) {
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
         closeMenu();
         toggle.focus();
       }
     });
 
-    document.addEventListener('click', function (e) {
+    document.addEventListener('click', function (event) {
       if (!nav.classList.contains('open')) return;
-      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      if (nav.contains(event.target) || toggle.contains(event.target)) return;
       closeMenu();
     });
 
