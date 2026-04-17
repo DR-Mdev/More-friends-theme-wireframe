@@ -456,6 +456,34 @@
     border-radius: 8px;
   }
 
+  .review-card-linkwrap {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .review-card-linkwrap:visited {
+    color: inherit;
+  }
+
+  .review-card-linkwrap:active {
+    color: inherit;
+  }
+
+  .review-card-linkwrap .review-name,
+  .review-card-linkwrap .review-pet,
+  .review-card-linkwrap .review-body,
+  .review-card-linkwrap .review-tag,
+  .review-card-linkwrap .review-stars {
+    color: inherit;
+  }
+
+  .review-card-linkwrap:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+
   .review-card-header {
     gap: 12px;
   }
