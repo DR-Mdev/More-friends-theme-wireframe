@@ -433,155 +433,234 @@
 
   /* ==============================================
      SECTION 2: 出張費について
-     PC: grid 2カラム（テーブル左 / ノートボックス右）
-     SP: 1カラム縦積み（テーブル上 → ノートボックス下）
-         テーブル: 横スクロール前提（§3-4）
+     Plan B 時系列タイムライン
+     このセクションだけを reference 準拠で差し替える
   =============================================== */
   .travel-section {
-    padding: 56px 16px;
+    padding: 56px 20px;
+    --travel-bg-soft: #fef5f0;
+    --travel-text-muted: #a89b94;
   }
 
   .travel-inner {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
     grid-template-columns: unset;
   }
 
-  /* テーブル: 横スクロールではなくカード型へ変換
-     理由:
-     - 3列比較の価値より、各行の情報理解の方が重要
-     - 同一HTMLのままCSSだけでSP最適化する
-  */
-  .travel-summary {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-bottom: 20px;
+  .travel-section .section-header {
+    margin-bottom: 8px;
   }
 
-  .travel-summary-item {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-
-  .travel-summary-label {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--text-sub);
-    margin-bottom: 6px;
-  }
-
-  .travel-summary-value {
-    font-size: 16px;
-    font-weight: 500;
+  .travel-section .label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
     color: var(--primary);
-    line-height: 1.5;
+    margin-bottom: 10px;
   }
 
-  .travel-table-wrap {
-    overflow: visible;
-    -webkit-overflow-scrolling: auto;
-    border: 0;
-    border-radius: 0;
-    -webkit-mask-image: none;
-            mask-image: none;
+  .travel-section .section-title {
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
   }
 
-  .travel-table {
+  .travel-section .section-sub {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.95;
+  }
+
+  .travel-policy {
+    padding: 20px 18px;
+    background: var(--travel-bg-soft);
+    border-radius: 12px;
+  }
+
+  .travel-policy-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .travel-policy-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.9;
+  }
+
+  .travel-policy-text em {
+    font-style: normal;
+    background: linear-gradient(transparent 60%, var(--primary-l) 60%);
+    padding: 0 2px;
+    font-weight: 500;
+  }
+
+  .travel-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
     width: 100%;
     min-width: 0;
-    font-size: 13px;
-    border-collapse: separate;
-    border-spacing: 0 12px;
+    padding-left: 32px;
   }
 
-  .travel-table thead {
-    display: none;
+  .travel-timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: var(--border);
   }
 
-  .travel-table tbody {
-    display: block;
-  }
-
-  .travel-table tr {
-    display: block;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .travel-table td {
+  .travel-step {
+    position: relative;
     display: block;
     width: 100%;
-    padding: 14px 16px;
-    text-align: left;
-    white-space: normal;
-    border-bottom: 1px solid var(--border);
-    line-height: 1.75;
-    color: var(--text);
+    min-width: 0;
+    padding-bottom: 28px;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  .travel-table tr td:last-child {
-    border-bottom: none;
+  .travel-timeline > .travel-step:last-child {
+    padding-bottom: 0;
   }
 
-  .travel-table td::before {
+  .travel-step::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 6px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2.5px solid var(--primary);
+    z-index: 1;
+  }
+
+  .travel-step-when {
     display: block;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--text-sub);
-    margin-bottom: 6px;
-    line-height: 1.4;
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--travel-text-muted);
+    margin-bottom: 4px;
   }
 
-  .travel-table td:nth-child(1) {
-    background: var(--bg-mid);
+  .travel-step-title {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
     font-size: 15px;
     font-weight: 500;
     color: var(--text);
-  }
-
-  .travel-table td:nth-child(1)::before {
-    content: 'ルール';
-  }
-
-  .travel-table td:nth-child(2) {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--primary);
+    margin-bottom: 6px;
     line-height: 1.5;
+    letter-spacing: 0.02em;
   }
 
-  .travel-table td:nth-child(2)::before {
-    content: '結論';
-  }
-
-  .travel-table td:nth-child(3) {
-    font-size: 13px;
+  .travel-step-text {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+    font-size: 12.5px;
     color: var(--text-sub);
-    line-height: 1.75;
+    line-height: 1.9;
   }
 
-  .travel-table td:nth-child(3)::before {
-    content: '補足';
-  }
-
-  .travel-highlight {
-    color: var(--primary);
+  .travel-step-tag {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: var(--bg);
+    color: var(--primary-d);
+    font-size: 11px;
     font-weight: 500;
+    line-height: 1.4;
+    border: 1px solid var(--primary-l);
+    border-radius: 4px;
+    white-space: nowrap;
   }
 
-  .travel-note-box {
-    padding: 20px 16px;
+  .travel-notice {
+    padding: 18px;
+    background: var(--bg2);
+    border-radius: 12px;
+    border: 1px solid var(--border);
   }
 
-  .travel-note-box ul li {
-    font-size: 13px;
-    line-height: 1.75;
+  .travel-notice-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .travel-notice-title::before {
+    content: '';
+    width: 3px;
+    height: 12px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  .travel-notice ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .travel-notice li {
+    font-size: 11.5px;
+    color: var(--text-sub);
+    line-height: 1.85;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .travel-notice li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 1.5px;
+    background: var(--primary);
   }
 
 
