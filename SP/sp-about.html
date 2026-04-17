@@ -89,6 +89,7 @@
     .def-row-col:first-of-type { border-right: 1px solid var(--border); }
     .def-col-label { font-size: 11px; color: var(--text-sub); letter-spacing: 0.08em; margin-bottom: 4px; }
     .def-row-sep { border-top: 1px solid var(--border); grid-column: 1 / -1; }
+    .sp-compare { display: none; }
 
     /* 3つの約束 */
     .promises { background: var(--bg); padding: 96px 80px; }
@@ -286,7 +287,7 @@
         <div class="def-card">
           <div class="def-card-vs">VS ペットホテル</div>
           <div class="def-card-title">ストレスのかかり方がまったく違います</div>
-          <div class="def-row">
+          <div class="def-row def-row--pc">
             <div class="def-row-head">比較ポイント</div>
 
             <div class="def-row-col">
@@ -336,6 +337,78 @@
             <div class="def-row-col">
               <div class="def-col-label">More Friends</div>
               自宅なので環境変化ゼロ。ストレス起因の体調変化リスクが最小限。
+            </div>
+          </div>
+
+          <div class="sp-compare">
+            <div class="sp-compare-cols">
+              <div class="sp-compare-col-h sp-compare-col-h--other">ペットホテル</div>
+              <div class="sp-compare-col-h sp-compare-col-h--mf">More Friends</div>
+
+              <div class="sp-compare-cat">
+                <span class="sp-compare-cat-num">1</span>環境の違い
+              </div>
+              <div class="sp-compare-row">
+                <div class="sp-compare-cell sp-compare-cell--other">
+                  知らない環境・知らない動物たちの中で過ごす
+                </div>
+                <div class="sp-compare-cell sp-compare-cell--mf">
+                  住み慣れた自宅でお世話。環境変化ゼロ
+                </div>
+              </div>
+
+              <div class="sp-compare-cat">
+                <span class="sp-compare-cat-num">2</span>担当者
+              </div>
+              <div class="sp-compare-row">
+                <div class="sp-compare-cell sp-compare-cell--other">
+                  不特定多数のスタッフ。顔なじみになりにくい
+                </div>
+                <div class="sp-compare-cell sp-compare-cell--mf">
+                  担当シッター固定。信頼関係が深まる
+                </div>
+              </div>
+
+              <div class="sp-compare-cat">
+                <span class="sp-compare-cat-num">3</span>要望の共有
+              </div>
+              <div class="sp-compare-row">
+                <div class="sp-compare-cell sp-compare-cell--other">
+                  細かい要望を伝えにくい
+                </div>
+                <div class="sp-compare-cell sp-compare-cell--mf">
+                  カウンセリングですべて共有。「いつも通り」を再現
+                </div>
+              </div>
+
+              <div class="sp-compare-cat">
+                <span class="sp-compare-cat-num">4</span>報告の質
+              </div>
+              <div class="sp-compare-row">
+                <div class="sp-compare-cell sp-compare-cell--other">
+                  お迎え時に口頭で一言程度
+                </div>
+                <div class="sp-compare-cell sp-compare-cell--mf">
+                  2時間以内に詳細報告。気づきも伝える
+                </div>
+              </div>
+
+              <div class="sp-compare-cat">
+                <span class="sp-compare-cat-num">5</span>健康リスク
+              </div>
+              <div class="sp-compare-row">
+                <div class="sp-compare-cell sp-compare-cell--other">
+                  環境変化のストレスで食欲・排泄に影響
+                </div>
+                <div class="sp-compare-cell sp-compare-cell--mf">
+                  ストレス起因の体調変化リスクが最小限
+                </div>
+              </div>
+            </div>
+
+            <div class="sp-compare-foot">
+              どちらにも<strong>それぞれの良さ</strong>があります。<br>
+              大切なのは、ペットさんに合った選び方。
             </div>
           </div>
         </div>
