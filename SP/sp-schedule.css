@@ -1,0 +1,587 @@
+/*
+  sp-schedule.css
+  More Friends — スケジュール（schedule）SP専用スタイル
+
+  読み込み順:
+    1. wireframe-base.css        共通トークン・リセット・PC側共通スタイル
+    2. sp-wireframe-base.css     SP共通ベース
+    3. [schedule.html inline]    PC用または共通の最低限レイアウト
+    4. sp-schedule.css           ← このファイル（768px以下を正式ブレークポイントで上書き）
+
+  方針:
+    - sp-area.css のヘッダー / HERO / CTA / フッター方針を踏襲
+    - スケジュール固有のレイアウト変更のみをここに記述
+    - 本番CSSではない。wireframe確認用
+
+  参照: sp-area.css / 03_SPワイヤー専用ルール.md
+  ブレークポイント: max-width: 768px
+*/
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 0;
+  }
+
+  /* ==============================================
+     SP ヘッダー
+     sp-area.css 踏襲
+  =============================================== */
+
+  #sp-nav {
+    display: none;
+  }
+
+  header,
+  .sp-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    height: 60px;
+    padding: 0 12px 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sp-header .header-logo,
+  header .header-logo {
+    font-size: 13px;
+    min-width: auto;
+    min-height: 36px;
+    padding: 6px 14px;
+  }
+
+  .sp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .sp-header__action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 6px 8px;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    border-left: 1px solid var(--border);
+  }
+
+  .sp-header__action-btn:first-child {
+    border-left: none;
+  }
+
+  .sp-header__action-btn--ig {
+    background: linear-gradient(160deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--line {
+    background: #06C755;
+    color: #fff;
+    border-left-color: transparent;
+    border-radius: 0;
+  }
+
+  .sp-header__action-btn--menu {
+    background: var(--bg-dark);
+    color: #fff;
+    border-radius: 0;
+    border-left-color: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 56px;
+    min-height: 44px;
+    padding: 8px 6px 6px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .sp-header__action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+  }
+
+  .sp-header__action-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: auto;
+    height: 16px;
+    background: transparent;
+  }
+
+  .hamburger-lines span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: #fff;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-icon {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sp-header__action-btn--menu .sp-header__action-label {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: 0;
+    display: block;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #fff;
+  }
+
+  .hamburger {
+    position: relative;
+    z-index: 101;
+    pointer-events: auto;
+  }
+
+  #sp-nav {
+    pointer-events: auto;
+  }
+
+  .sp-header__action-btn--menu .hamburger-lines span {
+    background: #fff;
+    width: 18px;
+    height: 1.5px;
+    border-radius: 2px;
+    display: block;
+  }
+
+  #sp-nav.open {
+    position: fixed;
+    top: 60px;
+    left: 48px;
+    right: 0;
+    bottom: auto;
+    height: auto;
+    max-height: calc(100dvh - 60px);
+    background: #fff;
+    display: flex !important;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow-y: auto;
+    z-index: 99;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 12px 24px rgba(38, 23, 15, 0.08);
+  }
+
+  #sp-nav.open a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 18px 12px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    min-height: 44px;
+    color: var(--text);
+    text-align: left;
+    text-decoration: none;
+    background: #fff;
+    border-bottom: none;
+    border-radius: 0;
+    letter-spacing: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #sp-nav.open a::after {
+    content: '›';
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 18px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  #sp-nav.open a.is-current {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+  .header-logo {
+    line-height: 0;
+  }
+
+  .header-logo .site-logo-img--header {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+
+  /* ==============================================
+     パンくず / ページヘッダー
+     sp-area.css 踏襲
+  =============================================== */
+
+  .breadcrumb {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px 6px;
+    flex-wrap: wrap;
+    font-size: 11px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: var(--text-sub);
+  }
+
+  .breadcrumb a {
+    color: var(--text-sub);
+    text-decoration: none;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .breadcrumb span {
+    color: var(--primary);
+    opacity: 1;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .breadcrumb-current {
+    color: var(--text);
+    opacity: 1;
+  }
+
+  .page-header {
+    padding: 16px 16px 40px;
+  }
+
+  .page-header h1 {
+    font-size: clamp(28px, 7.5vw, 32px);
+    line-height: 1.3;
+    margin: 0 0 18px;
+    color: var(--bg-dark);
+    font-weight: 400;
+  }
+
+  .page-header p {
+    font-size: 14px;
+    max-width: 100%;
+    line-height: 1.85;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .page-header .label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 400;
+  }
+
+  .page-header .label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--primary);
+    display: block;
+    flex-shrink: 0;
+  }
+
+  /* ==============================================
+     共通セクション余白
+  =============================================== */
+
+  section {
+    padding: 56px 16px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 28px);
+    line-height: 1.35;
+  }
+
+  .section-sub {
+    max-width: 100%;
+  }
+
+  /* ==============================================
+     SECTION: スケジュール
+     sp-area.css の 1カラムSP構成を踏襲
+  =============================================== */
+
+  .schedule-section {
+    padding: 56px 16px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .schedule-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .schedule-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 16px;
+  }
+
+  .schedule-card-head {
+    margin-bottom: 16px;
+  }
+
+  .schedule-card-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .schedule-card-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+
+  .schedule-card-text {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.85;
+  }
+
+  .schedule-toolbar {
+    margin-bottom: 14px;
+  }
+
+  .schedule-tab-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .schedule-tab {
+    appearance: none;
+    -webkit-appearance: none;
+    min-height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text);
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    padding: 10px 8px;
+  }
+
+  .schedule-tab.is-active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .schedule-embed-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  .schedule-embed {
+    width: 100%;
+    min-height: 560px;
+    border: 0;
+    border-radius: 8px;
+    display: block;
+    background: #fff;
+  }
+
+  .schedule-note {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.8;
+    text-align: left;
+    margin-top: 12px;
+  }
+
+  .schedule-inquiry-box {
+    background: var(--bg-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .schedule-inquiry-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .schedule-inquiry-text {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.85;
+  }
+
+  .schedule-inquiry-actions .btn-primary {
+    width: 100%;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  /* ==============================================
+     CTAセクション
+     sp-area.css 踏襲
+  =============================================== */
+
+  .cta-section {
+    padding: 56px 16px;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-cta-white,
+  .btn-line-lg,
+  .btn-ig-lg {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  /* ==============================================
+     フッター
+     sp-area.css 踏襲
+  =============================================== */
+
+  footer {
+    padding: 40px 16px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-nav {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-sns-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 11px;
+  }
+}
+
+/* ==============================================
+   ロゴ / フッター: SP非依存
+   sp-area.css 踏襲
+=============================================== */
+.header-logo-plain {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  min-width: auto;
+  min-height: auto;
+}
+
+.header-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-bottom: 16px;
+}
