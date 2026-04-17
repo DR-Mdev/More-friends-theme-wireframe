@@ -282,18 +282,31 @@
     width: auto;
     display: block;
   }
+  .page-header {
+    padding: 16px 16px 40px;
+    background: var(--bg-mid);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header .article-header {
+    margin-bottom: 0;
+  }
+
+  /* ==============================================
      パンくず
-     PC: padding 88px → SP: 縮小・折り返し対応
+     PCの .breadcrumb { padding: 88px 80px 0; } を
+     SPで完全に打ち消し、page-header の余白管理に統一する
   =============================================== */
   .breadcrumb {
-    padding: 20px 16px 0;
+    padding: 0;
     display: flex;
     align-items: flex-start;
     gap: 4px 6px;
     flex-wrap: wrap;
     font-size: 11px;
+    line-height: 1.4;
+    margin-bottom: 12px;
     color: var(--text-sub);
-    line-height: 1.6;
   }
 
   .breadcrumb a {

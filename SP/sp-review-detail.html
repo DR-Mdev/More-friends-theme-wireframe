@@ -242,18 +242,17 @@
 
   <main>
 
-    <!-- ========== BREADCRUMB ========== -->
-    <div class="breadcrumb">
-      <a href="./sp-index.html">Home</a>
-      <span>/</span>
-      <a href="./sp-reviews.html">お客様の声</a>
-      <span>/</span>
-      <span style="color:var(--text); opacity:1;">毎日の報告が旅行中の安心に</span>
-    </div>
-
     <!-- ========== PAGE HEADER ========== -->
     <!-- single-review-header.php -->
     <div class="page-header">
+      <div class="breadcrumb">
+        <a href="./sp-index.html">Home</a>
+        <span>/</span>
+        <a href="./sp-reviews.html">お客様の声</a>
+        <span>/</span>
+        <span class="breadcrumb-current">毎日の報告が旅行中の安心に</span>
+      </div>
+
       <span class="label">Customer Review</span>
       <h1 class="review-headline">
         毎日の報告が旅行中の安心に。<br>うちの子の性格を細かく把握してくれていた。
@@ -411,61 +410,6 @@
     </section>
 
   </main>
-
-  <script>
-  (function () {
-    const toggle = document.getElementById('sp-menu-toggle');
-    const nav = document.getElementById('sp-nav');
-
-    if (!toggle || !nav) return;
-
-    function closeMenu() {
-      nav.classList.remove('open');
-      nav.style.display = 'none';
-      nav.setAttribute('aria-hidden', 'true');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    function openMenu() {
-      nav.classList.add('open');
-      nav.style.display = 'flex';
-      nav.setAttribute('aria-hidden', 'false');
-      toggle.setAttribute('aria-expanded', 'true');
-    }
-
-    toggle.addEventListener('click', function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (nav.classList.contains('open')) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && nav.classList.contains('open')) {
-        closeMenu();
-        toggle.focus();
-      }
-    });
-
-    document.addEventListener('click', function (event) {
-      if (!nav.classList.contains('open')) return;
-      if (nav.contains(event.target) || toggle.contains(event.target)) return;
-      closeMenu();
-    });
-
-    nav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        closeMenu();
-      });
-    });
-
-    closeMenu();
-  })();
-  </script>
 
   <!-- ========== FOOTER ========== -->
   <!-- parts/footer.php -->

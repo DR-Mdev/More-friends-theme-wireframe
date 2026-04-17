@@ -277,6 +277,7 @@
     display: block;
   }
   .breadcrumb {
+    padding: 0;
     display: flex;
     align-items: center;
     gap: 4px 6px;
@@ -305,11 +306,16 @@
     color: var(--text);
     opacity: 1;
   }
+
+  /* ==============================================
      1. ページヘッダー
      PC: padding 72px 80px → SP: 縮小
+     PC側依存にしないよう背景と下線もSP側で明示する
   =============================================== */
   .page-header {
-    padding: 16px 16px 40px;
+    padding: 16px 16px 32px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
   }
 
   .page-header .section-title {

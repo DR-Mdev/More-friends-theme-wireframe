@@ -181,22 +181,33 @@
     <a href="./sp-contact.html">お問い合わせ</a>
   </nav>
 
-  <!-- ========================================
-    パンくず
-    parts/breadcrumb.php
-    編集区分: 固定
-    SP変換: padding縮小 / flex-wrap で折り返し対応
-    ⚠️ TODO: 末尾 span の inline style="color:var(--text)" → .breadcrumb-current クラスに移行済み
-  ========================================= -->
-  <div class="breadcrumb">
-    <a href="./sp-index.html">ホーム</a>
-    <span>/</span>
-    <a href="./sp-blog.html">ブログ</a>
-    <span>/</span>
-    <a href="./sp-blog.html">ペットケア</a>
-    <span>/</span>
-    <span class="breadcrumb-current">初めてペットシッターを使う前に知っておきたいこと</span>
-  </div>
+  <section class="page-header">
+    <div class="breadcrumb">
+      <a href="./sp-index.html">ホーム</a>
+      <span>›</span>
+      <a href="./sp-blog.html">ブログ</a>
+      <span>›</span>
+      <a href="./sp-blog.html">ペットケア</a>
+      <span>›</span>
+      <span class="breadcrumb-current">初めてペットシッターを使う前に知っておきたいこと</span>
+    </div>
+
+    <!-- ========================================
+      parts/article-header.php
+      編集区分: 固定（CMS: タイトル・カテゴリ・メタは動的）
+      ⚠️ TODO: article-title の <br> を本番で削除すること
+               sp-blog-detail.css の .article-title br { display:none } で制御済み
+    ========================================= -->
+    <div class="article-header">
+      <span class="article-cat">ペットケア</span>
+      <h1 class="article-title">初めてペットシッターを使う前に知っておきたいこと。<br>信頼できるシッターの見つけ方と準備のポイント</h1>
+      <div class="article-meta">
+        <div class="article-meta-item">📅 <span>2026.03.20</span></div>
+        <div class="article-meta-item">🕐 <span>読了時間 約5分</span></div>
+        <div class="article-meta-item">✏️ <span>椎名 春香</span></div>
+      </div>
+    </div>
+  </section>
 
   <!-- ========================================
     記事レイアウト（本文 + サイドバー）
@@ -209,22 +220,6 @@
 
     <!-- ===== MAIN COLUMN ===== -->
     <main>
-
-      <!-- ========================================
-        parts/article-header.php
-        編集区分: 固定（CMS: タイトル・カテゴリ・メタは動的）
-        ⚠️ TODO: article-title の <br> を本番で削除すること
-                 sp-blog-detail.css の .article-title br { display:none } で制御済み
-      ========================================= -->
-      <div class="article-header">
-        <span class="article-cat">ペットケア</span>
-        <h1 class="article-title">初めてペットシッターを使う前に知っておきたいこと。<br>信頼できるシッターの見つけ方と準備のポイント</h1>
-        <div class="article-meta">
-          <div class="article-meta-item">📅 <span>2026.03.20</span></div>
-          <div class="article-meta-item">🕐 <span>読了時間 約5分</span></div>
-          <div class="article-meta-item">✏️ <span>椎名 春香</span></div>
-        </div>
-      </div>
 
       <!-- ========================================
         アイキャッチ画像

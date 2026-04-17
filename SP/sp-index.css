@@ -259,22 +259,6 @@
     flex-shrink: 0;
   }
 
-  .breadcrumb {
-    padding: 20px 16px 0;
-    display: flex;
-    align-items: center;
-    gap: 4px 6px;
-    flex-wrap: wrap;
-    font-size: 11px;
-    color: var(--text-sub);
-  }
-
-  .breadcrumb-current {
-    color: var(--text);
-    opacity: 1;
-  }
-
-
   /* ==============================================
      ヒーロー直下ショートカット①: 3リンク
      Olive Sitter 参照: 3等分グリッド、アイコン上 + ラベル下
@@ -417,16 +401,17 @@
     display: flex;
     flex-direction: column;
     min-height: auto;
-    padding-top: 60px;
+    padding: 0;
   }
 
   .hero-left {
-    padding: 24px 16px 32px;
+    padding: 32px 16px 32px;
   }
 
   .hero-h1 {
     font-size: clamp(28px, 7.5vw, 32px);
-    margin-bottom: 16px;
+    line-height: 1.35;
+    margin: 0 0 16px;
   }
 
   .hero-h1 br,
@@ -438,7 +423,7 @@
     font-size: 14px;
     line-height: 1.8;
     max-width: 100%;
-    margin-bottom: 32px;
+    margin: 0 0 32px;
   }
 
   .hero-cta {

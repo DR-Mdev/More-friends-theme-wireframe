@@ -101,11 +101,19 @@ html {
 }
 
 body {
-  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  font-family: "Zen Maru Gothic", sans-serif;
   font-size:   var(--sp-font-body);
   line-height: var(--sp-lh-body);
   color:       var(--mf-color-text);
   background:  var(--mf-color-bg);
+}
+
+button,
+input,
+textarea,
+select,
+option {
+  font-family: "Zen Maru Gothic", sans-serif;
 }
 
 img, svg {
@@ -1169,19 +1177,30 @@ details[open] .c-faq__icon {
     justify-content: space-between;
   }
 
-  .header-logo,
-  .header-logo-plain {
+  .sp-header .header-logo,
+  header .header-logo,
+  .sp-header .header-logo-plain,
+  header .header-logo-plain {
     display: inline-flex;
     align-items: center;
+    justify-content: flex-start;
     line-height: 0;
     text-decoration: none;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    flex-shrink: 0;
   }
 
-  .header-logo-img,
-  .site-logo-img--header {
+  .sp-header .header-logo-img,
+  header .header-logo-img,
+  .sp-header .site-logo-img--header,
+  header .site-logo-img--header {
     display: block;
-    height: 48px;
-    width: auto;
+    height: 48px !important;
+    width: auto !important;
     max-width: none;
   }
 

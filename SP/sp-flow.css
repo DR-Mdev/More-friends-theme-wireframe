@@ -283,6 +283,7 @@
     width: auto;
     display: block;
   }
+  /* ==============================================
      共通: セクションパディング
   =============================================== */
   section {
@@ -306,12 +307,16 @@
     max-width: 100%;
   }
 
-
   /* ==============================================
      パンくず
-     PC: margin-top:64px / padding:12px 80px → SP: 縮小
+     PC: background / padding / border-bottom / margin-top を
+     SPで完全に打ち消し、page-header 内で自然に馴染ませる
   =============================================== */
   .breadcrumb {
+    background: transparent;
+    border-bottom: 0;
+    margin-top: 0;
+    padding: 0;
     display: flex;
     align-items: center;
     gap: 4px 6px;
@@ -341,13 +346,15 @@
     opacity: 1;
   }
 
-
   /* ==============================================
      ページヘッダー
      PC: padding 100px 80px → SP: 縮小
+     背景と下線はSP側でも明示して安定化する
   =============================================== */
   .page-header {
     padding: 16px 16px 40px;
+    background: var(--bg-mid);
+    border-bottom: 1px solid var(--border);
   }
 
   .page-header h1 {
