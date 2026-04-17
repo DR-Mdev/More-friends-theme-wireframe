@@ -485,17 +485,22 @@
 
   /* ==============================================
      SECTION 3: その他料金
-     SPでは横スクロールをやめ、1行 = 1カードに変換
-     理由:
-     - 3列比較より各ルールの理解が優先
-     - 備考列を確実に全文表示させる
+     SP: 1枚の外カード + 行ごとに実線区切り + 行内は破線で補足
+     構造:
+       row 1: td1 タイトル        ←→ td2 メイン金額
+       row 2: td1 small サブ説明  ←→ td2 small 単位
+       row 3: td3 備考
   =============================================== */
 
   .other-price-table-wrap {
+    --divider-strong: rgba(38, 23, 15, 0.22);
+    --divider-subtle: rgba(38, 23, 15, 0.09);
     overflow: visible;
     -webkit-overflow-scrolling: auto;
-    border: 0;
-    border-radius: 0;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px 16px;
     position: static;
   }
 
@@ -506,9 +511,9 @@
   .other-price-table {
     width: 100%;
     min-width: 0;
-    font-size: 13px;
     border-collapse: separate;
-    border-spacing: 0 12px;
+    border-spacing: 0;
+    margin-bottom: 0;
   }
 
   .other-price-table thead {
@@ -520,56 +525,45 @@
   }
 
   .other-price-table tr {
-    display: block;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "title price"
+      "note  note";
+    column-gap: 16px;
+    row-gap: 4px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--divider-strong);
+  }
+
+  .other-price-table tr:last-child {
+    border-bottom: none;
   }
 
   .other-price-table td {
     display: block;
-    width: 100%;
-    padding: 12px 16px;
+    padding: 0;
+    border: 0;
     font-size: 13px;
-    line-height: 1.75;
+    line-height: 1.6;
     white-space: normal;
     word-break: break-word;
     overflow-wrap: anywhere;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-  }
-
-  .other-price-table tr td:last-child {
-    border-bottom: none;
+    vertical-align: baseline;
   }
 
   .other-price-table td::before {
-    display: block;
-    font-size: 11px;
-    line-height: 1.4;
-    letter-spacing: 0.08em;
-    color: var(--text-sub);
-    margin-bottom: 4px;
-  }
-
-  .other-price-table td:nth-child(1)::before {
-    content: '項目';
-  }
-
-  .other-price-table td:nth-child(2)::before {
-    content: '料金（税込）';
-  }
-
-  .other-price-table td:nth-child(3)::before {
-    content: '備考';
+    content: none !important;
   }
 
   .other-price-table td:nth-child(1) {
+    grid-area: title;
+    min-width: 0;
     font-size: 14px;
     font-weight: 500;
     color: var(--text);
-    background: var(--bg);
+    line-height: 1.4;
+    align-self: start;
   }
 
   .other-price-table td:nth-child(1) small {
@@ -578,38 +572,57 @@
     color: var(--text-sub);
     font-weight: 400;
     margin-top: 4px;
+    line-height: 1.55;
   }
 
   .other-price-table td:nth-child(2) {
-    font-size: 20px;
+    grid-area: price;
+    font-size: 18px;
     font-weight: 500;
     color: var(--primary);
-    line-height: 1.45;
-    white-space: normal;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: right;
+    align-self: start;
+    justify-self: end;
   }
 
   .other-price-table td:nth-child(2) small {
-    display: inline;
-    font-size: 13px;
+    display: block;
+    font-size: 11px;
     color: var(--text-sub);
     font-weight: 400;
-    margin-top: 0;
-    margin-left: 4px;
+    margin-top: 4px;
+    margin-left: 0;
+    line-height: 1.55;
   }
 
   .other-price-table td:nth-child(3) {
-    font-size: 13px;
+    grid-area: note;
+    font-size: 12px;
     color: var(--text-sub);
-    line-height: 1.75;
+    line-height: 1.65;
+    margin-top: 8px;
+    padding: 8px 0 0 12px;
+    border-top: 1px dashed var(--divider-subtle);
   }
 
   .other-price-table td.td-note {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--text-sub);
   }
 
   .other-price-table td.td-free {
-    color: var(--primary) !important;
+    font-size: 14px;
+    color: var(--primary-d) !important;
+    background: var(--primary-l);
+    padding: 3px 10px !important;
+    border-radius: 14px;
+    display: inline-block !important;
+    justify-self: end;
+    align-self: center;
+    line-height: 1.4;
+    white-space: nowrap;
   }
 
 
