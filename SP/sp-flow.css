@@ -316,34 +316,50 @@
     background: transparent;
     border-bottom: 0;
     margin-top: 0;
-    padding: 0;
+    padding: 0 0 20px;
     display: flex;
     align-items: center;
     gap: 4px 6px;
     flex-wrap: wrap;
     font-size: 11px;
-    line-height: 1.4;
-    margin-bottom: 12px;
     color: var(--text-sub);
+    line-height: 1.6;
   }
 
   .breadcrumb a {
     color: var(--text-sub);
     text-decoration: none;
-    flex: 0 0 auto;
-    white-space: nowrap;
   }
 
   .breadcrumb span {
     color: var(--primary);
     opacity: 1;
-    flex: 0 0 auto;
-    white-space: nowrap;
   }
 
   .breadcrumb-current {
     color: var(--text);
     opacity: 1;
+  }
+
+  .page-header .label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 400;
+  }
+
+  .page-header .label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--primary);
+    display: block;
+    flex-shrink: 0;
   }
 
   /* ==============================================
@@ -353,19 +369,34 @@
   =============================================== */
   .page-header {
     padding: 16px 16px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
     background: var(--bg-mid);
     border-bottom: 1px solid var(--border);
   }
 
   .page-header h1 {
-    font-size: clamp(26px, 7vw, 32px);
-    margin-bottom: 14px;
+    font-size: clamp(28px, 7.5vw, 32px);
+    line-height: 1.3;
+    margin: 0 0 18px;
+    color: var(--bg-dark);
+    font-weight: 400;
   }
 
   .page-header p {
     font-size: 14px;
     max-width: 100%;
-    line-height: 1.85;
+    line-height: 1.9;
+    margin-top: 16px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .page-header p br {
+    display: none;
   }
 
   /* h1 直下の <br> → SP で自然折り返し

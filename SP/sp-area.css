@@ -280,6 +280,7 @@
     display: block;
   }
   .breadcrumb {
+    padding: 0;
     display: flex;
     align-items: center;
     gap: 4px 6px;
@@ -307,6 +308,27 @@
   .breadcrumb-current {
     color: var(--text);
     opacity: 1;
+  }
+
+  .page-header .label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 400;
+  }
+
+  .page-header .label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--primary);
+    display: block;
+    flex-shrink: 0;
   }
      共通: セクションパディング
   =============================================== */
@@ -343,12 +365,17 @@
   .page-header h1 {
     font-size: clamp(28px, 7.5vw, 32px);
     line-height: 1.3;
-    margin-bottom: 12px;
+    margin: 0 0 18px;
+    color: var(--bg-dark);
+    font-weight: 400;
   }
 
   .page-header p {
     font-size: 14px;
     max-width: 100%;
+    line-height: 1.85;
+    margin: 0;
+    color: var(--text);
   }
 
 
@@ -421,27 +448,131 @@
     grid-template-columns: unset;
   }
 
-  /* テーブル横スクロールラッパー
-     ⚠️ TODO: sp-area.html で .travel-table を .travel-table-wrap で囲むこと */
-  .travel-table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  /* テーブル: 横スクロールではなくカード型へ変換
+     理由:
+     - 3列比較の価値より、各行の情報理解の方が重要
+     - 同一HTMLのままCSSだけでSP最適化する
+  */
+  .travel-summary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .travel-summary-item {
+    background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    /* スクロール可能の視覚ヒント */
-    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-            mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .travel-summary-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+  }
+
+  .travel-summary-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+
+  .travel-table-wrap {
+    overflow: visible;
+    -webkit-overflow-scrolling: auto;
+    border: 0;
+    border-radius: 0;
+    -webkit-mask-image: none;
+            mask-image: none;
   }
 
   .travel-table {
-    min-width: 480px;
+    width: 100%;
+    min-width: 0;
     font-size: 13px;
+    border-collapse: separate;
+    border-spacing: 0 12px;
   }
 
-  .travel-table th,
+  .travel-table thead {
+    display: none;
+  }
+
+  .travel-table tbody {
+    display: block;
+  }
+
+  .travel-table tr {
+    display: block;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
   .travel-table td {
-    padding: 12px 14px;
-    white-space: nowrap;
+    display: block;
+    width: 100%;
+    padding: 14px 16px;
+    text-align: left;
+    white-space: normal;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .travel-table tr td:last-child {
+    border-bottom: none;
+  }
+
+  .travel-table td::before {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-sub);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .travel-table td:nth-child(1) {
+    background: var(--bg-mid);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .travel-table td:nth-child(1)::before {
+    content: 'ルール';
+  }
+
+  .travel-table td:nth-child(2) {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--primary);
+    line-height: 1.5;
+  }
+
+  .travel-table td:nth-child(2)::before {
+    content: '結論';
+  }
+
+  .travel-table td:nth-child(3) {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.75;
+  }
+
+  .travel-table td:nth-child(3)::before {
+    content: '補足';
+  }
+
+  .travel-highlight {
+    color: var(--primary);
+    font-weight: 500;
   }
 
   .travel-note-box {

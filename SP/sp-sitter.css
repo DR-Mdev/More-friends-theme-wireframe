@@ -285,6 +285,7 @@
   }
 
   .breadcrumb {
+    padding: 0;
     display: flex;
     align-items: center;
     gap: 4px 6px;
@@ -312,6 +313,27 @@
   .breadcrumb-current {
     color: var(--text);
     opacity: 1;
+  }
+
+  .page-header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 400;
+  }
+
+  .page-header-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--primary);
+    display: block;
+    flex-shrink: 0;
   }
 
   /* ==============================================
@@ -355,13 +377,16 @@
 
   .page-header-title {
     font-size: clamp(26px, 7vw, 32px);
-    margin-bottom: 14px;
+    margin: 0 0 18px;
+    color: var(--bg-dark);
+    font-weight: 400;
   }
 
   .page-header-lead {
     font-size: 14px;
     max-width: 100%;
     line-height: 1.85;
+    margin: 0;
   }
 
   /* <br> → SP で自然折り返し */

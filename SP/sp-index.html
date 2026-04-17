@@ -109,14 +109,15 @@
       ヒーロー
       parts/hero.php
       編集区分: 固定
-      SP変換:
-        - PC: grid 2カラム（左テキスト / 右ビジュアル）
-        - SP: flex-direction: column（テキスト先 → ビジュアル後）
-        - hero-right は DOM順が2番目のため、CSS変換だけで順序が成立する
-        - hero-stats は数字が短いため横並び維持（§3-2例外）
+      SP変換（案B オーバーラップ版 / CTAなし）:
+        - hero-left: 薄ローズ面（--bg-mid）にテキスト
+        - hero-right: 写真。hero-left の下部にオーバーラップして配置
+        - CTAはヒーロー内に置かない。直下の sp-shortcut-btns / sp-shortcut-nav が担う
+        - hero-stats（3数字）はヒーロー最下部に配置し、以降のショートカットへ視線を流す
     ========================================= -->
     <section class="hero">
       <div class="hero-left">
+        <div class="hero-eyebrow">Pet Sitting Service</div>
         <!--
           ⚠️ TODO: <br> タグを SP で非表示にする（sp-index.css 済み）
           本番では hero-h1 の <br> を削除し、テキストの自然折り返しに委ねること
@@ -143,6 +144,20 @@
       <div class="hero-right">
         <div class="ph-img" data-label="メイン写真 / シッターとペット"></div>
         <!-- ワイヤー専用: .ph-img 本番前に削除 -->
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">60<small>分〜</small></div>
+          <div class="stat-label">シッティング対応</div>
+        </div>
+        <div>
+          <div class="stat-num">東京<small>/千葉</small></div>
+          <div class="stat-label">対応エリア</div>
+        </div>
+        <div>
+          <div class="stat-num">24h</div>
+          <div class="stat-label">LINE受付</div>
+        </div>
       </div>
     </section>
 

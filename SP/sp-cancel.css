@@ -294,25 +294,73 @@
      PC: padding 128px 80px → SP: 縮小
   =============================================== */
   .page-header {
-    padding: 32px 16px 40px;
+    padding: 16px 16px 40px;
+    background: var(--bg-mid);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header .label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 400;
+  }
+
+  .page-header .label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--primary);
+    display: block;
+    flex-shrink: 0;
   }
 
   .breadcrumb {
-    margin-bottom: 20px;
     font-size: 11px;
+    line-height: 1.4;
+    margin-bottom: 12px;
     flex-wrap: wrap;
     gap: 4px 6px;
+    color: var(--text-sub);
+  }
+
+  .breadcrumb a {
+    color: var(--text-sub);
+    text-decoration: none;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .breadcrumb span {
+    color: var(--primary);
+    opacity: 1;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .breadcrumb-current {
+    color: var(--text);
+    opacity: 1;
   }
 
   .page-header-title {
     font-size: clamp(26px, 7vw, 32px);
-    margin-bottom: 12px;
+    margin: 0 0 18px;
+    color: var(--bg-dark);
+    font-weight: 400;
   }
 
   .page-header-sub {
     font-size: 14px;
     max-width: 100%;
     line-height: 1.85;
+    margin: 0;
+    color: var(--text);
   }
 
 

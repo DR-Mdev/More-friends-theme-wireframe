@@ -333,6 +333,29 @@
     word-break: break-word;
   }
 
+  .article-cat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 18px;
+  }
+
+  .article-cat::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--primary);
+    display: block;
+    flex-shrink: 0;
+  }
+
 
   /* ==============================================
      記事レイアウト
@@ -369,7 +392,9 @@
   .article-title {
     font-size: clamp(20px, 5.5vw, 24px);
     line-height: 1.5;
-    margin-bottom: 12px;
+    margin: 0 0 18px;
+    color: var(--bg-dark);
+    font-weight: 400;
   }
 
   /* h1 の <br> タグは SP で自然折り返しに委ねる
@@ -382,6 +407,7 @@
     flex-wrap: wrap;
     gap: 8px 16px;
     font-size: 11px;
+    margin-top: 0;
   }
 
 
