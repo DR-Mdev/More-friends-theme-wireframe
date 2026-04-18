@@ -430,6 +430,104 @@
     padding: 8px 14px;
   }
 
+  .price-comparison-section {
+    padding: 56px 16px;
+    background: #EDD8DE;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .price-comparison-title {
+    font-size: clamp(22px, 5.5vw, 26px);
+    line-height: 1.35;
+  }
+
+  .price-comparison-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    max-width: none;
+  }
+
+  .price-comparison-condition-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+  }
+
+  .price-comparison-condition-note {
+    white-space: normal;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .price-comparison-condition-note.is-accent {
+    border-left: none;
+    padding-left: 0;
+    padding-top: 8px;
+    border-top: 1px solid rgba(168,77,101,0.35);
+    width: 100%;
+  }
+
+  .price-comparison-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .price-comparison-chart-wrap {
+    padding: 14px 12px 10px;
+    margin-bottom: 18px;
+  }
+
+  .price-comparison-chart-wrap canvas {
+    height: 260px !important;
+  }
+
+  .price-comparison-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .price-comparison-summary-card {
+    padding: 18px 16px;
+  }
+
+  .price-comparison-summary-card.is-featured {
+    order: -1;
+  }
+
+  .price-comparison-card-header {
+    margin-bottom: 12px;
+  }
+
+  .price-comparison-card-total {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .price-comparison-card-row {
+    white-space: normal;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13px;
+  }
+
+  .price-comparison-card-row span:last-child {
+    flex-shrink: 0;
+  }
+
+  .price-comparison-footnote {
+    font-size: 11px;
+    line-height: 1.7;
+    margin-top: 18px;
+  }
+
 
   /* ==============================================
      SECTION 2: 割増料金
