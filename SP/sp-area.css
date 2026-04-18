@@ -455,7 +455,7 @@
 
   .travel-section .label {
     display: inline-block;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Zen Maru Gothic', sans-serif;
     font-size: 10px;
     letter-spacing: 0.22em;
     color: var(--primary);
@@ -484,7 +484,7 @@
   }
 
   .travel-policy-label {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Zen Maru Gothic', sans-serif;
     font-size: 10px;
     letter-spacing: 0.2em;
     color: var(--primary);
@@ -562,7 +562,7 @@
     white-space: normal;
     word-break: normal;
     overflow-wrap: break-word;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Zen Maru Gothic', sans-serif;
     font-size: 10px;
     letter-spacing: 0.16em;
     color: var(--travel-text-muted);
