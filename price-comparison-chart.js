@@ -32,6 +32,24 @@
     });
   }
 
+  function waitForZenFont() {
+    if (!document.fonts || typeof document.fonts.load !== 'function') {
+      return Promise.resolve();
+    }
+
+    return Promise.all([
+      document.fonts.load("400 13px 'Zen Maru Gothic'"),
+      document.fonts.load("500 11px 'Zen Maru Gothic'")
+    ])
+      .catch(() => undefined)
+      .then(() => {
+        if (document.fonts && document.fonts.ready) {
+          return document.fonts.ready.catch(() => undefined);
+        }
+        return undefined;
+      });
+  }
+
   function createChart(Chart) {
     const canvas = document.getElementById('compChart');
     if (!canvas || canvas.dataset.chartInitialized === 'true') return;
@@ -136,8 +154,10 @@
     const canvas = document.getElementById('compChart');
     if (!canvas) return;
 
-    loadChartJs()
-      .then(createChart)
+    Promise.all([loadChartJs(), waitForZenFont()])
+      .then(([Chart]) => {
+        createChart(Chart);
+      })
       .catch(() => {
         // No-op: keep the fallback text visible if Chart.js cannot load.
       });
